@@ -1,0 +1,34 @@
+{
+    "name": "HandActions",
+    "maps": [
+        {
+            "name": "Hand",
+            "id": "b4d24567-e937-4c0f-b075-fa58bbb444a8",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "2c94d5aa-59b9-4e57-9ad8-24934dab95d7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a07e5ef4-35a6-484d-8a24-a059f7fc9da8",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

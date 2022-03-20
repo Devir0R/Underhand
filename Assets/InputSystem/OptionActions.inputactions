@@ -1,0 +1,34 @@
+{
+    "name": "OptionActions",
+    "maps": [
+        {
+            "name": "Option",
+            "id": "2df56c3f-60bc-41c4-bbad-92273e949d04",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "12500852-c4c8-4a33-912d-05be2cc96fed",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "4238f99e-90d9-43ba-b10a-4a663ae7fbae",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

@@ -1,0 +1,67 @@
+{
+    "gods":[
+        {
+            "num": 0,
+            "name": "Uhl'uht'c",
+            "defeated": 0,
+            "blessings": [22, 25],
+            "dependency": [5, 6],
+            "startingCard": 57,
+            "specialRequirements": 0
+        },
+        {
+            "num": 1,
+            "name": "Wiindigoo",
+            "defeated": 0,
+            "blessings": [23, 97],
+            "dependency": [],
+            "startingCard": 27,
+            "specialRequirements": 1
+        },
+        {
+            "num": 2,
+            "name": "Rhybaax",
+            "defeated": 0,
+            "blessings": [21, 70],
+            "dependency": [4],
+            "startingCard": 29,
+            "specialRequirements": 0
+        },
+        {
+            "num": 3,
+            "name": "Yacare",
+            "defeated": 0,
+            "blessings": [38, 111],
+            "dependency": [5,6],
+            "startingCard": 79,
+            "specialRequirements": 0
+        },
+        {
+            "num": 4,
+            "name": "God of Beginnings",
+            "defeated": 1,
+            "blessings": [96, 98],
+            "dependency": [],
+            "startingCard": 94,
+            "specialRequirements": 0
+        },
+        {
+            "num": 5,
+            "name": "Kekujira",
+            "defeated": 0,
+            "blessings": [72, 113],
+            "dependency": [1, 2, 4],
+            "startingCard": 85,
+            "specialRequirements": 0
+        },
+        {
+            "num": 6,
+            "name": "Jhai'lungr",
+            "defeated": 0,
+            "blessings": [112, 114],
+            "dependency": [1, 2, 4],
+            "startingCard": 106,
+            "specialRequirements": 0
+        }
+    ]
+}

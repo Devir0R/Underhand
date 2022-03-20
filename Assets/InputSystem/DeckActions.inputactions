@@ -1,0 +1,34 @@
+{
+    "name": "DeckActions",
+    "maps": [
+        {
+            "name": "Deck",
+            "id": "73502b0a-d464-432f-be2b-f2cadf777802",
+            "actions": [
+                {
+                    "name": "TopCard",
+                    "type": "Button",
+                    "id": "bedd1c97-7e93-44b3-bc34-94a0a2ba3ad1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ea51cfcb-cd38-4f42-94bb-8c7fd0b7ff8d",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TopCard",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

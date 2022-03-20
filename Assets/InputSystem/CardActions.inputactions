@@ -1,0 +1,34 @@
+{
+    "name": "CardActions",
+    "maps": [
+        {
+            "name": "Card",
+            "id": "28e26ec6-2bce-4fac-b1bf-df7facbccb4d",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "a97c7f27-7d5c-4746-9a6c-5ef37ab8554a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e4a66674-d3d7-4f83-82cb-e34eba6c5c70",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

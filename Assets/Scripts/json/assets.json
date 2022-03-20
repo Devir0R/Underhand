@@ -1,0 +1,1207 @@
+{
+	"textures": {
+		"background": {
+			"file":     "textures/background.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"Border": {
+			"file": 		"textures/Border.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"Shadow": {
+			"file":     "textures/Shadow.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"sacrifice_active": {
+			"file": 		"textures/sacrifice_active.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"sacrifice_idle": {
+			"file":			"textures/sacrifice_idle.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"SacrificeHighlight": {
+			"file":			"textures/SacrificeHighlight.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"Menu": {
+			"file":     	"textures/menu/Menu.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"PlayButton": {
+			"file":     	"textures/menu/PlayButton.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"GalleryButton": {
+			"file":     	"textures/menu/GalleryButton.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"SettingsButton": {
+			"file":     	"textures/menu/SettingsButton.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"CreditsButton": {
+			"file":     	"textures/menu/CreditsButton.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"ResumeButton": {
+			"file":     	"textures/menu/ResumeButton.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"ForfeitButton": {
+			"file":     	"textures/menu/ForfeitButton.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"PlayButtonDown": {
+			"file": 		"textures/menu/PlayButtonDown.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"GalleryButtonDown": {
+			"file": 		"textures/menu/GalleryButtonDown.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"SettingsButtonDown": {
+			"file": 		"textures/menu/SettingsButtonDown.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"CreditsButtonDown": {
+			"file": 		"textures/menu/CreditsButtonDown.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"ResumeButtonDown": {
+			"file": 		"textures/menu/ResumeButtonDown.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"ForfeitButtonDown": {
+			"file":     	"textures/menu/ForfeitButtonDown.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"Settings": {
+			"file":     	"textures/menu/Settings.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"CloseSettings": {
+			"file":     	"textures/menu/CloseSettings.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"CloseSettingsDown": {
+			"file":     	"textures/menu/CloseSettingsDown.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"VolumeButton": {
+			"file":     	"textures/menu/VolumeButton.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"VolumeToggle": {
+			"file":     	"textures/menu/VolumeToggle.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"VoiceButton": {
+			"file":     	"textures/menu/VoiceButton.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"VoiceToggle": {
+			"file":     	"textures/menu/VoiceToggle.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"ResetTutorialButton": {
+			"file":     	"textures/menu/ResetTutorialButton.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"ResetTutorialButtonDown": {
+			"file":     	"textures/menu/ResetTutorialButtonDown.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"ResetGameButton": {
+			"file":     	"textures/menu/ResetGameButton.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"ResetGameButtonDown": {
+			"file":     	"textures/menu/ResetGameButtonDown.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"Gallery": {
+			"file":     	"textures/menu/Gallery.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"GodSelect": {
+			"file":     	"textures/menu/GodSelect.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"CloseGallery": {
+			"file":     	"textures/menu/CloseGallery.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"CloseGalleryDown": {
+			"file":     	"textures/menu/CloseGalleryDown.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"Credits": {
+			"file":     	"textures/menu/Credits.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"CloseCredits": {
+			"file":     	"textures/menu/CloseCredits.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"CloseCreditsDown": {
+			"file":     	"textures/menu/CloseCreditsDown.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"PauseButton": {
+			"file": 		"textures/PauseButton.png",
+			"minfilter":"linear",
+			"magfiler":"linear"
+		},
+		"PauseButtonDown": {
+			"file": 		"textures/PauseButtonDown.png",
+			"minfilter":"linear",
+			"magfiler":"linear"
+		},
+		"ExitButton": {
+			"file":         "textures/ExitButton.png",
+			"minfliter":"linear",
+			"magfilter":"linear"
+		},
+		"ExitButtonDown": {
+			"file":         "textures/ExitButtonDown.png",
+			"minfliter":"linear",
+			"magfilter":"linear"
+		},
+		"ContinueButton": {
+			"file":         "textures/ContinueButton.png",
+			"minfliter":"linear",
+			"magfilter":"linear"
+		},
+		"ContinueButtonDown": {
+			"file":         "textures/ContinueButtonDown.png",
+			"minfliter":"linear",
+			"magfilter":"linear"
+		},
+		"Checkmark": {
+			"file": 		"textures/Checkmark.png",
+			"minfilter":"linear",
+			"magfiler":"linear"
+		},
+		"Overlay": {
+			"file":         "textures/Overlay.png",
+			"minfliter":"linear",
+			"magfilter":"linear"
+		},
+		"ResourceOverlay": {
+			"file": 		"textures/ResourceOverlay.png",
+			"minfilter":"linear",
+			"magfiler":"linear"
+		},
+		"Relic": {
+			"file":			"textures/resources/Relic.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"Money": {
+			"file":			"textures/resources/Money.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"Cultist": {
+			"file":			"textures/resources/Cultist.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"Prisoner": {
+			"file":			"textures/resources/Prisoner.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"Food": {
+			"file":			"textures/resources/Food.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"Suspicion": {
+			"file":			"textures/resources/Suspicion.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"Counter": {
+			"file":			"textures/resources/Counter.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"SignalTotal": {
+			"file":			"textures/resources/SignalTotal.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"SignalFood": {
+			"file":			"textures/resources/SignalFood.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"SignalSuspicion": {
+			"file":			"textures/resources/SignalSuspicion.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"ResourceLabelBg": {
+			"file":			"textures/resources/circle_bg.png",
+			"minfilter":"linear",
+			"magfilter":"linear"
+		},
+		"OptionActive": {
+			"file":         "textures/options/OptionActive.png",
+			"minfliter":"linear",
+			"magfilter":"linear"
+		},
+		"OptionReady": {
+			"file":         "textures/options/OptionReady.png",
+			"minfliter":"linear",
+			"magfilter":"linear"
+		},
+		"OptionDormant": {
+			"file":         "textures/options/OptionDormant.png",
+			"minfliter":"linear",
+			"magfilter":"linear"
+		},
+		"OptionDown": {
+			"file":         "textures/options/OptionDown.png",
+			"minfliter":"linear",
+			"magfilter":"linear"
+		},
+		"OptionBack": {
+			"file":         "textures/options/OptionBack.png",
+			"minfliter":"linear",
+			"magfilter":"linear"
+		},
+		"ExchangeCultist": {
+			"file":         "textures/options/ExchangeCultist.png",
+			"minfliter":"linear",
+			"magfilter":"linear"
+		},
+		"ExchangeFood": {
+			"file":         "textures/options/ExchangeFood.png",
+			"minfliter":"linear",
+			"magfilter":"linear"
+		},
+		"ExchangeMoney": {
+			"file":         "textures/options/ExchangeMoney.png",
+			"minfliter":"linear",
+			"magfilter":"linear"
+		},
+		"ExchangePrisoner": {
+			"file":         "textures/options/ExchangePrisoner.png",
+			"minfliter":"linear",
+			"magfilter":"linear"
+		},
+		"ExchangeRelic": {
+			"file":         "textures/options/ExchangeRelic.png",
+			"minfliter":"linear",
+			"magfilter":"linear"
+		},
+		"ExchangeSuspicion": {
+			"file":         "textures/options/ExchangeSuspicion.png",
+			"minfliter":"linear",
+			"magfilter":"linear"
+		},
+		"ExchangeCultistPrisoner": {
+			"file":         "textures/options/ExchangeCultistPrisoner.png",
+			"minfliter":"linear",
+			"magfilter":"linear"
+		},
+		"WinScreen": {
+			"file":			"textures/WinLose/WinScreen.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"LoseScreen": {
+			"file":			"textures/WinLose/LoseScreen.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"WinContinue": {
+			"file":			"textures/WinLose/WinContinue.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"WinContinueDown": {
+			"file":			"textures/WinLose/WinContinueDown.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"LossContinue": {
+			"file":			"textures/WinLose/LossContinue.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"LossContinueDown": {
+			"file":			"textures/WinLose/LossContinueDown.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Uhl'uht'c": {
+			"file":			"textures/gods/Uhl'uht'c.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Uhl'uht'cThumbnail": {
+			"file":			"textures/gods/Uhl'uht'cThumbnail.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Wiindigoo": {
+			"file":			"textures/gods/Wiindigoo.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"WiindigooThumbnail": {
+			"file":			"textures/gods/WiindigooThumbnail.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Rhybaax": {
+			"file":			"textures/gods/Rhybaax.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"RhybaaxThumbnail": {
+			"file":			"textures/gods/RhybaaxThumbnail.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Yacare": {
+			"file":			"textures/gods/Yacare.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"YacareThumbnail": {
+			"file":			"textures/gods/YacareThumbnail.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Jhai'lungr": {
+			"file":			"textures/gods/Jhai'lungr.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Jhai'lungrThumbnail": {
+			"file":			"textures/gods/Jhai'lungrThumbnail.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Kekujira": {
+			"file":			"textures/gods/Kekujira.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"KekujiraThumbnail": {
+			"file":			"textures/gods/KekujiraThumbnail.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"God of Beginnings": {
+			"file":			"textures/gods/God of Beginnings.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"God of BeginningsThumbnail": {
+			"file":			"textures/gods/God of BeginningsThumbnail.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Cardback": {
+			"file":			"textures/cards/Cardback.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Deck": {
+			"file":			"textures/cards/Deck.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card1": {
+			"file":			"textures/cards/Card1.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card2": {
+			"file":			"textures/cards/Card2.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card3": {
+			"file":			"textures/cards/Card3.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card4": {
+			"file":			"textures/cards/Card4.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card5": {
+			"file":			"textures/cards/Card5.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card6": {
+			"file":			"textures/cards/Card6.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card7": {
+			"file":			"textures/cards/Card7.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card8": {
+			"file":			"textures/cards/Card8.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card9": {
+			"file":			"textures/cards/Card9.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card10": {
+			"file":			"textures/cards/Card10.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card11": {
+			"file":			"textures/cards/Card11.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card12": {
+			"file":			"textures/cards/Card12.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card13": {
+			"file":			"textures/cards/Card13.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card14": {
+			"file":			"textures/cards/Card14.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card15": {
+			"file":			"textures/cards/Card15.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card16": {
+			"file":			"textures/cards/Card16.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card17": {
+			"file":			"textures/cards/Card17.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card18": {
+			"file":			"textures/cards/Card18.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card19": {
+			"file":			"textures/cards/Card19.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card20": {
+			"file":			"textures/cards/Card20.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card21": {
+			"file":			"textures/cards/Card21.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card22": {
+			"file":			"textures/cards/Card22.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card23": {
+			"file":			"textures/cards/Card23.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card24": {
+			"file":			"textures/cards/Card24.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card25": {
+			"file":			"textures/cards/Card25.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card26": {
+			"file":			"textures/cards/Card26.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card27": {
+			"file":			"textures/cards/Card27.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card28": {
+			"file":			"textures/cards/Card28.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card29": {
+			"file":			"textures/cards/Card29.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card30": {
+			"file":			"textures/cards/Card30.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card31": {
+			"file":			"textures/cards/Card31.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card32": {
+			"file":			"textures/cards/Card32.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card33": {
+			"file":			"textures/cards/Card33.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card34": {
+			"file":			"textures/cards/Card34.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card35": {
+			"file":			"textures/cards/Card35.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card36": {
+			"file":			"textures/cards/Card36.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card37": {
+			"file":			"textures/cards/Card37.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card38": {
+			"file":			"textures/cards/Card38.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card39": {
+			"file":			"textures/cards/Card39.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card40": {
+			"file":			"textures/cards/Card40.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card41": {
+			"file":			"textures/cards/Card41.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card42": {
+			"file":			"textures/cards/Card42.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card43": {
+			"file":			"textures/cards/Card43.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card44": {
+			"file":			"textures/cards/Card44.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card45": {
+			"file":			"textures/cards/Card45.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card46": {
+			"file":			"textures/cards/Card46.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card47": {
+			"file":			"textures/cards/Card47.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card48": {
+			"file":			"textures/cards/Card48.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card49": {
+			"file":			"textures/cards/Card49.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card50": {
+			"file":			"textures/cards/Card50.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card51": {
+			"file":			"textures/cards/Card51.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card52": {
+			"file":			"textures/cards/Card52.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card53": {
+			"file":			"textures/cards/Card53.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card54": {
+			"file":			"textures/cards/Card54.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card55": {
+			"file":			"textures/cards/Card55.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card56": {
+			"file":			"textures/cards/Card56.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card57": {
+			"file":			"textures/cards/Card57.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card58": {
+			"file":			"textures/cards/Card58.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card59": {
+			"file":			"textures/cards/Card59.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card60": {
+			"file":			"textures/cards/Card60.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card61": {
+			"file":			"textures/cards/Card61.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card62": {
+			"file":			"textures/cards/Card62.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card63": {
+			"file":			"textures/cards/Card63.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card64": {
+			"file":			"textures/cards/Card64.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card65": {
+			"file":			"textures/cards/Card65.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card66": {
+			"file":			"textures/cards/Card66.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card67": {
+			"file":			"textures/cards/Card67.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card68": {
+			"file":			"textures/cards/Card68.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card69": {
+			"file":			"textures/cards/Card69.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card70": {
+			"file":			"textures/cards/Card70.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card71": {
+			"file":			"textures/cards/Card71.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card72": {
+			"file":			"textures/cards/Card72.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card73": {
+			"file":			"textures/cards/Card73.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card74": {
+			"file":			"textures/cards/Card74.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card75": {
+			"file":			"textures/cards/Card75.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card76": {
+			"file":			"textures/cards/Card76.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card77": {
+			"file":			"textures/cards/Card77.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card78": {
+			"file":			"textures/cards/Card78.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card79": {
+			"file":			"textures/cards/Card79.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card80": {
+			"file":			"textures/cards/Card80.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card81": {
+			"file":			"textures/cards/Card81.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card82": {
+			"file":			"textures/cards/Card82.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card83": {
+			"file":			"textures/cards/Card83.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card84": {
+			"file":			"textures/cards/Card84.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card85": {
+			"file":			"textures/cards/Card85.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card86": {
+			"file":			"textures/cards/Card86.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card87": {
+			"file":			"textures/cards/Card87.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card88": {
+			"file":			"textures/cards/Card88.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card89": {
+			"file":			"textures/cards/Card89.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card90": {
+			"file":			"textures/cards/Card90.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card91": {
+			"file":			"textures/cards/Card91.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card92": {
+			"file":			"textures/cards/Card92.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card93": {
+			"file":			"textures/cards/Card93.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card94": {
+			"file":			"textures/cards/Card94.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card95": {
+			"file":			"textures/cards/Card95.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card96": {
+			"file":			"textures/cards/Card96.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card97": {
+			"file":			"textures/cards/Card97.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card98": {
+			"file":			"textures/cards/Card98.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card99": {
+			"file":			"textures/cards/Card99.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card100": {
+			"file":			"textures/cards/Card100.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card101": {
+			"file":			"textures/cards/Card101.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card102": {
+			"file":			"textures/cards/Card102.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card103": {
+			"file":			"textures/cards/Card103.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card104": {
+			"file":			"textures/cards/Card104.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card105": {
+			"file":			"textures/cards/Card105.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card106": {
+			"file":			"textures/cards/Card106.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card107": {
+			"file":			"textures/cards/Card107.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card108": {
+			"file":			"textures/cards/Card108.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card109": {
+			"file":			"textures/cards/Card109.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card110": {
+			"file":			"textures/cards/Card110.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card111": {
+			"file":			"textures/cards/Card111.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card112": {
+			"file":			"textures/cards/Card112.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card113": {
+			"file":			"textures/cards/Card113.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card114": {
+			"file":			"textures/cards/Card114.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card115": {
+			"file":			"textures/cards/Card115.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card116": {
+			"file":			"textures/cards/Card116.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card117": {
+			"file":			"textures/cards/Card117.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		},
+		"Card118": {
+			"file":			"textures/cards/Card118.png",
+			"minfliter":	"linear",
+			"magfilter":	"linear"
+		}
+    },
+	"soundfx": {
+		"Fireplace": {
+			"file":		"sounds/Fireplace.ogg",
+			"volume":	0.1
+		},
+		"Sacrifice": {
+			"file":		"sounds/Sacrifice.ogg",
+			"volume":	0.8
+		},
+		"CardSlide": {
+			"file":		"sounds/Slide.ogg",
+			"volume":	0.5
+		},
+		"CardFlip": {
+			"file":		"sounds/Flip.ogg",
+			"volume":	0.2
+		},
+		"Shuffle": {
+			"file":		"sounds/Shuffle.ogg",
+			"volume":	0.5
+		},
+		"CardDrop": {
+			"file":		"sounds/Drop.ogg",
+			"volume":	0.5
+		},
+		"RadioEvent72Option1": {
+			"file":		"sounds/radio/Rain.ogg",
+			"volume":	0.5
+		},
+		"RadioEvent74Option2": {
+			"file":		"sounds/radio/Rain.ogg",
+			"volume":	0.5
+		},
+		"RadioEvent72Option2": {
+			"file":		"sounds/radio/GoldenSun.ogg",
+			"volume":	0.5
+		},
+		"RadioEvent77Option2": {
+			"file":		"sounds/radio/GoldenSun.ogg",
+			"volume":	0.5
+		},
+		"RadioEvent73Option1": {
+			"file":		"sounds/radio/ComingStorm.ogg",
+			"volume":	0.5
+		},
+		"RadioEvent74Option1": {
+			"file":		"sounds/radio/Hurricane.ogg",
+			"volume":	0.5
+		},
+		"RadioEvent77Option1": {
+			"file":		"sounds/radio/Drought.ogg",
+			"volume":	0.5
+		},
+		"RadioEvent2Option2": {
+			"file":		"sounds/radio/PoliceRaid.ogg",
+			"volume":	0.5
+		},
+		"RadioEvent3Option2": {
+			"file":		"sounds/radio/RecruitingOpportunity.ogg",
+			"volume":	0.5
+		},
+		"RadioEvent7Option2": {
+			"file":		"sounds/radio/MilkMan.ogg",
+			"volume":	0.5
+		},
+		"RadioEvent7Option3": {
+			"file":		"sounds/radio/MilkMan.ogg",
+			"volume":	0.5
+		},
+		"RadioEvent8Option2": {
+			"file":		"sounds/radio/DayJob.ogg",
+			"volume":	0.5
+		},
+		"RadioEvent9Option1": {
+			"file":		"sounds/radio/WanderingChildren.ogg",
+			"volume":	0.5
+		},
+		"RadioEvent9Option2": {
+			"file":		"sounds/radio/WanderingChildren2.ogg",
+			"volume":	0.5
+		},
+		"RadioEvent37Option2": {
+			"file":		"sounds/radio/AuctionOnRelic.ogg",
+			"volume":	0.5
+		},
+		"RadioEvent67Option2": {
+			"file":		"sounds/radio/CharitableDonation.ogg",
+			"volume":	0.5
+		},
+		"RadioEvent70Option2": {
+			"file":		"sounds/radio/Necromancy.ogg",
+			"volume":	0.5
+		},
+		"RadioEvent18Option1": {
+			"file":		"sounds/radio/ReadingTheNecronomicon.ogg",
+			"volume":	0.5
+		},
+		"RadioEvent106Option1": {
+			"file":		"sounds/radio/StartARestaurant.ogg",
+			"volume":	0.5
+		},
+		"RadioEvent109Option2": {
+			"file":		"sounds/radio/BoomingBusiness.ogg",
+			"volume":	0.5
+		},
+		"RadioEvent107Option1": {
+			"file":		"sounds/radio/FailingBusiness.ogg",
+			"volume":	0.5
+		},
+		"RadioEvent107Option2": {
+			"file":		"sounds/radio/FailingBusiness.ogg",
+			"volume":	0.5
+		},
+		"RadioEvent107Option3": {
+			"file":		"sounds/radio/FailingBusiness.ogg",
+			"volume":	0.5
+		}
+	},
+	"music": {
+		"Menu": {
+			"file":		"sounds/music/Asterope.ogg",
+			"volume":	0.5
+		},
+		"Game": {
+			"file":		"sounds/music/Dances.ogg",
+			"volume":	0.5
+		}
+	},
+	"fonts": {
+		"KalenderblattGrotesk40": {
+			"file":     "fonts/KalenderblattGrotesk.ttf",
+			"size":     40
+		},
+		"KalenderblattGrotesk24": {
+			"file":     "fonts/KalenderblattGrotesk.ttf",
+			"size":     24
+		},
+		"KalenderblattGrotesk20": {
+			"file":     "fonts/KalenderblattGrotesk.ttf",
+			"size":     20
+		},
+		"AmericanTypewriter44": {
+			"file":     "fonts/AmericanTypewriter.ttf",
+			"size":     44
+		},
+		"AmericanTypewriter30": {
+			"file":     "fonts/AmericanTypewriter.ttf",
+			"size":     30
+		},
+		"AmericanTypewriter20": {
+			"file":     "fonts/AmericanTypewriter.ttf",
+			"size":     20
+		},
+		"AmericanTypewriter18": {
+			"file":     "fonts/AmericanTypewriter.ttf",
+			"size":     18
+		}
+	}
+}

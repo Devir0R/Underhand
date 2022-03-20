@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: f62ca2145c137b2428e246b507320405
+  m_SerializeEntries:
+  - m_GUID: 70abb419adb04204f83e280aeb6f217d
+    m_Address: Assets/Sprites/Cards
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - CardsImages
+  - m_GUID: 364dcbd146bd3cf429fbba05f762de63
+    m_Address: Assets/Scripts/json/cardsJson
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - CardsJsons
+  - m_GUID: c2bb28e51b2e9ec438ddb136a93800bb
+    m_Address: Assets/Sprites/resources_moved/Suspicion.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SuspisionImages
+  - m_GUID: fd425f12dcb3b1342b5d97e3646fe3c5
+    m_Address: Assets/Sprites/resources_moved/Relic.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - RelicImages
+  - m_GUID: 17fbd971e3f7efa4cb551297f4fcdf9c
+    m_Address: Assets/Sprites/resources_moved/Prisoner.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PrionerImages
+    - PrisonerImage
+    - PrisonerImages
+  - m_GUID: 77334caaeecef95409a7a24d5edbb54d
+    m_Address: Assets/Sprites/resources_moved/Money.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MoneyImages
+  - m_GUID: f0e82e67435f30e4792775e7a350864a
+    m_Address: Assets/Sprites/resources_moved/Food.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - FoodImages
+  - m_GUID: 47435f0044827444e8b5c1fa8a54b810
+    m_Address: Assets/Sprites/resources_moved/Cultist.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - CultistImages
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 2075ec3d5f044ff4ea70106940026b21, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 4a26587c1f2a2294e94aae6a36b8567c, type: 2}
+    - {fileID: 11400000, guid: 23f96962e409145459f34527b9b3a01e, type: 2}

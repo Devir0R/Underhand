@@ -1,0 +1,114 @@
+"": {
+	"title":						"",
+	"flavortext":					"",
+	"option1": {
+		"optiontext":				"",
+		"outputtext":				"",
+		"cultistequalsprisoner":	0,
+		"foresight": {
+			"hasforesight":			0,
+			"numcards":				0
+		},
+		"shuffle": {
+			"lowerbound":			999,
+			"upperbound":			999,
+			"specificids":			[],
+			"allowsdupes":			0,
+			"numcards":				0
+		},
+		"randomrequirements":		0,
+		"requirements": {
+			"relic":				0,
+			"money":				0,
+			"cultist":				0,
+			"prisoner":				0,
+			"food":					0,
+			"suspicion":			0
+		},
+		"rewards": {
+			"relic":				0,
+			"money":				0,
+			"cultist":				0,
+			"prisoner":				0,
+			"food":					0,
+			"suspicion":			0
+		},
+		"iswin":					0,
+		"islose":					0
+		},
+	"option2": {
+		"optiontext":				"",
+		"outputtext":				"",
+		"cultistequalsprisoner":	0,
+		"foresight": {
+			"hasforesight":			0,
+			"numcards":				0
+		},
+		"shuffle": {
+			"lowerbound":			999,
+			"upperbound":			999,
+			"specificids":			[],
+			"allowsdupes":			0,
+			"numcards":				0
+		},
+		"randomrequirements":		0,
+		"requirements": {
+			"relic":				0,
+			"money":				0,
+			"cultist":				0,
+			"prisoner":				0,
+			"food":					0,
+			"suspicion":			0
+		},
+		"rewards": {
+			"relic":				0,
+			"money":				0,
+			"cultist":				0,
+			"prisoner":				0,
+			"food":					0,
+			"suspicion":			0
+		},
+		"iswin":					0,
+		"islose":					0
+	},
+	"option3": {
+		"optiontext":				"",
+		"outputtext":				"",
+		"cultistequalsprisoner":	0,
+		"foresight": {
+			"hasforesight":			0,
+			"numcards":				0
+		},
+		"shuffle": {
+			"lowerbound":			999,
+			"upperbound":			999,
+			"specificids":			[],
+			"allowsdupes":			0,
+			"numcards":				0
+		},
+		"randomrequirements":		0,
+		"requirements": {
+			"relic":				0,
+			"money":				0,
+			"cultist":				0,
+			"prisoner":				0,
+			"food":					0,
+			"suspicion":			0
+		},
+		"rewards": {
+			"relic":				0,
+			"money":				0,
+			"cultist":				0,
+			"prisoner":				0,
+			"food":					0,
+			"suspicion":			0
+		},
+		"iswin":					0,
+		"islose":					0
+	},
+	"isinitial":					1,
+	"isrecurring":					1,
+	"animationframes":				1,
+	"weight": 						1,
+	"cardartdone":					0
+},
