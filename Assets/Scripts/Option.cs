@@ -94,16 +94,21 @@ public class Option : MonoBehaviour
             optionChosen = this;
             
             spriteRenderer.sprite = down;
+
             if(Table.Instance.ResourcesOnTable().Count==0){
                 OnOptionChosen();
             }
             else{
                 ResourceCard.CardOnTableDestroyed +=MoveWhenCardsOnTableDestroyed;
                 Table.Instance.SacrificeAll();
-            }                
+            }
+            
+            Deck.Instance.AddToDiscard(option.shuffle);            
         }
         
     }
+
+    
 
     void MoveWhenCardsOnTableDestroyed(){
         ResourceCard.CardOnTableDestroyed-=MoveWhenCardsOnTableDestroyed;
@@ -192,7 +197,6 @@ public class Option : MonoBehaviour
             {Resource.Cultist,()=>requirements.cultist},
             {Resource.Prisoner,()=>requirements.prisoner},
             {Resource.Suspision,()=>requirements.suspicion},
-            {Resource.Relic,()=>requirements.relic},
         };
     } 
 
@@ -220,7 +224,7 @@ public class Option : MonoBehaviour
                     (resource==Resource.Prisoner && prisonerEqualCultist &&!allResourcesOnTable.Remove(Resource.Cultist)))
                 {
                     demandedRelics+=1;
-                    if(demandedRelics>requirements.relic){
+                    if(demandedRelics>allResourcesOnTable.Where(resource=>resource==Resource.Relic).Count()){
                         return false;
                     }
                 }
@@ -229,7 +233,7 @@ public class Option : MonoBehaviour
                 return false;
             }
         }
-        return demandedRelics==requirements.relic;
+        return demandedRelics==allResourcesOnTable.Where(resource=>resource==Resource.Relic).Count();
     }
 
     
@@ -290,13 +294,14 @@ public class Option : MonoBehaviour
     }
 
     private int specialNumbersAmounts(int amount,Resource resource){
+        int cardOfResourceInHand = Hand.Instance.HowManyOfResourceInHand(resource);
+        int cardOfResourceOnTable = Table.Instance.ResourcesOnTable().Where(resourceOnTable=>resourceOnTable==resource).Count();
+        int total = cardOfResourceInHand+cardOfResourceOnTable;
         if(amount==Hand.MAJORITY_ROUNDING_UP){
-            int cardOfResourceInHand = Hand.Instance.HowManyOfResourceInHand(resource);
-            return cardOfResourceInHand/2+cardOfResourceInHand%2;
+            return total/2+total%2;
         }
         else if(amount==Hand.MAJORITY_ROUNDING_DOWN){
-            int cardOfResourceInHand = Hand.Instance.HowManyOfResourceInHand(resource);
-            return cardOfResourceInHand/2;
+            return total/2;
         }
         return amount;
     }

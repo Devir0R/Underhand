@@ -18,7 +18,7 @@ public class Deck : MonoBehaviour
     List<CardDO>  deck;
     private bool disableDeck;
 
-    HashSet<CardDO> discard;
+    List<CardDO> discard;
     public Sprite[] spriteArray;
     public GameObject cardPrefab;
     
@@ -28,10 +28,39 @@ public class Deck : MonoBehaviour
 
     private Camera mainCamera;
 
-    private void Awake(){
+    private static Deck _instance;
+    public static Deck Instance{ get { return _instance; } }
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        } else {
+            _instance = this;
+        }
         mainCamera = Camera.main;
+
     }
     
+    
+    public void AddToDiscard(ShuffleDO shuffle){
+        List<CardDO> cardsToAdd = new List<CardDO>();
+        if(shuffle.lowerbound!=999&&shuffle.upperbound!=999){
+            for(int j=0;j<shuffle.numcards;j++){
+                CardDO cardToAdd;
+                cardToAdd = allCards.allCardsList.Find(card=>card.num==randomNumber(shuffle.lowerbound,shuffle.upperbound));
+                if(shuffle.allowsdupes==1 || cardsToAdd.FirstOrDefault(card=>card.num == cardToAdd.num)==null){
+                    cardsToAdd.Add(cardToAdd);
+                }
+                else j--;
+            }
+        }
+        cardsToAdd.AddRange(shuffle.specificids.Select(id=>allCards.allCardsList.Find(card=>card.num==id)));
+        
+        this.discard.AddRange(cardsToAdd);
+        
+
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -43,7 +72,7 @@ public class Deck : MonoBehaviour
                     .Where(card=>card.isinitial==1)
                     .OrderByDescending(card=>card.title.IndexOf("festation")>=0? 2 : Random.value)
                     .Take(INITIAL_DECK_SIZE).ToList();
-                this.discard = new HashSet<CardDO>();
+                this.discard = new List<CardDO>();
                 this.addRelicCardIfThereIsnt();
                 this.insertGods();
                 shuffleDeck();
@@ -89,14 +118,15 @@ public class Deck : MonoBehaviour
             CardDO current_card = RemoveTopCard();
 
             theCard.changeCard(current_card);
+            
 
-            this.discard.Add(current_card);
+            if(current_card.isrecurring==1) this.discard.Add(current_card);
     }
 
     CardDO RemoveTopCard(){
         if(this.deck.Count==0){
             this.deck = this.discard.ToList();
-            this.discard = new HashSet<CardDO>();
+            this.discard = new List<CardDO>();
             shuffleDeck();
         }
         CardDO current_card = this.deck[0];
