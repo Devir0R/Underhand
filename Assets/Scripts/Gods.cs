@@ -7,23 +7,26 @@ using Newtonsoft.Json;
 public class Gods
 {
 
-    AllGods allGods{get;set;}
+    public static AllGods allGods{get;set;}
     // Start is called before the first frame update
 
     public Gods(TextAsset godsJSON){
-        this.allGods = JsonConvert.DeserializeObject<AllGods>(godsJSON.text);
+        allGods = JsonConvert.DeserializeObject<AllGods>(godsJSON.text);
     }
     public List<int> godBlessingCardNumbers(int num){
         if (num>=0){
-            return this.allGods.gods.Find(god=>god.num==num).blessings;
+            return allGods.gods.Find(god=>god.num==num).blessings;
         }
         else{
-            return this.allGods.gods.Select(god=>god.blessings).SelectMany(b=>b).ToList();
+            return allGods.gods.Select(god=>god.blessings).SelectMany(b=>b).ToList();
         }
     }
 
     public List<GodDO> getUnlockedGods(){
-        return this.allGods.gods.Where(god=>god.defeated==1).ToList();
+        return allGods.gods
+            .Where(god=>
+                god.dependency.All(godnum=>
+                    allGods.gods.Find(god=>god.num==godnum).defeated==1)).ToList();
     }
 
 }

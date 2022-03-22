@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.InputSystem;
+using System.Linq;
 
 public class Card : MonoBehaviour
 {
@@ -45,7 +46,17 @@ public class Card : MonoBehaviour
         }
         moveTo =zero;
         rotateOn =zero;
+        StartCoroutine(CheckOptions());
     }
+
+     public IEnumerator CheckOptions(){
+         if(options.Any(option=>option.GetComponent<Option>().LosingOption())){
+            while(!options.All(option=>option.GetComponent<Option>().isDormant)){
+                yield return null;
+            }
+            options.Select(option=>option.GetComponent<Option>()).First(option=>option.LosingOption()).isDormant = false;
+         }
+     }
 
     public void ShowOptions(InputAction.CallbackContext context){
         if(this.disableCard || ! context.performed || !CardClicked()) return ;
@@ -78,7 +89,7 @@ public class Card : MonoBehaviour
         options.Add(Instantiate(optionPrefab,transform.position,transform.rotation));
         options.Add(Instantiate(optionPrefab,transform.position,transform.rotation));
         options.Add(Instantiate(optionPrefab,transform.position,transform.rotation));
-        spriteRenderer.sortingLayerName = "top";
+        spriteRenderer.sortingLayerName = "Card";
 
 
         UpdateOptions();
@@ -118,6 +129,7 @@ public class Card : MonoBehaviour
                 GameObject.FindGameObjectWithTag("Deck").GetComponent<Deck>().EnableDeck();
             }
         }
+        
     }
 
     public void MoveUp(System.Action callback){

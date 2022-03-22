@@ -10,7 +10,7 @@ public class MoreThan15Cards : AlertCondition{
     public bool Check(){
         int resourcesOnTable = Table.Instance.ResourcesOnTable().Count;
         int ResourcesInHand = Hand.Instance.hand.Count;
-        return resourcesOnTable+ResourcesInHand>=15;
+        return resourcesOnTable+ResourcesInHand>15;
 
     }
 }

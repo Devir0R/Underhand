@@ -79,7 +79,7 @@ public class Deck : MonoBehaviour
                 this.allCards = new AllCards(handleToCheck.Result.Select(json=>JsonConvert.DeserializeObject<CardDO>(json.text)));
                 this.deck  = this.allCards.allCardsList
                     .Where(card=>card.isinitial==1)
-                    .OrderByDescending(card=>card.title.Contains("festation")? 2: Random.value)
+                    .OrderByDescending(card=>Random.value)
                     .Take(INITIAL_DECK_SIZE).ToList();
                 this.discard = new List<CardDO>();
                 this.addRelicCardIfThereIsnt();
@@ -87,6 +87,7 @@ public class Deck : MonoBehaviour
                 shuffleDeck();
                 this.deckSize = this.deck.Count;
                 this.disableDeck = false;
+                GameState.GameStart();
                 
             }
         };
@@ -181,9 +182,9 @@ public class Deck : MonoBehaviour
                 int startingCard = god.startingCard;
                 CardDO staringCardDO = this.allCards.allCardsList.Find(card=>card.num==startingCard);
                 if (staringCardDO.isTutorial==0){
-                    this.deck.Insert(randomNumber(0,this.deck.Count+1),staringCardDO);
+                    this.deck.Add(staringCardDO);
                 }
-                //this.deck.AddRange(god.blessings.Select(card_num=>this.allCards.allCardsList.Find(card=>card.num==card_num)));
+                this.deck.AddRange(god.blessings.Select(card_num=>this.allCards.allCardsList.Find(card=>card.num==card_num)));
             }
         }
     }

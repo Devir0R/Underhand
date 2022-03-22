@@ -1,4 +1,4 @@
-using System.Collections;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -36,7 +36,7 @@ public class Option : MonoBehaviour
 
     private bool movedBack = false;
 
-    private bool isDormant = false;
+    public bool isDormant = false;
 
     private static Option optionChosen = null;
 
@@ -63,6 +63,10 @@ public class Option : MonoBehaviour
             optionChosen=null;
         }
         
+    }
+
+    public bool LosingOption(){
+        return option.islose==1;
     }
 
     // Update is called once per frame
@@ -92,24 +96,39 @@ public class Option : MonoBehaviour
             disableSpriteChange();
             DisbleOption();
             optionChosen = this;
-            
+
+            if(option.islose==1){
+                GameState.GameLost();
+            }
+            else if(option.iswin!=""){
+                GameState.GodWon = option.iswin;
+                GameState.GameWon();
+            }
+
             spriteRenderer.sprite = down;
             if(option.randomrequirements!=0){
                 Hand.Instance.RemoveFromHandRandomly(option.randomrequirements);
             }
             if(Table.Instance.ResourcesOnTable().Count==0){
+                LoadEndOfGame();
                 OnOptionChosen();
             }
             else{
                 ResourceCard.CardOnTableDestroyed +=MoveWhenCardsOnTableDestroyed;
+                ResourceCard.CardOnTableDestroyed += LoadEndOfGame;
                 Table.Instance.SacrificeAll();
             }
             
-            Deck.Instance.AddToDiscard(option.shuffle);            
+            Deck.Instance.AddToDiscard(option.shuffle);
         }
         
     }
 
+    void LoadEndOfGame(){
+        if(GameState.state==State.Lost || GameState.state==State.Won){
+            SceneManager.LoadScene("WinLose");
+        }
+    }
     
 
     void MoveWhenCardsOnTableDestroyed(){
@@ -183,7 +202,8 @@ public class Option : MonoBehaviour
 
     void UpdateSpriteFirstTime(){
         if(!(RequirementsCanBeMet(option.requirements,Table.Instance.ResourcesOnTable(),option.cultistequalsprisoner==1))
-            || isEmptyOption()){
+            || isEmptyOption()
+            || option.islose==1){
             isDormant=true;
             spriteRenderer.sprite = dormant;
         }
@@ -387,7 +407,7 @@ public class Option : MonoBehaviour
             layerID =SortingLayer.NameToID("middle");
         }
         else{
-            layerID =SortingLayer.NameToID("default");
+            layerID =SortingLayer.NameToID("top");
         }
         spriteRenderer.sortingLayerID =layerID;
         output.sortingLayerID = layerID;

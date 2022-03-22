@@ -59,6 +59,9 @@ TagManager:
   - name: top
     uniqueID: 3647246173
     locked: 0
+  - name: Card
+    uniqueID: 1610029077
+    locked: 0
   - name: hand
     uniqueID: 3933901155
     locked: 0
