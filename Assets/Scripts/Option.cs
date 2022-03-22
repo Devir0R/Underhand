@@ -59,7 +59,7 @@ public class Option : MonoBehaviour
     public void SpawnReawrds()
     {
         if(optionChosen==this){
-            Table.Instance.SpawnReawrds(option.rewards);
+            Table.Instance.SpawnRewards(option.rewards);
             optionChosen=null;
         }
         
@@ -94,7 +94,9 @@ public class Option : MonoBehaviour
             optionChosen = this;
             
             spriteRenderer.sprite = down;
-
+            if(option.randomrequirements!=0){
+                Hand.Instance.RemoveFromHandRandomly(option.randomrequirements);
+            }
             if(Table.Instance.ResourcesOnTable().Count==0){
                 OnOptionChosen();
             }
@@ -147,16 +149,23 @@ public class Option : MonoBehaviour
 
     bool IsMouseOnOption(){
         Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-        RaycastHit2D rayHit = Physics2D.GetRayIntersection(ray);
+        IEnumerable<RaycastHit2D> rayHits = Physics2D.GetRayIntersectionAll(ray).Where(hit=>(hit.collider?.CompareTag("Option")).GetValueOrDefault());
 
-        return rayHit.collider!=null && rayHit.collider.CompareTag("Option");
+        return rayHits.Count()>0;
     }
 
     bool IsMouseOnMe(){
         Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-        RaycastHit2D rayHit = Physics2D.GetRayIntersection(ray);
-
-        return rayHit.collider!=null && rayHit.collider.gameObject.GetComponent<Option>()==this;
+        IEnumerable<RaycastHit2D> rayHits = Physics2D.GetRayIntersectionAll(ray);
+        foreach(RaycastHit2D hit in rayHits){
+            if(hit.collider.CompareTag("Option")){
+                if(hit.collider.gameObject.GetComponent<Option>()==this){
+                    return true;
+                }
+                else return false;
+            }
+        }
+        return false;
     }
 
     void UpdateSprite(){
@@ -173,7 +182,8 @@ public class Option : MonoBehaviour
     }
 
     void UpdateSpriteFirstTime(){
-        if(!(RequirementsCanBeMet(option.requirements,Table.Instance.ResourcesOnTable(),option.cultistequalsprisoner==1))){
+        if(!(RequirementsCanBeMet(option.requirements,Table.Instance.ResourcesOnTable(),option.cultistequalsprisoner==1))
+            || isEmptyOption()){
             isDormant=true;
             spriteRenderer.sprite = dormant;
         }
@@ -197,6 +207,8 @@ public class Option : MonoBehaviour
             {Resource.Cultist,()=>requirements.cultist},
             {Resource.Prisoner,()=>requirements.prisoner},
             {Resource.Suspision,()=>requirements.suspicion},
+            {Resource.Relic,()=>requirements.relic},
+            
         };
     } 
 
@@ -215,13 +227,14 @@ public class Option : MonoBehaviour
         List<Resource> allResourcesOnTable = new List<Resource>();
         allResourcesOnTable.AddRange(resourcesOnTable);
         Dictionary<Resource,System.Func<int>> HowManyFrom = HowManyFromFunctions(requirements);
-        int demandedRelics = 0;
+        int demandedRelics = requirements.relic;
+        if(prisonerEqualCultist){
+            allResourcesOnTable = allResourcesOnTable.Select(resource=>resource==Resource.Prisoner ? Resource.Cultist: resource).ToList();
+        }
         foreach(Resource resource in HowManyFrom.Keys){
             int howManyDemanded = specialNumbersAmounts(HowManyFrom[resource](),resource);
             for(int i = 0; i<howManyDemanded;i++){
-                if(!allResourcesOnTable.Remove(resource) || 
-                    (resource==Resource.Cultist && prisonerEqualCultist &&!allResourcesOnTable.Remove(Resource.Prisoner)) ||
-                    (resource==Resource.Prisoner && prisonerEqualCultist &&!allResourcesOnTable.Remove(Resource.Cultist)))
+                if(!allResourcesOnTable.Remove(resource))
                 {
                     demandedRelics+=1;
                     if(demandedRelics>allResourcesOnTable.Where(resource=>resource==Resource.Relic).Count()){
@@ -229,7 +242,7 @@ public class Option : MonoBehaviour
                     }
                 }
             }
-            if(allResourcesOnTable.Contains(resource)){
+            if((resource!=Resource.Relic) && allResourcesOnTable.Contains(resource)){
                 return false;
             }
         }
@@ -242,22 +255,24 @@ public class Option : MonoBehaviour
         List<Resource> allResources = new List<Resource>();
         allResources.AddRange(resourcesOnTable);
         Dictionary<Resource,System.Func<int>> HowManyFrom = HowManyFromFunctions(requirements);
+        HowManyFrom.Remove(Resource.Relic);
         allResources.AddRange(Hand.Instance.ResourcesInHand());
-        int demandedRelics = 0;
+        int demandedRelics = requirements.relic;
+        if(prisonerEqualCultist){
+            allResources = allResources.Select(resource=>resource==Resource.Prisoner ? Resource.Cultist: resource).ToList();
+        }
         foreach(Resource resource in HowManyFrom.Keys){
             int howManyDemanded = specialNumbersAmounts(HowManyFrom[resource](),resource);
             for(int i = 0; i<howManyDemanded;i++){
-                if(!allResources.Remove(resource) || 
-                    (resource==Resource.Cultist && prisonerEqualCultist &&!allResources.Remove(Resource.Prisoner)) ||
-                    (resource==Resource.Prisoner && prisonerEqualCultist &&!allResources.Remove(Resource.Cultist))){
+                if(!allResources.Remove(resource)){
                     demandedRelics+=1;
-                    if(demandedRelics>requirements.relic){
+                    if(demandedRelics>allResources.Where(resource=>resource==Resource.Relic).Count()){
                         return false;
                     }
                 }
             }
         }
-        return demandedRelics<=requirements.relic;
+        return demandedRelics<=allResources.Where(resource=>resource==Resource.Relic).Count();
     }
 
     public void UpdateDO(OptionDO option,int optionNum){
@@ -276,11 +291,15 @@ public class Option : MonoBehaviour
     }
 
     private void AddRequirements(){
+        List<Resource> resourceList = GetOptionRequirements();
+        AddResourceRequirements(resourceList);
+    }
+
+    List<Resource> GetOptionRequirements(){
         List<Resource> resourceList = new List<Resource>();
         bool prisonerEqualCultist = option.cultistequalsprisoner==1;
 
         Dictionary<Resource,System.Func<int>> howManyFromFunctions = HowManyFromFunctions(option.requirements);
-
         foreach(Resource resource in howManyFromFunctions.Keys){
             int howManyToAdd = specialNumbersAmounts(howManyFromFunctions[resource](),resource);
             for(int i =0;i<howManyToAdd;i++){
@@ -290,7 +309,7 @@ public class Option : MonoBehaviour
                 else resourceList.Add(resource);
             }
         }
-        AddResourceRequirements(resourceList);
+        return resourceList;
     }
 
     private int specialNumbersAmounts(int amount,Resource resource){
@@ -307,6 +326,11 @@ public class Option : MonoBehaviour
     }
 
     private void AddRewards(){
+        List<Resource> resourceList = GetOptionRewards();
+        AddResourceRewards(resourceList);
+    }
+
+    private List<Resource> GetOptionRewards(){
         List<Resource> resourceList = new List<Resource>();
         Dictionary<Resource,System.Func<int>> howManyFromFunctions = HowManyFromFunctions(option.rewards);
 
@@ -315,11 +339,11 @@ public class Option : MonoBehaviour
                 resourceList.Add(resource);
             }
         }
-        AddResourceRewards(resourceList);
+        return resourceList;
     }
 
     private void AddResourceRewards(List<Resource> GameObjectsresourceList){
-        const float resourceSize_X = 0.30f*2*0.7f;
+        const float resourceSize_X = 0.35f*2*0.66f;
         const float resourceSize_Y = 1.0f*0.7f;
         Vector3 instantiationPlace = transform.position 
                         + Vector3.right*((resourceSize_X*(GameObjectsresourceList.Count-1))/2)
@@ -335,14 +359,20 @@ public class Option : MonoBehaviour
     }
 
     private void AddResourceRequirements(List<Resource> GameObjectsresourceList){
-        const float resourceSize_X = 0.35f*2*0.7f;
+        const float resourceSize_X = 0.35f*2*0.66f;
         Vector3 instantiationPlace = transform.position + Vector3.right*((resourceSize_X*(GameObjectsresourceList.Count-1))/2);
         while(GameObjectsresourceList.Count>0){
             Resource r = GameObjectsresourceList[0];
             GameObjectsresourceList.RemoveAt(0);
             GameObject NewResource = Instantiate(resourcePrefab,instantiationPlace,transform.rotation,this.transform);
             resourceList.Add(NewResource);
-            NewResource.GetComponent<ResourceExchange>().SetSprite(r);
+            if(option.cultistequalsprisoner==0 || (r!=Resource.Cultist && r!=Resource.Prisoner)){
+                NewResource.GetComponent<ResourceExchange>().SetSprite(r);
+            }
+            else{
+                NewResource.GetComponent<ResourceExchange>().SetSprite(Resource.PrisonerOrCultist);
+            }
+            
             instantiationPlace += Vector3.left*resourceSize_X;
         }
     }
@@ -368,6 +398,11 @@ public class Option : MonoBehaviour
         foreach(GameObject obj in rewardList){
             obj.GetComponent<ResourceExchange>().spriteRenderer.sortingLayerID = layerID;
         }    
+    }
+
+    private bool isEmptyOption(){
+        return option.optiontext=="" && option.outputtext=="" && 
+            GetOptionRewards().Count()==0 && GetOptionRequirements().Count()==0;
     }
 }
 

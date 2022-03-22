@@ -65,6 +65,8 @@ public class Card : MonoBehaviour
             });
         }));
     }
+
+
     bool CardClicked(){
         Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
         RaycastHit2D rayHit = Physics2D.GetRayIntersection(ray);

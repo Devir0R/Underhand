@@ -40,6 +40,7 @@ public class ResourceCard : MonoBehaviour
 
     private float mouseDragSpeed = 0.1f;
     private Vector3 velocity = Vector3.zero;
+    public static bool dragging = false;
 
     
     Vector3 OnTanbleSize;
@@ -76,6 +77,7 @@ public class ResourceCard : MonoBehaviour
             rayHits.Select(rayHit=>rayHit.collider?.gameObject?.GetComponent<ResourceCard>()?.spriteRenderer?.sortingOrder);
         if(sortings.Max()!=spriteRenderer.sortingOrder) return ;
         spriteRenderer.sortingOrder = Hand.Instance.hand.Count+1;
+        dragging = true;
         Hand.Instance.RemoveCardFromHand(this);
         transform.rotation = Quaternion.identity;
         StartCoroutine(DragUpdate(this));
@@ -102,6 +104,7 @@ public class ResourceCard : MonoBehaviour
         else{
             Hand.Instance.AddCardToHand(this);
         }
+        dragging = false;
     }
 
     // Start is called before the first frame update

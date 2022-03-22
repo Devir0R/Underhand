@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 103582004}
   - component: {fileID: 103582005}
+  - component: {fileID: 103582006}
   m_Layer: 0
   m_Name: FoodShortage
   m_TagString: Untagged
@@ -193,7 +194,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1328478147
   m_SortingLayer: -1
-  m_SortingOrder: 4
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 8abbb87cfef884d4aab7de0febf558ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -205,6 +206,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &103582006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103582003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03dc6a33743e79c49b89f42729bf8428, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  framesBetweenBlinks: 6
+  isOn: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,6 +337,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 909605309}
   godsJSON: {fileID: 4900000, guid: 893c4f1138cb21142b8129377d8b6ced, type: 3}
+  deck: []
+  discard: []
   spriteArray:
   - {fileID: 1113812728336201195, guid: bdb6684b60f557b4380efe1924d03d7a, type: 3}
   - {fileID: 5134120919787300631, guid: bdb6684b60f557b4380efe1924d03d7a, type: 3}
@@ -717,7 +734,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -361066141
   m_SortingLayer: 4
-  m_SortingOrder: 30
+  m_SortingOrder: 2
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1042420169
 GameObject:
@@ -794,7 +811,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -361066141
   m_SortingLayer: 4
-  m_SortingOrder: 20
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c5b94d2b20926b84ea6613baabc23ae7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -819,10 +836,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardsNumber: {fileID: 1021711835}
-  handMiddle: {x: 0, y: -3.32, z: 0}
+  handMiddle: {x: 0, y: -3, z: 0}
   gapFromOneItemToTheNextOne: 0
   ResourcePrefab: {fileID: 7540233002287511285, guid: ff93fac689fce1b4b8dff3766f00c802, type: 3}
   hand: []
+  MoreThan15Cards: {fileID: 1737545314}
+  FiveOrMoreSuspision: {fileID: 1450776220}
+  NoFood: {fileID: 103582006}
 --- !u!1 &1395547318
 GameObject:
   m_ObjectHideFlags: 0
@@ -923,8 +943,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1450776218}
   - component: {fileID: 1450776219}
+  - component: {fileID: 1450776220}
   m_Layer: 0
-  m_Name: SuspicionOverload
+  m_Name: SuspisionOverload
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -983,7 +1004,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1328478147
   m_SortingLayer: -1
-  m_SortingOrder: 4
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 7da3d866a383ee240aad99b91f15e922, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -995,6 +1016,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1450776220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450776217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30532ee0b1742474a9a9f8cd917830b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  framesBetweenBlinks: 6
+  isOn: 0
 --- !u!1 &1607560441
 GameObject:
   m_ObjectHideFlags: 0
@@ -1048,6 +1083,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1737545312}
   - component: {fileID: 1737545313}
+  - component: {fileID: 1737545314}
   m_Layer: 0
   m_Name: NumberOfCards
   m_TagString: Untagged
@@ -1108,7 +1144,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1328478147
   m_SortingLayer: -1
-  m_SortingOrder: 5
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 2aeb534814439f44ca0840076cf75cdd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1120,3 +1156,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1737545314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737545311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 338a13958215c5845b9b21460d75dd55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  framesBetweenBlinks: 6
+  isOn: 0

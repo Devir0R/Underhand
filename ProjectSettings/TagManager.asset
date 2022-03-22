@@ -62,3 +62,6 @@ TagManager:
   - name: hand
     uniqueID: 3933901155
     locked: 0
+  - name: cardsInHand
+    uniqueID: 852121303
+    locked: 0

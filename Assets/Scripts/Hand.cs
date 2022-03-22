@@ -7,6 +7,10 @@ using TMPro;
 
 public class Hand : MonoBehaviour
 {
+    public static float GREED_CHANCE = 0.5f;
+    public static float POLICE_RAID_CHANCE = 0.5f;
+    public static float DESPARATE_MEASURES_CHANCE = 0.5f;
+
     public TextMeshPro cardsNumber;
     private static Hand _instance;
     public static Hand Instance{ get { return _instance; } }
@@ -25,6 +29,10 @@ public class Hand : MonoBehaviour
     public static int MAJORITY_ROUNDING_DOWN = 840;
     public static int MAJORITY_ROUNDING_UP = 420;
 
+    public Alert MoreThan15Cards;
+    public Alert FiveOrMoreSuspision;
+    public Alert NoFood;
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -33,6 +41,28 @@ public class Hand : MonoBehaviour
         } else {
             _instance = this;
         }
+    }
+
+    public void RemoveFromHandRandomly(int numberOfCards){
+        List<float> cardsIndexesToRemove = new List<float>();
+        for(int j =0;j<numberOfCards;j++){
+            cardsIndexesToRemove.Add(Random.value);
+            if(cardsIndexesToRemove[j]==1f){
+                cardsIndexesToRemove.Remove(j);
+                j--;
+            }
+        }
+        cardsIndexesToRemove.Sort();
+        for(int j =cardsIndexesToRemove.Count-1;j>0;j--){
+            int indexToRemove = Mathf.FloorToInt(cardsIndexesToRemove[j]*hand.Count);
+            ResourceCard toRemove = hand[indexToRemove];
+            hand.RemoveAt(indexToRemove);
+            GameObject.Destroy(toRemove.gameObject);
+
+        }
+        FitCards();
+        
+
     }
 
     // Start is called before the first frame update
@@ -90,7 +120,7 @@ public class Hand : MonoBehaviour
             card.transform.Translate(0,-nudgeThisCard,0);
 
             card.spriteRenderer.sortingOrder = hand.Count- 2*Mathf.Abs((howManyAdded-(hand.Count/2)))
-                    +(howManyAdded>hand.Count/2? 1 : 0);
+                    +(howManyAdded>hand.Count/2? 1 : 0) ;
         }
     }
 

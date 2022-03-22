@@ -15,10 +15,10 @@ public class Deck : MonoBehaviour
 
     public TextAsset godsJSON;
     AllCards allCards;
-    List<CardDO>  deck;
+    public List<CardDO>  deck;
     private bool disableDeck;
 
-    List<CardDO> discard;
+    public List<CardDO> discard;
     public Sprite[] spriteArray;
     public GameObject cardPrefab;
     
@@ -41,6 +41,10 @@ public class Deck : MonoBehaviour
         mainCamera = Camera.main;
 
     }
+    public CardDO GetCard(string cardName){
+        return allCards.allCardsList.Find(card=>card.title==cardName);
+    }
+
     
     
     public void AddToDiscard(ShuffleDO shuffle){
@@ -48,8 +52,9 @@ public class Deck : MonoBehaviour
         if(shuffle.lowerbound!=999&&shuffle.upperbound!=999){
             for(int j=0;j<shuffle.numcards;j++){
                 CardDO cardToAdd;
-                cardToAdd = allCards.allCardsList.Find(card=>card.num==randomNumber(shuffle.lowerbound,shuffle.upperbound));
-                if(shuffle.allowsdupes==1 || cardsToAdd.FirstOrDefault(card=>card.num == cardToAdd.num)==null){
+                int randomCardNum = randomNumber(shuffle.lowerbound,shuffle.upperbound+1);
+                cardToAdd = allCards.allCardsList.Find(card=>card.num==randomCardNum);
+                if(shuffle.allowsdupes==1 || !cardsToAdd.Contains(cardToAdd)){
                     cardsToAdd.Add(cardToAdd);
                 }
                 else j--;
@@ -61,6 +66,10 @@ public class Deck : MonoBehaviour
         
 
     }
+
+    public CardDO GetTopCard(){
+        return Deck.Instance.deck[0];
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -70,7 +79,7 @@ public class Deck : MonoBehaviour
                 this.allCards = new AllCards(handleToCheck.Result.Select(json=>JsonConvert.DeserializeObject<CardDO>(json.text)));
                 this.deck  = this.allCards.allCardsList
                     .Where(card=>card.isinitial==1)
-                    .OrderByDescending(card=>card.title.IndexOf("festation")>=0? 2 : Random.value)
+                    .OrderByDescending(card=>card.title.Contains("festation")? 2: Random.value)
                     .Take(INITIAL_DECK_SIZE).ToList();
                 this.discard = new List<CardDO>();
                 this.addRelicCardIfThereIsnt();
@@ -115,12 +124,35 @@ public class Deck : MonoBehaviour
     }
 
     void nextCard(){
-            CardDO current_card = RemoveTopCard();
+            CardDO current_card= GetAlertCard();
+            if(current_card==null){
+                current_card = RemoveTopCard();
+            }
+            
 
             theCard.changeCard(current_card);
             
 
             if(current_card.isrecurring==1) this.discard.Add(current_card);
+    }
+
+    CardDO GetAlertCard(){
+        if(Hand.Instance.MoreThan15Cards.isOn){
+            if( Random.value>=Hand.GREED_CHANCE){
+                return GetCard("Greed");
+            }
+        }
+        else if(Hand.Instance.FiveOrMoreSuspision.isOn){
+            if(Random.value>=Hand.POLICE_RAID_CHANCE){
+                return GetCard("Police Raid");
+            }
+        }
+        else if(Hand.Instance.NoFood.isOn){
+            if(Random.value>=Hand.DESPARATE_MEASURES_CHANCE){
+                return GetCard("Desperate Measures");
+            }
+        }
+        return null;
     }
 
     CardDO RemoveTopCard(){
@@ -176,7 +208,7 @@ public class Deck : MonoBehaviour
         do{
             randFloat = Random.value;
         }while(randFloat==1);
-        int res = ((int)(Mathf.Floor( randFloat*range)+includeStart));
+        int res = (Mathf.FloorToInt( randFloat*range)+includeStart);
         return res;
     }
 

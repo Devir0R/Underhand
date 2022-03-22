@@ -68,7 +68,7 @@ public class Table : MonoBehaviour
             if(hit.collider.gameObject.CompareTag("CardOnTable")){
                 ResourcePrefab.resourceType = hit.collider.GetComponent<ResourceCard>().resourceType;
                 ResourceCard cardToDrag = Instantiate(ResourcePrefab,hit.collider.transform.position,hit.collider.transform.rotation);
-                cardToDrag.spriteRenderer.sortingLayerName = "hand";
+                cardToDrag.spriteRenderer.sortingLayerName = "cardsInHand";
                 cardToDrag.spriteRenderer.sortingOrder = Hand.Instance.hand.Count+1;
                 RemoveResource(cardToDrag.resourceType);
             }
@@ -98,7 +98,7 @@ public class Table : MonoBehaviour
         ResourcedOnTableChanged?.Invoke(); 
     }
 
-    public void SpawnReawrds(RewardsDO rewards){
+    public void SpawnRewards(RewardsDO rewards){
         Dictionary<Resource,System.Func<int>> howManyFromFunctions = HowManyFromFunctions(rewards);
         foreach(Resource resource in ResourceInfo.AllResources){
             int howManyToAdd = howManyFromFunctions[resource]();
