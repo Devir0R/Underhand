@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using UnityEngine.InputSystem;
+using System.Collections;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using Newtonsoft.Json;
@@ -16,14 +15,14 @@ public class Deck : MonoBehaviour
     public TextAsset godsJSON;
     AllCards allCards;
     public List<CardDO>  deck;
-    private bool disableDeck;
-
     public List<CardDO> discard;
     public Sprite[] spriteArray;
     public GameObject cardPrefab;
     
     private int deckSize;
     Card theCard;
+
+    private bool isSpawning = false;
     public Gods godsInfo;
 
     private Camera mainCamera;
@@ -86,7 +85,6 @@ public class Deck : MonoBehaviour
                 this.insertGods();
                 shuffleDeck();
                 this.deckSize = this.deck.Count;
-                this.disableDeck = false;
                 GameState.GameStart();
                 
             }
@@ -97,32 +95,31 @@ public class Deck : MonoBehaviour
         this.deck = this.deck.OrderBy(x => Random.value).ToList();
     }
 
-    public void SpawnACardClicked(InputAction.CallbackContext context){
-        if(this.disableDeck || ! context.performed || !DeckClicked()) return ;
+    public void SpawnACard(){
+        isSpawning = true;
+        StartCoroutine(MoveDeckAndSpawn());
 
-        DisableDeck();
-        Vector3 cardPosition = new Vector3(-transform.position.x+3,transform.position.y,transform.position.z);
-        if(theCard==null){
-            theCard = Instantiate(cardPrefab,cardPosition,transform.rotation).GetComponent<Card>();
-            nextCard();
+    }
+
+    public IEnumerator MoveDeckAndSpawn(){
+        Vector3 originalPosition = transform.position;
+        Vector3 moveTo = transform.position + Vector3.left*(spriteRenderer.bounds.size.x*1.05f);
+        //move in
+        while(transform.position!=moveTo){
+            transform.position = Vector3.MoveTowards(transform.position, moveTo,  Time.deltaTime*9);
+            yield return null;
         }
-    }
+        Vector3 cardPosition = new Vector3(transform.position.x,transform.position.y,transform.position.z);
+        theCard = Instantiate(cardPrefab,cardPosition,transform.rotation).GetComponent<Card>();
+        nextCard();
+        //move out
+        while(transform.position!=originalPosition){
+            transform.position = Vector3.MoveTowards(transform.position, originalPosition,  Time.deltaTime*9);
+            yield return null;
+        }
+        isSpawning = false;
+     }
 
-    bool DeckClicked(){
-        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-        RaycastHit2D rayHit = Physics2D.GetRayIntersection(ray);
-
-        return rayHit.collider!=null && rayHit.collider.gameObject.CompareTag("Deck");
-    }
-
-    void DisableDeck(){
-        this.disableDeck = true;
-    }
-
-    
-    public void EnableDeck(){
-        this.disableDeck = false;
-    }
 
     void nextCard(){
             CardDO current_card= GetAlertCard();
@@ -130,8 +127,7 @@ public class Deck : MonoBehaviour
                 current_card = RemoveTopCard();
             }
             
-
-            theCard.changeCard(current_card);
+            StartCoroutine(theCard.FlipCard(current_card));
             
 
             if(current_card.isrecurring==1) this.discard.Add(current_card);
@@ -279,6 +275,9 @@ public class Deck : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(theCard==null && !isSpawning){
+            SpawnACard();
+        }
     }
 }
 

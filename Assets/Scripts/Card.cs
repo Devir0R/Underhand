@@ -11,12 +11,10 @@ public class Card : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     private static IList<Sprite> spriteList;
     private CardDO currentCardDO;
-    private int currentImageIndex = 0;
     private Vector3 moveTo;
     private Vector3 rotateOn;
     private static Vector3 zero = Vector3.up*1000000;
     List<System.Action> performWhenListLoaded = new List<System.Action>();
-    private bool disableCard;
     public GameObject optionPrefab;
     private List<GameObject> options = new List<GameObject>();
 
@@ -27,7 +25,7 @@ public class Card : MonoBehaviour
     private void Awake(){
         mainCamera = Camera.main;
     }
-
+    private bool disableCard = true;
     private bool movedBack = false;
     
     void Start()
@@ -105,6 +103,10 @@ public class Card : MonoBehaviour
         disableCard = true;
     }
 
+    private void EnableCard(){
+        disableCard = false;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -126,7 +128,6 @@ public class Card : MonoBehaviour
             Vector3 outOfScreenVector = Camera.main.WorldToViewportPoint(transform.position);
             if(outOfScreenVector.y>1.5){
                 GameObject.Destroy(gameObject);
-                GameObject.FindGameObjectWithTag("Deck").GetComponent<Deck>().EnableDeck();
             }
         }
         
@@ -147,25 +148,39 @@ public class Card : MonoBehaviour
         this.rotateOn = transform.position+Vector3.up *10;
     }
 
-    public void changeCard(CardDO cardDO){
+    public IEnumerator FlipCard(CardDO cardDO){
+        
         System.Action changeSprite = ()=>{
             currentCardDO = cardDO;
-            for(int i =0;i<spriteList.Count;i++){
-                Sprite sprite = spriteList[i];
-                if(sprite.name.Equals("Card"+currentCardDO.num)){
-                    currentImageIndex = i;
-                    spriteRenderer.sprite = spriteList[currentImageIndex]; 
-                }
-            }
+            spriteRenderer.sprite = spriteList.First(sprite=>sprite.name.Equals("Card"+currentCardDO.num));
         };
-        if(spriteList==null){
-            performWhenListLoaded.Add(changeSprite);
+        Vector3 pivot = transform.position + (Vector3.left*(spriteRenderer.bounds.size.x/2f));
+        bool flipped = false;
+
+        while(!flipped){
+            transform.RotateAround(pivot, Vector3.up, -150 * Time.deltaTime);
+            if(-transform.rotation.y>transform.rotation.w){
+                flipped = true;
+            }
+            yield return null;
         }
-        else{
-            changeSprite();
+
+        if(spriteList==null) performWhenListLoaded.Add(changeSprite);
+        else changeSprite();
+
+        transform.rotation = new Quaternion(transform.rotation.x,-transform.rotation.y,transform.rotation.z,transform.rotation.w);
+        flipped = false;
+        while(!flipped){
+            float w_before = transform.rotation.w;
+            transform.RotateAround(pivot, Vector3.up, -150 * Time.deltaTime);
+            float w_after = transform.rotation.w;
+            if(w_before>w_after){
+                flipped = true;
+            }
+            yield return null;
         }
+        EnableCard();
     }
-    
 }
 
 [System.Serializable]

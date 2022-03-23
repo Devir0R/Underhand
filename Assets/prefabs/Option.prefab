@@ -29,7 +29,7 @@ RectTransform:
   m_GameObject: {fileID: 2712697371713110376}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.4, y: 1.4, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_Children:
   - {fileID: 6398797220254851407}
   - {fileID: 3436969867557364064}
@@ -158,6 +158,7 @@ MonoBehaviour:
   resourcePrefab: {fileID: 4829964750833847447, guid: 9f4d723907daca24ead65fd6f12591a0, type: 3}
   output: {fileID: 6210411967746744983}
   optionText: {fileID: 3137837990514184823}
+  isDormant: 0
 --- !u!61 &4189827185791679972
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -260,7 +261,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &6210411967746744983
 MonoBehaviour:
@@ -309,8 +310,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1.8
-  m_fontSizeBase: 1.8
+  m_fontSize: 2
+  m_fontSizeBase: 2
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -479,8 +480,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 3.6
-  m_fontSizeBase: 3.6
+  m_fontSize: 4
+  m_fontSizeBase: 4
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
