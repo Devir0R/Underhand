@@ -10,6 +10,7 @@ TagManager:
   - ResourceInHand
   - Table
   - CardOnTable
+  - Discard
   layers:
   - Default
   - TransparentFX

@@ -10,7 +10,7 @@ public class Card : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
     private static IList<Sprite> spriteList;
-    private CardDO currentCardDO;
+    public CardDO currentCardDO;
     private Vector3 moveTo;
     private Vector3 rotateOn;
     private static Vector3 zero = Vector3.up*1000000;
@@ -27,6 +27,10 @@ public class Card : MonoBehaviour
     }
     private bool disableCard = true;
     private bool movedBack = false;
+
+    public bool faceUp = false;
+
+    public float moveSpeed = 10f;
     
     void Start()
     {
@@ -71,6 +75,8 @@ public class Card : MonoBehaviour
                     options.RemoveAt(0);
                     GameObject.Destroy(op);
                 }
+                if(currentCardDO.isrecurring==0) rotateOut();
+                else Discard.Instance.MoveIn();
             });
         }));
     }
@@ -111,7 +117,7 @@ public class Card : MonoBehaviour
     void Update()
     {
         if(!moveTo.Equals( zero)){
-            transform.position = Vector3.MoveTowards(transform.position, moveTo,  Time.deltaTime*10);
+            transform.position = Vector3.MoveTowards(transform.position, moveTo,  Time.deltaTime*moveSpeed);
             if(transform.position.Equals(moveTo)){
                 moveTo = zero;
                 if(moveCallback!=null){
@@ -119,7 +125,8 @@ public class Card : MonoBehaviour
                     moveCallback = null;
                 }
                 if(movedBack){
-                    rotateOut();
+                    Discard.Instance.cardToDicard = this;                
+                    Discard.Instance.MoveOut();
                 }
             }
         }
@@ -138,6 +145,12 @@ public class Card : MonoBehaviour
         moveTo = transform.position+Vector3.up *8;
     }
 
+    public void FinishingMove(){
+        moveSpeed = 30f;
+        moveTo = Discard.Instance.transform.position;
+
+    }
+
     public void MoveBack(System.Action callback){
         this.moveCallback = callback;
         moveTo = transform.position+Vector3.down *8;
@@ -148,37 +161,35 @@ public class Card : MonoBehaviour
         this.rotateOn = transform.position+Vector3.up *10;
     }
 
-    public IEnumerator FlipCard(CardDO cardDO){
+    public IEnumerator FlipCard(){
+        faceUp = false;
         
         System.Action changeSprite = ()=>{
-            currentCardDO = cardDO;
-            spriteRenderer.sprite = spriteList.First(sprite=>sprite.name.Equals("Card"+currentCardDO.num));
+            string cardSuffix = spriteRenderer.sprite.name.Contains("back")?  this.currentCardDO.num.ToString(): "back";
+            spriteRenderer.sprite = spriteList.First(sprite=>sprite.name.Equals("Card"+cardSuffix));
         };
-        Vector3 pivot = transform.position + (Vector3.left*(spriteRenderer.bounds.size.x/2f));
-        bool flipped = false;
-
-        while(!flipped){
-            transform.RotateAround(pivot, Vector3.up, -150 * Time.deltaTime);
-            if(-transform.rotation.y>transform.rotation.w){
-                flipped = true;
-            }
+        Vector3 startingPosition =transform.position;
+        while(currentCardDO==null){
             yield return null;
         }
-
-        if(spriteList==null) performWhenListLoaded.Add(changeSprite);
-        else changeSprite();
-
-        transform.rotation = new Quaternion(transform.rotation.x,-transform.rotation.y,transform.rotation.z,transform.rotation.w);
-        flipped = false;
-        while(!flipped){
-            float w_before = transform.rotation.w;
-            transform.RotateAround(pivot, Vector3.up, -150 * Time.deltaTime);
-            float w_after = transform.rotation.w;
-            if(w_before>w_after){
-                flipped = true;
+        if(!faceUp)
+        {
+            for(float i = 0f;i<=360f;i+=15f)
+            {
+                transform.rotation = Quaternion.Euler(0f,i,0f);
+                
+                transform.position =startingPosition+ Vector3.left*((spriteRenderer.bounds.size.x)*((i<180f? i : i-180f)/180f));
+                if(i==90f){
+                    if(spriteList==null) performWhenListLoaded.Add(changeSprite);
+                    else changeSprite();
+                    i+=180f;
+                }
+                yield return new WaitForSeconds(0.01f);
             }
-            yield return null;
+            
         }
+        faceUp= !faceUp;
+
         EnableCard();
     }
 }

@@ -363,8 +363,8 @@ public class Option : MonoBehaviour
     }
 
     private void AddResourceRewards(List<Resource> GameObjectsresourceList){
-        const float resourceSize_X = 0.35f*2*0.66f;
-        const float resourceSize_Y = 1.0f*0.7f;
+        const float resourceSize_X = 0.35f*2*0.5f;
+        const float resourceSize_Y = 1.0f*0.5f;
         Vector3 instantiationPlace = transform.position 
                         + Vector3.right*((resourceSize_X*(GameObjectsresourceList.Count-1))/2)
                         + Vector3.down*resourceSize_Y;
@@ -379,7 +379,7 @@ public class Option : MonoBehaviour
     }
 
     private void AddResourceRequirements(List<Resource> GameObjectsresourceList){
-        const float resourceSize_X = 0.35f*2*0.66f;
+        const float resourceSize_X = 0.35f*2*0.5f;
         Vector3 instantiationPlace = transform.position + Vector3.right*((resourceSize_X*(GameObjectsresourceList.Count-1))/2);
         while(GameObjectsresourceList.Count>0){
             Resource r = GameObjectsresourceList[0];
