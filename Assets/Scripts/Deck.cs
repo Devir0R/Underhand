@@ -5,6 +5,7 @@ using System.Collections;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using Newtonsoft.Json;
+using UnityEngine.InputSystem;
 
 
 public class Deck : MonoBehaviour
@@ -16,7 +17,7 @@ public class Deck : MonoBehaviour
     AllCards allCards;
     public List<CardDO>  deck;
     public Sprite[] spriteArray;
-    public GameObject cardPrefab;
+    public Card cardPrefab;
     
     private int deckSize;
     public Card theCard;
@@ -28,6 +29,13 @@ public class Deck : MonoBehaviour
 
     private static Deck _instance;
     public static Deck Instance{ get { return _instance; } }
+
+    private List<Card> foresightCards = new List<Card>();
+
+    [SerializeField]
+    public InputAction forsightMouseClick;
+
+    public bool performingForesight = false;
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -100,23 +108,62 @@ public class Deck : MonoBehaviour
 
     }
 
+    public IEnumerator MoveTo(Vector3 to){
+        while(transform.position!=to){
+            transform.position = Vector3.MoveTowards(transform.position, to,  Time.deltaTime*9);
+            yield return null;
+        }
+    }
+
+    public IEnumerator Foresight(bool discard){
+        performingForesight = true;
+        Vector3 inScene = transform.position + Vector3.left*(spriteRenderer.bounds.size.x*1.05f);
+        yield return MoveTo(inScene);
+        yield return ShowForesightCards();
+
+
+    }
+
+    public IEnumerator ShowForesightCards(){
+        if(deck.Count<3) shuffleDiscard();
+
+        for(int j = 0;j<3;j++){
+            foresightCards.Add(Instantiate(cardPrefab,transform.position,transform.rotation));
+            foresightCards[j].changeSprite(deck[j].num.ToString());
+            yield return foresightCards[j].MoveTo(transform.position+(Vector3.left*spriteRenderer.bounds.size.x*(j+3)));
+        }
+        forsightMouseClick.performed += WaitForClick;
+        forsightMouseClick.Enable();
+    }
+
+    private void WaitForClick(InputAction.CallbackContext context)=>StartCoroutine(RemoveForesightCards());
+
+    public IEnumerator RemoveForesightCards(){
+        forsightMouseClick.performed -= WaitForClick;
+        forsightMouseClick.Disable();
+
+        if(deck.Count<3) shuffleDiscard();
+
+        for(int j = 2;j>=0;j--){
+            Card cardToRemove = foresightCards[j];
+            yield return cardToRemove.MoveTo(transform.position);
+            GameObject.Destroy(cardToRemove.gameObject);
+        }
+        Vector3 outScene = transform.position + Vector3.right*(spriteRenderer.bounds.size.x*1.05f);
+        yield return MoveTo(outScene);
+        performingForesight = false;
+
+    }
+
     public IEnumerator MoveDeckAndSpawn(){
         Vector3 originalPosition = transform.position;
-        Vector3 moveTo = transform.position + Vector3.left*(spriteRenderer.bounds.size.x*1.05f);
-        //move in
-        while(transform.position!=moveTo){
-            transform.position = Vector3.MoveTowards(transform.position, moveTo,  Time.deltaTime*9);
-            yield return null;
-        }
-        Vector3 cardPosition = new Vector3(transform.position.x,transform.position.y,transform.position.z);
+        Vector3 inScene = transform.position + Vector3.left*(spriteRenderer.bounds.size.x*1.05f);
+        yield return MoveTo(inScene);
         
-        theCard = Instantiate(cardPrefab,cardPosition,transform.rotation).GetComponent<Card>();
+        theCard = Instantiate(cardPrefab,transform.position,transform.rotation);
         nextCard();
-        //move out
-        while(transform.position!=originalPosition){
-            transform.position = Vector3.MoveTowards(transform.position, originalPosition,  Time.deltaTime*9);
-            yield return null;
-        }
+
+        yield return MoveTo(originalPosition);
         isSpawning = false;
      }
 
@@ -152,12 +199,15 @@ public class Deck : MonoBehaviour
         return null;
     }
 
+    void shuffleDiscard(){
+        Discard.Instance.shuffleDiscard();
+        this.deck.AddRange(Discard.Instance.discard);
+        Discard.Instance.discard.RemoveAll(card=>true);
+    }
+
     CardDO RemoveTopCard(){
-        if(this.deck.Count==0){
-            this.deck = Discard.Instance.discard.ToList();
-            Discard.Instance.discard = new List<CardDO>();
-            shuffleDeck();
-        }
+        if(this.deck.Count==0) shuffleDiscard();
+
         CardDO current_card = this.deck[0];
         this.deck.RemoveAt(0);
         UpdateDeckSprite();

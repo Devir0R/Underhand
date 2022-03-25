@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
 using System.Linq;
+using System.Collections;
 
 public class Option : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class Option : MonoBehaviour
     private Vector3 moveTo;
     private static Vector3 zero = Vector3.up*1000000;
 
-    public GameObject resourcePrefab;
+    public ResourceExchange resourcePrefab;
 
     int optionNum;
 
@@ -29,8 +30,8 @@ public class Option : MonoBehaviour
 
     private Camera mainCamera;
 
-    private List<GameObject> resourceList = new List<GameObject>();
-    private List<GameObject> rewardList = new List<GameObject>();
+    private List<ResourceExchange> requirementsObjects = new List<ResourceExchange>();
+    private List<ResourceExchange> rewardList = new List<ResourceExchange>();
 
     private System.Action cardCallBack;
 
@@ -54,6 +55,7 @@ public class Option : MonoBehaviour
     {
         OptionChosen += MoveOptionBack;
         OptionChosen += this.SpawnReawrds;
+        StartCoroutine(MarkResourcesOnTable());
     }
 
     public void SpawnReawrds()
@@ -109,13 +111,10 @@ public class Option : MonoBehaviour
             if(option.randomrequirements!=0){
                 Hand.Instance.RemoveFromHandRandomly(option.randomrequirements);
             }
-            if(Table.Instance.ResourcesOnTable().Count==0){
-                LoadEndOfGame();
-                OnOptionChosen();
-            }
+
+            if(Table.Instance.ResourcesOnTable().Count==0) optionRealized();
             else{
-                ResourceCard.CardOnTableDestroyed +=MoveWhenCardsOnTableDestroyed;
-                ResourceCard.CardOnTableDestroyed += LoadEndOfGame;
+                ResourceCard.CardOnTableDestroyed +=whenCardsOnTableDestroyed;
                 Table.Instance.SacrificeAll();
             }
             
@@ -123,17 +122,39 @@ public class Option : MonoBehaviour
         }
         
     }
+    
+
+
 
     void LoadEndOfGame(){
         if(GameState.state==State.Lost || GameState.state==State.Won){
             SceneManager.LoadScene("WinLose");
         }
     }
+
+    void optionRealized(){
+        checkForesight();
+        StartCoroutine(checkForesightDone());
+
+    }
+    private IEnumerator checkForesightDone(){
+        while(Deck.Instance.performingForesight){
+            yield return new WaitForSeconds(0.5f);
+        }
+        LoadEndOfGame();
+        OnOptionChosen();
+    }
     
 
-    void MoveWhenCardsOnTableDestroyed(){
-        ResourceCard.CardOnTableDestroyed-=MoveWhenCardsOnTableDestroyed;
-        OnOptionChosen();
+    void whenCardsOnTableDestroyed(){
+        ResourceCard.CardOnTableDestroyed-=whenCardsOnTableDestroyed;
+        optionRealized();
+    }
+
+    void checkForesight(){
+        if(option.foresight.hasforesight==1){
+            StartCoroutine( Deck.Instance.Foresight(option.foresight.candiscard==1));
+        }
     }
 
     void DisbleOption(){
@@ -363,15 +384,15 @@ public class Option : MonoBehaviour
     }
 
     private void AddResourceRewards(List<Resource> GameObjectsresourceList){
-        const float resourceSize_X = 0.35f*2*0.5f;
-        const float resourceSize_Y = 1.0f*0.5f;
+        const float resourceSize_X = 0.35f*2*0.55f;
+        const float resourceSize_Y = 1.0f*0.55f;
         Vector3 instantiationPlace = transform.position 
                         + Vector3.right*((resourceSize_X*(GameObjectsresourceList.Count-1))/2)
                         + Vector3.down*resourceSize_Y;
         while(GameObjectsresourceList.Count>0){
             Resource r = GameObjectsresourceList[0];
             GameObjectsresourceList.RemoveAt(0);
-            GameObject NewResource = Instantiate(resourcePrefab,instantiationPlace,transform.rotation,this.transform);
+            ResourceExchange NewResource = Instantiate(resourcePrefab,instantiationPlace,transform.rotation,this.transform);
             rewardList.Add(NewResource);
             NewResource.GetComponent<ResourceExchange>().SetSprite(r);
             instantiationPlace += Vector3.left*resourceSize_X;
@@ -379,13 +400,13 @@ public class Option : MonoBehaviour
     }
 
     private void AddResourceRequirements(List<Resource> GameObjectsresourceList){
-        const float resourceSize_X = 0.35f*2*0.5f;
+        const float resourceSize_X = 0.35f*2*0.55f;
         Vector3 instantiationPlace = transform.position + Vector3.right*((resourceSize_X*(GameObjectsresourceList.Count-1))/2);
         while(GameObjectsresourceList.Count>0){
             Resource r = GameObjectsresourceList[0];
             GameObjectsresourceList.RemoveAt(0);
-            GameObject NewResource = Instantiate(resourcePrefab,instantiationPlace,transform.rotation,this.transform);
-            resourceList.Add(NewResource);
+            ResourceExchange NewResource = Instantiate(resourcePrefab,instantiationPlace,transform.rotation,this.transform);
+            requirementsObjects.Add(NewResource);
             if(option.cultistequalsprisoner==0 || (r!=Resource.Cultist && r!=Resource.Prisoner)){
                 NewResource.GetComponent<ResourceExchange>().SetSprite(r);
             }
@@ -395,6 +416,31 @@ public class Option : MonoBehaviour
             
             instantiationPlace += Vector3.left*resourceSize_X;
         }
+    }
+
+    private IEnumerator MarkResourcesOnTable(){
+        while(this!=null){
+            foreach(ResourceExchange resOfReq in requirementsObjects){
+                resOfReq.Ungrey();
+            }
+            int howManyMarked = 0;
+            List<Resource> resourcesOnTable = Table.Instance.ResourcesOnTable();
+            foreach(Resource resource in resourcesOnTable){
+                foreach(ResourceExchange resOfReq in requirementsObjects){
+                    if(resource==resOfReq.myType && !resOfReq.greyed){
+                        resOfReq.Grey();
+                        howManyMarked+=1;
+                        break;
+                    }
+                }
+            }
+            List<ResourceExchange> ungreyedRelics = requirementsObjects.Where(resExch=>!resExch.greyed&&resExch.myType==Resource.Relic).ToList();
+            for(int j = 0;j<resourcesOnTable.Count-howManyMarked && j<ungreyedRelics.Count;j++){
+                ungreyedRelics[j].Grey();
+            }
+            yield return new WaitForSeconds(0.1f);
+        }
+
     }
 
     private void MoveOptionLayer(){
@@ -412,11 +458,11 @@ public class Option : MonoBehaviour
         spriteRenderer.sortingLayerID =layerID;
         output.sortingLayerID = layerID;
         optionText.sortingLayerID = layerID;  
-        foreach(GameObject obj in resourceList){
-            obj.GetComponent<ResourceExchange>().spriteRenderer.sortingLayerID = layerID;
+        foreach(ResourceExchange obj in requirementsObjects){
+            obj.spriteRenderer.sortingLayerID = layerID;
         }
-        foreach(GameObject obj in rewardList){
-            obj.GetComponent<ResourceExchange>().spriteRenderer.sortingLayerID = layerID;
+        foreach(ResourceExchange obj in rewardList){
+            obj.spriteRenderer.sortingLayerID = layerID;
         }    
     }
 

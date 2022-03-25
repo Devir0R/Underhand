@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Discard : MonoBehaviour
 {
@@ -25,6 +26,10 @@ public class Discard : MonoBehaviour
             _instance = this;
         }
 
+    }
+
+    public void shuffleDiscard(){
+        this.discard = this.discard.OrderBy(x => Random.value).ToList();
     }
 
     void UpdateDeckSprite(){

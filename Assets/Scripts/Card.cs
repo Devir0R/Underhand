@@ -8,6 +8,7 @@ using System.Linq;
 
 public class Card : MonoBehaviour
 {
+    public bool foresight = false;
     public SpriteRenderer spriteRenderer;
     private static IList<Sprite> spriteList;
     public CardDO currentCardDO;
@@ -48,7 +49,7 @@ public class Card : MonoBehaviour
         }
         moveTo =zero;
         rotateOn =zero;
-        StartCoroutine(CheckOptions());
+        if(!foresight)  StartCoroutine(CheckOptions());
     }
 
      public IEnumerator CheckOptions(){
@@ -61,7 +62,7 @@ public class Card : MonoBehaviour
      }
 
     public void ShowOptions(InputAction.CallbackContext context){
-        if(this.disableCard || ! context.performed || !CardClicked()) return ;
+        if(this.foresight || this.disableCard || ! context.performed || !CardClicked()) return ;
         DisbleCard();
         CreateOptions();
         MoveUp(MoveOptions);
@@ -139,7 +140,12 @@ public class Card : MonoBehaviour
         }
         
     }
-
+    public IEnumerator MoveTo(Vector3 to){
+        while(transform.position!=to){
+            transform.position = Vector3.MoveTowards(transform.position, to,  Time.deltaTime*30);
+            yield return null;
+        }
+    }
     public void MoveUp(System.Action callback){
         this.moveCallback = callback;
         moveTo = transform.position+Vector3.up *8;
@@ -161,13 +167,13 @@ public class Card : MonoBehaviour
         this.rotateOn = transform.position+Vector3.up *10;
     }
 
+    public void changeSprite(string suffix){
+        spriteRenderer.sprite = spriteList.First(sprite=>sprite.name.Equals("Card"+suffix));
+    }
+
     public IEnumerator FlipCard(){
         faceUp = false;
         
-        System.Action changeSprite = ()=>{
-            string cardSuffix = spriteRenderer.sprite.name.Contains("back")?  this.currentCardDO.num.ToString(): "back";
-            spriteRenderer.sprite = spriteList.First(sprite=>sprite.name.Equals("Card"+cardSuffix));
-        };
         Vector3 startingPosition =transform.position;
         while(currentCardDO==null){
             yield return null;
@@ -180,8 +186,9 @@ public class Card : MonoBehaviour
                 
                 transform.position =startingPosition+ Vector3.left*((spriteRenderer.bounds.size.x)*((i<180f? i : i-180f)/180f));
                 if(i==90f){
-                    if(spriteList==null) performWhenListLoaded.Add(changeSprite);
-                    else changeSprite();
+                    string cardSuffix = spriteRenderer.sprite.name.Contains("back")?  this.currentCardDO.num.ToString(): "back";
+                    if(spriteList==null) performWhenListLoaded.Add(()=>changeSprite(cardSuffix));
+                    else changeSprite(cardSuffix);
                     i+=180f;
                 }
                 yield return new WaitForSeconds(0.01f);
@@ -193,6 +200,7 @@ public class Card : MonoBehaviour
         EnableCard();
     }
 }
+
 
 [System.Serializable]
 public class CardDO{

@@ -155,7 +155,7 @@ MonoBehaviour:
   ready: {fileID: 21300000, guid: 6a4cbbd6926387a4e8f9ba5cbd5f3784, type: 3}
   active: {fileID: 21300000, guid: 9b2b916327859f246974a5a6a8c03c8c, type: 3}
   spriteRenderer: {fileID: 2712697371713110391}
-  resourcePrefab: {fileID: 4829964750833847447, guid: 9f4d723907daca24ead65fd6f12591a0, type: 3}
+  resourcePrefab: {fileID: 7676431950774545101, guid: 9f4d723907daca24ead65fd6f12591a0, type: 3}
   output: {fileID: 6210411967746744983}
   optionText: {fileID: 3137837990514184823}
   isDormant: 0

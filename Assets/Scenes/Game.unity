@@ -337,14 +337,31 @@ MonoBehaviour:
   spriteRenderer: {fileID: 909605309}
   godsJSON: {fileID: 4900000, guid: 893c4f1138cb21142b8129377d8b6ced, type: 3}
   deck: []
-  discard: []
   spriteArray:
   - {fileID: 1113812728336201195, guid: bdb6684b60f557b4380efe1924d03d7a, type: 3}
   - {fileID: 5134120919787300631, guid: bdb6684b60f557b4380efe1924d03d7a, type: 3}
   - {fileID: -8636438075815445334, guid: bdb6684b60f557b4380efe1924d03d7a, type: 3}
   - {fileID: -960882843745312163, guid: bdb6684b60f557b4380efe1924d03d7a, type: 3}
   - {fileID: -681101681698349018, guid: bdb6684b60f557b4380efe1924d03d7a, type: 3}
-  cardPrefab: {fileID: 3757492724992295507, guid: af7e974e671f0eb4980326a5377c5118, type: 3}
+  cardPrefab: {fileID: 3757492724992295504, guid: af7e974e671f0eb4980326a5377c5118, type: 3}
+  theCard: {fileID: 0}
+  forsightMouseClick:
+    m_Name: Forsight Mouse Click
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 50721dd1-bca3-4cf2-8e84-d79536d4189d
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: c73a9d4a-8905-4425-9aba-8b09987b08d1
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Forsight Mouse Click
+      m_Flags: 0
+    m_Flags: 0
 --- !u!212 &909605309
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1151,7 +1168,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1686722274}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.14, y: 2.4, z: 0}
+  m_LocalPosition: {x: -13.22, y: 2.4, z: 0}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

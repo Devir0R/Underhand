@@ -13,21 +13,21 @@ public class ResourceExchange : MonoBehaviour
     public Sprite CultistPrisoner;
 
     public SpriteRenderer spriteRenderer;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public bool greyed = false;
+    public Resource myType = Resource.None;
 
+    public void Grey(){
+        spriteRenderer.material.color = Color.grey;
+        greyed = true;
+    }
+    public void Ungrey(){
+        spriteRenderer.material.color = Color.white;
+        greyed = false;
+    }
     
     public void SetSprite(Resource resource){
+        myType = resource;
         switch(resource){
             case Resource.Cultist:
                 spriteRenderer.sprite = Cultist;
