@@ -67,10 +67,11 @@ public class Card : MonoBehaviour
     IEnumerator MoveCardUp(){
         yield return MoveTo(transform.position+Vector3.up *8);
         MoveOptions();
+        options.ForEach(op=>op.GetComponent<Option>().AddOnChooseListeners());
     }
 
     void MoveOptions(){
-        this.options.ForEach(op=>op.GetComponent<Option>().MoveOption(()=>StartCoroutine(FinishingMove())));
+        options.ForEach(op=>op.GetComponent<Option>().MoveOption(()=>StartCoroutine(FinishingMove())));
     }
 
 
@@ -151,9 +152,11 @@ public class Card : MonoBehaviour
             yield return RotateOutOfScreen();
             GameObject.Destroy(gameObject);
         }
-        else yield return Discard.Instance.MoveIn();
-        Discard.Instance.cardToDicard = this;                
-        Discard.Instance.MoveOut();
+        else{
+            yield return Discard.Instance.MoveIn();
+            Discard.Instance.cardToDicard = this;                
+            Discard.Instance.MoveOut();
+        }
     
     }
 

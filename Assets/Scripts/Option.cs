@@ -52,9 +52,12 @@ public class Option : MonoBehaviour
     }
     void Start()
     {
+        StartCoroutine(MarkResourcesOnTable());
+    }
+
+    public void AddOnChooseListeners(){
         OptionChosen += MoveOptionBack;
         OptionChosen += this.SpawnReawrds;
-        StartCoroutine(MarkResourcesOnTable());
     }
 
     public void SpawnReawrds()

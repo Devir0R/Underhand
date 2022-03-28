@@ -10,8 +10,6 @@ public class Discard : MonoBehaviour
     private static Discard _instance;
     public static Discard Instance{ get { return _instance; } }
     public SpriteRenderer spriteRenderer;
-    bool movedIn = false;
-    bool movingOut = false;
      
     public Card cardToDicard;
 
@@ -39,26 +37,20 @@ public class Discard : MonoBehaviour
     }
 
     public void MoveOut(){
-        if(!movingOut){
-            movingOut = true;
-            StartCoroutine(MoveDiscardOut());
-        } 
+        StartCoroutine(MoveDiscardOut());
     }
 
     public IEnumerator MoveIn(){
-        if(!movedIn){
-            Vector3 moveTo = transform.position + Vector3.right*(spriteRenderer.bounds.size.x*1.2f);
-            //move in
-            while(transform.position!=moveTo){
-                transform.position = Vector3.MoveTowards(transform.position, moveTo,  Time.deltaTime*9);
-                yield return null;
-            }
-            movedIn = true;
+        Vector3 moveTo = transform.position + Vector3.right*(spriteRenderer.bounds.size.x*1.2f);
+        //move in
+        while(transform.position!=moveTo){
+            transform.position = Vector3.MoveTowards(transform.position, moveTo,  Time.deltaTime*9);
+            yield return null;
         }
     }
 
     private IEnumerator MoveDiscardOut(){
-        while(cardToDicard==null || !movedIn){
+        while(cardToDicard==null){
             yield return null;
         }
         StartCoroutine(cardToDicard.FlipCard());
@@ -74,8 +66,6 @@ public class Discard : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, originalPosition,  Time.deltaTime*9);
             yield return null;
         }
-        movedIn = false;
-        movingOut = false;
     
     }
 

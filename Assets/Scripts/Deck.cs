@@ -36,6 +36,8 @@ public class Deck : MonoBehaviour
     public InputAction forsightMouseClick;
 
     public bool performingForesight = false;
+
+    bool triggerInsertCardAnimation = false;
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -69,6 +71,7 @@ public class Deck : MonoBehaviour
         cardsToAdd.AddRange(shuffle.specificids.Select(id=>allCards.allCardsList.Find(card=>card.num==id)));
         
         Discard.Instance.discard.AddRange(cardsToAdd);
+        if(cardsToAdd.Count>0) triggerInsertCardAnimation = true;
         
 
     }
