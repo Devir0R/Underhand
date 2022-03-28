@@ -11,7 +11,7 @@ public class Discard : MonoBehaviour
     public static Discard Instance{ get { return _instance; } }
     public SpriteRenderer spriteRenderer;
     bool movedIn = false;
-    bool moveingOut = false;
+    bool movingOut = false;
      
     public Card cardToDicard;
 
@@ -38,19 +38,14 @@ public class Discard : MonoBehaviour
         spriteRenderer.sprite = spriteArray[spriteIndex];
     }
 
-    // Start is called before the first frame update
-    public void MoveIn(){
-        StartCoroutine(MoveDiscardIn());
-    }
-
     public void MoveOut(){
-        if(!moveingOut){
-            moveingOut = true;
+        if(!movingOut){
+            movingOut = true;
             StartCoroutine(MoveDiscardOut());
         } 
     }
 
-    private IEnumerator MoveDiscardIn(){
+    public IEnumerator MoveIn(){
         if(!movedIn){
             Vector3 moveTo = transform.position + Vector3.right*(spriteRenderer.bounds.size.x*1.2f);
             //move in
@@ -72,17 +67,15 @@ public class Discard : MonoBehaviour
         }
 
         Vector3 whereToMove = transform.position;
-         cardToDicard.FinishingMove();
+        yield return cardToDicard.MoveTo(transform.position);
 
-        while(cardToDicard.transform.position!=transform.position) yield return null;
-
-        if(cardToDicard!=null) GameObject.Destroy(cardToDicard.gameObject);
+        GameObject.Destroy(cardToDicard.gameObject);
         while(transform.position!=originalPosition){
             transform.position = Vector3.MoveTowards(transform.position, originalPosition,  Time.deltaTime*9);
             yield return null;
         }
         movedIn = false;
-        moveingOut = false;
+        movingOut = false;
     
     }
 

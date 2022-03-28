@@ -13,8 +13,6 @@ public class Card : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     private static IList<Sprite> spriteList;
     public CardDO currentCardDO;
-    private Vector3 moveTo;
-    private Vector3 rotateOn;
     private static Vector3 zero = Vector3.up*1000000;
     List<System.Action> performWhenListLoaded = new List<System.Action>();
     public GameObject optionPrefab;
@@ -28,7 +26,6 @@ public class Card : MonoBehaviour
         mainCamera = Camera.main;
     }
     private bool disableCard = true;
-    private bool movedBack = false;
 
     public bool faceUp = false;
 
@@ -48,8 +45,6 @@ public class Card : MonoBehaviour
                 }
             };
         }
-        moveTo =zero;
-        rotateOn =zero;
         if(!foresight)  StartCoroutine(CheckOptions());
     }
 
@@ -66,21 +61,16 @@ public class Card : MonoBehaviour
         if(this.foresight || this.disableCard || ! context.performed || !CardClicked()) return ;
         DisbleCard();
         CreateOptions();
-        MoveUp(MoveOptions);
+        StartCoroutine(MoveCardUp());
+    }
+
+    IEnumerator MoveCardUp(){
+        yield return MoveTo(transform.position+Vector3.up *8);
+        MoveOptions();
     }
 
     void MoveOptions(){
-        this.options.ForEach(op=>op.GetComponent<Option>().MoveOption(()=>{
-            this.MoveBack(()=>{
-                while(options.Count>0){
-                    GameObject op = options[0];
-                    options.RemoveAt(0);
-                    GameObject.Destroy(op);
-                }
-                if(currentCardDO.isrecurring==0) rotateOut();
-                else Discard.Instance.MoveIn();
-            });
-        }));
+        this.options.ForEach(op=>op.GetComponent<Option>().MoveOption(()=>StartCoroutine(FinishingMove())));
     }
 
 
@@ -133,35 +123,9 @@ public class Card : MonoBehaviour
         disableCard = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(!moveTo.Equals( zero)){
-            transform.position = Vector3.MoveTowards(transform.position, moveTo,  Time.deltaTime*moveSpeed);
-            if(transform.position.Equals(moveTo)){
-                moveTo = zero;
-                if(moveCallback!=null){
-                    moveCallback();
-                    moveCallback = null;
-                }
-                if(movedBack){
-                    Discard.Instance.cardToDicard = this;                
-                    Discard.Instance.MoveOut();
-                }
-            }
-        }
-        if(!rotateOn.Equals(zero)){
-            transform.RotateAround(rotateOn, Vector3.back, 135 * Time.deltaTime);
-            Vector3 outOfScreenVector = Camera.main.WorldToViewportPoint(transform.position);
-            if(outOfScreenVector.y>1.5){
-                GameObject.Destroy(gameObject);
-            }
-        }
-        
-    }
-    public IEnumerator MoveTo(Vector3 to){
+    public IEnumerator MoveTo(Vector3 to,float speed = 30f){
         while(transform.position!=to){
-            transform.position = Vector3.MoveTowards(transform.position, to,  Time.deltaTime*30);
+            transform.position = Vector3.MoveTowards(transform.position, to,  Time.deltaTime*speed);
             yield return null;
         }
     }
@@ -176,25 +140,21 @@ public class Card : MonoBehaviour
         }while(outOfScreenVector.y<=1.5);
     }
 
+    public IEnumerator FinishingMove(){
+        yield return MoveTo(transform.position+Vector3.down *8);
+        while(options.Count>0){
+            GameObject op = options[0];
+            options.RemoveAt(0);
+            GameObject.Destroy(op);
+        }
+        if(currentCardDO.isrecurring==0) {
+            yield return RotateOutOfScreen();
+            GameObject.Destroy(gameObject);
+        }
+        else yield return Discard.Instance.MoveIn();
+        Discard.Instance.cardToDicard = this;                
+        Discard.Instance.MoveOut();
     
-    public void MoveUp(System.Action callback){
-        this.moveCallback = callback;
-        moveTo = transform.position+Vector3.up *8;
-    }
-
-    public void FinishingMove(){
-        moveSpeed = 30f;
-        moveTo = Discard.Instance.transform.position;
-    }
-
-    public void MoveBack(System.Action callback){
-        this.moveCallback = callback;
-        moveTo = transform.position+Vector3.down *8;
-        movedBack = true;
-    }
-
-    public void rotateOut(){
-        this.rotateOn = transform.position+Vector3.up *10;
     }
 
     public void changeSprite(string suffix){

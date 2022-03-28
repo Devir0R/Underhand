@@ -16,7 +16,6 @@ public class Option : MonoBehaviour
 
     public SpriteRenderer spriteRenderer;
 
-    private Vector3 moveTo;
     private static Vector3 zero = Vector3.up*1000000;
 
     public ResourceExchange resourcePrefab;
@@ -71,25 +70,19 @@ public class Option : MonoBehaviour
         return option.islose==1;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(!moveTo.Equals( zero)){
-            transform.position = Vector3.MoveTowards(transform.position, moveTo,  Time.deltaTime*10);
-            if(transform.position.Equals(moveTo)){
-                moveTo = zero;
-                if(cardCallBack!=null && optionNum==3 && movedBack){
-                    cardCallBack();
-                    cardCallBack = null;
-                }
-            }
-        }
-    }
-
     public void OnOptionHover(){
 
     }
-
+    public IEnumerator MoveTo(Vector3 to,float speed = 10f){
+        while(transform.position!=to){
+            transform.position = Vector3.MoveTowards(transform.position, to,  Time.deltaTime*speed);
+            yield return null;
+        }
+        if(cardCallBack!=null && optionNum==3 && movedBack){
+            cardCallBack();
+            cardCallBack = null;
+        }
+    }
     public void OnOptionClicked(InputAction.CallbackContext context){
         if(this.disableOption || ! context.performed || !IsMouseOnOption()) return ;
         if(isDormant || !spriteRenderer.sprite.name.Contains("Ready")) return;
@@ -167,24 +160,32 @@ public class Option : MonoBehaviour
 
     public void MoveOption(System.Action cardCallBack){
         this.cardCallBack = cardCallBack;
+        Vector3 to = Vector3.zero;
         if(optionNum==1){
-            moveTo = transform.position+Vector3.left*spriteRenderer.bounds.size.x;
+            to = transform.position+Vector3.left*spriteRenderer.bounds.size.x;
 
         }
         else if(optionNum==3){
-            moveTo = transform.position+Vector3.right*spriteRenderer.bounds.size.x;
+            to = transform.position+Vector3.right*spriteRenderer.bounds.size.x;
+        }
+        if(to!=Vector3.zero){
+            StartCoroutine(MoveTo(to));
         }
     }
 
     public void MoveOptionBack(){
+        Vector3 to = Vector3.zero;
         if(optionNum==1){
-            moveTo = transform.position+Vector3.right*spriteRenderer.bounds.size.x;
+            to = transform.position+Vector3.right*spriteRenderer.bounds.size.x;
 
         }
         else if(optionNum==3){
-            moveTo = transform.position+Vector3.left*spriteRenderer.bounds.size.x;
+            to = transform.position+Vector3.left*spriteRenderer.bounds.size.x;
         }
         movedBack = true;
+        if(to!=Vector3.zero){
+            StartCoroutine(MoveTo(to));
+        }
     }
 
     bool IsMouseOnOption(){
@@ -321,7 +322,6 @@ public class Option : MonoBehaviour
         this.optionNum = optionNum;
         UpdateSpriteFirstTime();
         Table.Instance.ResourcedOnTableChanged += UpdateSprite;
-        moveTo = zero;
 
         output.text = option.outputtext;
         optionText.text = option.optiontext;
@@ -384,7 +384,7 @@ public class Option : MonoBehaviour
     }
 
     private void AddResourceRewards(List<Resource> GameObjectsresourceList){
-        const float resourceSize_X = 0.35f*2*0.55f;
+        const float resourceSize_X = 0.35f*2*0.5f;
         const float resourceSize_Y = 1.0f*0.55f;
         Vector3 instantiationPlace = transform.position 
                         + Vector3.right*((resourceSize_X*(GameObjectsresourceList.Count-1))/2)
@@ -400,7 +400,7 @@ public class Option : MonoBehaviour
     }
 
     private void AddResourceRequirements(List<Resource> GameObjectsresourceList){
-        const float resourceSize_X = 0.35f*2*0.55f;
+        const float resourceSize_X = 0.35f*2*0.5f;
         Vector3 instantiationPlace = transform.position + Vector3.right*((resourceSize_X*(GameObjectsresourceList.Count-1))/2);
         while(GameObjectsresourceList.Count>0){
             Resource r = GameObjectsresourceList[0];
