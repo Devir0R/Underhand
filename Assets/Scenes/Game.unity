@@ -273,7 +273,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 5.238571
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -362,6 +362,9 @@ MonoBehaviour:
       m_Action: Forsight Mouse Click
       m_Flags: 0
     m_Flags: 0
+  performingForesight: 0
+  triggerCardInsert: 0
+  cardToInsert: {fileID: 0}
 --- !u!212 &909605309
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -421,7 +424,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 909605307}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.22, y: 2.34, z: 0}
+  m_LocalPosition: {x: 13.6, y: 2.34, z: 0}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -530,7 +533,7 @@ Transform:
   m_GameObject: {fileID: 1019269142}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.61, y: 0.88, z: 1}
+  m_LocalScale: {x: 3.8, y: 0.92, z: 1}
   m_Children:
   - {fileID: 1395547321}
   m_Father: {fileID: 0}
@@ -1082,6 +1085,7 @@ MonoBehaviour:
   - {fileID: -681101681698349018, guid: bdb6684b60f557b4380efe1924d03d7a, type: 3}
   discard: []
   spriteRenderer: {fileID: 1686722277}
+  movedIn: 0
   cardToDicard: {fileID: 0}
 --- !u!61 &1686722276
 BoxCollider2D:
@@ -1168,7 +1172,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1686722274}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.22, y: 2.4, z: 0}
+  m_LocalPosition: {x: -13.6, y: 2.34, z: 0}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

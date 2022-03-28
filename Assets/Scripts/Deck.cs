@@ -91,6 +91,7 @@ public class Deck : MonoBehaviour
                 this.addRelicCardIfThereIsnt();
                 this.insertGods();
                 shuffleDeck();
+                // this.deck.Insert(0,allCards.allCardsList.Find(card=>card.num==111));
                 this.deckSize = this.deck.Count;
                 GameState.GameStart();
                 
@@ -119,36 +120,77 @@ public class Deck : MonoBehaviour
         performingForesight = true;
         Vector3 inScene = transform.position + Vector3.left*(spriteRenderer.bounds.size.x*1.05f);
         yield return MoveTo(inScene);
-        yield return ShowForesightCards();
+        yield return ShowForesightCards(discard);
 
 
     }
 
-    public IEnumerator ShowForesightCards(){
-        if(deck.Count<3) shuffleDiscard();
+    public IEnumerator ShowForesightCards(bool candiscard){
+        if(deck.Count<3){ 
+            shuffleDiscard();
+            UpdateDeckSprite();
+        }
 
         for(int j = 0;j<3;j++){
             foresightCards.Add(Instantiate(cardPrefab,transform.position,transform.rotation));
             foresightCards[j].changeSprite(deck[j].num.ToString());
             yield return foresightCards[j].MoveTo(transform.position+(Vector3.left*spriteRenderer.bounds.size.x*(j+3)));
         }
-        forsightMouseClick.performed += WaitForClick;
+        if(!candiscard){
+            forsightMouseClick.performed += WaitForClick;
+        }
+        else{
+            forsightMouseClick.performed += WaitForClickOnCard;
+        }
         forsightMouseClick.Enable();
+
     }
 
-    private void WaitForClick(InputAction.CallbackContext context)=>StartCoroutine(RemoveForesightCards());
+    private void WaitForClickOnCard(InputAction.CallbackContext context){
+        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        RaycastHit2D[] rayHits = Physics2D.GetRayIntersectionAll(ray);
+        int cardClickedIndex = -1;
+        foreach(RaycastHit2D hit in rayHits){
+            for(int j=0;j<foresightCards.Count;j++){
+                if(foresightCards[j]==hit.collider.gameObject.GetComponent<Card>()){
+                    cardClickedIndex = j;
+                    break;
+                }
+            }
+            if(cardClickedIndex>=0) break;
+        }
 
-    public IEnumerator RemoveForesightCards(){
+        if(cardClickedIndex<0){
+            forsightMouseClick.performed -= WaitForClickOnCard;
+            forsightMouseClick.Disable();
+            StartCoroutine(RemoveForesightCards());
+        }
+        else{
+            foresightCards.ForEach(card=>{
+                if(card.isGreyed && foresightCards[cardClickedIndex]!=card)
+                    card.SwitchGreyness();
+            });
+            foresightCards[cardClickedIndex].SwitchGreyness();
+        }
+    }
+
+    private void WaitForClick(InputAction.CallbackContext context){
         forsightMouseClick.performed -= WaitForClick;
         forsightMouseClick.Disable();
+        StartCoroutine(RemoveForesightCards());
+    }
 
-        if(deck.Count<3) shuffleDiscard();
-
+    public IEnumerator RemoveForesightCards(){
         for(int j = 2;j>=0;j--){
             Card cardToRemove = foresightCards[j];
-            yield return cardToRemove.MoveTo(transform.position);
+            if(!foresightCards[j].isGreyed)    yield return cardToRemove.MoveTo(transform.position);
+            else{
+                yield return cardToRemove.RotateOutOfScreen();
+                deck.RemoveAt(j);
+            }
             GameObject.Destroy(cardToRemove.gameObject);
         }
+        foresightCards.RemoveAll(card=>true);
         Vector3 outScene = transform.position + Vector3.right*(spriteRenderer.bounds.size.x*1.05f);
         yield return MoveTo(outScene);
         performingForesight = false;

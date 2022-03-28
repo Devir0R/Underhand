@@ -8,6 +8,7 @@ using System.Linq;
 
 public class Card : MonoBehaviour
 {
+    public bool isGreyed = false;
     public bool foresight = false;
     public SpriteRenderer spriteRenderer;
     private static IList<Sprite> spriteList;
@@ -90,6 +91,24 @@ public class Card : MonoBehaviour
         return rayHit.collider!=null && rayHit.collider.gameObject.CompareTag("Card");
     }
 
+    public IEnumerator FadeIn(){
+        Color cardColor = spriteRenderer.material.color;
+        float initialTransprancy = cardColor.a;
+        float numberOfFrames = 10f;
+        float unit = (initialTransprancy/Time.deltaTime)/numberOfFrames;
+        float fadeAmount = 0;
+        do{
+            spriteRenderer.material.color = new Color(cardColor.r,cardColor.b,cardColor.g,fadeAmount*Time.deltaTime*unit);
+            fadeAmount+=1;
+            yield return new WaitForSeconds(0.05f);
+        }while(fadeAmount<=numberOfFrames);
+    }
+
+    public void SwitchGreyness(){
+        isGreyed = !isGreyed;
+        spriteRenderer.material.color = isGreyed? Color.grey : Color.white;
+    }
+
     private void CreateOptions(){
         options.Add(Instantiate(optionPrefab,transform.position,transform.rotation));
         options.Add(Instantiate(optionPrefab,transform.position,transform.rotation));
@@ -146,6 +165,18 @@ public class Card : MonoBehaviour
             yield return null;
         }
     }
+
+    public IEnumerator RotateOutOfScreen(){
+        Vector3 on = transform.position+Vector3.up *10;
+        Vector3 outOfScreenVector;
+        do{
+            transform.RotateAround(on, Vector3.back, 135 * Time.deltaTime);
+            outOfScreenVector = Camera.main.WorldToViewportPoint(transform.position);
+            yield return null;
+        }while(outOfScreenVector.y<=1.5);
+    }
+
+    
     public void MoveUp(System.Action callback){
         this.moveCallback = callback;
         moveTo = transform.position+Vector3.up *8;
@@ -154,7 +185,6 @@ public class Card : MonoBehaviour
     public void FinishingMove(){
         moveSpeed = 30f;
         moveTo = Discard.Instance.transform.position;
-
     }
 
     public void MoveBack(System.Action callback){

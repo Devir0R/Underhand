@@ -67,11 +67,12 @@ public class Discard : MonoBehaviour
             yield return null;
         }
         StartCoroutine(cardToDicard.FlipCard());
-        while(cardToDicard.faceUp){
+        while(!cardToDicard.faceUp){
             yield return null;
         }
 
-        cardToDicard.FinishingMove();
+        Vector3 whereToMove = transform.position;
+         cardToDicard.FinishingMove();
 
         while(cardToDicard.transform.position!=transform.position) yield return null;
 
