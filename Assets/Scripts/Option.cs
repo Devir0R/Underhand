@@ -276,6 +276,7 @@ public class Option : MonoBehaviour
         if(prisonerEqualCultist){
             allResourcesOnTable = allResourcesOnTable.Select(resource=>resource==Resource.Prisoner ? Resource.Cultist: resource).ToList();
         }
+        HowManyFrom.Remove(Resource.Relic);
         foreach(Resource resource in HowManyFrom.Keys){
             int howManyDemanded = specialNumbersAmounts(HowManyFrom[resource](),resource);
             for(int i = 0; i<howManyDemanded;i++){
@@ -430,7 +431,9 @@ public class Option : MonoBehaviour
             List<Resource> resourcesOnTable = Table.Instance.ResourcesOnTable();
             foreach(Resource resource in resourcesOnTable){
                 foreach(ResourceExchange resOfReq in requirementsObjects){
-                    if(resource==resOfReq.myType && !resOfReq.greyed){
+                    if(!resOfReq.greyed 
+                            && (resource==resOfReq.myType || 
+                                (resOfReq.myType==Resource.PrisonerOrCultist && (resource==Resource.Cultist || resource==Resource.Prisoner))) ){
                         resOfReq.Grey();
                         howManyMarked+=1;
                         break;

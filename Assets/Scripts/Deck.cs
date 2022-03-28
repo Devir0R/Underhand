@@ -37,7 +37,7 @@ public class Deck : MonoBehaviour
 
     public bool performingForesight = false;
 
-    bool triggerInsertCardAnimation = false;
+    public bool triggerInsertCardAnimation = false;
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -71,9 +71,19 @@ public class Deck : MonoBehaviour
         cardsToAdd.AddRange(shuffle.specificids.Select(id=>allCards.allCardsList.Find(card=>card.num==id)));
         
         Discard.Instance.discard.AddRange(cardsToAdd);
-        if(cardsToAdd.Count>0) triggerInsertCardAnimation = true;
-        
+        triggerInsertCardAnimation = cardsToAdd.Count>0;
+    }
 
+    public IEnumerator CheckIfInsertCard(Card currentCard){
+        if(triggerInsertCardAnimation){
+            
+            Vector3 belowCardPosition = currentCard.transform.position+Vector3.down*currentCard.spriteRenderer.bounds.size.y*1.2f;
+            Card insertionCard = Instantiate(cardPrefab,belowCardPosition,currentCard.transform.rotation);
+            yield return insertionCard.FadeIn();
+            float stepsFromCardToDiscard = (Vector3.Distance(currentCard.transform.position,Discard.Instance.transform.position)/30f);
+            float belowCardVelocity = Vector3.Distance(belowCardPosition,Discard.Instance.transform.position)/stepsFromCardToDiscard;
+            StartCoroutine(insertionCard.MoveToAndDestroy(Discard.Instance.transform.position,belowCardVelocity));
+        }
     }
 
     public CardDO GetTopCard(){
@@ -94,7 +104,7 @@ public class Deck : MonoBehaviour
                 this.addRelicCardIfThereIsnt();
                 this.insertGods();
                 shuffleDeck();
-                // this.deck.Insert(0,allCards.allCardsList.Find(card=>card.num==111));
+                //this.deck.Insert(0,allCards.allCardsList.Find(card=>card.num==66));
                 this.deckSize = this.deck.Count;
                 GameState.GameStart();
                 

@@ -131,6 +131,11 @@ public class Card : MonoBehaviour
         }
     }
 
+    public IEnumerator MoveToAndDestroy(Vector3 to,float speed = 30f){
+        yield return MoveTo(to,speed);
+        GameObject.Destroy(gameObject);
+    }
+
     public IEnumerator RotateOutOfScreen(){
         Vector3 on = transform.position+Vector3.up *10;
         Vector3 outOfScreenVector;
@@ -149,15 +154,21 @@ public class Card : MonoBehaviour
             GameObject.Destroy(op);
         }
         if(currentCardDO.isrecurring==0) {
+            if(Deck.Instance.triggerInsertCardAnimation){
+                yield return Discard.Instance.MoveIn();
+                yield return Deck.Instance.CheckIfInsertCard(this);
+            }
+
             yield return RotateOutOfScreen();
+
+            if(Deck.Instance.triggerInsertCardAnimation) yield return Discard.Instance.MoveOut();
             GameObject.Destroy(gameObject);
         }
         else{
             yield return Discard.Instance.MoveIn();
             Discard.Instance.cardToDicard = this;                
-            Discard.Instance.MoveOut();
+            StartCoroutine(Discard.Instance.MoveDiscardOut());
         }
-    
     }
 
     public void changeSprite(string suffix){
