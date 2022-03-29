@@ -2,8 +2,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using System.IO;
-using Newtonsoft.Json;
 using UnityEngine.UI;
 
 public class Continue : MonoBehaviour
@@ -69,9 +67,11 @@ public class Continue : MonoBehaviour
         disabled = true;
         if(GameState.state==State.Won){
             Gods.allGods.gods.Find(god=>god.name==GameState.GodWon).defeated=1;
-            string godsJson = JsonConvert.SerializeObject(Gods.allGods,Formatting.Indented);
-            File.WriteAllText(Application.dataPath+"/Scripts/json/gods.json",godsJson);
+            //string godsJson = JsonConvert.SerializeObject(Gods.allGods,Formatting.Indented);
+            Gods.SaveToFile();
+            
         }
         SceneManager.LoadScene("Game");
     }
+
 }

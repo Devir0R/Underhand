@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Newtonsoft.Json;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class Gods
 {
@@ -11,7 +13,7 @@ public class Gods
     // Start is called before the first frame update
 
     public Gods(TextAsset godsJSON){
-        allGods = JsonConvert.DeserializeObject<AllGods>(godsJSON.text);
+        if(!LoadGame()) allGods = JsonConvert.DeserializeObject<AllGods>(godsJSON.text);
     }
     public List<int> godBlessingCardNumbers(int num){
         if (num>=0){
@@ -27,6 +29,35 @@ public class Gods
             .Where(god=>
                 god.dependency.All(godnum=>
                     allGods.gods.Find(god=>god.num==godnum).defeated==1)).ToList();
+    }
+
+
+    public static void SaveToFile(){
+	    BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/gods.json");
+        bf.Serialize(file,allGods);
+        file.Close();
+    }
+
+    public static bool LoadGame()
+    {
+        if (File.Exists(Application.persistentDataPath + "/gods.json"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = 
+                    File.Open(Application.persistentDataPath 
+                    + "/gods.json", FileMode.Open);
+            AllGods allGods = (AllGods)bf.Deserialize(file);
+            file.Close();
+            Gods.allGods = allGods;
+            Debug.Log("Game data loaded!");
+            return true;
+        }
+        else{
+            Debug.LogError("There is no save data!");
+            return false;
+        }
+            
     }
 
 }
