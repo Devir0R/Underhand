@@ -79,6 +79,13 @@ public class Discard : MonoBehaviour
     }
 
     void Start(){
+        float worldScreenHeight = Camera.main.orthographicSize;
+        float worldScreenWidth = worldScreenHeight / Screen.height * Screen.width;
+        float newWidth = worldScreenWidth/11f;
+        transform.localScale = new Vector3(newWidth,transform.localScale.y*(newWidth/transform.localScale.x),transform.localScale.z);
+        transform.position = new Vector3(-worldScreenWidth-spriteRenderer.bounds.size.x*0.6f,
+                                         worldScreenHeight-spriteRenderer.bounds.size.y/1.8f,
+                                         transform.position.z);
         originalPosition = transform.position;
     }
 }

@@ -45,6 +45,7 @@ public class Card : MonoBehaviour
                 }
             };
         }
+        optionPrefab.transform.localScale = transform.localScale;
         if(!foresight)  StartCoroutine(CheckOptions());
     }
 
@@ -144,10 +145,10 @@ public class Card : MonoBehaviour
         Vector3 outOfScreenVector;
         do{
             transform.position = Vector3.MoveTowards(transform.position, on, 25 * Time.deltaTime);
-            transform.RotateAround(transform.position, Vector3.forward, 60f * Time.deltaTime);
+            transform.RotateAround(transform.position, Vector3.forward, 65f * Time.deltaTime);
             outOfScreenVector = Camera.main.WorldToViewportPoint(transform.position);
             yield return null;
-        }while(outOfScreenVector.y<=1.5);
+        }while(on!=transform.position);
     }
 
     public IEnumerator FinishingMove(){

@@ -92,6 +92,15 @@ public class Deck : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        float worldScreenHeight = Camera.main.orthographicSize;
+        float worldScreenWidth = worldScreenHeight / Screen.height * Screen.width;
+        float newWidth = worldScreenWidth/11f;
+        transform.localScale = new Vector3(newWidth,transform.localScale.y*(newWidth/transform.localScale.x),transform.localScale.z);
+        cardPrefab.transform.localScale = transform.localScale;
+        transform.position = new Vector3(worldScreenWidth+spriteRenderer.bounds.size.x*0.6f,
+                                         worldScreenHeight-spriteRenderer.bounds.size.y/1.8f,
+                                         transform.position.z);
+        
         Addressables.LoadAssetsAsync<TextAsset>("CardsJsons", null).Completed += (handleToCheck)=>{
             if(handleToCheck.Status == AsyncOperationStatus.Succeeded)
             {
@@ -124,7 +133,7 @@ public class Deck : MonoBehaviour
 
     public IEnumerator MoveTo(Vector3 to){
         while(transform.position!=to){
-            transform.position = Vector3.MoveTowards(transform.position, to,  Time.deltaTime*9);
+            transform.position = Vector3.MoveTowards(transform.position, to,  Time.deltaTime*12f);
             yield return null;
         }
     }
@@ -212,7 +221,7 @@ public class Deck : MonoBehaviour
 
     public IEnumerator MoveDeckAndSpawn(){
         Vector3 originalPosition = transform.position;
-        Vector3 inScene = transform.position + Vector3.left*(spriteRenderer.bounds.size.x*1.05f);
+        Vector3 inScene = transform.position + Vector3.left*(spriteRenderer.bounds.size.x*1.2f);
         yield return MoveTo(inScene);
         
         theCard = Instantiate(cardPrefab,transform.position,transform.rotation);
@@ -380,7 +389,7 @@ public class Deck : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(theCard==null && !isSpawning){
+        if(theCard==null && !isSpawning && GameState.state==State.Ongoing){
             SpawnACard();
         }
     }
