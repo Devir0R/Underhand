@@ -97,8 +97,112 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29764a3c032a2b14981f3f866f326db8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGreyed: 0
+  foresight: 0
   spriteRenderer: {fileID: 3757492724992295506}
-  optionPrefab: {fileID: 2712697371713110376, guid: 56cda26349c06594a896579717b26ba4, type: 3}
+  currentCardDO:
+    flavortext: 
+    title: 
+    isrecurring: 0
+    isinitial: 0
+    isTutorial: 0
+    option1:
+      optiontext: 
+      outputtext: 
+      cultistequalsprisoner: 0
+      randomrequirements: 0
+      requirements:
+        relic: 0
+        money: 0
+        cultist: 0
+        food: 0
+        prisoner: 0
+        suspicion: 0
+      rewards:
+        relic: 0
+        money: 0
+        cultist: 0
+        food: 0
+        prisoner: 0
+        suspicion: 0
+      foresight:
+        hasforesight: 0
+        candiscard: 0
+      shuffle:
+        lowerbound: 0
+        upperbound: 0
+        specificids: 
+        allowsdupes: 0
+        numcards: 0
+      iswin: 
+      islose: 0
+    option2:
+      optiontext: 
+      outputtext: 
+      cultistequalsprisoner: 0
+      randomrequirements: 0
+      requirements:
+        relic: 0
+        money: 0
+        cultist: 0
+        food: 0
+        prisoner: 0
+        suspicion: 0
+      rewards:
+        relic: 0
+        money: 0
+        cultist: 0
+        food: 0
+        prisoner: 0
+        suspicion: 0
+      foresight:
+        hasforesight: 0
+        candiscard: 0
+      shuffle:
+        lowerbound: 0
+        upperbound: 0
+        specificids: 
+        allowsdupes: 0
+        numcards: 0
+      iswin: 
+      islose: 0
+    option3:
+      optiontext: 
+      outputtext: 
+      cultistequalsprisoner: 0
+      randomrequirements: 0
+      requirements:
+        relic: 0
+        money: 0
+        cultist: 0
+        food: 0
+        prisoner: 0
+        suspicion: 0
+      rewards:
+        relic: 0
+        money: 0
+        cultist: 0
+        food: 0
+        prisoner: 0
+        suspicion: 0
+      foresight:
+        hasforesight: 0
+        candiscard: 0
+      shuffle:
+        lowerbound: 0
+        upperbound: 0
+        specificids: 
+        allowsdupes: 0
+        numcards: 0
+      iswin: 
+      islose: 0
+    num: 0
+    animationframes: 0
+    weight: 0
+    cardartdone: 0
+  optionPrefab: {fileID: 4699331813791409292, guid: 56cda26349c06594a896579717b26ba4, type: 3}
+  faceUp: 0
+  moveSpeed: 10
 --- !u!114 &-760384447663447326
 MonoBehaviour:
   m_ObjectHideFlags: 0

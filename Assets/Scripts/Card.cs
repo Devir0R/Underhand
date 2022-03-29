@@ -15,8 +15,8 @@ public class Card : MonoBehaviour
     public CardDO currentCardDO;
     private static Vector3 zero = Vector3.up*1000000;
     List<System.Action> performWhenListLoaded = new List<System.Action>();
-    public GameObject optionPrefab;
-    private List<GameObject> options = new List<GameObject>();
+    public Option optionPrefab;
+    private List<Option> options = new List<Option>();
 
     private Camera mainCamera;
 
@@ -111,9 +111,12 @@ public class Card : MonoBehaviour
     }
 
     private void UpdateOptions(){
-        options[0].GetComponent<Option>().UpdateDO(this.currentCardDO.option1,2);
-        options[1].GetComponent<Option>().UpdateDO(this.currentCardDO.option2,1);
-        options[2].GetComponent<Option>().UpdateDO(this.currentCardDO.option3,3);
+        options[0].UpdateDO(this.currentCardDO.option1,1);
+        options[1].UpdateDO(this.currentCardDO.option2,3);
+        options[2].UpdateDO(this.currentCardDO.option3,2);
+        if(options.All(op=>op.isDormant)){
+            options.Where(op=>op.LosingOption()).ToList().ForEach(op=>op.WakeUp());
+        }
     }
 
     private void DisbleCard(){
@@ -137,10 +140,11 @@ public class Card : MonoBehaviour
     }
 
     public IEnumerator RotateOutOfScreen(){
-        Vector3 on = transform.position+Vector3.up *10;
+        Vector3 on = Discard.Instance.transform.position+Vector3.up *(spriteRenderer.bounds.size.y)*2f;
         Vector3 outOfScreenVector;
         do{
-            transform.RotateAround(on, Vector3.back, 135 * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, on, 25 * Time.deltaTime);
+            transform.RotateAround(transform.position, Vector3.forward, 60f * Time.deltaTime);
             outOfScreenVector = Camera.main.WorldToViewportPoint(transform.position);
             yield return null;
         }while(outOfScreenVector.y<=1.5);
@@ -149,9 +153,9 @@ public class Card : MonoBehaviour
     public IEnumerator FinishingMove(){
         yield return MoveTo(transform.position+Vector3.down *8);
         while(options.Count>0){
-            GameObject op = options[0];
+            Option op = options[0];
             options.RemoveAt(0);
-            GameObject.Destroy(op);
+            GameObject.Destroy(op.gameObject);
         }
         if(currentCardDO.isrecurring==0) {
             if(Deck.Instance.triggerInsertCardAnimation){

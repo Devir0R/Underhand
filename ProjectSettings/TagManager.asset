@@ -69,3 +69,6 @@ TagManager:
   - name: cardsInHand
     uniqueID: 852121303
     locked: 0
+  - name: WinLose
+    uniqueID: 2545381007
+    locked: 0

@@ -15,7 +15,7 @@ public class Hand : MonoBehaviour
     private static Hand _instance;
     public static Hand Instance{ get { return _instance; } }
     private static readonly Resource[] startingHand = 
-        new Resource[]{ Resource.Food,Resource.Food,Resource.Money,Resource.Money,Resource.Relic,
+        new Resource[]{ Resource.Food,Resource.Food,Resource.Money,Resource.Money,
                             Resource.Cultist,Resource.Cultist,Resource.Prisoner,Resource.Prisoner};
 
     public Vector3 handMiddle;
@@ -26,7 +26,7 @@ public class Hand : MonoBehaviour
 
     public List<ResourceCard> hand;
 
-    public static int MAJORITY_ROUNDING_DOWN = 840;
+    public static int ONLY_IF_RESOURCE_IS_ZERO = 840;
     public static int MAJORITY_ROUNDING_UP = 420;
 
     public Alert MoreThan15Cards;

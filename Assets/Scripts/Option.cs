@@ -1,4 +1,3 @@
-using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -15,8 +14,6 @@ public class Option : MonoBehaviour
     public Sprite active;
 
     public SpriteRenderer spriteRenderer;
-
-    private static Vector3 zero = Vector3.up*1000000;
 
     public ResourceExchange resourcePrefab;
 
@@ -120,14 +117,6 @@ public class Option : MonoBehaviour
     }
     
 
-
-
-    void LoadEndOfGame(){
-        if(GameState.state==State.Lost || GameState.state==State.Won){
-            SceneManager.LoadScene("WinLose");
-        }
-    }
-
     void optionRealized(){
         checkForesight();
         StartCoroutine(checkForesightDone());
@@ -137,8 +126,7 @@ public class Option : MonoBehaviour
         while(Deck.Instance.performingForesight){
             yield return new WaitForSeconds(0.5f);
         }
-        LoadEndOfGame();
-        OnOptionChosen();
+        if(!WinLoseBG.Instance.StartFadeIn())    OnOptionChosen();
     }
     
 
@@ -225,14 +213,31 @@ public class Option : MonoBehaviour
         }
     }
 
+    public void WakeUp(){
+        isDormant = false;
+        UpdateSprite();
+    }
+
     void UpdateSpriteFirstTime(){
         if(!(RequirementsCanBeMet(option.requirements,Table.Instance.ResourcesOnTable(),option.cultistequalsprisoner==1))
             || isEmptyOption()
-            || option.islose==1){
+            || option.islose==1
+            || LockedUnlessZeroOfResource()){
             isDormant=true;
             spriteRenderer.sprite = dormant;
         }
         else UpdateSprite();
+    }
+
+    bool LockedUnlessZeroOfResource(){
+        Dictionary<Resource,System.Func<int>> howManyFromFunctions = HowManyFromFunctions(option.requirements);
+        foreach(Resource resource in ResourceInfo.AllResources){
+            if(howManyFromFunctions[resource]()==Hand.ONLY_IF_RESOURCE_IS_ZERO){
+                return Table.Instance.ResourcesOnTable().Where(resourseOnTable=>resourseOnTable==resource).Count() +
+                        Hand.Instance.HowManyOfResourceInHand(resource)>0;
+            }
+        }
+        return false;
     }
 
     private void OnDestroy(){
@@ -364,8 +369,8 @@ public class Option : MonoBehaviour
         if(amount==Hand.MAJORITY_ROUNDING_UP){
             return total/2+total%2;
         }
-        else if(amount==Hand.MAJORITY_ROUNDING_DOWN){
-            return total/2;
+        else if(amount==Hand.ONLY_IF_RESOURCE_IS_ZERO){
+            return 0;
         }
         return amount;
     }
