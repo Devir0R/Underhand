@@ -294,7 +294,7 @@ public class Deck : MonoBehaviour
                 if (staringCardDO.isTutorial==0){
                     this.deck.Add(staringCardDO);
                 }
-                this.deck.AddRange(god.blessings.Select(card_num=>this.allCards.allCardsList.Find(card=>card.num==card_num)));
+                if(god.defeated==1) this.deck.AddRange(god.blessings.Select(card_num=>this.allCards.allCardsList.Find(card=>card.num==card_num)));
             }
         }
     }

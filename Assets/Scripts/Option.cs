@@ -393,24 +393,24 @@ public class Option : MonoBehaviour
     }
 
     private void AddResourceRewards(List<Resource> GameObjectsresourceList){
-        const float resourceSize_X = 0.35f*2*0.5f;
-        const float resourceSize_Y = 1.0f*0.55f;
+        float distance_X = (spriteRenderer.bounds.size.x*0.85f)/(GameObjectsresourceList.Count+1);
+        float distance_Y = spriteRenderer.bounds.size.y/6f;
         Vector3 instantiationPlace = transform.position 
-                        + Vector3.right*((resourceSize_X*(GameObjectsresourceList.Count-1))/2)
-                        + Vector3.down*resourceSize_Y;
+                        + Vector3.right*((distance_X*(GameObjectsresourceList.Count-1))/2)
+                        + Vector3.down*distance_Y;
         while(GameObjectsresourceList.Count>0){
             Resource r = GameObjectsresourceList[0];
             GameObjectsresourceList.RemoveAt(0);
             ResourceExchange NewResource = Instantiate(resourcePrefab,instantiationPlace,transform.rotation,this.transform);
             rewardList.Add(NewResource);
             NewResource.GetComponent<ResourceExchange>().SetSprite(r);
-            instantiationPlace += Vector3.left*resourceSize_X;
+            instantiationPlace += Vector3.left*distance_X;
         }
     }
 
     private void AddResourceRequirements(List<Resource> GameObjectsresourceList){
-        const float resourceSize_X = 0.35f*2*0.5f;
-        Vector3 instantiationPlace = transform.position + Vector3.right*((resourceSize_X*(GameObjectsresourceList.Count-1))/2);
+        float distance_X = (spriteRenderer.bounds.size.x*0.85f)/(GameObjectsresourceList.Count+1);
+        Vector3 instantiationPlace = transform.position + Vector3.right*((distance_X*(GameObjectsresourceList.Count-1))/2);
         while(GameObjectsresourceList.Count>0){
             Resource r = GameObjectsresourceList[0];
             GameObjectsresourceList.RemoveAt(0);
@@ -423,7 +423,7 @@ public class Option : MonoBehaviour
                 NewResource.GetComponent<ResourceExchange>().SetSprite(Resource.PrisonerOrCultist);
             }
             
-            instantiationPlace += Vector3.left*resourceSize_X;
+            instantiationPlace += Vector3.left*distance_X;
         }
     }
 
