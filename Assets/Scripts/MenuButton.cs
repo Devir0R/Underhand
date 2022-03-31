@@ -14,6 +14,8 @@ public class MenuButton : MonoBehaviour
 
 
     public void LoadScene(){
+        if(sceneName=="Game")   GameAudio.Instance.PlayGameMusic();
+        else if(sceneName=="Main")   GameAudio.Instance.PlayMenuMusic();
         SceneManager.LoadScene(sceneName);
     }
 

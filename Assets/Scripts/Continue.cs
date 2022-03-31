@@ -71,7 +71,8 @@ public class Continue : MonoBehaviour
             Gods.SaveToFile();
             
         }
-        SceneManager.LoadScene("Game");
+        GameAudio.Instance.PlayMenuMusic();
+        SceneManager.LoadScene("Main");
     }
 
 }

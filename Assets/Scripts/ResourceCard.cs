@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.ResourceManagement.AsyncOperations;
 using System.Linq;
 using UnityEngine.InputSystem;
 
@@ -49,7 +48,9 @@ public class ResourceCard : MonoBehaviour
     public delegate void NotifyCardOnTableDestroyed();
     public static event NotifyCardOnTableDestroyed CardOnTableDestroyed;
 
-    public int AnimationSpeed = 4;
+    public int AnimationSpeed;
+
+    public AudioClip DropClip;
     protected virtual void OnCardOnTableDestroyed() //protected virtual method
     {
         //if ProcessCompleted is not null then call delegate
@@ -67,6 +68,7 @@ public class ResourceCard : MonoBehaviour
     }
 
     private void Awake(){
+        AnimationSpeed =  Mathf.RoundToInt((1.0f/Time.deltaTime)/6.2f);
         mainCamera = Camera.main;
     }
     public void DragCard(InputAction.CallbackContext context){
@@ -96,6 +98,7 @@ public class ResourceCard : MonoBehaviour
         RaycastHit2D[] rayHits = Physics2D.GetRayIntersectionAll(rayToTable);
         Collider2D table = rayHits.Select(hit=>hit.collider).FirstOrDefault(collider=>collider.gameObject.CompareTag("Table"));
         if(table!=null){
+            GameAudio.Instance.PlayTrack(DropClip);
             table.GetComponent<Table>().AddResource(resourceType);
             GameObject.Destroy(gameObject);
 
@@ -185,6 +188,7 @@ public class ResourceCard : MonoBehaviour
 
     public void RewardCard(){
         currentAnimationIndex = 0;
+        spriteRenderer.sprite = sprites[0];
         this.rewardInitiated = true;
 
     }

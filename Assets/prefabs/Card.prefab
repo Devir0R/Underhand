@@ -203,6 +203,7 @@ MonoBehaviour:
   optionPrefab: {fileID: 4699331813791409292, guid: 56cda26349c06594a896579717b26ba4, type: 3}
   faceUp: 0
   moveSpeed: 10
+  flipSound: {fileID: 8300000, guid: 3c060805192d23843aa908198b2e8b6b, type: 3}
 --- !u!114 &-760384447663447326
 MonoBehaviour:
   m_ObjectHideFlags: 0

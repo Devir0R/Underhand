@@ -245,7 +245,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -878,6 +878,7 @@ MonoBehaviour:
       m_Action: Mouse Clicked On Table Resource
       m_Flags: 0
     m_Flags: 0
+  SacrificeClip: {fileID: 8300000, guid: ac048f05ada591b4fbd30fd140c7caf9, type: 3}
 --- !u!61 &1395547320
 BoxCollider2D:
   m_ObjectHideFlags: 0

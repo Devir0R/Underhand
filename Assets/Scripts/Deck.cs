@@ -112,7 +112,6 @@ public class Deck : MonoBehaviour
         // this.deck.Insert(0,allCards.allCardsList.Find(card=>card.num==98));
         this.deckSize = this.deck.Count;
         GameState.GameStart();
-
     }
 
     void shuffleDeck(){

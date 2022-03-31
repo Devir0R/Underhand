@@ -394,7 +394,7 @@ public class Option : MonoBehaviour
 
     private void AddResourceRewards(List<Resource> GameObjectsresourceList){
         float distance_X = (spriteRenderer.bounds.size.x*0.85f)/(GameObjectsresourceList.Count+1);
-        float distance_Y = spriteRenderer.bounds.size.y/6f;
+        float distance_Y = spriteRenderer.bounds.size.y/7f;
         Vector3 instantiationPlace = transform.position 
                         + Vector3.right*((distance_X*(GameObjectsresourceList.Count-1))/2)
                         + Vector3.down*distance_Y;

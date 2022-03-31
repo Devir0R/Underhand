@@ -22,6 +22,7 @@ public class Table : MonoBehaviour
 
     public delegate void NotifyResourcesOnTableChanged();
     public event NotifyResourcesOnTableChanged ResourcedOnTableChanged;
+    public AudioClip SacrificeClip;
 
     private void Awake()
     {
@@ -124,6 +125,7 @@ public class Table : MonoBehaviour
     } 
 
     public void SacrificeAll(){
+
         bool anyOnTable = false;
         foreach(Resource resource in ResourceInfo.AllResources){
             ResourceCard currentCard = ResourceInfo.Info[resource].resourceOnTable;
@@ -134,6 +136,7 @@ public class Table : MonoBehaviour
         }
         if(anyOnTable){
             StartTableAnimation(()=>{
+                GameAudio.Instance.PlayTrack(SacrificeClip);
                 foreach(Resource resource in ResourceInfo.AllResources){
                     ResourceInfo.Info[resource].resourceOnTable?.SacrificeCard();
                 }

@@ -25,6 +25,7 @@ public class EyeLoader : MonoBehaviour
             yield return null;
         }
         yield return new WaitForSeconds(0.3f);
+        GameAudio.Instance.PlayMenuMusic();
         SceneManager.LoadScene("Main");
 
     }

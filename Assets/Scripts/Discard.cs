@@ -63,6 +63,7 @@ public class Discard : MonoBehaviour
     }
 
     public IEnumerator MoveOut(){
+        GameAudio.Instance.PlayTrackSlide();
         while(transform.position!=originalPosition){
             transform.position = Vector3.MoveTowards(transform.position, originalPosition,  Time.deltaTime*9);
             yield return null;

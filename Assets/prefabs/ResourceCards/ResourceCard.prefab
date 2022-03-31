@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 852121303
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: -7424190809465752597, guid: 47435f0044827444e8b5c1fa8a54b810, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -140,6 +140,7 @@ MonoBehaviour:
     m_Flags: 0
   howMany: 0
   AnimationSpeed: 4
+  DropClip: {fileID: 8300000, guid: c34c17f96ddcfe34999cef652d1dc66e, type: 3}
 --- !u!61 &3369806181466844633
 BoxCollider2D:
   m_ObjectHideFlags: 0

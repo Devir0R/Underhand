@@ -27,6 +27,9 @@ public class Card : MonoBehaviour
     public bool faceUp = false;
 
     public float moveSpeed = 10f;
+
+    public AudioClip flipSound;
+
     
     void Start()
     {
@@ -127,6 +130,7 @@ public class Card : MonoBehaviour
     }
 
     public IEnumerator RotateOutOfScreen(){
+        GameAudio.Instance.PlayTrackSlide();
         Vector3 on = Discard.Instance.transform.position+Vector3.up *(spriteRenderer.bounds.size.y)*2f;
         Vector3 outOfScreenVector;
         do{
@@ -173,6 +177,7 @@ public class Card : MonoBehaviour
         while(currentCardDO==null){
             yield return null;
         }
+        GameAudio.Instance.PlayTrack(flipSound);
         if(!faceUp)
         {
             for(float i = 0f;i<=360f;i+=15f)
