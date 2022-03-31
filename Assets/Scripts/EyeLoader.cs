@@ -8,6 +8,8 @@ public class EyeLoader : MonoBehaviour
     public List<Sprite> spriteList = new List<Sprite>();
     public Image myImage;
 
+    int currentIndex = 0;
+
     void Start()
     {
         StartCoroutine(LoadGame());
@@ -16,9 +18,9 @@ public class EyeLoader : MonoBehaviour
     IEnumerator LoadGame(){
         Loader.LoadAddressables();
         float loadPercent = Loader.PercentComplete();
-        while(loadPercent<1f){
-            int index = Mathf.FloorToInt(loadPercent*(spriteList.Count-1));
-            myImage.sprite = spriteList[index];
+        while(currentIndex<spriteList.Count-1){
+            currentIndex = Mathf.Min(currentIndex+1,Mathf.FloorToInt(loadPercent*(spriteList.Count-1)));
+            myImage.sprite = spriteList[currentIndex];
             loadPercent = Loader.PercentComplete();
             yield return null;
         }
