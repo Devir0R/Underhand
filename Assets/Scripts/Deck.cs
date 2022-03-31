@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System.Collections;
-using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using Newtonsoft.Json;
 using UnityEngine.InputSystem;
@@ -101,24 +100,19 @@ public class Deck : MonoBehaviour
                                          worldScreenHeight-spriteRenderer.bounds.size.y/1.8f,
                                          transform.position.z);
         
-        Addressables.LoadAssetsAsync<TextAsset>("CardsJsons", null).Completed += (handleToCheck)=>{
-            if(handleToCheck.Status == AsyncOperationStatus.Succeeded)
-            {
-                this.allCards = new AllCards(handleToCheck.Result.Select(json=>JsonConvert.DeserializeObject<CardDO>(json.text)));
-                this.deck  = this.allCards.allCardsList
-                    .Where(card=>card.isinitial==1)
-                    .OrderByDescending(card=>Random.value)
-                    .Take(INITIAL_DECK_SIZE).ToList();
-                Discard.Instance.discard = new List<CardDO>();
-                this.addRelicCardIfThereIsnt();
-                this.insertGods();
-                shuffleDeck();
-                // this.deck.Insert(0,allCards.allCardsList.Find(card=>card.num==98));
-                this.deckSize = this.deck.Count;
-                GameState.GameStart();
-                
-            }
-        };
+        this.allCards = new AllCards(Loader.cardsJsons.Select(json=>JsonConvert.DeserializeObject<CardDO>(json.text)));
+        this.deck  = this.allCards.allCardsList
+            .Where(card=>card.isinitial==1)
+            .OrderByDescending(card=>Random.value)
+            .Take(INITIAL_DECK_SIZE).ToList();
+        Discard.Instance.discard = new List<CardDO>();
+        this.addRelicCardIfThereIsnt();
+        this.insertGods();
+        shuffleDeck();
+        // this.deck.Insert(0,allCards.allCardsList.Find(card=>card.num==98));
+        this.deckSize = this.deck.Count;
+        GameState.GameStart();
+
     }
 
     void shuffleDeck(){

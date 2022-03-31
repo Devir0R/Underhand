@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using System.Linq;
 using UnityEngine.InputSystem;
@@ -111,15 +110,10 @@ public class ResourceCard : MonoBehaviour
     void Start()
     {
         if(resourceType!=Resource.None){
-            Addressables.LoadAssetAsync<IList<Sprite>>(ResourceInfo.Info[resourceType].imagesLabel).Completed += (handleToCheck)=>{
-                if(handleToCheck.Status == AsyncOperationStatus.Succeeded)
-                {
-                    sprites = handleToCheck.Result.ToList();
-                    spriteRenderer.sprite = sprites.Find(sprite=>sprite.name.Contains("_9"));
-                    if(resourceCircle!=null)
-                        resourceCircle.GetComponent<Renderer>().material.color = ResourceInfo.Info[resourceType].circleColor;        
-                }
-            };
+            sprites = Loader.resourcesSpritesDictionary[resourceType].ToList();
+            spriteRenderer.sprite = sprites.Find(sprite=>sprite.name.Contains("_9"));
+            if(resourceCircle!=null)
+                resourceCircle.GetComponent<Renderer>().material.color = ResourceInfo.Info[resourceType].circleColor;        
         }
         OnTanbleSize = transform.localScale;
          

@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.InputSystem;
 using System.Linq;
 
@@ -14,7 +12,6 @@ public class Card : MonoBehaviour
     private static IList<Sprite> spriteList;
     public CardDO currentCardDO;
     private static Vector3 zero = Vector3.up*1000000;
-    List<System.Action> performWhenListLoaded = new List<System.Action>();
     public Option optionPrefab;
     private List<Option> options = new List<Option>();
 
@@ -33,18 +30,7 @@ public class Card : MonoBehaviour
     
     void Start()
     {
-        if(spriteList==null ||spriteList.Count==0){
-            Addressables.LoadAssetsAsync<Sprite>("CardsImages", null).Completed += (handleToCheck)=>{
-                if(handleToCheck.Status == AsyncOperationStatus.Succeeded)
-                {
-                    spriteList = handleToCheck.Result;
-                    while(performWhenListLoaded.Count>0){
-                        performWhenListLoaded[0]();
-                        performWhenListLoaded.RemoveAt(0);
-                    }
-                }
-            };
-        }
+        if(spriteList==null ||spriteList.Count==0)  spriteList = Loader.cardsSprites;
         optionPrefab.transform.localScale = transform.localScale;
         if(!foresight)  StartCoroutine(CheckOptions());
     }
@@ -196,8 +182,7 @@ public class Card : MonoBehaviour
                 transform.position =startingPosition+ Vector3.left*((spriteRenderer.bounds.size.x)*((i<180f? i : i-180f)/180f));
                 if(i==90f){
                     string cardSuffix = spriteRenderer.sprite.name.Contains("back")?  this.currentCardDO.num.ToString(): "back";
-                    if(spriteList==null) performWhenListLoaded.Add(()=>changeSprite(cardSuffix));
-                    else changeSprite(cardSuffix);
+                    changeSprite(cardSuffix);
                     i+=180f;
                 }
                 yield return new WaitForSeconds(0.01f);
