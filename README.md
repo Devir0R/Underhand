@@ -1,5 +1,6 @@
 # Underhand
-An unofficial continuation to the app [Underhand](https://play.google.com/store/apps/details?id=edu.cornell.gdiac.underhand)
+An unofficial continuation to the app [Underhand](https://play.google.com/store/apps/details?id=edu.cornell.gdiac.underhand).
+I used the app as refernce to create this desktop version of the game.
 
 <h1>How to open in Unity</h1>
 
