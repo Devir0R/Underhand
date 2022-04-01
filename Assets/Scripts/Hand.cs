@@ -77,9 +77,13 @@ public class Hand : MonoBehaviour
     void SpawnCards(){
         hand = new List<ResourceCard>();
         foreach(Resource resource in startingHand.ToList()){
-            ResourcePrefab.resourceType = resource;
-            hand.Add(Instantiate(ResourcePrefab,handMiddle,transform.rotation));
+            AddOfResource(resource);
         }
+    }
+
+    void AddOfResource(Resource resource){
+        ResourcePrefab.resourceType = resource;
+        hand.Add(Instantiate(ResourcePrefab,handMiddle,transform.rotation));
     }
 
     public int HowManyOfResourceInHand(Resource resource){
@@ -147,6 +151,13 @@ public class Hand : MonoBehaviour
     }
     public void AddCardToHand(ResourceCard card){
         hand.Add(card);
+        FitCards();
+    }
+
+    public void AddCardToHand(Resource resource,int howMany){
+        for(int i = 0;i<howMany;i++){
+            AddOfResource(resource);
+        }
         FitCards();
     }
     public IEnumerable<Resource> ResourcesInHand(){

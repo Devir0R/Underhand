@@ -51,6 +51,8 @@ public class ResourceCard : MonoBehaviour
     public int AnimationSpeed;
 
     public AudioClip DropClip;
+
+    bool disbled = false;
     protected virtual void OnCardOnTableDestroyed() //protected virtual method
     {
         //if ProcessCompleted is not null then call delegate
@@ -68,10 +70,12 @@ public class ResourceCard : MonoBehaviour
     }
 
     private void Awake(){
-        AnimationSpeed =  Mathf.RoundToInt((1.0f/Time.deltaTime)/6.2f);
+        AnimationSpeed =  Mathf.RoundToInt((1.0f/Time.deltaTime)/12f);
         mainCamera = Camera.main;
     }
     public void DragCard(InputAction.CallbackContext context){
+        if(disbled) return;
+
         Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
         RaycastHit2D[] rayHits = Physics2D.GetRayIntersectionAll(ray);
         IEnumerable<int?> sortings = 
@@ -82,7 +86,6 @@ public class ResourceCard : MonoBehaviour
         Hand.Instance.RemoveCardFromHand(this);
         transform.rotation = Quaternion.identity;
         StartCoroutine(DragUpdate(this));
-        
     }
 
     public IEnumerator DragUpdate(ResourceCard draggedCard){
@@ -119,8 +122,6 @@ public class ResourceCard : MonoBehaviour
                 resourceCircle.GetComponent<Renderer>().material.color = ResourceInfo.Info[resourceType].circleColor;        
         }
         OnTanbleSize = transform.localScale;
-         
-        
     }
 
     public void addOneOfResource(){
@@ -165,6 +166,7 @@ public class ResourceCard : MonoBehaviour
             spriteRenderer.sprite = sprites[currentAnimationIndex];
             if(sprites[currentAnimationIndex].name.Contains(NormalCardString)){
                 rewardInitiated = false;
+                StartCoroutine(JumpToHand());
             }
             currentAnimationIndex+=1;
         }
@@ -181,12 +183,24 @@ public class ResourceCard : MonoBehaviour
         
     }
 
+    public IEnumerator JumpToHand(){
+        GameObject.Destroy(resourceCircle.gameObject);
+        transform.localScale = transform.localScale * 1.4f;
+        while(transform.position!=Hand.Instance.transform.position){
+            transform.position = Vector3.MoveTowards(transform.position,Hand.Instance.transform.position,Time.deltaTime*20f);
+            yield return new WaitForSeconds(0.01f);
+        }
+        Hand.Instance.AddCardToHand(resourceType,howMany);
+        Destroy(gameObject);
+    }
+
     public void SacrificeCard(){
         currentAnimationIndex = 9;
         this.sacrificeInitiated = true;
     }
 
     public void RewardCard(){
+        disbled = true;
         currentAnimationIndex = 0;
         spriteRenderer.sprite = sprites[0];
         this.rewardInitiated = true;

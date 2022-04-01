@@ -54,10 +54,10 @@ public class Option : MonoBehaviour
 
     public void AddOnChooseListeners(){
         OptionChosen += MoveOptionBack;
-        OptionChosen += this.SpawnReawrds;
+        OptionChosen += this.SpawnRewards;
     }
 
-    public void SpawnReawrds()
+    public void SpawnRewards()
     {
         if(optionChosen==this){
             Table.Instance.SpawnRewards(option.rewards);
@@ -243,7 +243,7 @@ public class Option : MonoBehaviour
     private void OnDestroy(){
         disableSpriteChange();
         OptionChosen -= MoveOptionBack;
-        OptionChosen -= this.SpawnReawrds;
+        OptionChosen -= this.SpawnRewards;
     }
 
     private void disableSpriteChange(){

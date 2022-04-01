@@ -47,7 +47,7 @@ public class TableAnimation : MonoBehaviour
         while(index<sacrificeSprites.Count){
             spriteRenderer.sprite = sacrificeSprites[index];
             index++;
-            yield return new WaitForSeconds(1.9f/32f);
+            yield return new WaitForSeconds(1f/32f);
         }
         inSacrifice = false;
         StartIdleness();
@@ -59,7 +59,7 @@ public class TableAnimation : MonoBehaviour
         while(!inSacrifice){
             index = (index+1) % idleSprites.Count;
             spriteRenderer.sprite = idleSprites[index];
-            yield return new WaitForSeconds(1.9f/32f);
+            yield return new WaitForSeconds(1f/32f);
         }
     }
 }
