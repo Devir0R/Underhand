@@ -148,6 +148,7 @@ public class Card : MonoBehaviour
     public IEnumerator FlipAndMoveUp(){
         yield return FlipCard();
         CreateOptions();
+        yield return new WaitForSeconds(0.5f);
         yield return MoveCardUp();
     }
 
@@ -171,7 +172,7 @@ public class Card : MonoBehaviour
                     changeSprite(cardSuffix);
                     i+=180f;
                 }
-                yield return new WaitForSeconds(0.01f);
+                yield return new WaitForSeconds(0.015f);
             }
             
         }
