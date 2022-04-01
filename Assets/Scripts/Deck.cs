@@ -231,9 +231,7 @@ public class Deck : MonoBehaviour
                 current_card = RemoveTopCard();
             }
             theCard.currentCardDO = current_card;
-            StartCoroutine(theCard.FlipCard());
-            
-
+            StartCoroutine(theCard.FlipAndMoveUp());
             if(current_card.isrecurring==1) Discard.Instance.discard.Add(current_card);
     }
 

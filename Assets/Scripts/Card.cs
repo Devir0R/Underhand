@@ -16,12 +16,10 @@ public class Card : MonoBehaviour
 
     private Camera mainCamera;
 
-    private System.Action moveCallback;
 
     private void Awake(){
         mainCamera = Camera.main;
     }
-    private bool disableCard = true;
 
     public bool faceUp = false;
 
@@ -46,15 +44,8 @@ public class Card : MonoBehaviour
          }
      }
 
-    public void ShowOptions(InputAction.CallbackContext context){
-        if(this.foresight || this.disableCard || ! context.performed || !CardClicked()) return ;
-        DisbleCard();
-        CreateOptions();
-        StartCoroutine(MoveCardUp());
-    }
-
     IEnumerator MoveCardUp(){
-        yield return MoveTo(transform.position+Vector3.up *spriteRenderer.bounds.size.y*1.1f);
+        yield return MoveTo(transform.position+Vector3.up *spriteRenderer.bounds.size.y,10f);
         MoveOptions();
         options.ForEach(op=>op.GetComponent<Option>().AddOnChooseListeners());
     }
@@ -63,13 +54,6 @@ public class Card : MonoBehaviour
         options.ForEach(op=>op.GetComponent<Option>().MoveOption(()=>StartCoroutine(FinishingMove())));
     }
 
-
-    bool CardClicked(){
-        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-        RaycastHit2D rayHit = Physics2D.GetRayIntersection(ray);
-
-        return rayHit.collider!=null && rayHit.collider.gameObject.CompareTag("Card");
-    }
 
     public IEnumerator FadeIn(){
         Color cardColor = spriteRenderer.material.color;
@@ -108,14 +92,6 @@ public class Card : MonoBehaviour
         }
     }
 
-    private void DisbleCard(){
-        disableCard = true;
-    }
-
-    private void EnableCard(){
-        disableCard = false;
-    }
-
     public IEnumerator MoveTo(Vector3 to,float speed = 30f){
         while(transform.position!=to){
             transform.position = Vector3.MoveTowards(transform.position, to,  Time.deltaTime*speed);
@@ -141,7 +117,7 @@ public class Card : MonoBehaviour
     }
 
     public IEnumerator FinishingMove(){
-        yield return MoveTo(transform.position+Vector3.down *8);
+        yield return MoveTo(transform.position+Vector3.down *spriteRenderer.bounds.size.y,10f);
         while(options.Count>0){
             Option op = options[0];
             options.RemoveAt(0);
@@ -167,6 +143,12 @@ public class Card : MonoBehaviour
 
     public void changeSprite(string suffix){
         spriteRenderer.sprite = spriteList.First(sprite=>sprite.name.Equals("Card"+suffix));
+    }
+
+    public IEnumerator FlipAndMoveUp(){
+        yield return FlipCard();
+        CreateOptions();
+        yield return MoveCardUp();
     }
 
     public IEnumerator FlipCard(){
@@ -195,7 +177,6 @@ public class Card : MonoBehaviour
         }
         faceUp= !faceUp;
 
-        EnableCard();
     }
 }
 
