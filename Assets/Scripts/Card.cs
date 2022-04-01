@@ -11,7 +11,6 @@ public class Card : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     private static IList<Sprite> spriteList;
     public CardDO currentCardDO;
-    private static Vector3 zero = Vector3.up*1000000;
     public Option optionPrefab;
     private List<Option> options = new List<Option>();
 
@@ -55,7 +54,7 @@ public class Card : MonoBehaviour
     }
 
     IEnumerator MoveCardUp(){
-        yield return MoveTo(transform.position+Vector3.up *8);
+        yield return MoveTo(transform.position+Vector3.up *spriteRenderer.bounds.size.y*1.1f);
         MoveOptions();
         options.ForEach(op=>op.GetComponent<Option>().AddOnChooseListeners());
     }

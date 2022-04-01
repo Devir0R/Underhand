@@ -154,6 +154,7 @@ public class Table : MonoBehaviour
         if(ResourceInfo.Info[resource].resourceOnTable==null){
             ResourceOnTablePrefab.resourceType = resource;
             ResourceInfo.Info[resource].resourceOnTable = Instantiate(ResourceOnTablePrefab,ResourceInfo.Info[resource].resourcePositionOnTable,transform.rotation);
+            ResourceInfo.Info[resource].resourceOnTable.spriteRenderer.sortingOrder = tableAnimation.spriteRenderer.sortingOrder+1;
         }
         ResourceInfo.Info[resource].resourceOnTable.addOneOfResource();
         OnResourcedOnTableChanged();
