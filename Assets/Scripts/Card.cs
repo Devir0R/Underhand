@@ -7,7 +7,6 @@ using System.Linq;
 public class Card : MonoBehaviour
 {
     public bool isGreyed = false;
-    public bool foresight = false;
     public SpriteRenderer spriteRenderer;
     private static IList<Sprite> spriteList;
     public CardDO currentCardDO;
@@ -32,7 +31,7 @@ public class Card : MonoBehaviour
     {
         if(spriteList==null ||spriteList.Count==0)  spriteList = Loader.cardsSprites;
         optionPrefab.transform.localScale = transform.localScale;
-        if(!foresight)  StartCoroutine(CheckOptions());
+        StartCoroutine(CheckOptions());
     }
 
      public IEnumerator CheckOptions(){
@@ -74,6 +73,7 @@ public class Card : MonoBehaviour
     }
 
     private void CreateOptions(){
+        optionPrefab.disableOption = true;
         options.Add(Instantiate(optionPrefab,transform.position,transform.rotation));
         options.Add(Instantiate(optionPrefab,transform.position,transform.rotation));
         options.Add(Instantiate(optionPrefab,transform.position,transform.rotation));
@@ -150,6 +150,7 @@ public class Card : MonoBehaviour
         CreateOptions();
         yield return new WaitForSeconds(0.5f);
         yield return MoveCardUp();
+        options.ForEach(op=>op.disableOption = false);
     }
 
     public IEnumerator FlipCard(){

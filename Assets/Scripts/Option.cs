@@ -22,7 +22,7 @@ public class Option : MonoBehaviour
     public TextMeshPro output;
     public TextMeshPro optionText;
     // Start is called before the first frame update
-    bool disableOption;
+    public bool disableOption;
 
     private Camera mainCamera;
 

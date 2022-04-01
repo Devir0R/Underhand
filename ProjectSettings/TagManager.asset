@@ -12,6 +12,7 @@ TagManager:
   - CardOnTable
   - Discard
   - GameAudio
+  - GameMenu
   layers:
   - Default
   - TransparentFX
