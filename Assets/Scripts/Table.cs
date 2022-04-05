@@ -25,6 +25,8 @@ public class Table : MonoBehaviour
 
     public TableAnimation tableAnimation;
 
+    int isLightUp = 0;
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -39,6 +41,16 @@ public class Table : MonoBehaviour
     private void OnEnable(){
         mouseClickedOnTableResource.Enable();
         mouseClickedOnTableResource.performed += DragCard;
+    }
+
+    public void Darken(){
+        isLightUp +=1;
+        tableAnimation.backgroundSpriteRenderer.material.color = Color.grey;
+    }
+
+    public void LightUp(){
+        isLightUp-=1;
+        if(isLightUp<=0)    tableAnimation.backgroundSpriteRenderer.material.color = Color.white;
     }
 
     private void OnDisable(){

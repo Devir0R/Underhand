@@ -24,7 +24,6 @@ public class Discard : MonoBehaviour
         } else {
             _instance = this;
         }
-
     }
 
     public void shuffleDiscard(){
@@ -70,14 +69,6 @@ public class Discard : MonoBehaviour
         }
     }
 
-
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     void Start(){
         float worldScreenHeight = Camera.main.orthographicSize;

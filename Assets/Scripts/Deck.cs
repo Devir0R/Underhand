@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System.Collections;
-using UnityEngine.ResourceManagement.AsyncOperations;
 using Newtonsoft.Json;
 using UnityEngine.InputSystem;
 
@@ -37,6 +36,10 @@ public class Deck : MonoBehaviour
     public bool performingForesight = false;
 
     public bool triggerInsertCardAnimation = false;
+    public AudioClip shuffleSound;
+
+    public ShuffleText shuffleText;
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -109,7 +112,8 @@ public class Deck : MonoBehaviour
         this.addRelicCardIfThereIsnt();
         this.insertGods();
         shuffleDeck();
-        // this.deck.Insert(0,allCards.allCardsList.Find(card=>card.num==98));
+        // this.deck.Insert(this.deck.Count,allCards.allCardsList.Find(card=>card.num==21));
+        // this.deck.RemoveRange(0,3*deck.Count/4);
         this.deckSize = this.deck.Count;
         GameState.GameStart();
     }
@@ -133,6 +137,7 @@ public class Deck : MonoBehaviour
 
     public IEnumerator Foresight(bool discard){
         performingForesight = true;
+        Table.Instance.Darken();
         Vector3 inScene = transform.position + Vector3.left*(spriteRenderer.bounds.size.x*1.05f);
         yield return MoveTo(inScene);
         yield return ShowForesightCards(discard);
@@ -142,11 +147,11 @@ public class Deck : MonoBehaviour
 
     public IEnumerator ShowForesightCards(bool candiscard){
         if(deck.Count<3){ 
-            shuffleDiscard();
+            yield return shuffleDiscard();
             UpdateDeckSprite();
         }
 
-        for(int j = 0;j<3;j++){
+        for(int j = 0;j<3 &&j<deck.Count;j++){
             foresightCards.Add(Instantiate(cardPrefab,transform.position,transform.rotation));
             foresightCards[j].changeSprite(deck[j].num.ToString());
             yield return foresightCards[j].MoveTo(transform.position+(Vector3.left*spriteRenderer.bounds.size.x*(j+3)));
@@ -196,7 +201,7 @@ public class Deck : MonoBehaviour
     }
 
     public IEnumerator RemoveForesightCards(){
-        for(int j = 2;j>=0;j--){
+        for(int j = Mathf.Min(deck.Count,3)-1;j>=0;j--){
             Card cardToRemove = foresightCards[j];
             if(!foresightCards[j].isGreyed)    yield return cardToRemove.MoveTo(transform.position);
             else{
@@ -208,6 +213,7 @@ public class Deck : MonoBehaviour
         foresightCards.RemoveAll(card=>true);
         Vector3 outScene = transform.position + Vector3.right*(spriteRenderer.bounds.size.x*1.05f);
         yield return MoveTo(outScene);
+        Table.Instance.LightUp();
         performingForesight = false;
 
     }
@@ -215,6 +221,7 @@ public class Deck : MonoBehaviour
     public IEnumerator MoveDeckAndSpawn(){
         Vector3 originalPosition = transform.position;
         Vector3 inScene = transform.position + Vector3.left*(spriteRenderer.bounds.size.x*1.2f);
+        if(this.deck.Count==0) yield return shuffleDiscard();
         yield return MoveTo(inScene);
         
         theCard = Instantiate(cardPrefab,transform.position,transform.rotation);
@@ -232,7 +239,6 @@ public class Deck : MonoBehaviour
             }
             theCard.currentCardDO = current_card;
             StartCoroutine(theCard.FlipAndMoveUp());
-            if(current_card.isrecurring==1) Discard.Instance.discard.Add(current_card);
     }
 
     CardDO GetAlertCard(){
@@ -254,15 +260,17 @@ public class Deck : MonoBehaviour
         return null;
     }
 
-    void shuffleDiscard(){
+    IEnumerator shuffleDiscard(){
+        GameAudio.Instance.PlayTrack(shuffleSound);
+        shuffleText.Show();
+        yield return new WaitForSeconds(shuffleSound.length-0.2f);
+        shuffleText.Hide();
         Discard.Instance.shuffleDiscard();
         this.deck.AddRange(Discard.Instance.discard);
         Discard.Instance.discard.RemoveAll(card=>true);
     }
 
     CardDO RemoveTopCard(){
-        if(this.deck.Count==0) shuffleDiscard();
-
         CardDO current_card = this.deck[0];
         this.deck.RemoveAt(0);
         UpdateDeckSprite();
@@ -271,6 +279,7 @@ public class Deck : MonoBehaviour
 
     void UpdateDeckSprite(){
         float leftOfDeck = ((float)(this.deck.Count))/this.deckSize;
+        if(leftOfDeck>1) leftOfDeck = 1;
         int spriteIndex = (int)((1-leftOfDeck)*(spriteArray.Length-1));
         spriteRenderer.sprite = spriteArray[spriteIndex];
 

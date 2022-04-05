@@ -136,7 +136,8 @@ public class Card : MonoBehaviour
         }
         else{
             yield return Discard.Instance.MoveIn();
-            Discard.Instance.cardToDicard = this;                
+            Discard.Instance.cardToDicard = this;
+            if(currentCardDO.isrecurring==1) Discard.Instance.discard.Add(currentCardDO);         
             StartCoroutine(Discard.Instance.MoveDiscardOut());
         }
     }
@@ -148,7 +149,7 @@ public class Card : MonoBehaviour
     public IEnumerator FlipAndMoveUp(){
         yield return FlipCard();
         CreateOptions();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.35f);
         yield return MoveCardUp();
         options.ForEach(op=>op.disableOption = false);
     }
