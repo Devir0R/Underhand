@@ -45,12 +45,15 @@ public class Card : MonoBehaviour
 
     IEnumerator MoveCardUp(){
         yield return MoveTo(transform.position+Vector3.up *spriteRenderer.bounds.size.y,10f);
-        MoveOptions();
+        yield return MoveOptions();
         options.ForEach(op=>op.GetComponent<Option>().AddOnChooseListeners());
     }
 
-    void MoveOptions(){
-        options.ForEach(op=>op.GetComponent<Option>().MoveOption(()=>StartCoroutine(FinishingMove())));
+    IEnumerator MoveOptions(){
+        foreach(Coroutine coroutine in options.Select(op=>op.GetComponent<Option>().MoveOption(()=>StartCoroutine(FinishingMove())))){
+            yield return coroutine;
+        }
+        options.ForEach(op=>op.disableOption = false);
     }
 
 
@@ -151,7 +154,6 @@ public class Card : MonoBehaviour
         CreateOptions();
         yield return new WaitForSeconds(0.35f);
         yield return MoveCardUp();
-        options.ForEach(op=>op.disableOption = false);
     }
 
     public IEnumerator FlipCard(){

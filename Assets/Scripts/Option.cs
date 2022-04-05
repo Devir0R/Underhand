@@ -149,7 +149,7 @@ public class Option : MonoBehaviour
         this.disableOption = false;
     }
 
-    public void MoveOption(System.Action cardCallBack){
+    public Coroutine MoveOption(System.Action cardCallBack){
         this.cardCallBack = cardCallBack;
         Vector3 to = Vector3.zero;
         if(optionNum==1){
@@ -160,8 +160,9 @@ public class Option : MonoBehaviour
             to = transform.position+Vector3.right*spriteRenderer.bounds.size.x;
         }
         if(to!=Vector3.zero){
-            StartCoroutine(MoveTo(to));
+            return StartCoroutine(MoveTo(to));
         }
+        return null;
     }
 
     public void MoveOptionBack(){
