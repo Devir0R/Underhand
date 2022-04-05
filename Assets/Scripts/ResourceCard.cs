@@ -187,7 +187,7 @@ public class ResourceCard : MonoBehaviour
         GameObject.Destroy(resourceCircle.gameObject);
         transform.localScale = transform.localScale * 1.4f;
         while(transform.position!=Hand.Instance.transform.position){
-            transform.position = Vector3.MoveTowards(transform.position,Hand.Instance.transform.position,Time.deltaTime*20f);
+            transform.position = Vector3.MoveTowards(transform.position,Hand.Instance.transform.position,Time.deltaTime*60f);
             yield return new WaitForSeconds(0.01f);
         }
         Hand.Instance.AddCardToHand(resourceType,howMany);

@@ -50,6 +50,7 @@ public class TableAnimation : MonoBehaviour
             yield return new WaitForSeconds(1f/32f);
         }
         inSacrifice = false;
+
         StartIdleness();
     }
 

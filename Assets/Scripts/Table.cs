@@ -106,6 +106,7 @@ public class Table : MonoBehaviour
             int howManyToAdd = howManyFromFunctions[resource]();
             if(howManyToAdd>0){
                 ResourceOnTablePrefab.resourceType = resource;
+                ResourceOnTablePrefab.spriteRenderer.sortingOrder = Table.Instance.tableAnimation.spriteRenderer.sortingOrder+1;
                 ResourceInfo.Info[resource].resourceOnTable = Instantiate(ResourceOnTablePrefab,ResourceInfo.Info[resource].resourcePositionOnTable,transform.rotation);
                 ResourceInfo.Info[resource].resourceOnTable.addNOfResource(howManyToAdd);
                 ResourceInfo.Info[resource].resourceOnTable.RewardCard();
