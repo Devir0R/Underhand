@@ -12,6 +12,10 @@ public class GameAudio : MonoBehaviour
     private static GameAudio _instance;
     public static GameAudio Instance{ get { return _instance; } }
 
+    private bool muteAudio;
+    private bool muteSound;
+    
+
     private void Awake(){
         if (_instance != null && _instance != this)
         {
@@ -23,20 +27,41 @@ public class GameAudio : MonoBehaviour
     }
 
     public void PlayMenuMusic(){
+        if(muteAudio) return;
         audioSource.Stop();
         audioSource.PlayOneShot(Fireplace);
         audioSource.PlayOneShot(Asterope);
     }
 
-    public void PlayTrackSlide()=>audioSource.PlayOneShot(SlideSound);
+    public void FlipAudio(){
+        muteAudio=!muteAudio;
+        if(muteAudio){
+            audioSource.Stop();
+        }
+        else{
+            PlayMenuMusic();
+        }
+    }
+    public void FlipSound()=>muteSound=!muteSound;
 
-    public void PlayTrack(AudioClip clip)=>audioSource.PlayOneShot(clip);
+    public void PlayTrackSlide(){
+        PlayTrack(SlideSound);
+    }
+
+    public void PlayTrack(AudioClip clip){
+        if(!muteSound) audioSource.PlayOneShot(clip);
+    }
 
     public void PlayGameMusic(){
+        if(muteAudio) return;
+
         audioSource.Stop();
         audioSource.PlayOneShot(Dances);
 
     }
+
+    public bool isAudioOn()=>!muteAudio;
+    public bool isSoundOn()=>!muteSound;
 
 
 }
