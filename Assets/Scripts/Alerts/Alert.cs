@@ -13,6 +13,7 @@ public class Alert : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
+        framesBetweenBlinks = Mathf.RoundToInt((1f/Time.deltaTime)/3f);
         backToInitState();
     }
 
