@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using System.Linq;
 using TMPro;
@@ -42,26 +43,26 @@ public class Hand : MonoBehaviour
         }
     }
 
-    public void RemoveFromHandRandomly(int numberOfCards){
-        List<float> cardsIndexesToRemove = new List<float>();
+    public IEnumerator RemoveFromHandRandomly(int numberOfCards){
+        List<int> cardsIndexesToRemove = new List<int>();
         for(int j =0;j<numberOfCards;j++){
-            cardsIndexesToRemove.Add(Random.value);
-            if(cardsIndexesToRemove[j]==1f){
+            cardsIndexesToRemove.Add(Mathf.FloorToInt(Random.value*hand.Count));
+            if(cardsIndexesToRemove[j]==hand.Count){
                 cardsIndexesToRemove.Remove(j);
                 j--;
             }
         }
         cardsIndexesToRemove.Sort();
+        List<Coroutine> cardsJumps = new List<Coroutine>();
         for(int j =cardsIndexesToRemove.Count-1;j>0;j--){
-            int indexToRemove = Mathf.FloorToInt(cardsIndexesToRemove[j]*hand.Count);
+            int indexToRemove = cardsIndexesToRemove[j];
             ResourceCard toRemove = hand[indexToRemove];
             hand.RemoveAt(indexToRemove);
-            GameObject.Destroy(toRemove.gameObject);
-
+            cardsJumps.Add(StartCoroutine(toRemove.JumpToTable()));
         }
+        foreach(Coroutine jump in cardsJumps) yield return jump;
+        Table.Instance.SacrificeAll();
         FitCards();
-        
-
     }
 
     // Start is called before the first frame update

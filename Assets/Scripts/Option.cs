@@ -102,10 +102,10 @@ public class Option : MonoBehaviour
 
             spriteRenderer.sprite = down;
             if(option.randomrequirements!=0){
-                Hand.Instance.RemoveFromHandRandomly(option.randomrequirements);
+                ResourceCard.CardOnTableDestroyed +=whenCardsOnTableDestroyed;
+                StartCoroutine(Hand.Instance.RemoveFromHandRandomly(option.randomrequirements));                
             }
-
-            if(Table.Instance.ResourcesOnTable().Count==0) optionRealized();
+            else if(Table.Instance.ResourcesOnTable().Count==0) optionRealized();
             else{
                 ResourceCard.CardOnTableDestroyed +=whenCardsOnTableDestroyed;
                 Table.Instance.SacrificeAll();

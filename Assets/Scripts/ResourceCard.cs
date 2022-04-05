@@ -64,13 +64,13 @@ public class ResourceCard : MonoBehaviour
         mouseClickedOnCard.performed += DragCard;
     }
 
-    private void OnDisable(){
+    public void OnDisable(){
         mouseClickedOnCard.performed -= DragCard;
         mouseClickedOnCard.Disable();
     }
 
     private void Awake(){
-        AnimationSpeed =  Mathf.RoundToInt((1.0f/Time.deltaTime)/12f);
+        AnimationSpeed =  Mathf.RoundToInt((1.0f/Time.deltaTime)/11f);
         mainCamera = Camera.main;
     }
     public void DragCard(InputAction.CallbackContext context){
@@ -192,6 +192,17 @@ public class ResourceCard : MonoBehaviour
         }
         Hand.Instance.AddCardToHand(resourceType,howMany);
         Destroy(gameObject);
+    }
+
+    public IEnumerator JumpToTable(){
+        disbled = true;
+        transform.rotation = new Quaternion();
+        while(transform.position!=ResourceInfo.Info[resourceType].resourcePositionOnTable){
+            transform.position = Vector3.MoveTowards(transform.position,ResourceInfo.Info[resourceType].resourcePositionOnTable,60f*Time.deltaTime);
+            yield return new WaitForSeconds(0.01f);
+        }
+        GameObject.Destroy(gameObject);
+        Table.Instance.AddGreedResource(resourceType);
     }
 
     public void SacrificeCard(){

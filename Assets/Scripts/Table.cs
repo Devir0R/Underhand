@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Linq;
 
 public class Table : MonoBehaviour
 {
@@ -171,6 +170,11 @@ public class Table : MonoBehaviour
         }
         ResourceInfo.Info[resource].resourceOnTable.addOneOfResource();
         OnResourcedOnTableChanged();
+    }
+
+    public void AddGreedResource(Resource resource){
+        AddResource(resource);
+        ResourceInfo.Info[resource].resourceOnTable.OnDisable();
     }
 
     public void RemoveResource(Resource resource){
