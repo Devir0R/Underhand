@@ -29,8 +29,10 @@ public class GameAudio : MonoBehaviour
     public void PlayMenuMusic(){
         if(muteAudio) return;
         audioSource.Stop();
+        audioSource.clip = Asterope;
+        audioSource.loop = true;
+        audioSource.Play();
         audioSource.PlayOneShot(Fireplace);
-        audioSource.PlayOneShot(Asterope);
     }
 
     public void FlipAudio(){
@@ -56,7 +58,9 @@ public class GameAudio : MonoBehaviour
         if(muteAudio) return;
 
         audioSource.Stop();
-        audioSource.PlayOneShot(Dances);
+        audioSource.clip = Dances;
+        audioSource.loop = true;
+        audioSource.Play();
 
     }
 
