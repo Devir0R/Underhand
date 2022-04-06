@@ -449,9 +449,12 @@ public class Option : MonoBehaviour
                     }
                 }
             }
-            List<ResourceExchange> ungreyedRelics = requirementsObjects.Where(resExch=>!resExch.greyed&&resExch.myType==Resource.Relic).ToList();
-            for(int j = 0;j<resourcesOnTable.Count-howManyMarked && j<ungreyedRelics.Count;j++){
-                ungreyedRelics[j].Grey();
+            List<ResourceExchange> ungreyedResources = requirementsObjects.Where(resExch=>!resExch.greyed).ToList();
+            int greyedRelics = requirementsObjects.Where(resExch=>resExch.greyed&&resExch.myType==Resource.Relic).Count();
+            int relicsOnTable = resourcesOnTable.Where(res=>res==Resource.Relic).Count();
+            int freeRelics = relicsOnTable - greyedRelics;
+            for(int j = 0;j<resourcesOnTable.Count-howManyMarked && j<ungreyedResources.Count&&j<freeRelics;j++){
+                ungreyedResources[j].Grey();
             }
             yield return new WaitForSeconds(0.1f);
         }

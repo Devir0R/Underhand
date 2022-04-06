@@ -112,7 +112,7 @@ public class Deck : MonoBehaviour
         this.addRelicCardIfThereIsnt();
         this.insertGods();
         shuffleDeck();
-        // this.deck.Insert(this.deck.Count,allCards.allCardsList.Find(card=>card.num==21));
+        // this.deck.Insert(0,allCards.allCardsList.Find(card=>card.num==4));
         // this.deck.RemoveRange(0,3*deck.Count/4);
         this.deckSize = this.deck.Count;
         GameState.GameStart();

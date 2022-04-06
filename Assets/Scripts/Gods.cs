@@ -50,11 +50,11 @@ public class Gods
             AllGods allGods = (AllGods)bf.Deserialize(file);
             file.Close();
             Gods.allGods = allGods;
-            Debug.Log("Game data loaded!");
+            //Debug.Log("Game data loaded!");
             return true;
         }
         else{
-            Debug.LogError("There is no save data!");
+            //Debug.LogError("There is no save data!");
             return false;
         }
             

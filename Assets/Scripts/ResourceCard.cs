@@ -70,7 +70,6 @@ public class ResourceCard : MonoBehaviour
     }
 
     private void Awake(){
-        AnimationSpeed =  Mathf.RoundToInt((1.0f/Time.deltaTime)/11f);
         mainCamera = Camera.main;
     }
     public void DragCard(InputAction.CallbackContext context){
@@ -115,6 +114,7 @@ public class ResourceCard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        AnimationSpeed =  Mathf.RoundToInt((1.0f/Time.deltaTime)/11f);
         if(resourceType!=Resource.None){
             sprites = Loader.resourcesSpritesDictionary[resourceType].ToList();
             spriteRenderer.sprite = sprites.Find(sprite=>sprite.name.Contains("_9"));
