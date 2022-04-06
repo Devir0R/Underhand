@@ -77,6 +77,7 @@ public class Card : MonoBehaviour
 
     private void CreateOptions(){
         optionPrefab.disableOption = true;
+        optionPrefab.cardDO = currentCardDO;
         options.Add(Instantiate(optionPrefab,transform.position,transform.rotation));
         options.Add(Instantiate(optionPrefab,transform.position,transform.rotation));
         options.Add(Instantiate(optionPrefab,transform.position,transform.rotation));
@@ -88,8 +89,8 @@ public class Card : MonoBehaviour
 
     private void UpdateOptions(){
         options[0].UpdateDO(this.currentCardDO.option1,1);
-        options[1].UpdateDO(this.currentCardDO.option2,3);
-        options[2].UpdateDO(this.currentCardDO.option3,2);
+        options[1].UpdateDO(this.currentCardDO.option2,2);
+        options[2].UpdateDO(this.currentCardDO.option3,3);
         if(options.All(op=>op.isDormant)){
             options.Where(op=>op.LosingOption()).ToList().ForEach(op=>op.WakeUp());
         }

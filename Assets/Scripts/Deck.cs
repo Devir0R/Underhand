@@ -124,6 +124,7 @@ public class Deck : MonoBehaviour
 
     public void SpawnACard(){
         isSpawning = true;
+        GameAudio.Instance.playNextOnQueue();
         StartCoroutine(MoveDeckAndSpawn());
 
     }

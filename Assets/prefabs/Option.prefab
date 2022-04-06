@@ -29,7 +29,7 @@ RectTransform:
   m_GameObject: {fileID: 2712697371713110376}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.3125825, y: 1.3125825, z: 1}
+  m_LocalScale: {x: 1.2362696, y: 1.2362696, z: 1}
   m_Children:
   - {fileID: 6398797220254851407}
   - {fileID: 3436969867557364064}
@@ -160,6 +160,106 @@ MonoBehaviour:
   optionText: {fileID: 3137837990514184823}
   disableOption: 1
   isDormant: 0
+  cardDO:
+    flavortext: The first time's always the easiest
+    title: Beginner's Luck
+    isrecurring: 0
+    isinitial: 0
+    isTutorial: 0
+    option1:
+      optiontext: We could use some cultists
+      outputtext: 
+      cultistequalsprisoner: 0
+      randomrequirements: 0
+      requirements:
+        relic: 0
+        money: 0
+        cultist: 0
+        food: 0
+        prisoner: 0
+        suspicion: 0
+      rewards:
+        relic: 0
+        money: 0
+        cultist: 2
+        food: 0
+        prisoner: 0
+        suspicion: 0
+      foresight:
+        hasforesight: 0
+        candiscard: 0
+      shuffle:
+        lowerbound: 999
+        upperbound: 999
+        specificids: 
+        allowsdupes: 0
+        numcards: 0
+      iswin: 
+      islose: 0
+    option2:
+      optiontext: We could use some food
+      outputtext: 
+      cultistequalsprisoner: 0
+      randomrequirements: 0
+      requirements:
+        relic: 0
+        money: 0
+        cultist: 0
+        food: 0
+        prisoner: 0
+        suspicion: 0
+      rewards:
+        relic: 0
+        money: 0
+        cultist: 0
+        food: 2
+        prisoner: 0
+        suspicion: 0
+      foresight:
+        hasforesight: 0
+        candiscard: 0
+      shuffle:
+        lowerbound: 999
+        upperbound: 999
+        specificids: 
+        allowsdupes: 0
+        numcards: 0
+      iswin: 
+      islose: 0
+    option3:
+      optiontext: We could use some money
+      outputtext: 
+      cultistequalsprisoner: 0
+      randomrequirements: 0
+      requirements:
+        relic: 0
+        money: 0
+        cultist: 0
+        food: 0
+        prisoner: 0
+        suspicion: 0
+      rewards:
+        relic: 0
+        money: 2
+        cultist: 0
+        food: 0
+        prisoner: 0
+        suspicion: 0
+      foresight:
+        hasforesight: 0
+        candiscard: 0
+      shuffle:
+        lowerbound: 999
+        upperbound: 999
+        specificids: 
+        allowsdupes: 0
+        numcards: 0
+      iswin: 
+      islose: 0
+    num: 96
+    animationframes: 1
+    weight: 10
+    cardartdone: 1
 --- !u!61 &4189827185791679972
 BoxCollider2D:
   m_ObjectHideFlags: 0

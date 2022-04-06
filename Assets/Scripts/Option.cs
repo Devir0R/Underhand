@@ -39,6 +39,9 @@ public class Option : MonoBehaviour
 
     public delegate void NotifyOptionChosen();
     public static event NotifyOptionChosen OptionChosen;
+
+    public CardDO cardDO;
+
     protected virtual void OnOptionChosen() //protected virtual method
     {
         //if ProcessCompleted is not null then call delegate
@@ -110,7 +113,7 @@ public class Option : MonoBehaviour
                 ResourceCard.CardOnTableDestroyed +=whenCardsOnTableDestroyed;
                 Table.Instance.SacrificeAll();
             }
-            
+            GameAudio.Instance.AddToQueue(cardDO.title,optionNum);
             Deck.Instance.AddToDiscard(option.shuffle);
         }
         

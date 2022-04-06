@@ -1,6 +1,9 @@
 
 using UnityEngine;
-
+using System.Collections.Generic;
+using System.Collections;
+using System.Linq;
+using System;
 public class GameAudio : MonoBehaviour
 {
     public AudioSource audioSource;
@@ -12,8 +15,13 @@ public class GameAudio : MonoBehaviour
     private static GameAudio _instance;
     public static GameAudio Instance{ get { return _instance; } }
 
+    public List<OptionClip> optionsAudio = new List<OptionClip>();
+
     private bool muteAudio;
     private bool muteSound;
+    private Dictionary<int,List<AudioClip>> audioQueue = new Dictionary<int, List<AudioClip>>();
+
+    private bool playingRadio = false;
     
 
     private void Awake(){
@@ -33,6 +41,48 @@ public class GameAudio : MonoBehaviour
         audioSource.loop = true;
         audioSource.Play();
         audioSource.PlayOneShot(Fireplace);
+    }
+    
+    public void AddToQueue(string cardName, int optionNum){
+        int waitNCards = Mathf.CeilToInt(UnityEngine.Random.Range(0,5));
+        if(!audioQueue.ContainsKey(waitNCards)){
+            audioQueue[waitNCards] = new List<AudioClip>();
+        }
+        foreach(OptionClip opClip in optionsAudio){
+            if(opClip.cardName==cardName && opClip.option==optionNum){
+                audioQueue[waitNCards].Add(opClip.clip);
+                break;
+            }
+        }
+    }
+
+    public void playNextOnQueue(){
+        if(AudioQueueEmpty()) return;
+
+        if(audioQueue.ContainsKey(0)&& audioQueue[0].Count>0){
+            if(!playingRadio){
+                playingRadio = true;
+                PlayTrack(audioQueue[0][0]);
+                StartCoroutine(turnOffRadioIn(audioQueue[0][0].length));
+            }
+            audioQueue[0].RemoveAt(0);
+        }
+        else{
+            List<int> queueKeys = audioQueue.Keys.OrderBy(i=>i).ToList();
+            foreach(int key in queueKeys){
+                audioQueue[key-1] = audioQueue[key];
+                audioQueue.Remove(key);
+            }
+        }
+    }
+
+    IEnumerator turnOffRadioIn(float seconds){
+        yield return new WaitForSeconds(seconds);
+        playingRadio = false;
+    }
+
+    private bool AudioQueueEmpty(){
+        return audioQueue.Keys.All(key=>(!audioQueue.ContainsKey(key))||audioQueue[key].Count==0);
     }
 
     public void FlipAudio(){
@@ -69,3 +119,11 @@ public class GameAudio : MonoBehaviour
 
 
 }
+
+ [Serializable]
+ public struct OptionClip {
+    public string cardName;
+
+    public int option;
+    public AudioClip clip;
+ }

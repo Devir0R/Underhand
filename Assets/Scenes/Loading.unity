@@ -530,7 +530,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.795
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -645,6 +645,79 @@ MonoBehaviour:
   Dances: {fileID: 8300000, guid: 86ebb6f492d68b4479153eed3fa48ff4, type: 3}
   Asterope: {fileID: 8300000, guid: 9afac032811b3ca4abab209194792f69, type: 3}
   SlideSound: {fileID: 8300000, guid: c88c90d7c935c1d48b52056ccadbb41a, type: 3}
+  optionsAudio:
+  - cardName: Auction on Relic
+    option: 2
+    clip: {fileID: 8300000, guid: 00d2ad8d54a020b42a33a8813a609259, type: 3}
+  - cardName: Booming Business
+    option: 2
+    clip: {fileID: 8300000, guid: 4142a4151d0b90642983209d6e7426ff, type: 3}
+  - cardName: A Charitable Donation
+    option: 1
+    clip: {fileID: 8300000, guid: e2de10946b9227c46966b077347e56a3, type: 3}
+  - cardName: A Charitable Donation
+    option: 2
+    clip: {fileID: 8300000, guid: e2de10946b9227c46966b077347e56a3, type: 3}
+  - cardName: Rain
+    option: 1
+    clip: {fileID: 8300000, guid: 7a7203ec2862ee844a25672d636d0284, type: 3}
+  - cardName: Day Job
+    option: 2
+    clip: {fileID: 8300000, guid: d892b8b5149f005478cdc1f6f8583b94, type: 3}
+  - cardName: Desperate Measures
+    option: 1
+    clip: {fileID: 8300000, guid: da66a607005028b4f9e06ca9ffa4d7aa, type: 3}
+  - cardName: A Long Summer
+    option: 1
+    clip: {fileID: 8300000, guid: d71dce7b9a0bc0c408cc47812fe99ce0, type: 3}
+  - cardName: Failing Business
+    option: 3
+    clip: {fileID: 8300000, guid: 5898f20255d7b344e90e2af7f072f9aa, type: 3}
+  - cardName: A Long Summer
+    option: 2
+    clip: {fileID: 8300000, guid: b835f0a95fc31b2498e34c6b644d9c05, type: 3}
+  - cardName: Aeromancy
+    option: 2
+    clip: {fileID: 8300000, guid: b835f0a95fc31b2498e34c6b644d9c05, type: 3}
+  - cardName: Storm
+    option: 1
+    clip: {fileID: 8300000, guid: 4636776507b15cb4687b8f4eaf060c59, type: 3}
+  - cardName: Milk Delivery
+    option: 2
+    clip: {fileID: 8300000, guid: 8154ec0413ed1484a8d081a21140c8c8, type: 3}
+  - cardName: Milk Delivery
+    option: 3
+    clip: {fileID: 8300000, guid: 8154ec0413ed1484a8d081a21140c8c8, type: 3}
+  - cardName: Necromancy
+    option: 2
+    clip: {fileID: 8300000, guid: 5fb6700a2a4c02a49b583d5d22e5d598, type: 3}
+  - cardName: Police Raid
+    option: 2
+    clip: {fileID: 8300000, guid: ff1c68f1d5f3d944ebaa2c0568d9e8de, type: 3}
+  - cardName: Aeromancy
+    option: 1
+    clip: {fileID: 8300000, guid: 984c4e99bf283ae4ebf6afba433dc500, type: 3}
+  - cardName: Storm
+    option: 2
+    clip: {fileID: 8300000, guid: 984c4e99bf283ae4ebf6afba433dc500, type: 3}
+  - cardName: The Necronomicon
+    option: 1
+    clip: {fileID: 8300000, guid: daa7cce4dc052ca448a7d666112a6f3f, type: 3}
+  - cardName: Recruiting Opportunity
+    option: 2
+    clip: {fileID: 8300000, guid: 45257e4d9df9061458e4a6f761ac7c68, type: 3}
+  - cardName: Start a Tea Shop
+    option: 1
+    clip: {fileID: 8300000, guid: a23405f8ce4806743b67ad422f5db2ec, type: 3}
+  - cardName: Failing Business
+    option: 2
+    clip: {fileID: 8300000, guid: a23405f8ce4806743b67ad422f5db2ec, type: 3}
+  - cardName: Wandering Children
+    option: 1
+    clip: {fileID: 8300000, guid: d73cfcbc745b6be4d9c9ed66fb2a7069, type: 3}
+  - cardName: Wandering Children
+    option: 2
+    clip: {fileID: 8300000, guid: 230deeed440e7464cbccb7ba23db39f7, type: 3}
 --- !u!1 &2114480540
 GameObject:
   m_ObjectHideFlags: 0
