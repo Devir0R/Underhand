@@ -44,6 +44,7 @@ public class GameAudio : MonoBehaviour
     }
     
     public void AddToQueue(string cardName, int optionNum){
+        if(UnityEngine.Random.value>=.5) return;
         int waitNCards = Mathf.CeilToInt(UnityEngine.Random.Range(0,5));
         if(!audioQueue.ContainsKey(waitNCards)){
             audioQueue[waitNCards] = new List<AudioClip>();
