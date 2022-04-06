@@ -109,7 +109,7 @@
 			"islose": 					0
 		},
 		"isTutorial": 0,
-		"isinitial": 					1,
+		"isinitial":					1,
 		"isrecurring": 					1,
 		"animationframes": 				1,
 		"weight": 						10,
@@ -341,7 +341,7 @@
 			"islose":					0
 		},
 		"isTutorial": 0,
-		"isinitial": 					1,
+		"isinitial":					1,
 		"isrecurring": 					1,
 		"animationframes": 				1,
 		"weight":						10,
@@ -457,7 +457,7 @@
 			"islose": 					0
 		},
 		"isTutorial": 0,
-		"isinitial": 					1,
+		"isinitial":					1,
 		"isrecurring": 					1,
 		"animationframes": 				1,
 		"weight":						13,
@@ -689,7 +689,7 @@
 			"islose": 					0
 		},
 		"isTutorial": 0,
-		"isinitial": 					1,
+		"isinitial":					1,
 		"isrecurring": 					1,
 		"animationframes": 				1,
 		"weight":						13,
@@ -805,7 +805,7 @@
 			"islose": 					0
 		},
 		"isTutorial": 0,
-		"isinitial": 					1,
+		"isinitial":					1,
 		"isrecurring": 					1,
 		"animationframes": 				1,
 		"weight":						10,
@@ -921,7 +921,7 @@
 			"islose": 					0
 		},
 		"isTutorial": 0,
-		"isinitial": 					1,
+		"isinitial":					1,
 		"isrecurring": 					1,
 		"animationframes": 				1,
 		"weight":						12,
@@ -1037,7 +1037,7 @@
 			"islose": 					0
 		},
 		"isTutorial": 0,
-		"isinitial": 					1,
+		"isinitial":					1,
 		"isrecurring": 					1,
 		"animationframes": 				1,
 		"weight":						10,
@@ -1153,7 +1153,7 @@
 			"islose": 					0
 		},
 		"isTutorial": 0,
-		"isinitial": 					1,
+		"isinitial":					1,
 		"isrecurring": 					1,
 		"animationframes": 				1,
 		"weight":						12,
@@ -1501,7 +1501,7 @@
 			"islose": 					0
 		},
 		"isTutorial": 0,
-		"isinitial": 					1,
+		"isinitial":					1,
 		"isrecurring": 					1,
 		"animationframes": 				1,
 		"weight":						10,
@@ -1617,7 +1617,7 @@
 			"islose": 					0
 		},
 		"isTutorial": 0,
-		"isinitial": 					1,
+		"isinitial":					1,
 		"isrecurring": 					0,
 		"animationframes": 				1,
 		"weight":						14,

@@ -30,7 +30,18 @@ public static class Loader
         foreach(Resource resourceType in ResourceInfo.AllResources){
             resourcesSpritesHandler[resourceType] = Addressables.LoadAssetAsync<IList<Sprite>>(ResourceInfo.Info[resourceType].imagesLabel);
             resourcesSpritesHandler[resourceType].Completed += handleToCheck=>{
-                if(handleToCheck.Status == AsyncOperationStatus.Succeeded)  resourcesSpritesDictionary[resourceType] =  handleToCheck.Result.ToList();
+                if(handleToCheck.Status == AsyncOperationStatus.Succeeded){
+                    resourcesSpritesDictionary[resourceType] =  handleToCheck.Result.ToList();
+                    resourcesSpritesDictionary[resourceType].Sort((sp1,sp2)=>{
+                        int index1 = sp1.name.IndexOf('_')+1;
+                        int index2 = sp2.name.IndexOf('_')+1;
+                        string numberStr1 = sp1.name.Substring(index1);
+                        string numberStr2 = sp2.name.Substring(index1);
+                        if(int.TryParse(numberStr1,out int num1) &&int.TryParse(numberStr2,out int num2))
+                            return num1.CompareTo(num2);
+                        return 0;
+                    });
+                }  
             };
         }
     }
