@@ -22,7 +22,7 @@ To open the project in Unity -
 <h2>What is in the Game?</h2>
 
 everything! except...
-1)  the game menu is not done yet, it contains only The Game and mute in option without.
+1)  the game menu is not done yet, it contains only The Game and mute in options.
 2)  all god's blessing cards are all in the deck and not like the app, where you can choose up to 3 god's blessing,this will be implemented in the future.
 
 <h2>Vision(Future Expectations</h2>
