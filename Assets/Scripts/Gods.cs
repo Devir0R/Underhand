@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
@@ -24,6 +23,16 @@ public class Gods
         }
     }
 
+    public static void GodDefeated(string godName){
+        Gods.allGods.gods.Find(god=>god.name==godName).defeated=1;
+    }
+    public static void GodUndefeated(string godName){
+        Gods.allGods.gods.Find(god=>god.name==godName).defeated=0;
+    }
+
+    public static void AllGodsUndefeated(){
+        Gods.allGods.gods.ForEach(god=>god.defeated=0);
+    }
     public List<GodDO> getUnlockedGods(){
         return allGods.gods
             .Where(god=>

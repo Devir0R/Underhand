@@ -6,6 +6,7 @@ public class SettingButton : MenuButton
     public Sprite onImage;
     public Sprite offImage;
     public Image myImage;
+    public string action;
 
     // Start is called before the first frame update
     new void Start()

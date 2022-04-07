@@ -6,7 +6,6 @@ public class MenuButton : MonoBehaviour
 {
     public string sceneName;
 
-    public string action;
 
     public Vector3 RelativePosition;
 
@@ -16,11 +15,11 @@ public class MenuButton : MonoBehaviour
     protected void Start()
     {
         GetComponent<Image>().alphaHitTestMinimumThreshold = 0.1f;
-        UpdateOnce();
+        Update();
 
     }
 
-    void UpdateOnce(){
+    void Update(){
         RectTransform menuRect = GameObject.FindGameObjectWithTag("GameMenu").GetComponent<RectTransform>();
         float newYPosition = (menuRect.rect.height*RelativePosition.y);
         float newXPosition = (menuRect.rect.width*RelativePosition.x);
@@ -45,6 +44,12 @@ public class MenuButton : MonoBehaviour
             newYScale = (menuRect.rect.height/mySize.height)*yScale;
             newXScale = (menuRect.rect.width/mySize.width)*xScale;
         }
+        else if(type==ButtonType.RectSetting){
+            float yScale = 0.14f;
+            float xScale  = 0.5f;
+            newYScale = (menuRect.rect.height/mySize.height)*yScale;
+            newXScale = (menuRect.rect.width/mySize.width)*xScale;
+        }
         else{//really should never happen
             newYScale = (menuRect.rect.height/mySize.height)*0.1f;
             newXScale = (menuRect.rect.width/mySize.width)*0.1f;
@@ -66,5 +71,5 @@ public class MenuButton : MonoBehaviour
 }
 
 public enum ButtonType{
-    Round,Arrow,Setting
+    Round,Arrow,Setting,RectSetting
 }

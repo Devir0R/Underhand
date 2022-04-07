@@ -66,8 +66,7 @@ public class Continue : MonoBehaviour
         mouseClicked.Disable();
         disabled = true;
         if(GameState.state==State.Won){
-            Gods.allGods.gods.Find(god=>god.name==GameState.GodWon).defeated=1;
-            //string godsJson = JsonConvert.SerializeObject(Gods.allGods,Formatting.Indented);
+            Gods.GodDefeated(GameState.GodWon);
             Gods.SaveToFile();
             
         }
