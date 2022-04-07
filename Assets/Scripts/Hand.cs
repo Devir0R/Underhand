@@ -15,7 +15,7 @@ public class Hand : MonoBehaviour
     private static Hand _instance;
     public static Hand Instance{ get { return _instance; } }
     private static readonly Resource[] startingHand = 
-        new Resource[]{ Resource.Food,Resource.Food,Resource.Money,Resource.Money,
+        new Resource[]{ Resource.Relic,Resource.Relic,
                             Resource.Cultist,Resource.Cultist,Resource.Prisoner,Resource.Prisoner};
 
     public Vector3 handMiddle;

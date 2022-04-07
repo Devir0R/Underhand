@@ -256,30 +256,31 @@ public class Option : MonoBehaviour
 
 
     bool RequirementsAreMet(RequirementsDO requirements,List<Resource> resourcesOnTable,bool prisonerEqualCultist){
-        List<Resource> allResourcesOnTable = new List<Resource>();
-        allResourcesOnTable.AddRange(resourcesOnTable);
+        return SpareResources(requirements,resourcesOnTable,prisonerEqualCultist)==0;
+    }
 
-        Dictionary<Resource,System.Func<int>> HowManyFrom = ResourceInfo.HowManyFromFunctions(requirements);
-        int needWildCards = 0;
-        if(prisonerEqualCultist){
-            allResourcesOnTable = allResourcesOnTable.Select(resource=>resource==Resource.Prisoner ? Resource.Cultist: resource).ToList();
-        }
+    int SpareResources(RequirementsDO requirements,List<Resource> resourcesToCover,bool prisonerEqualCultist){
+        List<Resource> allResourcesOnTable = new List<Resource>();
+        allResourcesOnTable.AddRange(resourcesToCover);
+
+        Dictionary<Resource,System.Func<int>> HowManyFrom = ResourceInfo.HowManyFromFunctions(requirements,prisonerEqualCultist);
+        allResourcesOnTable.Sort();
         foreach(Resource resource in HowManyFrom.Keys){
             int howManyDemanded = specialNumbersAmounts(HowManyFrom[resource](),resource);
             for(int i = 0; i<howManyDemanded;i++){
-                if(!allResourcesOnTable.Remove(resource))
-                {
-                    needWildCards+=1;
-                    if(needWildCards>allResourcesOnTable.Where(resource=>resource.isWildCard()).Count()){
-                        return false;
+                bool canCoverThisResource = false;
+                for(int j=0;j<allResourcesOnTable.Count;j++ ){
+                    Resource resourceOnTable = allResourcesOnTable[j];
+                    if(resource.IsCoveredBy(resourceOnTable)){
+                        allResourcesOnTable.RemoveAt(j);
+                        canCoverThisResource = true;
+                        break;
                     }
                 }
-            }
-            if((!resource.isWildCard()) && allResourcesOnTable.Contains(resource)){
-                return false;
+                if(!canCoverThisResource)   return -1;
             }
         }
-        return needWildCards==allResourcesOnTable.Where(resource=>resource.isWildCard()).Count();
+        return allResourcesOnTable.Count;
     }
 
     
@@ -287,25 +288,8 @@ public class Option : MonoBehaviour
     bool RequirementsCanBeMet(RequirementsDO requirements,List<Resource> resourcesOnTable,bool prisonerEqualCultist){
         List<Resource> allResources = new List<Resource>();
         allResources.AddRange(resourcesOnTable);
-        Dictionary<Resource,System.Func<int>> HowManyFrom = ResourceInfo.HowManyFromFunctions(requirements);
-        HowManyFrom.Remove(Resource.Relic);
         allResources.AddRange(Hand.Instance.ResourcesInHand());
-        int demandedRelics = requirements.relic;
-        if(prisonerEqualCultist){
-            allResources = allResources.Select(resource=>resource==Resource.Prisoner ? Resource.Cultist: resource).ToList();
-        }
-        foreach(Resource resource in HowManyFrom.Keys){
-            int howManyDemanded = specialNumbersAmounts(HowManyFrom[resource](),resource);
-            for(int i = 0; i<howManyDemanded;i++){
-                if(!allResources.Remove(resource)){
-                    demandedRelics+=1;
-                    if(demandedRelics>allResources.Where(resource=>resource==Resource.Relic).Count()){
-                        return false;
-                    }
-                }
-            }
-        }
-        return demandedRelics<=allResources.Where(resource=>resource==Resource.Relic).Count();
+        return SpareResources(requirements,allResources,prisonerEqualCultist)>=0;
     }
 
     public void UpdateDO(OptionDO option,int optionNum){

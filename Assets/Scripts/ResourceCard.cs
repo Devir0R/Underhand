@@ -287,16 +287,24 @@ class ResourceInfo{
         };
 
 
-    public static Dictionary<Resource,System.Func<int>> HowManyFromFunctions(RequirementsDO requirements){
-        return new Dictionary<Resource, System.Func<int>>(){
-            {Resource.Food,()=>requirements.food},
-            {Resource.Money,()=>requirements.money},
-            {Resource.Cultist,()=>requirements.cultist},
-            {Resource.Prisoner,()=>requirements.prisoner},
-            {Resource.Suspision,()=>requirements.suspicion},
-            {Resource.Relic,()=>requirements.relic},
-            
-        };
+    public static Dictionary<Resource,System.Func<int>> HowManyFromFunctions(RequirementsDO requirements,bool prisonerEqualCultist = false){
+        if(!prisonerEqualCultist)
+            return new Dictionary<Resource, System.Func<int>>(){
+                {Resource.Food,()=>requirements.food},
+                {Resource.Money,()=>requirements.money},
+                {Resource.Cultist,()=>requirements.cultist},
+                {Resource.Prisoner,()=>requirements.prisoner},
+                {Resource.Suspision,()=>requirements.suspicion},
+                {Resource.Relic,()=>requirements.relic},
+            };
+        else 
+            return new Dictionary<Resource, System.Func<int>>(){
+                {Resource.Food,()=>requirements.food},
+                {Resource.Money,()=>requirements.money},
+                {Resource.PrisonerOrCultist,()=>requirements.prisoner+requirements.cultist},
+                {Resource.Suspision,()=>requirements.suspicion},
+                {Resource.Relic,()=>requirements.relic},
+            };
     }
 
 
@@ -314,7 +322,7 @@ class ResourceInfo{
 }
 
 public enum Resource{
-    None,Food,Money,Suspision,Cultist,Prisoner,Relic,PrisonerOrCultist,
-    Corruption,Ally,Holy,Foe,Reputation
+    None,Food,Money,Suspision,Cultist,Prisoner,PrisonerOrCultist,
+    Corruption,Ally,Foe,Reputation,Holy,Relic
 
 }
