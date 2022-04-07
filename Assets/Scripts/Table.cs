@@ -66,7 +66,7 @@ public class Table : MonoBehaviour
             }
             return resources;
         };
-        foreach(Resource resource in ResourceInfo.AllResources){
+        foreach(Resource resource in ResourceInfo.GetAllResources()){
             if(ResourceInfo.Info[resource].resourceOnTable!=null){
                 resourcesOnTable.AddRange(nOfRsource(resource,ResourceInfo.Info[resource].resourceOnTable.howMany));
             }            
@@ -113,7 +113,7 @@ public class Table : MonoBehaviour
 
     public void SpawnRewards(RewardsDO rewards){
         Dictionary<Resource,System.Func<int>> howManyFromFunctions = HowManyFromFunctions(rewards);
-        foreach(Resource resource in ResourceInfo.AllResources){
+        foreach(Resource resource in ResourceInfo.GetAllResources()){
             int howManyToAdd = howManyFromFunctions[resource]();
             if(howManyToAdd>0){
                 ResourceOnTablePrefab.resourceType = resource;
@@ -140,7 +140,7 @@ public class Table : MonoBehaviour
     public void SacrificeAll(){
 
         bool anyOnTable = false;
-        foreach(Resource resource in ResourceInfo.AllResources){
+        foreach(Resource resource in ResourceInfo.GetAllResources()){
             ResourceCard currentCard = ResourceInfo.Info[resource].resourceOnTable;
             if(currentCard!=null){
                 anyOnTable = true;
@@ -150,7 +150,7 @@ public class Table : MonoBehaviour
         if(anyOnTable){
             tableAnimation.StartSacrifice();
             StartTableAnimation(()=>{
-                foreach(Resource resource in ResourceInfo.AllResources){
+                foreach(Resource resource in ResourceInfo.GetAllResources()){
                     ResourceInfo.Info[resource].resourceOnTable?.SacrificeCard();
                 }
             });

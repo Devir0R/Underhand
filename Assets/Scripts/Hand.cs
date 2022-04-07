@@ -166,10 +166,29 @@ public class Hand : MonoBehaviour
 
 }
 
+static class ResourceMethods {
+    public static bool isWildCard(this Resource res){
+        return res==Resource.Relic || res==Resource.Holy;
+    }
 
+    public static bool IsCoveredBy(this Resource toCover, Resource covering){
+        if(covering.isWildCard())    return true;
+        return toCover.CanBeCoverBy().Contains(covering);
+    }
 
-public enum Resource{
-    None,Food,Money,Suspision,Cultist,Prisoner,Relic,PrisonerOrCultist
+    public static bool IsMultiple(this Resource resource)=>resource==Resource.PrisonerOrCultist;
+
+    public static ICollection<Resource> CanBeCoverBy(this Resource resource){
+        List<Resource> canCover = new List<Resource>();
+        if(resource==Resource.PrisonerOrCultist){
+            canCover.Add(Resource.Cultist);
+            canCover.Add(Resource.Prisoner);
+        }
+        else{
+            canCover.Add(resource);
+        }
+        return canCover;
+    }
 }
 
 

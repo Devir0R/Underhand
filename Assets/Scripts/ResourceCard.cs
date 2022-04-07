@@ -230,13 +230,25 @@ class ResourceInfo{
 
     }
 
+
     public ResourceCard resourceOnTable;
     public Vector3 resourcePositionOnTable;
     public Resource type;
     public string imagesLabel;
 
     public Color circleColor;
-    public static readonly Resource[] AllResources = new Resource[]{Resource.Food,Resource.Money,Resource.Cultist,Resource.Prisoner,Resource.Suspision,Resource.Relic};
+
+    public static Resource[] GetAllResources(){
+        switch(GameState.GameMode){
+            case Mode.FightCult:
+                return AllResources_Mode2;
+            case Mode.Cult:
+            default:
+                return AllResources_Mode1;
+        }
+    }
+    public static readonly Resource[] AllResources_Mode1 = new Resource[]{Resource.Food,Resource.Money,Resource.Cultist,Resource.Prisoner,Resource.Suspision,Resource.Relic};
+    public static readonly Resource[] AllResources_Mode2 = new Resource[]{Resource.Corruption,Resource.Money,Resource.Foe,Resource.Holy,Resource.Ally,Resource.Reputation};
     public static readonly Dictionary<Resource,ResourceInfo> Info =  
         new Dictionary<Resource, ResourceInfo>() {
             {
@@ -257,6 +269,26 @@ class ResourceInfo{
             {
                 Resource.Suspision, new ResourceInfo(Resource.Suspision,"SuspisionImages",new Color(181f/255,81f/255,51f/255))
             },
+            {
+                Resource.Ally, new ResourceInfo(Resource.Money,"MoneyImages",new Color(126f/255,141f/255,66f/255))
+            },
+            {
+                Resource.Foe, new ResourceInfo(Resource.Cultist,"CultistImages", new Color(168f/255,122f/255,125f/255))
+            },
+            {
+                Resource.Corruption, new ResourceInfo(Resource.Prisoner,"PrisonerImages",new Color(156f/255,172f/255,157f/255))
+            },
+            {
+                Resource.Holy, new ResourceInfo(Resource.Relic,"RelicImages",new Color(255f/255,255f/255,255f/255))
+            },
+            {
+                Resource.Reputation, new ResourceInfo(Resource.Suspision,"SuspisionImages",new Color(181f/255,81f/255,51f/255))
+            },
         };
 }
 
+public enum Resource{
+    None,Food,Money,Suspision,Cultist,Prisoner,Relic,PrisonerOrCultist,
+    Corruption,Ally,Holy,Foe,Reputation
+
+}

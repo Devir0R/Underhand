@@ -8,8 +8,14 @@ public static class GameState
 
     public static string GodWon = null;
 
+    public static Mode GameMode = Mode.Cult;
+
 }
 
 public enum State{
     NotStarted,Ongoing,Won,Lost
+}
+
+public enum Mode{
+    Cult,FightCult
 }

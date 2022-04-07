@@ -235,7 +235,7 @@ public class Option : MonoBehaviour
 
     bool LockedUnlessZeroOfResource(){
         Dictionary<Resource,System.Func<int>> howManyFromFunctions = HowManyFromFunctions(option.requirements);
-        foreach(Resource resource in ResourceInfo.AllResources){
+        foreach(Resource resource in ResourceInfo.GetAllResources()){
             if(howManyFromFunctions[resource]()==Hand.ONLY_IF_RESOURCE_IS_ZERO){
                 return Table.Instance.ResourcesOnTable().Where(resourseOnTable=>resourseOnTable==resource).Count() +
                         Hand.Instance.HowManyOfResourceInHand(resource)>0;

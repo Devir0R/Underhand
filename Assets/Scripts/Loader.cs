@@ -27,7 +27,7 @@ public static class Loader
 
         resourcesSpritesHandler = new Dictionary<Resource, AsyncOperationHandle<IList<Sprite>>>();
         resourcesSpritesDictionary = new Dictionary<Resource, List<Sprite>>();
-        foreach(Resource resourceType in ResourceInfo.AllResources){
+        foreach(Resource resourceType in ResourceInfo.GetAllResources()){
             resourcesSpritesHandler[resourceType] = Addressables.LoadAssetAsync<IList<Sprite>>(ResourceInfo.Info[resourceType].imagesLabel);
             resourcesSpritesHandler[resourceType].Completed += handleToCheck=>{
                 if(handleToCheck.Status == AsyncOperationStatus.Succeeded){
@@ -49,13 +49,13 @@ public static class Loader
 
     public static float PercentComplete(){
         float resourcesLoadPercent = 0f;
-        foreach(Resource resourceType in ResourceInfo.AllResources){
+        foreach(Resource resourceType in ResourceInfo.GetAllResources()){
             resourcesLoadPercent+=resourcesSpritesHandler[resourceType].PercentComplete;
         }
         //resourcesLoadPercent has 6 images with total 120 frames.
         //resourceSpriteHandler has 100 images
         //cardsJsonsHandler has 100 jsons so...
-        resourcesLoadPercent = (resourcesLoadPercent/ResourceInfo.AllResources.Count())*0.16f;
+        resourcesLoadPercent = (resourcesLoadPercent/ResourceInfo.GetAllResources().Count())*0.16f;
         float cardsSpritesPercent = cardsSpriteHandler.PercentComplete*.42f;
         float cardsJsonsPercent = cardsJsonsHandler.PercentComplete*.42f;
         
