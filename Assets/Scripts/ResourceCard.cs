@@ -288,35 +288,66 @@ class ResourceInfo{
 
 
     public static Dictionary<Resource,System.Func<int>> HowManyFromFunctions(RequirementsDO requirements,bool prisonerEqualCultist = false){
-        if(!prisonerEqualCultist)
+        if(GameState.GameMode==Mode.Cult){
+            if(!prisonerEqualCultist)
+                    return new Dictionary<Resource, System.Func<int>>(){
+                        {Resource.Food,()=>requirements.food},
+                        {Resource.Money,()=>requirements.money},
+                        {Resource.Cultist,()=>requirements.cultist},
+                        {Resource.Prisoner,()=>requirements.prisoner},
+                        {Resource.Suspision,()=>requirements.suspicion},
+                        {Resource.Relic,()=>requirements.relic},
+                    };
+                else 
+                    return new Dictionary<Resource, System.Func<int>>(){
+                        {Resource.Food,()=>requirements.food},
+                        {Resource.Money,()=>requirements.money},
+                        {Resource.PrisonerOrCultist,()=>requirements.prisoner+requirements.cultist},
+                        {Resource.Suspision,()=>requirements.suspicion},
+                        {Resource.Relic,()=>requirements.relic},
+                    };
+        }
+        else if(GameState.GameMode==Mode.FightCult){
             return new Dictionary<Resource, System.Func<int>>(){
-                {Resource.Food,()=>requirements.food},
+                {Resource.Foe,()=>requirements.food},
                 {Resource.Money,()=>requirements.money},
-                {Resource.Cultist,()=>requirements.cultist},
-                {Resource.Prisoner,()=>requirements.prisoner},
-                {Resource.Suspision,()=>requirements.suspicion},
-                {Resource.Relic,()=>requirements.relic},
+                {Resource.Ally,()=>requirements.cultist},
+                {Resource.Corruption,()=>requirements.prisoner},
+                {Resource.Holy,()=>requirements.suspicion},
+                {Resource.Reputation,()=>requirements.relic},
             };
-        else 
-            return new Dictionary<Resource, System.Func<int>>(){
-                {Resource.Food,()=>requirements.food},
-                {Resource.Money,()=>requirements.money},
-                {Resource.PrisonerOrCultist,()=>requirements.prisoner+requirements.cultist},
-                {Resource.Suspision,()=>requirements.suspicion},
-                {Resource.Relic,()=>requirements.relic},
-            };
+        }
+        else{
+            throw new System.SystemException("Game mode is invalid");
+        }
+ 
     }
 
 
     public static Dictionary<Resource,System.Func<int>> HowManyFromFunctions(RewardsDO rewards){
-        return new Dictionary<Resource, System.Func<int>>(){
-            {Resource.Food,()=>rewards.food},
-            {Resource.Money,()=>rewards.money},
-            {Resource.Cultist,()=>rewards.cultist},
-            {Resource.Prisoner,()=>rewards.prisoner},
-            {Resource.Suspision,()=>rewards.suspicion},
-            {Resource.Relic,()=>rewards.relic},
-        };
+        if(GameState.GameMode==Mode.Cult){
+            return new Dictionary<Resource, System.Func<int>>(){
+                {Resource.Food,()=>rewards.food},
+                {Resource.Money,()=>rewards.money},
+                {Resource.Cultist,()=>rewards.cultist},
+                {Resource.Prisoner,()=>rewards.prisoner},
+                {Resource.Suspision,()=>rewards.suspicion},
+                {Resource.Relic,()=>rewards.relic},
+            };
+        }
+        else if(GameState.GameMode==Mode.FightCult){
+            return new Dictionary<Resource, System.Func<int>>(){
+                {Resource.Foe,()=>rewards.food},
+                {Resource.Money,()=>rewards.money},
+                {Resource.Ally,()=>rewards.cultist},
+                {Resource.Corruption,()=>rewards.prisoner},
+                {Resource.Holy,()=>rewards.suspicion},
+                {Resource.Reputation,()=>rewards.relic},
+            };
+        }
+        else{
+            throw new System.SystemException("Game mode is invalid");
+        }
     } 
 
 }

@@ -59,6 +59,31 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - CultistImages
+  - m_GUID: ba164ef6395488740b204916602266ed
+    m_Address: Assets/Sprites/resources_moved/Ally.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - AllyImages
+  - m_GUID: 9ab92eda4c02fe84796cf9de3b9356ca
+    m_Address: Assets/Sprites/resources_moved/Corruption.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - CorruptionImages
+  - m_GUID: fc6f731331d450346b8edfe4ba5c180d
+    m_Address: Assets/Sprites/resources_moved/Foe.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - FoeImages
+  - m_GUID: a21c4f4d6b8168a48a7282229c0a36fa
+    m_Address: Assets/Sprites/resources_moved/Holy.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - HolyImages
+  - m_GUID: 009e895368372f645b720adce01edf4b
+    m_Address: Assets/Sprites/resources_moved/Reputation.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ReputationImages
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2075ec3d5f044ff4ea70106940026b21, type: 2}
   m_SchemaSet:
