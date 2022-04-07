@@ -234,7 +234,7 @@ public class Option : MonoBehaviour
     }
 
     bool LockedUnlessZeroOfResource(){
-        Dictionary<Resource,System.Func<int>> howManyFromFunctions = HowManyFromFunctions(option.requirements);
+        Dictionary<Resource,System.Func<int>> howManyFromFunctions = ResourceInfo.HowManyFromFunctions(option.requirements);
         foreach(Resource resource in ResourceInfo.GetAllResources()){
             if(howManyFromFunctions[resource]()==Hand.ONLY_IF_RESOURCE_IS_ZERO){
                 return Table.Instance.ResourcesOnTable().Where(resourseOnTable=>resourseOnTable==resource).Count() +
@@ -254,54 +254,32 @@ public class Option : MonoBehaviour
         Table.Instance.ResourcedOnTableChanged -= UpdateSprite;
     }
 
-    Dictionary<Resource,System.Func<int>> HowManyFromFunctions(RequirementsDO requirements){
-        return new Dictionary<Resource, System.Func<int>>(){
-            {Resource.Food,()=>requirements.food},
-            {Resource.Money,()=>requirements.money},
-            {Resource.Cultist,()=>requirements.cultist},
-            {Resource.Prisoner,()=>requirements.prisoner},
-            {Resource.Suspision,()=>requirements.suspicion},
-            {Resource.Relic,()=>requirements.relic},
-            
-        };
-    } 
-
-    Dictionary<Resource,System.Func<int>> HowManyFromFunctions(RewardsDO rewards){
-        return new Dictionary<Resource, System.Func<int>>(){
-            {Resource.Food,()=>rewards.food},
-            {Resource.Money,()=>rewards.money},
-            {Resource.Cultist,()=>rewards.cultist},
-            {Resource.Prisoner,()=>rewards.prisoner},
-            {Resource.Suspision,()=>rewards.suspicion},
-            {Resource.Relic,()=>rewards.relic},
-        };
-    } 
 
     bool RequirementsAreMet(RequirementsDO requirements,List<Resource> resourcesOnTable,bool prisonerEqualCultist){
         List<Resource> allResourcesOnTable = new List<Resource>();
         allResourcesOnTable.AddRange(resourcesOnTable);
-        Dictionary<Resource,System.Func<int>> HowManyFrom = HowManyFromFunctions(requirements);
-        int demandedRelics = requirements.relic;
+
+        Dictionary<Resource,System.Func<int>> HowManyFrom = ResourceInfo.HowManyFromFunctions(requirements);
+        int needWildCards = 0;
         if(prisonerEqualCultist){
             allResourcesOnTable = allResourcesOnTable.Select(resource=>resource==Resource.Prisoner ? Resource.Cultist: resource).ToList();
         }
-        HowManyFrom.Remove(Resource.Relic);
         foreach(Resource resource in HowManyFrom.Keys){
             int howManyDemanded = specialNumbersAmounts(HowManyFrom[resource](),resource);
             for(int i = 0; i<howManyDemanded;i++){
                 if(!allResourcesOnTable.Remove(resource))
                 {
-                    demandedRelics+=1;
-                    if(demandedRelics>allResourcesOnTable.Where(resource=>resource==Resource.Relic).Count()){
+                    needWildCards+=1;
+                    if(needWildCards>allResourcesOnTable.Where(resource=>resource.isWildCard()).Count()){
                         return false;
                     }
                 }
             }
-            if((resource!=Resource.Relic) && allResourcesOnTable.Contains(resource)){
+            if((!resource.isWildCard()) && allResourcesOnTable.Contains(resource)){
                 return false;
             }
         }
-        return demandedRelics==allResourcesOnTable.Where(resource=>resource==Resource.Relic).Count();
+        return needWildCards==allResourcesOnTable.Where(resource=>resource.isWildCard()).Count();
     }
 
     
@@ -309,7 +287,7 @@ public class Option : MonoBehaviour
     bool RequirementsCanBeMet(RequirementsDO requirements,List<Resource> resourcesOnTable,bool prisonerEqualCultist){
         List<Resource> allResources = new List<Resource>();
         allResources.AddRange(resourcesOnTable);
-        Dictionary<Resource,System.Func<int>> HowManyFrom = HowManyFromFunctions(requirements);
+        Dictionary<Resource,System.Func<int>> HowManyFrom = ResourceInfo.HowManyFromFunctions(requirements);
         HowManyFrom.Remove(Resource.Relic);
         allResources.AddRange(Hand.Instance.ResourcesInHand());
         int demandedRelics = requirements.relic;
@@ -353,7 +331,7 @@ public class Option : MonoBehaviour
         List<Resource> resourceList = new List<Resource>();
         bool prisonerEqualCultist = option.cultistequalsprisoner==1;
 
-        Dictionary<Resource,System.Func<int>> howManyFromFunctions = HowManyFromFunctions(option.requirements);
+        Dictionary<Resource,System.Func<int>> howManyFromFunctions = ResourceInfo.HowManyFromFunctions(option.requirements);
         foreach(Resource resource in howManyFromFunctions.Keys){
             int howManyToAdd = specialNumbersAmounts(howManyFromFunctions[resource](),resource);
             for(int i =0;i<howManyToAdd;i++){
@@ -386,7 +364,7 @@ public class Option : MonoBehaviour
 
     private List<Resource> GetOptionRewards(){
         List<Resource> resourceList = new List<Resource>();
-        Dictionary<Resource,System.Func<int>> howManyFromFunctions = HowManyFromFunctions(option.rewards);
+        Dictionary<Resource,System.Func<int>> howManyFromFunctions = ResourceInfo.HowManyFromFunctions(option.rewards);
 
         foreach(Resource resource in howManyFromFunctions.Keys){
             for(int i =0;i<howManyFromFunctions[resource]();i++){

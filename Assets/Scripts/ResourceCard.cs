@@ -285,6 +285,32 @@ class ResourceInfo{
                 Resource.Reputation, new ResourceInfo(Resource.Suspision,"SuspisionImages",new Color(181f/255,81f/255,51f/255))
             },
         };
+
+
+    public static Dictionary<Resource,System.Func<int>> HowManyFromFunctions(RequirementsDO requirements){
+        return new Dictionary<Resource, System.Func<int>>(){
+            {Resource.Food,()=>requirements.food},
+            {Resource.Money,()=>requirements.money},
+            {Resource.Cultist,()=>requirements.cultist},
+            {Resource.Prisoner,()=>requirements.prisoner},
+            {Resource.Suspision,()=>requirements.suspicion},
+            {Resource.Relic,()=>requirements.relic},
+            
+        };
+    }
+
+
+    public static Dictionary<Resource,System.Func<int>> HowManyFromFunctions(RewardsDO rewards){
+        return new Dictionary<Resource, System.Func<int>>(){
+            {Resource.Food,()=>rewards.food},
+            {Resource.Money,()=>rewards.money},
+            {Resource.Cultist,()=>rewards.cultist},
+            {Resource.Prisoner,()=>rewards.prisoner},
+            {Resource.Suspision,()=>rewards.suspicion},
+            {Resource.Relic,()=>rewards.relic},
+        };
+    } 
+
 }
 
 public enum Resource{

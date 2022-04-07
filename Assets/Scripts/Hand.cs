@@ -139,11 +139,6 @@ public class Hand : MonoBehaviour
         cardsNumber.text = hand.Count+"";
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void RemoveCardFromHand(ResourceCard card){
         hand.Remove(card);
