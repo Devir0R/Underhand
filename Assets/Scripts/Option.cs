@@ -398,25 +398,18 @@ public class Option : MonoBehaviour
             foreach(ResourceExchange resOfReq in requirementsObjects){
                 resOfReq.Ungrey();
             }
+
             int howManyMarked = 0;
             List<Resource> resourcesOnTable = Table.Instance.ResourcesOnTable();
+            resourcesOnTable.Sort();
             foreach(Resource resource in resourcesOnTable){
                 foreach(ResourceExchange resOfReq in requirementsObjects){
-                    if(!resOfReq.greyed 
-                            && (resource==resOfReq.myType || 
-                                (resOfReq.myType==Resource.PrisonerOrCultist && (resource==Resource.Cultist || resource==Resource.Prisoner))) ){
+                    if(!resOfReq.greyed && (resOfReq.myType.IsCoveredBy(resource)) ){
                         resOfReq.Grey();
                         howManyMarked+=1;
                         break;
                     }
                 }
-            }
-            List<ResourceExchange> ungreyedResources = requirementsObjects.Where(resExch=>!resExch.greyed).ToList();
-            int greyedRelics = requirementsObjects.Where(resExch=>resExch.greyed&&resExch.myType==Resource.Relic).Count();
-            int relicsOnTable = resourcesOnTable.Where(res=>res==Resource.Relic).Count();
-            int freeRelics = relicsOnTable - greyedRelics;
-            for(int j = 0;j<resourcesOnTable.Count-howManyMarked && j<ungreyedResources.Count&&j<freeRelics;j++){
-                ungreyedResources[j].Grey();
             }
             yield return new WaitForSeconds(0.1f);
         }

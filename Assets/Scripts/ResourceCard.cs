@@ -324,5 +324,4 @@ class ResourceInfo{
 public enum Resource{
     None,Food,Money,Suspision,Cultist,Prisoner,PrisonerOrCultist,
     Corruption,Ally,Foe,Reputation,Holy,Relic
-
 }
