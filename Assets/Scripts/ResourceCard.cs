@@ -247,6 +247,11 @@ class ResourceInfo{
                 return AllResources_Mode1;
         }
     }
+
+    public static Resource[] GetAllResources_AllModes(){
+        HashSet<Resource> set = new HashSet<Resource>();
+        return set.Union(AllResources_Mode2).Union(AllResources_Mode1).ToArray();
+    }
     public static readonly Resource[] AllResources_Mode1 = new Resource[]{Resource.Food,Resource.Money,Resource.Cultist,Resource.Prisoner,Resource.Suspision,Resource.Relic};
     public static readonly Resource[] AllResources_Mode2 = new Resource[]{Resource.Corruption,Resource.Money,Resource.Foe,Resource.Holy,Resource.Ally,Resource.Reputation};
     public static readonly Dictionary<Resource,ResourceInfo> Info =  
@@ -270,19 +275,19 @@ class ResourceInfo{
                 Resource.Suspision, new ResourceInfo(Resource.Suspision,"SuspisionImages",new Color(181f/255,81f/255,51f/255))
             },
             {
-                Resource.Ally, new ResourceInfo(Resource.Money,"MoneyImages",new Color(126f/255,141f/255,66f/255))
+                Resource.Ally, new ResourceInfo(Resource.Ally,"AllyImages",new Color(126f/255,141f/255,66f/255))
             },
             {
-                Resource.Foe, new ResourceInfo(Resource.Cultist,"CultistImages", new Color(168f/255,122f/255,125f/255))
+                Resource.Foe, new ResourceInfo(Resource.Foe,"FoeImages", new Color(168f/255,122f/255,125f/255))
             },
             {
-                Resource.Corruption, new ResourceInfo(Resource.Prisoner,"PrisonerImages",new Color(156f/255,172f/255,157f/255))
+                Resource.Corruption, new ResourceInfo(Resource.Corruption,"CorruptionImages",new Color(156f/255,172f/255,157f/255))
             },
             {
-                Resource.Holy, new ResourceInfo(Resource.Relic,"RelicImages",new Color(255f/255,255f/255,255f/255))
+                Resource.Holy, new ResourceInfo(Resource.Holy,"HolyImages",new Color(255f/255,255f/255,255f/255))
             },
             {
-                Resource.Reputation, new ResourceInfo(Resource.Suspision,"SuspisionImages",new Color(181f/255,81f/255,51f/255))
+                Resource.Reputation, new ResourceInfo(Resource.Reputation,"ReputationImages",new Color(181f/255,81f/255,51f/255))
             },
         };
 

@@ -27,7 +27,7 @@ public static class Loader
 
         resourcesSpritesHandler = new Dictionary<Resource, AsyncOperationHandle<IList<Sprite>>>();
         resourcesSpritesDictionary = new Dictionary<Resource, List<Sprite>>();
-        foreach(Resource resourceType in ResourceInfo.GetAllResources()){
+        foreach(Resource resourceType in ResourceInfo.GetAllResources_AllModes()){
             resourcesSpritesHandler[resourceType] = Addressables.LoadAssetAsync<IList<Sprite>>(ResourceInfo.Info[resourceType].imagesLabel);
             resourcesSpritesHandler[resourceType].Completed += handleToCheck=>{
                 if(handleToCheck.Status == AsyncOperationStatus.Succeeded){

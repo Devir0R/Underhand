@@ -22,8 +22,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - CardsImages
-  - m_GUID: 364dcbd146bd3cf429fbba05f762de63
-    m_Address: Assets/Scripts/json/cardsJson
+  - m_GUID: b8c1d7f28b3927d4e9595535c7b53301
+    m_Address: Assets/Scripts/json/cardsJson/CultMode
     m_ReadOnly: 0
     m_SerializedLabels:
     - CardsJsons
