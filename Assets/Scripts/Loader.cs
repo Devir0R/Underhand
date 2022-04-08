@@ -19,7 +19,7 @@ public static class Loader
         };
 
 
-        cardsJsonsHandler = Addressables.LoadAssetsAsync<TextAsset>("CardsJsons", null);
+        cardsJsonsHandler = Addressables.LoadAssetsAsync<TextAsset>("CultJsons", null);
         cardsJsonsHandler.Completed += handleToCheck=>{
             if(handleToCheck.Status == AsyncOperationStatus.Succeeded)  cardsJsons =  handleToCheck.Result.ToList();
         };

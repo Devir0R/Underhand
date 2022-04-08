@@ -27,6 +27,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - CardsJsons
+    - CultJsons
   - m_GUID: c2bb28e51b2e9ec438ddb136a93800bb
     m_Address: Assets/Sprites/resources_moved/Suspicion.png
     m_ReadOnly: 0
@@ -84,6 +85,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - ReputationImages
+  - m_GUID: 973166ed644555e4ab05761751390e67
+    m_Address: Assets/Scripts/json/cardsJson/FightCultMode
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - FightCultJsons
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2075ec3d5f044ff4ea70106940026b21, type: 2}
   m_SchemaSet:

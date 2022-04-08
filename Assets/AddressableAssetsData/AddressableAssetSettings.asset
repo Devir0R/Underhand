@@ -80,7 +80,6 @@ MonoBehaviour:
     m_LabelNames:
     - default
     - CardsImages
-    - CardsJsons
     - OptionImages
     - RelicImages
     - MoneyImages
@@ -93,6 +92,8 @@ MonoBehaviour:
     - FoeImages
     - HolyImages
     - ReputationImages
+    - FightCultJsons
+    - CultJsons
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: eb7b51d5590fce74886c545dda4a6a19, type: 2}
