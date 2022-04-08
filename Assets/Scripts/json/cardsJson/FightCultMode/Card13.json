@@ -1,10 +1,10 @@
 {
-	"num": 0,
-	"title":						"",
-	"flavortext":					"",
+	"num": 14,
+	"title":						"Prophecy",
+	"flavortext":					"I can't see anything",
 	"reputationequalallies": 0,
 	"option1": {
-		"optiontext":				"",
+		"optiontext":				"There's nothing in my destiny",
 		"outputtext":				"",
 		"foresight": {
 			"hasforesight":			0,

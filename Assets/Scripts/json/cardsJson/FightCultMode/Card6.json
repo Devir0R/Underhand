@@ -1,10 +1,10 @@
 {
-	"num": 0,
-	"title":						"",
-	"flavortext":					"",
+	"num": 7,
+	"title":						"All according to plan",
+	"flavortext":					"I knew this chance like this will come by",
 	"reputationequalallies": 0,
 	"option1": {
-		"optiontext":				"",
+		"optiontext":				"Get rid of them",
 		"outputtext":				"",
 		"foresight": {
 			"hasforesight":			0,
@@ -21,7 +21,7 @@
 		"requirements": {
 			"holy":					0,
 			"money":				0,
-			"foe":					0,
+			"foe":					3,
 			"reputation":			0,
 			"ally":					0,
 			"corruption":			0
@@ -38,9 +38,9 @@
 		"islose":					0
 		},
 	"option2": {
-		"optiontext":				"",
+		"optiontext":				"Save it as plan B",
 		"reputationequalallies": 0,
-		"outputtext":				"",
+		"outputtext":				"Put back into the deck",
 		"foresight": {
 			"hasforesight":			0,
 			"numcards":				0
@@ -48,9 +48,9 @@
 		"shuffle": {
 			"lowerbound":			999,
 			"upperbound":			999,
-			"specificids":			[],
+			"specificids":			[7],
 			"allowsdupes":			0,
-			"numcards":				0
+			"numcards":				1
 		},
 		"randomrequirements":		0,
 		"requirements": {

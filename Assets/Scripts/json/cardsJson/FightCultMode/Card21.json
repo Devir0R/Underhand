@@ -1,10 +1,10 @@
 {
-	"num": 0,
-	"title":						"",
-	"flavortext":					"",
+	"num": 22,
+	"title":						"Encounter",
+	"flavortext":					"Your dark side",
 	"reputationequalallies": 0,
 	"option1": {
-		"optiontext":				"",
+		"optiontext":				"This is the real me",
 		"outputtext":				"",
 		"foresight": {
 			"hasforesight":			0,
@@ -23,7 +23,7 @@
 			"money":				0,
 			"foe":					0,
 			"reputation":			0,
-			"ally":					0,
+			"ally":					420,
 			"corruption":			0
 		},
 		"rewards": {
@@ -38,7 +38,7 @@
 		"islose":					0
 		},
 	"option2": {
-		"optiontext":				"",
+		"optiontext":				"Harness it",
 		"reputationequalallies": 0,
 		"outputtext":				"",
 		"foresight": {
@@ -67,7 +67,7 @@
 			"foe":					0,
 			"reputation":			0,
 			"ally":					0,
-			"corruption":			0
+			"corruption":			2
 		},
 		"iswin":					0,
 		"islose":					0

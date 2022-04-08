@@ -1,10 +1,10 @@
 {
-	"num": 0,
-	"title":						"",
-	"flavortext":					"",
+	"num": 38,
+	"title":						"Treasure",
+	"flavortext":					"Gold",
 	"reputationequalallies": 0,
 	"option1": {
-		"optiontext":				"",
+		"optiontext":				"Money cannot hurt",
 		"outputtext":				"",
 		"foresight": {
 			"hasforesight":			0,
@@ -28,7 +28,7 @@
 		},
 		"rewards": {
 			"holy":					0,
-			"money":				0,
+			"money":				3,
 			"foe":					0,
 			"reputation":			0,
 			"ally":					0,
@@ -38,7 +38,7 @@
 		"islose":					0
 		},
 	"option2": {
-		"optiontext":				"",
+		"optiontext":				"Our pockets are full",
 		"reputationequalallies": 0,
 		"outputtext":				"",
 		"foresight": {

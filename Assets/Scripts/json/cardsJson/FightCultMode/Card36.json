@@ -1,10 +1,10 @@
 {
-	"num": 0,
-	"title":						"",
-	"flavortext":					"",
+	"num": 37,
+	"title":						"Treasure",
+	"flavortext":					"Preserved pure water bottled up",
 	"reputationequalallies": 0,
 	"option1": {
-		"optiontext":				"",
+		"optiontext":				"Keep it",
 		"outputtext":				"",
 		"foresight": {
 			"hasforesight":			0,
@@ -27,7 +27,7 @@
 			"corruption":			0
 		},
 		"rewards": {
-			"holy":					0,
+			"holy":					1,
 			"money":				0,
 			"foe":					0,
 			"reputation":			0,
@@ -38,7 +38,7 @@
 		"islose":					0
 		},
 	"option2": {
-		"optiontext":				"",
+		"optiontext":				"Must be expired",
 		"reputationequalallies": 0,
 		"outputtext":				"",
 		"foresight": {

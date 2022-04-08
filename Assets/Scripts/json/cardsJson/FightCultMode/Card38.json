@@ -1,10 +1,10 @@
 {
-	"num": 0,
-	"title":						"",
-	"flavortext":					"",
+	"num": 39,
+	"title":						"Treasure",
+	"flavortext":					"Genie in a lamp.",
 	"reputationequalallies": 0,
 	"option1": {
-		"optiontext":				"",
+		"optiontext":				"Free him",
 		"outputtext":				"",
 		"foresight": {
 			"hasforesight":			0,
@@ -23,7 +23,7 @@
 			"money":				0,
 			"foe":					0,
 			"reputation":			0,
-			"ally":					0,
+			"ally":					1,
 			"corruption":			0
 		},
 		"rewards": {
@@ -38,7 +38,7 @@
 		"islose":					0
 		},
 	"option2": {
-		"optiontext":				"",
+		"optiontext":				"Sell the lamp",
 		"reputationequalallies": 0,
 		"outputtext":				"",
 		"foresight": {
@@ -63,7 +63,7 @@
 		},
 		"rewards": {
 			"holy":					0,
-			"money":				0,
+			"money":				1,
 			"foe":					0,
 			"reputation":			0,
 			"ally":					0,

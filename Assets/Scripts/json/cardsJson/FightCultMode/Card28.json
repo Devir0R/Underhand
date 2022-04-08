@@ -1,10 +1,10 @@
 {
-	"num": 0,
-	"title":						"",
-	"flavortext":					"",
+	"num": 29,
+	"title":						"Beggar",
+	"flavortext":					"Small act of kindness",
 	"reputationequalallies": 0,
 	"option1": {
-		"optiontext":				"",
+		"optiontext":				"Charity mends the soul.",
 		"outputtext":				"",
 		"foresight": {
 			"hasforesight":			0,
@@ -20,11 +20,11 @@
 		"randomrequirements":		0,
 		"requirements": {
 			"holy":					0,
-			"money":				0,
+			"money":				1,
 			"foe":					0,
 			"reputation":			0,
 			"ally":					0,
-			"corruption":			0
+			"corruption":			1
 		},
 		"rewards": {
 			"holy":					0,
@@ -38,7 +38,7 @@
 		"islose":					0
 		},
 	"option2": {
-		"optiontext":				"",
+		"optiontext":				"Pull connections to give him a job",
 		"reputationequalallies": 0,
 		"outputtext":				"",
 		"foresight": {
@@ -57,9 +57,9 @@
 			"holy":					0,
 			"money":				0,
 			"foe":					0,
-			"reputation":			0,
+			"reputation":			1,
 			"ally":					0,
-			"corruption":			0
+			"corruption":			1
 		},
 		"rewards": {
 			"holy":					0,
@@ -73,7 +73,7 @@
 		"islose":					0
 	},
 	"option3": {
-		"optiontext":				"",
+		"optiontext":				"Ignore him",
 		"outputtext":				"",
 		"reputationequalallies": 0,
 		"foresight": {
@@ -108,8 +108,8 @@
 		"islose":					0
 	},
 	"isTutorial": 0,
-	"isinitial":					0,
-	"isrecurring":					0,
+	"isinitial":					1,
+	"isrecurring":					1,
 	"animationframes":				1,
 	"weight": 						1,
 	"cardartdone":					0

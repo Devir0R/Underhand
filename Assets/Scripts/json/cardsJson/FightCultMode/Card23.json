@@ -1,10 +1,10 @@
 {
-	"num": 0,
-	"title":						"",
-	"flavortext":					"",
+	"num": 24,
+	"title":						"Cultist Decision",
+	"flavortext":					"Now we know the truth about the cult.",
 	"reputationequalallies": 0,
 	"option1": {
-		"optiontext":				"",
+		"optiontext":				"Join your side",
 		"outputtext":				"",
 		"foresight": {
 			"hasforesight":			0,
@@ -31,14 +31,14 @@
 			"money":				0,
 			"foe":					0,
 			"reputation":			0,
-			"ally":					0,
+			"ally":					2,
 			"corruption":			0
 		},
 		"iswin":					0,
 		"islose":					0
 		},
 	"option2": {
-		"optiontext":				"",
+		"optiontext":				"We don't need cultists on our side",
 		"reputationequalallies": 0,
 		"outputtext":				"",
 		"foresight": {

@@ -1,10 +1,10 @@
 {
-	"num": 0,
-	"title":						"",
-	"flavortext":					"",
+	"num": 40,
+	"title":						"Treasure",
+	"flavortext":					"The journey was the true reward",
 	"reputationequalallies": 0,
 	"option1": {
-		"optiontext":				"",
+		"optiontext":				"All that glitters is not gold.",
 		"outputtext":				"",
 		"foresight": {
 			"hasforesight":			0,

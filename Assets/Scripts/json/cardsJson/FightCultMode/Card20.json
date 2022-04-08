@@ -1,10 +1,10 @@
 {
-	"num": 0,
-	"title":						"",
-	"flavortext":					"",
+	"num": 21,
+	"title":						"Encounter",
+	"flavortext":					"Group of cultists performs a dark ritual",
 	"reputationequalallies": 0,
 	"option1": {
-		"optiontext":				"",
+		"optiontext":				"Interfere",
 		"outputtext":				"",
 		"foresight": {
 			"hasforesight":			0,
@@ -29,7 +29,7 @@
 		"rewards": {
 			"holy":					0,
 			"money":				0,
-			"foe":					0,
+			"foe":					2,
 			"reputation":			0,
 			"ally":					0,
 			"corruption":			0
@@ -38,7 +38,7 @@
 		"islose":					0
 		},
 	"option2": {
-		"optiontext":				"",
+		"optiontext":				"Turn a blind Eye",
 		"reputationequalallies": 0,
 		"outputtext":				"",
 		"foresight": {
@@ -57,7 +57,7 @@
 			"holy":					0,
 			"money":				0,
 			"foe":					0,
-			"reputation":			0,
+			"reputation":			2,
 			"ally":					0,
 			"corruption":			0
 		},

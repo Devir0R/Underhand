@@ -1,11 +1,11 @@
 {
-	"num": 0,
-	"title":						"",
-	"flavortext":					"",
-	"reputationequalallies": 0,
+	"num": 2,
+	"title":						"The Cult Rises To Power",
+	"flavortext":					"They must be stopped",
 	"option1": {
-		"optiontext":				"",
+		"optiontext":				"Cleanse their soul",
 		"outputtext":				"",
+		"reputationequalallies": 0,
 		"foresight": {
 			"hasforesight":			0,
 			"numcards":				0
@@ -19,9 +19,9 @@
 		},
 		"randomrequirements":		0,
 		"requirements": {
-			"holy":					0,
+			"holy":					1,
 			"money":				0,
-			"foe":					0,
+			"foe":					420,
 			"reputation":			0,
 			"ally":					0,
 			"corruption":			0
@@ -38,9 +38,9 @@
 		"islose":					0
 		},
 	"option2": {
-		"optiontext":				"",
-		"reputationequalallies": 0,
+		"optiontext":				"It's a holy war",
 		"outputtext":				"",
+		"reputationequalallies": 0,
 		"foresight": {
 			"hasforesight":			0,
 			"numcards":				0
@@ -56,7 +56,7 @@
 		"requirements": {
 			"holy":					0,
 			"money":				0,
-			"foe":					0,
+			"foe":					420,
 			"reputation":			0,
 			"ally":					0,
 			"corruption":			0
@@ -67,7 +67,7 @@
 			"foe":					0,
 			"reputation":			0,
 			"ally":					0,
-			"corruption":			0
+			"corruption":			2
 		},
 		"iswin":					0,
 		"islose":					0

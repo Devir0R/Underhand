@@ -1,10 +1,10 @@
 {
-	"num": 0,
-	"title":						"",
-	"flavortext":					"",
+	"num": 34,
+	"title":						"Damsel in distress",
+	"flavortext":					"You need save the poor lady",
 	"reputationequalallies": 0,
 	"option1": {
-		"optiontext":				"",
+		"optiontext":				"Pay the ransom",
 		"outputtext":				"",
 		"foresight": {
 			"hasforesight":			0,
@@ -20,7 +20,7 @@
 		"randomrequirements":		0,
 		"requirements": {
 			"holy":					0,
-			"money":				0,
+			"money":				2,
 			"foe":					0,
 			"reputation":			0,
 			"ally":					0,
@@ -31,14 +31,14 @@
 			"money":				0,
 			"foe":					0,
 			"reputation":			0,
-			"ally":					0,
+			"ally":					1,
 			"corruption":			0
 		},
 		"iswin":					0,
 		"islose":					0
 		},
 	"option2": {
-		"optiontext":				"",
+		"optiontext":				"Use your name to scare them away",
 		"reputationequalallies": 0,
 		"outputtext":				"",
 		"foresight": {
@@ -57,7 +57,7 @@
 			"holy":					0,
 			"money":				0,
 			"foe":					0,
-			"reputation":			0,
+			"reputation":			2,
 			"ally":					0,
 			"corruption":			0
 		},
@@ -66,14 +66,14 @@
 			"money":				0,
 			"foe":					0,
 			"reputation":			0,
-			"ally":					0,
+			"ally":					1,
 			"corruption":			0
 		},
 		"iswin":					0,
 		"islose":					0
 	},
 	"option3": {
-		"optiontext":				"",
+		"optiontext":				"I hope she will manage alone.",
 		"outputtext":				"",
 		"reputationequalallies": 0,
 		"foresight": {
@@ -108,8 +108,8 @@
 		"islose":					0
 	},
 	"isTutorial": 0,
-	"isinitial":					0,
-	"isrecurring":					0,
+	"isinitial":					1,
+	"isrecurring":					1,
 	"animationframes":				1,
 	"weight": 						1,
 	"cardartdone":					0

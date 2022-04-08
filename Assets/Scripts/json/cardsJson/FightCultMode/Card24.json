@@ -1,10 +1,10 @@
 {
-	"num": 0,
-	"title":						"",
-	"flavortext":					"",
+	"num": 25,
+	"title":						"Cultist Decision",
+	"flavortext":					"Our belief is stronger!",
 	"reputationequalallies": 0,
 	"option1": {
-		"optiontext":				"",
+		"optiontext":				"Words can't do everything.",
 		"outputtext":				"",
 		"foresight": {
 			"hasforesight":			0,

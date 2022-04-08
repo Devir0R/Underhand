@@ -1,10 +1,10 @@
 {
-	"num": 0,
-	"title":						"",
-	"flavortext":					"",
+	"num": 27,
+	"title":						"Cultist Decision",
+	"flavortext":					"I must seek a decent employment.",
 	"reputationequalallies": 0,
 	"option1": {
-		"optiontext":				"",
+		"optiontext":				"It's all thanks to you",
 		"outputtext":				"",
 		"foresight": {
 			"hasforesight":			0,
@@ -28,7 +28,7 @@
 		},
 		"rewards": {
 			"holy":					0,
-			"money":				0,
+			"money":				2,
 			"foe":					0,
 			"reputation":			0,
 			"ally":					0,
@@ -38,7 +38,7 @@
 		"islose":					0
 		},
 	"option2": {
-		"optiontext":				"",
+		"optiontext":				"Save the money for yourself",
 		"reputationequalallies": 0,
 		"outputtext":				"",
 		"foresight": {

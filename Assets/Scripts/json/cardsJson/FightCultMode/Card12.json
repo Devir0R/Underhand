@@ -1,10 +1,10 @@
 {
-	"num": 0,
-	"title":						"",
-	"flavortext":					"",
+	"num": 12,
+	"title":						"Prophecy",
+	"flavortext":					"The one that shall destroy the cult",
 	"reputationequalallies": 0,
 	"option1": {
-		"optiontext":				"",
+		"optiontext":				"your foe are daunted",
 		"outputtext":				"",
 		"foresight": {
 			"hasforesight":			0,
@@ -21,7 +21,7 @@
 		"requirements": {
 			"holy":					0,
 			"money":				0,
-			"foe":					0,
+			"foe":					420,
 			"reputation":			0,
 			"ally":					0,
 			"corruption":			0

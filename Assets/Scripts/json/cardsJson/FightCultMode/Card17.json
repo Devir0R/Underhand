@@ -1,10 +1,10 @@
 {
-	"num": 0,
-	"title":						"",
-	"flavortext":					"",
+	"num": 18,
+	"title":						"Encounter",
+	"flavortext":					"You saved an orphan",
 	"reputationequalallies": 0,
 	"option1": {
-		"optiontext":				"",
+		"optiontext":				"Every hero has a sidekick",
 		"outputtext":				"",
 		"foresight": {
 			"hasforesight":			0,
@@ -31,14 +31,14 @@
 			"money":				0,
 			"foe":					0,
 			"reputation":			0,
-			"ally":					0,
+			"ally":					1,
 			"corruption":			0
 		},
 		"iswin":					0,
 		"islose":					0
 		},
 	"option2": {
-		"optiontext":				"",
+		"optiontext":				"Spread the news",
 		"reputationequalallies": 0,
 		"outputtext":				"",
 		"foresight": {
@@ -57,7 +57,7 @@
 			"holy":					0,
 			"money":				0,
 			"foe":					0,
-			"reputation":			0,
+			"reputation":			1,
 			"ally":					0,
 			"corruption":			0
 		},
@@ -73,7 +73,7 @@
 		"islose":					0
 	},
 	"option3": {
-		"optiontext":				"",
+		"optiontext":				"I am a better person now",
 		"outputtext":				"",
 		"reputationequalallies": 0,
 		"foresight": {
@@ -94,7 +94,7 @@
 			"foe":					0,
 			"reputation":			0,
 			"ally":					0,
-			"corruption":			0
+			"corruption":			1
 		},
 		"rewards": {
 			"holy":					0,

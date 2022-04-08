@@ -1,10 +1,10 @@
 {
-	"num": 0,
-	"title":						"",
-	"flavortext":					"",
+	"num": 28,
+	"title":						"Murder In Town",
+	"flavortext":					"You are being framed.",
 	"reputationequalallies": 0,
 	"option1": {
-		"optiontext":				"",
+		"optiontext":				"Your reputation saves you",
 		"outputtext":				"",
 		"foresight": {
 			"hasforesight":			0,
@@ -22,7 +22,7 @@
 			"holy":					0,
 			"money":				0,
 			"foe":					0,
-			"reputation":			0,
+			"reputation":			2,
 			"ally":					0,
 			"corruption":			0
 		},
@@ -38,9 +38,9 @@
 		"islose":					0
 		},
 	"option2": {
-		"optiontext":				"",
+		"optiontext":				"Run from town",
 		"reputationequalallies": 0,
-		"outputtext":				"",
+		"outputtext":				"I know i am innocent",
 		"foresight": {
 			"hasforesight":			0,
 			"numcards":				0
@@ -59,7 +59,7 @@
 			"foe":					0,
 			"reputation":			0,
 			"ally":					0,
-			"corruption":			0
+			"corruption":			2
 		},
 		"rewards": {
 			"holy":					0,
@@ -73,7 +73,7 @@
 		"islose":					0
 	},
 	"option3": {
-		"optiontext":				"",
+		"optiontext":				"Blame someone else",
 		"outputtext":				"",
 		"reputationequalallies": 0,
 		"foresight": {
@@ -91,10 +91,10 @@
 		"requirements": {
 			"holy":					0,
 			"money":				0,
-			"foe":					0,
+			"foe":					1,
 			"reputation":			0,
 			"ally":					0,
-			"corruption":			0
+			"corruption":			1
 		},
 		"rewards": {
 			"holy":					0,
@@ -108,8 +108,8 @@
 		"islose":					0
 	},
 	"isTutorial": 0,
-	"isinitial":					0,
-	"isrecurring":					0,
+	"isinitial":					1,
+	"isrecurring":					1,
 	"animationframes":				1,
 	"weight": 						1,
 	"cardartdone":					0

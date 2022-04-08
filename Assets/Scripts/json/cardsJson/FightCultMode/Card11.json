@@ -1,10 +1,10 @@
 {
-	"num": 0,
-	"title":						"",
-	"flavortext":					"",
+	"num": 12,
+	"title":						"Prophecy",
+	"flavortext":					"Our savior",
 	"reputationequalallies": 0,
 	"option1": {
-		"optiontext":				"",
+		"optiontext":				"Destined for greatness",
 		"outputtext":				"",
 		"foresight": {
 			"hasforesight":			0,
@@ -30,7 +30,7 @@
 			"holy":					0,
 			"money":				0,
 			"foe":					0,
-			"reputation":			0,
+			"reputation":			2,
 			"ally":					0,
 			"corruption":			0
 		},

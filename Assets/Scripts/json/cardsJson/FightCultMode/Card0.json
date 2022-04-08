@@ -1,11 +1,11 @@
 {
-	"num": 0,
-	"title":						"",
-	"flavortext":					"",
-	"reputationequalallies": 0,
+	"num": 1,
+	"title":						"Face Your Inner Demons",
+	"flavortext":					"The corrputed cannot fight the cult",
 	"option1": {
-		"optiontext":				"",
+		"optiontext":				"Drink holy water",
 		"outputtext":				"",
+		"reputationequalallies": 0,
 		"foresight": {
 			"hasforesight":			0,
 			"numcards":				0
@@ -19,12 +19,12 @@
 		},
 		"randomrequirements":		0,
 		"requirements": {
-			"holy":					0,
+			"holy":					1,
 			"money":				0,
 			"foe":					0,
 			"reputation":			0,
 			"ally":					0,
-			"corruption":			0
+			"corruption":			420
 		},
 		"rewards": {
 			"holy":					0,
@@ -38,9 +38,9 @@
 		"islose":					0
 		},
 	"option2": {
-		"optiontext":				"",
-		"reputationequalallies": 0,
+		"optiontext":				"Reveal your weaknesses",
 		"outputtext":				"",
+		"reputationequalallies": 0,
 		"foresight": {
 			"hasforesight":			0,
 			"numcards":				0
@@ -58,8 +58,8 @@
 			"money":				0,
 			"foe":					0,
 			"reputation":			0,
-			"ally":					0,
-			"corruption":			0
+			"ally":					2,
+			"corruption":			420
 		},
 		"rewards": {
 			"holy":					0,
@@ -73,7 +73,7 @@
 		"islose":					0
 	},
 	"option3": {
-		"optiontext":				"",
+		"optiontext":				"You decide to open a cult",
 		"outputtext":				"",
 		"reputationequalallies": 0,
 		"foresight": {
@@ -105,7 +105,7 @@
 			"corruption":			0
 		},
 		"iswin":					0,
-		"islose":					0
+		"islose":					1
 	},
 	"isTutorial": 0,
 	"isinitial":					0,

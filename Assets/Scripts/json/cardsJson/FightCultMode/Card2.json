@@ -1,11 +1,11 @@
 {
-	"num": 0,
-	"title":						"",
-	"flavortext":					"",
-	"reputationequalallies": 0,
+	"num": 3,
+	"title":						"Crushing Defeat",
+	"flavortext":					"regroup",
 	"option1": {
-		"optiontext":				"",
+		"optiontext":				"Heal the wounded",
 		"outputtext":				"",
+		"reputationequalallies": 0,
 		"foresight": {
 			"hasforesight":			0,
 			"numcards":				0
@@ -19,7 +19,7 @@
 		},
 		"randomrequirements":		0,
 		"requirements": {
-			"holy":					0,
+			"holy":					1,
 			"money":				0,
 			"foe":					0,
 			"reputation":			0,
@@ -38,9 +38,9 @@
 		"islose":					0
 		},
 	"option2": {
-		"optiontext":				"",
-		"reputationequalallies": 0,
+		"optiontext":				"Bury the dead",
 		"outputtext":				"",
+		"reputationequalallies": 1,
 		"foresight": {
 			"hasforesight":			0,
 			"numcards":				0
@@ -66,14 +66,14 @@
 			"money":				0,
 			"foe":					0,
 			"reputation":			0,
-			"ally":					0,
+			"ally":					5,
 			"corruption":			0
 		},
 		"iswin":					0,
 		"islose":					0
 	},
 	"option3": {
-		"optiontext":				"",
+		"optiontext":				"There is no one left",
 		"outputtext":				"",
 		"reputationequalallies": 0,
 		"foresight": {
@@ -105,7 +105,7 @@
 			"corruption":			0
 		},
 		"iswin":					0,
-		"islose":					0
+		"islose":					1
 	},
 	"isTutorial": 0,
 	"isinitial":					0,
