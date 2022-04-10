@@ -33,7 +33,7 @@
 			"food":					0,
 			"suspicion":			0
 		},
-		"iswin":					0,
+		"iswin":					"",
 		"islose":					0
 		},
 	"option2": {
@@ -68,7 +68,7 @@
 			"food":					0,
 			"suspicion":			0
 		},
-		"iswin":					0,
+		"iswin":					"",
 		"islose":					0
 	},
 	"option3": {
@@ -103,7 +103,7 @@
 			"food":					0,
 			"suspicion":			0
 		},
-		"iswin":					0,
+		"iswin":					"",
 		"islose":					0
 	},
 	"isinitial":					1,

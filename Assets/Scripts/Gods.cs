@@ -43,19 +43,18 @@ public class Gods
 
     public static void SaveToFile(){
 	    BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/gods.json");
+        FileStream file = File.Create(PlaceToSave());
         bf.Serialize(file,allGods);
         file.Close();
     }
 
     public static bool LoadGame()
     {
-        if (File.Exists(Application.persistentDataPath + "/gods.json"))
+        if (File.Exists(PlaceToSave()))
         {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = 
-                    File.Open(Application.persistentDataPath 
-                    + "/gods.json", FileMode.Open);
+                    File.Open(PlaceToSave(), FileMode.Open);
             AllGods allGods = (AllGods)bf.Deserialize(file);
             file.Close();
             Gods.allGods = allGods;
@@ -65,10 +64,12 @@ public class Gods
         else{
             //Debug.LogError("There is no save data!");
             return false;
-        }
-            
+        }            
     }
 
+    private static string PlaceToSave(){
+        return Application.persistentDataPath + (GameState.GameMode == Mode.FightCult? "/leaders.json" : "/gods.json");
+    }
 }
 
 [System.Serializable]
@@ -78,7 +79,6 @@ public class AllGods{
 
 [System.Serializable]
 public class GodDO{
-
         public int num;
         public string name;
         public int defeated;
@@ -86,5 +86,4 @@ public class GodDO{
         public List<int> dependency;
         public int startingCard;
         public int specialRequirements;
-
 }

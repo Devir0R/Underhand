@@ -12,6 +12,7 @@ public class Deck : MonoBehaviour
     public SpriteRenderer spriteRenderer;
 
     public TextAsset godsJSON;
+    public TextAsset leadersJSON;
     AllCards allCards;
     public List<CardDO>  deck;
     public Sprite[] spriteArray;
@@ -102,15 +103,19 @@ public class Deck : MonoBehaviour
         transform.position = new Vector3(worldScreenWidth+spriteRenderer.bounds.size.x*0.6f,
                                          worldScreenHeight-spriteRenderer.bounds.size.y/1.8f,
                                          transform.position.z);
-        
-        this.allCards = new AllCards(Loader.CultCardsJsons.Select(json=>JsonConvert.DeserializeObject<CardInfo>(json.text)));
+        if(GameState.GameMode==Mode.FightCult){
+            allCards = new AllCards(Loader.FightCultCardsJsons.Select(json=>JsonConvert.DeserializeObject<FightCultCardDO>(json.text)));
+        }
+        else{
+            allCards = new AllCards(Loader.CultCardsJsons.Select(json=>JsonConvert.DeserializeObject<CultCardDO>(json.text)));
+        }
         this.deck  = this.allCards.allCardsList
             .Where(card=>card.IsInitial())
             .OrderByDescending(card=>Random.value)
             .Take(INITIAL_DECK_SIZE).ToList();
         Discard.Instance.discard = new List<CardDO>();
         this.addRelicCardIfThereIsnt();
-        this.insertGods();
+        this.insertWinCards();
         shuffleDeck();
         // this.deck.Insert(0,allCards.allCardsList.Find(card=>card.GetNumber()==4));
         // this.deck.RemoveRange(0,3*deck.Count/4);
@@ -243,20 +248,26 @@ public class Deck : MonoBehaviour
     }
 
     CardDO GetAlertCard(){
-        if(Hand.Instance.MoreThan15Cards.isOn){
-            if( Random.value>=Hand.GREED_CHANCE){
-                return GetCard("Greed");
+        if(GameState.GameMode==Mode.Cult){
+            if(Hand.Instance.MoreThan15Cards.isOn){
+                if( Random.value>=Hand.GREED_CHANCE){
+                    return GetCard("Greed");
+                }
             }
+            else if(Hand.Instance.FiveOrMoreSuspision.isOn){
+                if(Random.value>=Hand.POLICE_RAID_CHANCE){
+                    return GetCard("Police Raid");
+                }
+            }
+            else if(Hand.Instance.NoFood.isOn){
+                if(Random.value>=Hand.DESPARATE_MEASURES_CHANCE){
+                    return GetCard("Desperate Measures");
+                }
+            }
+            return null;
         }
-        else if(Hand.Instance.FiveOrMoreSuspision.isOn){
-            if(Random.value>=Hand.POLICE_RAID_CHANCE){
-                return GetCard("Police Raid");
-            }
-        }
-        else if(Hand.Instance.NoFood.isOn){
-            if(Random.value>=Hand.DESPARATE_MEASURES_CHANCE){
-                return GetCard("Desperate Measures");
-            }
+        else if(GameState.GameMode==Mode.FightCult){
+            return null;
         }
         return null;
     }
@@ -286,17 +297,22 @@ public class Deck : MonoBehaviour
 
     }
 
-    void insertGods(){
-        this.godsInfo = new Gods(godsJSON);
-        foreach(GodDO god in godsInfo.getUnlockedGods()){
-            if (god.specialRequirements==0){
-                int startingCard = god.startingCard;
-                CardDO staringCardDO = this.allCards.allCardsList.Find(card=>card.GetNumber()==startingCard);
-                if (!staringCardDO.IsTutorial()){
-                    this.deck.Add(staringCardDO);
+    void insertWinCards(){
+        if(GameState.GameMode==Mode.Cult){
+            this.godsInfo = new Gods(GameState.GameMode==Mode.FightCult? leadersJSON : godsJSON);
+            foreach(GodDO god in godsInfo.getUnlockedGods()){
+                if (god.specialRequirements==0){
+                    int startingCard = god.startingCard;
+                    CardDO staringCardDO = this.allCards.allCardsList.Find(card=>card.GetNumber()==startingCard);
+                    if (!staringCardDO.IsTutorial()){
+                        this.deck.Add(staringCardDO);
+                    }
+                    if(god.defeated==1) this.deck.AddRange(god.blessings.Select(card_num=>this.allCards.allCardsList.Find(card=>card.GetNumber()==card_num)));
                 }
-                if(god.defeated==1) this.deck.AddRange(god.blessings.Select(card_num=>this.allCards.allCardsList.Find(card=>card.GetNumber()==card_num)));
             }
+        }
+        else{
+
         }
     }
         
@@ -307,7 +323,13 @@ public class Deck : MonoBehaviour
 
     void addRelicCardIfThereIsnt(){
         if (! this.relicCardInDeck()){
-            List<CardDO> relicCards = this.potentialRelicCards(this.init_cards().Select(init_card=>this.allCards.allCardsList.Find(c=>c.GetNumber() == init_card.GetNumber())).ToList());
+            List<CardDO> relicCards = 
+                potentialRelicCards(
+                    init_cards()
+                    .Select(init_card=>allCards.allCardsList.
+                        Find(c=>c.GetNumber() == init_card.GetNumber())
+                    ).ToList()
+                );
             CardDO randomRelicCard = relicCards[randomNumber(0,relicCards.Count)];
             int replace_with = randomNumber(0,this.deck.Count);
             this.deck[replace_with] = randomRelicCard;
@@ -337,7 +359,7 @@ public class Deck : MonoBehaviour
     List<CardDO> potentialRelicCards(List<CardDO> cards){
         if (cards==null)
             cards = this.allCards.allCardsList;
-        return cards.Where(card=> this.potentialRelicCard(card)).ToList();
+        return cards.Where(card=> potentialRelicCard(card)).ToList();
     }
 
     bool potentialRelicCard(CardDO card){
@@ -351,7 +373,7 @@ public class Deck : MonoBehaviour
                 return true;
             }
             else{
-                List<int> currentCardPossibleCards = this.possibleShuffleCardsNumbers(currentCard);
+                List<int> currentCardPossibleCards = possibleShuffleCardsNumbers(currentCard);
                 foreach(int possibleCardNumber in currentCardPossibleCards){
                     CardDO possibleCard = allCards.allCardsList.Find(one_card=>one_card.GetNumber() == possibleCardNumber);
                     if (! visited.Contains(possibleCard)){
@@ -365,9 +387,9 @@ public class Deck : MonoBehaviour
     }
 
     List<int> possibleShuffleCardsNumbers(CardDO card){
-        return possibleShuffleCards(card.GetOption_1().shuffle)
-            .Concat(possibleShuffleCards(card.GetOption_2().shuffle)).
-            Concat(possibleShuffleCards(card.GetOption_3().shuffle)).ToList();
+        return possibleShuffleCards(card.GetOption_1().GetShuffle())
+            .Concat(possibleShuffleCards(card.GetOption_2().GetShuffle())).
+            Concat(possibleShuffleCards(card.GetOption_3().GetShuffle())).ToList();
 
     }
 

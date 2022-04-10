@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class NumberOfCardsAlert : Alert
 {
@@ -8,6 +5,7 @@ public class NumberOfCardsAlert : Alert
     new void Start()
     {
         base.Start();
+        ActiveOnMode = Mode.Cult;
         condition = new MoreThan15Cards();
 
     }

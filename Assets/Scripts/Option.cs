@@ -449,7 +449,7 @@ public class Option : MonoBehaviour
 
 
 [System.Serializable]
-public class OptionDO:IOptionDO{
+public class CultOptionDO:IOptionDO{
         public string optiontext;
         public string outputtext;
         public int cultistequalsprisoner;

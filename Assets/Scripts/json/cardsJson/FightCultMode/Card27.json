@@ -34,7 +34,7 @@
 			"ally":					0,
 			"corruption":			0
 		},
-		"iswin":					0,
+		"iswin":					"",
 		"islose":					0
 		},
 	"option2": {
@@ -59,7 +59,7 @@
 			"foe":					0,
 			"reputation":			0,
 			"ally":					0,
-			"corruption":			2
+			"corruption":			0
 		},
 		"rewards": {
 			"holy":					0,
@@ -67,9 +67,9 @@
 			"foe":					0,
 			"reputation":			0,
 			"ally":					0,
-			"corruption":			0
+			"corruption":			2
 		},
-		"iswin":					0,
+		"iswin":					"",
 		"islose":					0
 	},
 	"option3": {
@@ -91,20 +91,20 @@
 		"requirements": {
 			"holy":					0,
 			"money":				0,
-			"foe":					1,
-			"reputation":			0,
-			"ally":					0,
-			"corruption":			1
-		},
-		"rewards": {
-			"holy":					0,
-			"money":				0,
 			"foe":					0,
 			"reputation":			0,
 			"ally":					0,
 			"corruption":			0
 		},
-		"iswin":					0,
+		"rewards": {
+			"holy":					0,
+			"money":				0,
+			"foe":					1,
+			"reputation":			0,
+			"ally":					0,
+			"corruption":			1
+		},
+		"iswin":					"",
 		"islose":					0
 	},
 	"isTutorial": 0,

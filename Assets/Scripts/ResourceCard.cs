@@ -254,6 +254,17 @@ class ResourceInfo{
     }
     public static readonly Resource[] AllResources_Mode1 = new Resource[]{Resource.Food,Resource.Money,Resource.Cultist,Resource.Prisoner,Resource.Suspision,Resource.Relic};
     public static readonly Resource[] AllResources_Mode2 = new Resource[]{Resource.Corruption,Resource.Money,Resource.Foe,Resource.Holy,Resource.Ally,Resource.Reputation};
+    
+    public static Resource[] OpeningHand(){
+        if(GameState.GameMode==Mode.FightCult){
+            return  new Resource[]{ Resource.Foe,Resource.Foe,Resource.Money,Resource.Money,
+                            Resource.Reputation,Resource.Reputation,Resource.Ally,Resource.Ally};
+        }
+        else{
+            return  new Resource[]{ Resource.Food,Resource.Food,Resource.Money,Resource.Money,
+                            Resource.Cultist,Resource.Cultist,Resource.Prisoner,Resource.Prisoner};
+        }
+    }
     public static readonly Dictionary<Resource,ResourceInfo> Info =  
         new Dictionary<Resource, ResourceInfo>() {
             {

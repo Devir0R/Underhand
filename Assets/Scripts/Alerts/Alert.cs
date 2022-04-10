@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Alert : MonoBehaviour
@@ -9,6 +7,7 @@ public class Alert : MonoBehaviour
     private int currentFrame = 0;
     public bool isOn = false;
 
+    public Mode ActiveOnMode = Mode.Cult;
     public AlertCondition condition;
     // Start is called before the first frame update
     public void Start()
@@ -20,24 +19,26 @@ public class Alert : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isOn){
-            if(timesBlinked<3){
-                currentFrame++;
-                if(currentFrame==framesBetweenBlinks){
-                    toFront();
-                    currentFrame = 0;
-                    timesBlinked+=1;
+        if(GameState.GameMode==ActiveOnMode){
+            if(isOn){
+                if(timesBlinked<3){
+                    currentFrame++;
+                    if(currentFrame==framesBetweenBlinks){
+                        toFront();
+                        currentFrame = 0;
+                        timesBlinked+=1;
+                    }
+                    else if(currentFrame==framesBetweenBlinks/2){
+                        toBack();
+                    }
                 }
-                else if(currentFrame==framesBetweenBlinks/2){
-                    toBack();
+                if(!ResourceCard.dragging &&!condition.Check()){
+                    backToInitState();
                 }
             }
-            if(!ResourceCard.dragging &&!condition.Check()){
-                backToInitState();
+            else if(!ResourceCard.dragging && condition.Check()){
+                isOn = true;
             }
-        }
-        else if(!ResourceCard.dragging && condition.Check()){
-            isOn = true;
         }
     }
 

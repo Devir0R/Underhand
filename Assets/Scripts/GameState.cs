@@ -8,7 +8,7 @@ public static class GameState
 
     public static string GodWon = null;
 
-    public static Mode GameMode = Mode.Cult;
+    public static Mode GameMode = Mode.FightCult;
 
 }
 

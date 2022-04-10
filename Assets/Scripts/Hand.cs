@@ -14,9 +14,6 @@ public class Hand : MonoBehaviour
     public TextMeshPro cardsNumber;
     private static Hand _instance;
     public static Hand Instance{ get { return _instance; } }
-    private static readonly Resource[] startingHand = 
-        new Resource[]{ Resource.Food,Resource.Food,Resource.Money,Resource.Money,
-                            Resource.Cultist,Resource.Cultist,Resource.Prisoner,Resource.Prisoner};
 
     public Vector3 handMiddle;
 
@@ -76,7 +73,7 @@ public class Hand : MonoBehaviour
 
     void SpawnCards(){
         hand = new List<ResourceCard>();
-        foreach(Resource resource in startingHand.ToList()){
+        foreach(Resource resource in ResourceInfo.OpeningHand().ToList()){
             AddOfResource(resource);
         }
     }

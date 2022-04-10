@@ -29,7 +29,14 @@ public class Card : MonoBehaviour
     
     void Start()
     {
-        if(spriteList==null ||spriteList.Count==0)  spriteList = Loader.CultCardsSprites;
+        if(spriteList==null ||spriteList.Count==0){
+            if(GameState.GameMode==Mode.FightCult){
+                spriteList = Loader.FightCultCardsSprites;
+            }
+            else{
+                spriteList = Loader.CultCardsSprites;
+            }
+        }
         optionPrefab.transform.localScale = transform.localScale;
         StartCoroutine(CheckOptions());
     }
@@ -188,15 +195,15 @@ public class Card : MonoBehaviour
 
 
 [System.Serializable]
-public class CardInfo:CardDO{
+public class CultCardDO:CardDO{
         public string flavortext;
         public string title;
         public int isrecurring;
         public int isinitial;
         public int isTutorial;
-        public OptionDO option1;
-        public OptionDO option2;
-        public OptionDO option3;
+        public CultOptionDO option1;
+        public CultOptionDO option2;
+        public CultOptionDO option3;
         public int num ;
         public int animationframes;
         public int weight;
@@ -205,9 +212,9 @@ public class CardInfo:CardDO{
         public bool IsRecurring()=>isrecurring==1;
         public bool IsInitial()=>isinitial==1;
         public bool IsTutorial()=>isTutorial==1;
-        public OptionDO GetOption_1()=>option1;
-        public OptionDO GetOption_2()=>option2;
-        public OptionDO GetOption_3()=>option3;
+        public IOptionDO GetOption_1()=>option1;
+        public IOptionDO GetOption_2()=>option2;
+        public IOptionDO GetOption_3()=>option3;
         public int GetNumber()=>num;
 
 }
@@ -218,9 +225,9 @@ public class FightCultCardDO:CardDO{
         public int isrecurring;
         public int isinitial;
         public int isTutorial;
-        public OptionDO option1;
-        public OptionDO option2;
-        public OptionDO option3;
+        public FightCultOptionDO option1;
+        public FightCultOptionDO option2;
+        public FightCultOptionDO option3;
         public int num ;
         public int animationframes;
         public int weight;
@@ -229,9 +236,9 @@ public class FightCultCardDO:CardDO{
         public bool IsRecurring()=>isrecurring==1;
         public bool IsInitial()=>isinitial==1;
         public bool IsTutorial()=>isTutorial==1;
-        public OptionDO GetOption_1()=>option1;
-        public OptionDO GetOption_2()=>option2;
-        public OptionDO GetOption_3()=>option3;
+        public IOptionDO GetOption_1()=>option1;
+        public IOptionDO GetOption_2()=>option2;
+        public IOptionDO GetOption_3()=>option3;
         public int GetNumber()=>num;
 }
 
@@ -240,9 +247,9 @@ public interface CardDO{
     public bool IsRecurring();
     public bool IsInitial();
     public bool IsTutorial();
-    public OptionDO GetOption_1();
-    public OptionDO GetOption_2();
-    public OptionDO GetOption_3();
+    public IOptionDO GetOption_1();
+    public IOptionDO GetOption_2();
+    public IOptionDO GetOption_3();
     public int GetNumber();
 
 }

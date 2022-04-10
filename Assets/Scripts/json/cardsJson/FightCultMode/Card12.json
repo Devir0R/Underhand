@@ -1,5 +1,5 @@
 {
-	"num": 12,
+	"num": 13,
 	"title":						"Prophecy",
 	"flavortext":					"The one that shall destroy the cult",
 	"option1": {
@@ -34,7 +34,7 @@
 			"ally":					0,
 			"corruption":			0
 		},
-		"iswin":					0,
+		"iswin":					"",
 		"islose":					0
 		},
 	"option2": {
@@ -69,7 +69,7 @@
 			"ally":					0,
 			"corruption":			0
 		},
-		"iswin":					0,
+		"iswin":					"",
 		"islose":					0
 	},
 	"option3": {
@@ -104,7 +104,7 @@
 			"ally":					0,
 			"corruption":			0
 		},
-		"iswin":					0,
+		"iswin":					"",
 		"islose":					0
 	},
 	"isTutorial": 0,
