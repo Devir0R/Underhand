@@ -7,7 +7,7 @@ using System.Collections;
 
 public class Option : MonoBehaviour
 {
-    OptionDO option;
+    IOptionDO option;
     public Sprite dormant;
     public Sprite down;
     public Sprite ready;
@@ -63,14 +63,14 @@ public class Option : MonoBehaviour
     public void SpawnRewards()
     {
         if(optionChosen==this){
-            Table.Instance.SpawnRewards(option.rewards);
+            Table.Instance.SpawnRewards(option.GetRewards());
             optionChosen=null;
         }
         
     }
 
     public bool LosingOption(){
-        return option.islose==1;
+        return option.IsLose();
     }
 
     public void OnOptionHover(){
@@ -95,18 +95,18 @@ public class Option : MonoBehaviour
             DisbleOption();
             optionChosen = this;
 
-            if(option.islose==1){
+            if(option.IsLose()){
                 GameState.GameLost();
             }
-            else if(option.iswin!=""){
-                GameState.GodWon = option.iswin;
+            else if(option.IsWin()!=""){
+                GameState.GodWon = option.IsWin();
                 GameState.GameWon();
             }
 
             spriteRenderer.sprite = down;
-            if(option.randomrequirements!=0){
+            if(option.RandomRequirements()!=0){
                 ResourceCard.CardOnTableDestroyed +=whenCardsOnTableDestroyed;
-                StartCoroutine(Hand.Instance.RemoveFromHandRandomly(option.randomrequirements));                
+                StartCoroutine(Hand.Instance.RemoveFromHandRandomly(option.RandomRequirements()));                
             }
             else if(Table.Instance.ResourcesOnTable().Count==0) optionRealized();
             else{
@@ -114,7 +114,7 @@ public class Option : MonoBehaviour
                 Table.Instance.SacrificeAll();
             }
             GameAudio.Instance.AddToQueue(cardDO.GetTitle(),optionNum);
-            Deck.Instance.AddToDiscard(option.shuffle);
+            Deck.Instance.AddToDiscard(option.GetShuffle());
         }
         
     }
@@ -139,8 +139,8 @@ public class Option : MonoBehaviour
     }
 
     void checkForesight(){
-        if(option.foresight.hasforesight==1){
-            StartCoroutine( Deck.Instance.Foresight(option.foresight.candiscard==1));
+        if(option.GetForesight().hasforesight==1){
+            StartCoroutine( Deck.Instance.Foresight(option.GetForesight().candiscard==1));
         }
     }
 
@@ -208,8 +208,8 @@ public class Option : MonoBehaviour
         if(isDormant) return;
         
         List<Resource> resourcesOnTable = Table.Instance.ResourcesOnTable();
-        RequirementsDO requirements = option.requirements;
-        if(RequirementsAreMet(requirements,resourcesOnTable,option.cultistequalsprisoner==1)){
+        IRequirementsDO requirements = option.GetRequirements();
+        if(RequirementsAreMet(requirements,resourcesOnTable)){
             spriteRenderer.sprite = ready;
         }
         else{
@@ -223,9 +223,9 @@ public class Option : MonoBehaviour
     }
 
     void UpdateSpriteFirstTime(){
-        if(!(RequirementsCanBeMet(option.requirements,Table.Instance.ResourcesOnTable(),option.cultistequalsprisoner==1))
+        if(!(RequirementsCanBeMet(option.GetRequirements(),Table.Instance.ResourcesOnTable(),option.IsCultistEqualPrisoner()))
             || isEmptyOption()
-            || option.islose==1
+            || option.IsLose()
             || LockedUnlessZeroOfResource()){
             isDormant=true;
             spriteRenderer.sprite = dormant;
@@ -234,7 +234,7 @@ public class Option : MonoBehaviour
     }
 
     bool LockedUnlessZeroOfResource(){
-        Dictionary<Resource,System.Func<int>> howManyFromFunctions = option.requirements.HowManyFromFunctions();
+        Dictionary<Resource,System.Func<int>> howManyFromFunctions = option.GetRequirements().HowManyFromFunctions();
         foreach(Resource resource in howManyFromFunctions.Keys){
             if(howManyFromFunctions[resource]()==Hand.ONLY_IF_RESOURCE_IS_ZERO){
                 return Table.Instance.ResourcesOnTable().Where(resourseOnTable=>resourseOnTable==resource).Count() +
@@ -255,15 +255,15 @@ public class Option : MonoBehaviour
     }
 
 
-    bool RequirementsAreMet(RequirementsDO requirements,List<Resource> resourcesOnTable,bool prisonerEqualCultist){
-        return SpareResources(requirements,resourcesOnTable,prisonerEqualCultist)==0;
+    bool RequirementsAreMet(IRequirementsDO requirements,List<Resource> resourcesOnTable){
+        return SpareResources(requirements,resourcesOnTable)==0;
     }
 
-    int SpareResources(RequirementsDO requirements,List<Resource> resourcesToCover,bool prisonerEqualCultist){
+    int SpareResources(IRequirementsDO requirements,List<Resource> resourcesToCover){
         List<Resource> allResourcesOnTable = new List<Resource>();
         allResourcesOnTable.AddRange(resourcesToCover);
 
-        Dictionary<Resource,System.Func<int>> HowManyFrom = requirements.HowManyFromFunctions(new RequirementsOptions(){cultistequalsprisoner=true});
+        Dictionary<Resource,System.Func<int>> HowManyFrom = requirements.HowManyFromFunctions(new RequirementsOptions(){cultistequalsprisoner=option.IsCultistEqualPrisoner()});
         allResourcesOnTable.Sort();
         foreach(Resource resource in HowManyFrom.Keys){
             int howManyDemanded = specialNumbersAmounts(HowManyFrom[resource](),resource);
@@ -285,21 +285,21 @@ public class Option : MonoBehaviour
 
     
 
-    bool RequirementsCanBeMet(RequirementsDO requirements,List<Resource> resourcesOnTable,bool prisonerEqualCultist){
+    bool RequirementsCanBeMet(IRequirementsDO requirements,List<Resource> resourcesOnTable,bool prisonerEqualCultist){
         List<Resource> allResources = new List<Resource>();
         allResources.AddRange(resourcesOnTable);
         allResources.AddRange(Hand.Instance.ResourcesInHand());
-        return SpareResources(requirements,allResources,prisonerEqualCultist)>=0;
+        return SpareResources(requirements,allResources)>=0;
     }
 
-    public void UpdateDO(OptionDO option,int optionNum){
+    public void UpdateDO(IOptionDO option,int optionNum){
         this.option = option;
         this.optionNum = optionNum;
         UpdateSpriteFirstTime();
         Table.Instance.ResourcedOnTableChanged += UpdateSprite;
 
-        output.text = option.outputtext;
-        optionText.text = option.optiontext;
+        output.text = option.GetOutputText();
+        optionText.text = option.GetOptionText();
         AddRequirements();
         AddRewards();
 
@@ -313,9 +313,9 @@ public class Option : MonoBehaviour
 
     List<Resource> GetOptionRequirements(){
         List<Resource> resourceList = new List<Resource>();
-        bool prisonerEqualCultist = option.cultistequalsprisoner==1;
+        bool prisonerEqualCultist = option.IsCultistEqualPrisoner();
 
-        Dictionary<Resource,System.Func<int>> howManyFromFunctions = option.requirements.HowManyFromFunctions();
+        Dictionary<Resource,System.Func<int>> howManyFromFunctions = option.GetRequirements().HowManyFromFunctions();
         foreach(Resource resource in howManyFromFunctions.Keys){
             int howManyToAdd = specialNumbersAmounts(howManyFromFunctions[resource](),resource);
             for(int i =0;i<howManyToAdd;i++){
@@ -348,7 +348,7 @@ public class Option : MonoBehaviour
 
     private List<Resource> GetOptionRewards(){
         List<Resource> resourceList = new List<Resource>();
-        Dictionary<Resource,System.Func<int>> howManyFromFunctions = option.rewards.HowManyFromFunctions();
+        Dictionary<Resource,System.Func<int>> howManyFromFunctions = option.GetRewards().HowManyFromFunctions();
 
         foreach(Resource resource in howManyFromFunctions.Keys){
             for(int i =0;i<howManyFromFunctions[resource]();i++){
@@ -382,7 +382,7 @@ public class Option : MonoBehaviour
             GameObjectsresourceList.RemoveAt(0);
             ResourceExchange NewResource = Instantiate(resourcePrefab,instantiationPlace,transform.rotation,this.transform);
             requirementsObjects.Add(NewResource);
-            if(option.cultistequalsprisoner==0 || (r!=Resource.Cultist && r!=Resource.Prisoner)){
+            if(!option.IsCultistEqualPrisoner() || (r!=Resource.Cultist && r!=Resource.Prisoner)){
                 NewResource.GetComponent<ResourceExchange>().SetSprite(r);
             }
             else{
@@ -440,7 +440,7 @@ public class Option : MonoBehaviour
     }
 
     private bool isEmptyOption(){
-        return option.optiontext=="" && option.outputtext=="" && 
+        return option.GetOptionText()=="" && option.GetOutputText()=="" && 
             GetOptionRewards().Count()==0 && GetOptionRequirements().Count()==0;
     }
 }
@@ -449,7 +449,7 @@ public class Option : MonoBehaviour
 
 
 [System.Serializable]
-public class OptionDO{
+public class OptionDO:IOptionDO{
         public string optiontext;
         public string outputtext;
         public int cultistequalsprisoner;
@@ -460,5 +460,53 @@ public class OptionDO{
         public ShuffleDO shuffle;
         public string iswin;
         public int islose;
+        public bool IsCultistEqualPrisoner()=>cultistequalsprisoner==1;
+        public bool IsAllyEqualReputation()=>false;
+        public IRequirementsDO GetRequirements()=>requirements;
+        public IRewardsDO GetRewards()=>rewards;
+        public string GetOptionText()=>optiontext;
+        public string GetOutputText()=>outputtext;
+        public int RandomRequirements()=>randomrequirements;
+        public ForesightDO GetForesight()=>foresight;
+        public ShuffleDO GetShuffle()=>shuffle;
+        public bool IsLose()=>islose==1;
+        public string IsWin()=>iswin;
+}
 
+public class FightCultOptionDO:IOptionDO{
+    public string optiontext;
+    public string outputtext;
+    public int allyequalreputation;
+    public int randomrequirements;
+    public FightCultRequirementsDO requirements;
+    public FightCultRewardsDO rewards;
+    public ForesightDO foresight;
+    public ShuffleDO shuffle;
+    public string iswin;
+    public int islose;
+    public bool IsCultistEqualPrisoner()=> false;
+    public bool IsAllyEqualReputation()=>allyequalreputation==1;
+    public IRequirementsDO GetRequirements()=>requirements;
+    public IRewardsDO GetRewards()=>rewards;
+    public string GetOptionText()=>optiontext;
+    public string GetOutputText()=>outputtext;
+    public int RandomRequirements()=>randomrequirements;
+    public ForesightDO GetForesight()=>foresight;
+    public ShuffleDO GetShuffle()=>shuffle;
+    public bool IsLose()=>islose==1;
+    public string IsWin()=>iswin;
+}
+
+public interface IOptionDO{
+    public bool IsCultistEqualPrisoner();
+    public bool IsAllyEqualReputation();
+    public IRequirementsDO GetRequirements();
+    public IRewardsDO GetRewards();
+    public string GetOptionText();
+    public string GetOutputText();
+    public int RandomRequirements();
+    public ForesightDO GetForesight();
+    public ShuffleDO GetShuffle();
+    public bool IsLose();
+    public string IsWin();
 }

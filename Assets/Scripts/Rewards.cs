@@ -15,7 +15,7 @@ public class RewardsDO:IRewardsDO{
 	public int food;
 	public int prisoner;
 	public int suspicion;
-
+    public bool CanGiveWildCard()=>relic>0;
     public Dictionary<Resource,System.Func<int>> HowManyFromFunctions(){
         return new Dictionary<Resource, System.Func<int>>(){
             {Resource.Food,()=>food},
@@ -37,6 +37,7 @@ public class FightCultRewardsDO:IRewardsDO{
 	public int ally;
 	public int corruption;
 	public int reputation;
+    public bool CanGiveWildCard()=>holy>0;
     public Dictionary<Resource,System.Func<int>> HowManyFromFunctions(){
         return new Dictionary<Resource, System.Func<int>>(){
             {Resource.Foe,()=>foe},
@@ -52,4 +53,6 @@ public class FightCultRewardsDO:IRewardsDO{
 
 public interface IRewardsDO{
     public Dictionary<Resource,System.Func<int>> HowManyFromFunctions();
+
+    public bool CanGiveWildCard();
 }

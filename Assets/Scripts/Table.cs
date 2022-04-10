@@ -111,8 +111,8 @@ public class Table : MonoBehaviour
         ResourcedOnTableChanged?.Invoke(); 
     }
 
-    public void SpawnRewards(RewardsDO rewards){
-        Dictionary<Resource,System.Func<int>> howManyFromFunctions = HowManyFromFunctions(rewards);
+    public void SpawnRewards(IRewardsDO rewards){
+        Dictionary<Resource,System.Func<int>> howManyFromFunctions = rewards.HowManyFromFunctions();
         foreach(Resource resource in ResourceInfo.GetAllResources()){
             int howManyToAdd = howManyFromFunctions[resource]();
             if(howManyToAdd>0){
@@ -125,18 +125,6 @@ public class Table : MonoBehaviour
         }
 
     }
-
-    Dictionary<Resource,System.Func<int>> HowManyFromFunctions(RewardsDO rewards){
-        return new Dictionary<Resource, System.Func<int>>(){
-            {Resource.Food,()=>rewards.food},
-            {Resource.Money,()=>rewards.money},
-            {Resource.Cultist,()=>rewards.cultist},
-            {Resource.Prisoner,()=>rewards.prisoner},
-            {Resource.Suspision,()=>rewards.suspicion},            
-            {Resource.Relic,()=>rewards.relic},            
-        };
-    } 
-
     public void SacrificeAll(){
 
         bool anyOnTable = false;

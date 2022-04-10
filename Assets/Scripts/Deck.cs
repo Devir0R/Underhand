@@ -347,7 +347,7 @@ public class Deck : MonoBehaviour
         while (toVisit.Count>0){
             CardDO currentCard = toVisit.Dequeue();
             visited.Add(currentCard);
-            if(canGiveRelic(currentCard)){
+            if(canGiveWildCard(currentCard)){
                 return true;
             }
             else{
@@ -381,10 +381,10 @@ public class Deck : MonoBehaviour
 
     }
 
-    bool canGiveRelic(CardDO card){
-        return card.GetOption_1().rewards.relic>0
-            || card.GetOption_2().rewards.relic>0
-            || card.GetOption_3().rewards.relic>0;
+    bool canGiveWildCard(CardDO card){
+        return card.GetOption_1().GetRewards().CanGiveWildCard()
+            || card.GetOption_2().GetRewards().CanGiveWildCard()
+            || card.GetOption_3().GetRewards().CanGiveWildCard();
     }
 
     // Update is called once per frame
