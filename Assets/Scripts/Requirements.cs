@@ -1,20 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Requirements : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
 
 [System.Serializable]
@@ -25,7 +13,6 @@ public class RequirementsDO:IRequirementsDO{
 	public int food;
 	public int prisoner;
 	public int suspicion;
-
     public Dictionary<Resource,System.Func<int>> HowManyFromFunctions(RequirementsOptions options = new RequirementsOptions()){
         if(!options.cultistequalsprisoner)
             return new Dictionary<Resource, System.Func<int>>(){
@@ -71,7 +58,7 @@ public class FightCultRequirementsDO:IRequirementsDO{
             return new Dictionary<Resource, System.Func<int>>(){
                 {Resource.Foe,()=>foe},
                 {Resource.Money,()=>money},
-                {Resource.AllyEqualReputation,()=>ally+reputation},
+                {Resource.AllyReputation,()=>ally+reputation},
                 {Resource.Holy,()=>holy},
                 {Resource.Corruption,()=>corruption},
             };

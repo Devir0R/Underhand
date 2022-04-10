@@ -13,7 +13,7 @@ public static class Loader
     public static List<TextAsset> cardsJsons;
     public static Dictionary<Resource, List<Sprite>> resourcesSpritesDictionary;
     public static void LoadAddressables(){
-        cardsSpriteHandler = Addressables.LoadAssetsAsync<Sprite>("CardsImages", null);
+        cardsSpriteHandler = Addressables.LoadAssetsAsync<Sprite>("CultCardsImages", null);
         cardsSpriteHandler.Completed += handleToCheck=>{
             if(handleToCheck.Status == AsyncOperationStatus.Succeeded)  cardsSprites =  handleToCheck.Result.ToList();
         };

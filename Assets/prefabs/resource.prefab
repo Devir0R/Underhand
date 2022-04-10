@@ -102,4 +102,12 @@ MonoBehaviour:
   Money: {fileID: 21300000, guid: 163649540c3f22247a04e182067f13ec, type: 3}
   Food: {fileID: 21300000, guid: 2f8c3c1a76dc03f49a53ad90563f82c2, type: 3}
   CultistPrisoner: {fileID: 21300000, guid: ea522084fb96cf741808f2fa53e051c6, type: 3}
+  Reputation: {fileID: 21300000, guid: d028f505497d82a43bc63e8cfdbf260f, type: 3}
+  Holy: {fileID: 21300000, guid: 32997e31b841f7e43a75f77da34a607f, type: 3}
+  Foe: {fileID: 21300000, guid: a6271c597e36dc0409a373342a225ab8, type: 3}
+  Corruption: {fileID: 21300000, guid: 81c7492906b8eeb47809c17f39f28a5a, type: 3}
+  Ally: {fileID: 21300000, guid: e21ef85da1e17144880e3ce7ef18d1a6, type: 3}
+  AllyReputation: {fileID: 21300000, guid: f3b14dcd8720d7e42a92feeb4d3fce70, type: 3}
   spriteRenderer: {fileID: 1472505486226532168}
+  greyed: 0
+  myType: 0

@@ -11,6 +11,13 @@ public class ResourceExchange : MonoBehaviour
     public Sprite Food;
     public Sprite CultistPrisoner;
 
+    public Sprite Reputation;
+    public Sprite Holy;
+    public Sprite Foe;
+    public Sprite Corruption;
+    public Sprite Ally;
+    public Sprite AllyReputation;
+
     public SpriteRenderer spriteRenderer;
 
     public bool greyed = false;
@@ -48,6 +55,24 @@ public class ResourceExchange : MonoBehaviour
             break;
             case Resource.PrisonerOrCultist:
                 spriteRenderer.sprite = CultistPrisoner;
+            break;
+           case Resource.Foe:
+                spriteRenderer.sprite = Foe;
+            break;
+            case Resource.Ally:
+                spriteRenderer.sprite = Ally;
+            break;
+            case Resource.Holy:
+                spriteRenderer.sprite = Holy;
+            break;
+            case Resource.Corruption:
+                spriteRenderer.sprite = Corruption;
+            break;
+            case Resource.Reputation:
+                spriteRenderer.sprite = Reputation;
+            break;
+            case Resource.AllyReputation:
+                spriteRenderer.sprite = AllyReputation;
             break;
         }
 
