@@ -29,7 +29,7 @@ public class Card : MonoBehaviour
     
     void Start()
     {
-        if(spriteList==null ||spriteList.Count==0)  spriteList = Loader.cardsSprites;
+        if(spriteList==null ||spriteList.Count==0)  spriteList = Loader.CultCardsSprites;
         optionPrefab.transform.localScale = transform.localScale;
         StartCoroutine(CheckOptions());
     }

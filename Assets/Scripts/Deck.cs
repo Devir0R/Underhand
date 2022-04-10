@@ -103,7 +103,7 @@ public class Deck : MonoBehaviour
                                          worldScreenHeight-spriteRenderer.bounds.size.y/1.8f,
                                          transform.position.z);
         
-        this.allCards = new AllCards(Loader.cardsJsons.Select(json=>JsonConvert.DeserializeObject<CardInfo>(json.text)));
+        this.allCards = new AllCards(Loader.CultCardsJsons.Select(json=>JsonConvert.DeserializeObject<CardInfo>(json.text)));
         this.deck  = this.allCards.allCardsList
             .Where(card=>card.IsInitial())
             .OrderByDescending(card=>Random.value)

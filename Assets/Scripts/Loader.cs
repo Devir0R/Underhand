@@ -5,23 +5,38 @@ using UnityEngine;
 using System.Linq;
 public static class Loader
 {
-    private static AsyncOperationHandle<IList<Sprite>> cardsSpriteHandler;
-    private static AsyncOperationHandle<IList<TextAsset>> cardsJsonsHandler;
+    private static AsyncOperationHandle<IList<Sprite>> cultCardsSpriteHandler;
+    private static AsyncOperationHandle<IList<Sprite>> fightCultCardsSpriteHandler;
+    private static AsyncOperationHandle<IList<TextAsset>> cultCardsJsonsHandler;
+    private static AsyncOperationHandle<IList<TextAsset>> fightCultCardsJsonsHandler;
     private static Dictionary<Resource,AsyncOperationHandle<IList<Sprite>>> resourcesSpritesHandler;
 
-    public static List<Sprite> cardsSprites;
-    public static List<TextAsset> cardsJsons;
+    public static List<Sprite> CultCardsSprites;
+    public static List<Sprite> FightCultCardsSprites;
+    public static List<TextAsset> CultCardsJsons;
+    public static List<TextAsset> FightCultCardsJsons;
     public static Dictionary<Resource, List<Sprite>> resourcesSpritesDictionary;
     public static void LoadAddressables(){
-        cardsSpriteHandler = Addressables.LoadAssetsAsync<Sprite>("CultCardsImages", null);
-        cardsSpriteHandler.Completed += handleToCheck=>{
-            if(handleToCheck.Status == AsyncOperationStatus.Succeeded)  cardsSprites =  handleToCheck.Result.ToList();
+        cultCardsSpriteHandler = Addressables.LoadAssetsAsync<Sprite>("CultCardsImages", null);
+        cultCardsSpriteHandler.Completed += handleToCheck=>{
+            if(handleToCheck.Status == AsyncOperationStatus.Succeeded)  CultCardsSprites =  handleToCheck.Result.ToList();
+        };
+
+        fightCultCardsSpriteHandler = Addressables.LoadAssetsAsync<Sprite>("FightCultCardsImages", null);
+        fightCultCardsSpriteHandler.Completed += handleToCheck=>{
+            if(handleToCheck.Status == AsyncOperationStatus.Succeeded)  FightCultCardsSprites =  handleToCheck.Result.ToList();
         };
 
 
-        cardsJsonsHandler = Addressables.LoadAssetsAsync<TextAsset>("CultJsons", null);
-        cardsJsonsHandler.Completed += handleToCheck=>{
-            if(handleToCheck.Status == AsyncOperationStatus.Succeeded)  cardsJsons =  handleToCheck.Result.ToList();
+        cultCardsJsonsHandler = Addressables.LoadAssetsAsync<TextAsset>("CultJsons", null);
+        cultCardsJsonsHandler.Completed += handleToCheck=>{
+            if(handleToCheck.Status == AsyncOperationStatus.Succeeded)  CultCardsJsons =  handleToCheck.Result.ToList();
+        };
+
+
+        fightCultCardsJsonsHandler = Addressables.LoadAssetsAsync<TextAsset>("FightCultJsons", null);
+        fightCultCardsJsonsHandler.Completed += handleToCheck=>{
+            if(handleToCheck.Status == AsyncOperationStatus.Succeeded)  FightCultCardsJsons =  handleToCheck.Result.ToList();
         };
 
 
@@ -56,9 +71,15 @@ public static class Loader
         //resourceSpriteHandler has 100 images
         //cardsJsonsHandler has 100 jsons so...
         resourcesLoadPercent = (resourcesLoadPercent/ResourceInfo.GetAllResources().Count())*0.16f;
-        float cardsSpritesPercent = cardsSpriteHandler.PercentComplete*.42f;
-        float cardsJsonsPercent = cardsJsonsHandler.PercentComplete*.42f;
+        float cultCardsSpritesPercent = cultCardsSpriteHandler.PercentComplete*.21f;
+        float fightCultCardsSpritesPercent = fightCultCardsSpriteHandler.PercentComplete*.21f;
+        float cultCardsJsonsPercent = cultCardsJsonsHandler.PercentComplete*.21f;
+        float fightCultCardsJsonsPercent = fightCultCardsJsonsHandler.PercentComplete*.21f;
         
-        return resourcesLoadPercent+cardsSpritesPercent+cardsJsonsPercent;
+        return resourcesLoadPercent +
+                cultCardsSpritesPercent + 
+                cultCardsJsonsPercent + 
+                fightCultCardsSpritesPercent + 
+                fightCultCardsJsonsPercent;
     }
 }
