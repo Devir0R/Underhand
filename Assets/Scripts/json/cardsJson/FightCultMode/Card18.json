@@ -2,7 +2,6 @@
 	"num": 19,
 	"title":						"Encounter",
 	"flavortext":					"A trap!",
-	"reputationequalallies": 0,
 	"option1": {
 		"optiontext":				"You barely escape",
 		"outputtext":				"",
@@ -18,6 +17,7 @@
 			"numcards":				0
 		},
 		"randomrequirements":		0,
+		"reputationequalallies": 0,
 		"requirements": {
 			"holy":					0,
 			"money":				0,

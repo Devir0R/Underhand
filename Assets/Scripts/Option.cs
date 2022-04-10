@@ -113,7 +113,7 @@ public class Option : MonoBehaviour
                 ResourceCard.CardOnTableDestroyed +=whenCardsOnTableDestroyed;
                 Table.Instance.SacrificeAll();
             }
-            GameAudio.Instance.AddToQueue(cardDO.title,optionNum);
+            GameAudio.Instance.AddToQueue(cardDO.GetTitle(),optionNum);
             Deck.Instance.AddToDiscard(option.shuffle);
         }
         
@@ -234,8 +234,8 @@ public class Option : MonoBehaviour
     }
 
     bool LockedUnlessZeroOfResource(){
-        Dictionary<Resource,System.Func<int>> howManyFromFunctions = ResourceInfo.HowManyFromFunctions(option.requirements);
-        foreach(Resource resource in ResourceInfo.GetAllResources()){
+        Dictionary<Resource,System.Func<int>> howManyFromFunctions = option.requirements.HowManyFromFunctions();
+        foreach(Resource resource in howManyFromFunctions.Keys){
             if(howManyFromFunctions[resource]()==Hand.ONLY_IF_RESOURCE_IS_ZERO){
                 return Table.Instance.ResourcesOnTable().Where(resourseOnTable=>resourseOnTable==resource).Count() +
                         Hand.Instance.HowManyOfResourceInHand(resource)>0;
@@ -263,7 +263,7 @@ public class Option : MonoBehaviour
         List<Resource> allResourcesOnTable = new List<Resource>();
         allResourcesOnTable.AddRange(resourcesToCover);
 
-        Dictionary<Resource,System.Func<int>> HowManyFrom = ResourceInfo.HowManyFromFunctions(requirements,prisonerEqualCultist);
+        Dictionary<Resource,System.Func<int>> HowManyFrom = requirements.HowManyFromFunctions(new RequirementsOptions(){cultistequalsprisoner=true});
         allResourcesOnTable.Sort();
         foreach(Resource resource in HowManyFrom.Keys){
             int howManyDemanded = specialNumbersAmounts(HowManyFrom[resource](),resource);
@@ -315,7 +315,7 @@ public class Option : MonoBehaviour
         List<Resource> resourceList = new List<Resource>();
         bool prisonerEqualCultist = option.cultistequalsprisoner==1;
 
-        Dictionary<Resource,System.Func<int>> howManyFromFunctions = ResourceInfo.HowManyFromFunctions(option.requirements);
+        Dictionary<Resource,System.Func<int>> howManyFromFunctions = option.requirements.HowManyFromFunctions();
         foreach(Resource resource in howManyFromFunctions.Keys){
             int howManyToAdd = specialNumbersAmounts(howManyFromFunctions[resource](),resource);
             for(int i =0;i<howManyToAdd;i++){
@@ -348,7 +348,7 @@ public class Option : MonoBehaviour
 
     private List<Resource> GetOptionRewards(){
         List<Resource> resourceList = new List<Resource>();
-        Dictionary<Resource,System.Func<int>> howManyFromFunctions = ResourceInfo.HowManyFromFunctions(option.rewards);
+        Dictionary<Resource,System.Func<int>> howManyFromFunctions = option.rewards.HowManyFromFunctions();
 
         foreach(Resource resource in howManyFromFunctions.Keys){
             for(int i =0;i<howManyFromFunctions[resource]();i++){

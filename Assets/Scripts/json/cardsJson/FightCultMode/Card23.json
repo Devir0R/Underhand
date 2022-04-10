@@ -2,7 +2,6 @@
 	"num": 24,
 	"title":						"Cultist Decision",
 	"flavortext":					"Now we know the truth about the cult.",
-	"reputationequalallies": 0,
 	"option1": {
 		"optiontext":				"Join your side",
 		"outputtext":				"",
@@ -18,6 +17,7 @@
 			"numcards":				0
 		},
 		"randomrequirements":		0,
+		"reputationequalallies": 0,
 		"requirements": {
 			"holy":					0,
 			"money":				0,

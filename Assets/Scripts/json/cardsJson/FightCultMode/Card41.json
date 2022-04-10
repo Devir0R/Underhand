@@ -2,7 +2,6 @@
 	"num": 42,
 	"title":						"Festival",
 	"flavortext":					"We don't need reason to celebrate",
-	"reputationequalallies": 0,
 	"option1": {
 		"optiontext":				"Drink with a stranger",
 		"outputtext":				"",
@@ -18,6 +17,7 @@
 			"numcards":				0
 		},
 		"randomrequirements":		0,
+		"reputationequalallies": 0,
 		"requirements": {
 			"holy":					0,
 			"money":				1,

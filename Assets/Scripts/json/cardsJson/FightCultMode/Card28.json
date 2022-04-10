@@ -2,7 +2,6 @@
 	"num": 29,
 	"title":						"Beggar",
 	"flavortext":					"Small act of kindness",
-	"reputationequalallies": 0,
 	"option1": {
 		"optiontext":				"Charity mends the soul.",
 		"outputtext":				"",
@@ -18,6 +17,7 @@
 			"numcards":				0
 		},
 		"randomrequirements":		0,
+		"reputationequalallies": 0,
 		"requirements": {
 			"holy":					0,
 			"money":				1,

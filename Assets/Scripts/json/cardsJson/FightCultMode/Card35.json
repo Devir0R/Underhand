@@ -2,7 +2,6 @@
 	"num": 36,
 	"title":						"Buried Treasure",
 	"flavortext":					"Old and rusty treasure Chest",
-	"reputationequalallies": 0,
 	"option1": {
 		"optiontext":				"Open it",
 		"outputtext":				"Insert 'Treasure'",
@@ -18,6 +17,7 @@
 			"numcards":				1
 		},
 		"randomrequirements":		0,
+		"reputationequalallies": 0,
 		"requirements": {
 			"holy":					0,
 			"money":				0,

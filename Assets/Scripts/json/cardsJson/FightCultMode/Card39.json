@@ -2,7 +2,6 @@
 	"num": 40,
 	"title":						"Treasure",
 	"flavortext":					"The journey was the true reward",
-	"reputationequalallies": 0,
 	"option1": {
 		"optiontext":				"All that glitters is not gold.",
 		"outputtext":				"",
@@ -18,6 +17,7 @@
 			"numcards":				0
 		},
 		"randomrequirements":		0,
+		"reputationequalallies": 0,
 		"requirements": {
 			"holy":					0,
 			"money":				0,

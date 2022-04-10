@@ -2,7 +2,6 @@
 	"num": 11,
 	"title":						"Divine Revelation",
 	"flavortext":					"What the future holds for us?",
-	"reputationequalallies": 0,
 	"option1": {
 		"optiontext":				"",
 		"outputtext":				"Insert x2 'Prophecy'",
@@ -18,6 +17,7 @@
 			"numcards":				2
 		},
 		"randomrequirements":		0,
+		"reputationequalallies": 0,
 		"requirements": {
 			"holy":					0,
 			"money":				0,

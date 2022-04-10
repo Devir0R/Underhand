@@ -52,7 +52,7 @@ public class Deck : MonoBehaviour
 
     }
     public CardDO GetCard(string cardName){
-        return allCards.allCardsList.Find(card=>card.title==cardName);
+        return allCards.allCardsList.Find(card=>card.GetTitle()==cardName);
     }
 
     
@@ -63,14 +63,14 @@ public class Deck : MonoBehaviour
             for(int j=0;j<shuffle.numcards;j++){
                 CardDO cardToAdd;
                 int randomCardNum = randomNumber(shuffle.lowerbound,shuffle.upperbound+1);
-                cardToAdd = allCards.allCardsList.Find(card=>card.num==randomCardNum);
+                cardToAdd = allCards.allCardsList.Find(card=>card.GetNumber()==randomCardNum);
                 if(shuffle.allowsdupes==1 || !cardsToAdd.Contains(cardToAdd)){
                     cardsToAdd.Add(cardToAdd);
                 }
                 else j--;
             }
         }
-        cardsToAdd.AddRange(shuffle.specificids.Select(id=>allCards.allCardsList.Find(card=>card.num==id)));
+        cardsToAdd.AddRange(shuffle.specificids.Select(id=>allCards.allCardsList.Find(card=>card.GetNumber()==id)));
         
         Discard.Instance.discard.AddRange(cardsToAdd);
         triggerInsertCardAnimation = cardsToAdd.Count>0;
@@ -103,16 +103,16 @@ public class Deck : MonoBehaviour
                                          worldScreenHeight-spriteRenderer.bounds.size.y/1.8f,
                                          transform.position.z);
         
-        this.allCards = new AllCards(Loader.cardsJsons.Select(json=>JsonConvert.DeserializeObject<CardDO>(json.text)));
+        this.allCards = new AllCards(Loader.cardsJsons.Select(json=>JsonConvert.DeserializeObject<CardInfo>(json.text)));
         this.deck  = this.allCards.allCardsList
-            .Where(card=>card.isinitial==1)
+            .Where(card=>card.IsInitial())
             .OrderByDescending(card=>Random.value)
             .Take(INITIAL_DECK_SIZE).ToList();
         Discard.Instance.discard = new List<CardDO>();
         this.addRelicCardIfThereIsnt();
         this.insertGods();
         shuffleDeck();
-        // this.deck.Insert(0,allCards.allCardsList.Find(card=>card.num==4));
+        // this.deck.Insert(0,allCards.allCardsList.Find(card=>card.GetNumber()==4));
         // this.deck.RemoveRange(0,3*deck.Count/4);
         this.deckSize = this.deck.Count;
         GameState.GameStart();
@@ -154,7 +154,7 @@ public class Deck : MonoBehaviour
 
         for(int j = 0;j<3 &&j<deck.Count;j++){
             foresightCards.Add(Instantiate(cardPrefab,transform.position,transform.rotation));
-            foresightCards[j].changeSprite(deck[j].num.ToString());
+            foresightCards[j].changeSprite(deck[j].GetNumber().ToString());
             yield return foresightCards[j].MoveTo(transform.position+(Vector3.left*spriteRenderer.bounds.size.x*(j+3)));
         }
         if(!candiscard){
@@ -291,23 +291,23 @@ public class Deck : MonoBehaviour
         foreach(GodDO god in godsInfo.getUnlockedGods()){
             if (god.specialRequirements==0){
                 int startingCard = god.startingCard;
-                CardDO staringCardDO = this.allCards.allCardsList.Find(card=>card.num==startingCard);
-                if (staringCardDO.isTutorial==0){
+                CardDO staringCardDO = this.allCards.allCardsList.Find(card=>card.GetNumber()==startingCard);
+                if (!staringCardDO.IsTutorial()){
                     this.deck.Add(staringCardDO);
                 }
-                if(god.defeated==1) this.deck.AddRange(god.blessings.Select(card_num=>this.allCards.allCardsList.Find(card=>card.num==card_num)));
+                if(god.defeated==1) this.deck.AddRange(god.blessings.Select(card_num=>this.allCards.allCardsList.Find(card=>card.GetNumber()==card_num)));
             }
         }
     }
         
 
     List<CardDO> init_cards(){
-        return this.allCards.allCardsList.Where(card=> card.isinitial!=0).ToList();
+        return this.allCards.allCardsList.Where(card=> card.IsInitial()).ToList();
     }
 
     void addRelicCardIfThereIsnt(){
         if (! this.relicCardInDeck()){
-            List<CardDO> relicCards = this.potentialRelicCards(this.init_cards().Select(init_card=>this.allCards.allCardsList.Find(c=>c.num == init_card.num)).ToList());
+            List<CardDO> relicCards = this.potentialRelicCards(this.init_cards().Select(init_card=>this.allCards.allCardsList.Find(c=>c.GetNumber() == init_card.GetNumber())).ToList());
             CardDO randomRelicCard = relicCards[randomNumber(0,relicCards.Count)];
             int replace_with = randomNumber(0,this.deck.Count);
             this.deck[replace_with] = randomRelicCard;
@@ -325,9 +325,9 @@ public class Deck : MonoBehaviour
     }
 
     bool relicCardInDeck(){
-        HashSet<int> potentialRelicCards = new HashSet<int>(this.potentialRelicCards(this.allCards.allCardsList).Select(card=>card.num));
+        HashSet<int> potentialRelicCards = new HashSet<int>(this.potentialRelicCards(this.allCards.allCardsList).Select(card=>card.GetNumber()));
         foreach(CardDO card in this.deck){
-            if (potentialRelicCards.Contains(card.num)){
+            if (potentialRelicCards.Contains(card.GetNumber())){
                 return true;
             }
         }
@@ -353,7 +353,7 @@ public class Deck : MonoBehaviour
             else{
                 List<int> currentCardPossibleCards = this.possibleShuffleCardsNumbers(currentCard);
                 foreach(int possibleCardNumber in currentCardPossibleCards){
-                    CardDO possibleCard = allCards.allCardsList.Find(one_card=>one_card.num == possibleCardNumber);
+                    CardDO possibleCard = allCards.allCardsList.Find(one_card=>one_card.GetNumber() == possibleCardNumber);
                     if (! visited.Contains(possibleCard)){
                         visited.Add(possibleCard);
                         toVisit.Enqueue(possibleCard);
@@ -365,9 +365,9 @@ public class Deck : MonoBehaviour
     }
 
     List<int> possibleShuffleCardsNumbers(CardDO card){
-        return possibleShuffleCards(card.option1.shuffle)
-            .Concat(possibleShuffleCards(card.option1.shuffle)).
-            Concat(possibleShuffleCards(card.option1.shuffle)).ToList();
+        return possibleShuffleCards(card.GetOption_1().shuffle)
+            .Concat(possibleShuffleCards(card.GetOption_2().shuffle)).
+            Concat(possibleShuffleCards(card.GetOption_3().shuffle)).ToList();
 
     }
 
@@ -382,9 +382,9 @@ public class Deck : MonoBehaviour
     }
 
     bool canGiveRelic(CardDO card){
-        return card.option1.rewards.relic>0
-            || card.option2.rewards.relic>0
-            || card.option3.rewards.relic>0;
+        return card.GetOption_1().rewards.relic>0
+            || card.GetOption_2().rewards.relic>0
+            || card.GetOption_3().rewards.relic>0;
     }
 
     // Update is called once per frame

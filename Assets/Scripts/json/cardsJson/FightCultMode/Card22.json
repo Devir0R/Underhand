@@ -2,7 +2,6 @@
 	"num": 23,
 	"title":						"Branch Of The Cult",
 	"flavortext":					"We can't leave it to be",
-	"reputationequalallies": 0,
 	"option1": {
 		"optiontext":				"Fight Them",
 		"outputtext":				"",
@@ -18,6 +17,7 @@
 			"numcards":				0
 		},
 		"randomrequirements":		0,
+		"reputationequalallies": 0,
 		"requirements": {
 			"holy":					0,
 			"money":				0,

@@ -2,7 +2,6 @@
 	"num": 35,
 	"title":						"Reporter",
 	"flavortext":					"He wants to write about you",
-	"reputationequalallies": 0,
 	"option1": {
 		"optiontext":				"Participate in an interview",
 		"outputtext":				"",
@@ -18,6 +17,7 @@
 			"numcards":				0
 		},
 		"randomrequirements":		0,
+		"reputationequalallies": 0,
 		"requirements": {
 			"holy":					0,
 			"money":				0,

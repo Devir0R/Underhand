@@ -2,7 +2,6 @@
 	"num": 6,
 	"title":						"Undercover Ally",
 	"flavortext":					"Destroy the cult from within",
-	"reputationequalallies": 0,
 	"option1": {
 		"optiontext":				"Infiltrate the cult",
 		"outputtext":				"Insert 'All according to plan'",
@@ -17,6 +16,7 @@
 			"allowsdupes":			0,
 			"numcards":				1
 		},
+		"reputationequalallies": 0,
 		"randomrequirements":		0,
 		"requirements": {
 			"holy":					0,

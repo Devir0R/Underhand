@@ -2,7 +2,6 @@
 	"num": 27,
 	"title":						"Cultist Decision",
 	"flavortext":					"I must seek a decent employment.",
-	"reputationequalallies": 0,
 	"option1": {
 		"optiontext":				"It's all thanks to you",
 		"outputtext":				"",
@@ -18,6 +17,7 @@
 			"numcards":				0
 		},
 		"randomrequirements":		0,
+		"reputationequalallies": 0,
 		"requirements": {
 			"holy":					0,
 			"money":				0,

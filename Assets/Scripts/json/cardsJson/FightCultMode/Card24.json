@@ -2,7 +2,6 @@
 	"num": 25,
 	"title":						"Cultist Decision",
 	"flavortext":					"Our belief is stronger!",
-	"reputationequalallies": 0,
 	"option1": {
 		"optiontext":				"Words can't do everything.",
 		"outputtext":				"",
@@ -18,6 +17,7 @@
 			"numcards":				0
 		},
 		"randomrequirements":		0,
+		"reputationequalallies": 0,
 		"requirements": {
 			"holy":					0,
 			"money":				0,

@@ -2,7 +2,6 @@
 	"num": 30,
 	"title":						"Prisoned Ally",
 	"flavortext":					"You should have chosen your allies better",
-	"reputationequalallies": 0,
 	"option1": {
 		"optiontext":				"Release him on bail",
 		"outputtext":				"",
@@ -18,6 +17,7 @@
 			"numcards":				0
 		},
 		"randomrequirements":		0,
+		"reputationequalallies": 0,
 		"requirements": {
 			"holy":					0,
 			"money":				1,

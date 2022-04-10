@@ -2,7 +2,6 @@
 	"num": 14,
 	"title":						"Prophecy",
 	"flavortext":					"I can't see anything",
-	"reputationequalallies": 0,
 	"option1": {
 		"optiontext":				"There's nothing in my destiny",
 		"outputtext":				"",
@@ -18,6 +17,7 @@
 			"numcards":				0
 		},
 		"randomrequirements":		0,
+		"reputationequalallies": 0,
 		"requirements": {
 			"holy":					0,
 			"money":				0,

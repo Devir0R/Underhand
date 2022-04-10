@@ -2,7 +2,6 @@
 	"num": 7,
 	"title":						"All according to plan",
 	"flavortext":					"I knew this chance like this will come by",
-	"reputationequalallies": 0,
 	"option1": {
 		"optiontext":				"Get rid of them",
 		"outputtext":				"",
@@ -18,6 +17,7 @@
 			"numcards":				0
 		},
 		"randomrequirements":		0,
+		"reputationequalallies": 0,
 		"requirements": {
 			"holy":					0,
 			"money":				0,

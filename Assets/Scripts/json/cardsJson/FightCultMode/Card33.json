@@ -2,7 +2,6 @@
 	"num": 34,
 	"title":						"Damsel in distress",
 	"flavortext":					"You need save the poor lady",
-	"reputationequalallies": 0,
 	"option1": {
 		"optiontext":				"Pay the ransom",
 		"outputtext":				"",
@@ -18,6 +17,7 @@
 			"numcards":				0
 		},
 		"randomrequirements":		0,
+		"reputationequalallies": 0,
 		"requirements": {
 			"holy":					0,
 			"money":				2,

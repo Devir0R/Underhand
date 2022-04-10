@@ -2,7 +2,6 @@
 	"num": 21,
 	"title":						"Encounter",
 	"flavortext":					"Group of cultists performs a dark ritual",
-	"reputationequalallies": 0,
 	"option1": {
 		"optiontext":				"Interfere",
 		"outputtext":				"",
@@ -18,6 +17,7 @@
 			"numcards":				0
 		},
 		"randomrequirements":		0,
+		"reputationequalallies": 0,
 		"requirements": {
 			"holy":					0,
 			"money":				0,

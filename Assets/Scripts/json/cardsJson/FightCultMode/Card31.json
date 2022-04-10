@@ -2,7 +2,6 @@
 	"num": 32,
 	"title":						"Herbalist",
 	"flavortext":					"The best remedies in town",
-	"reputationequalallies": 0,
 	"option1": {
 		"optiontext":				"Herb for a broken mind",
 		"outputtext":				"",
@@ -18,6 +17,7 @@
 			"numcards":				0
 		},
 		"randomrequirements":		0,
+		"reputationequalallies": 0,
 		"requirements": {
 			"holy":					0,
 			"money":				1,

@@ -2,7 +2,6 @@
 	"num": 31,
 	"title":						"Quest",
 	"flavortext":					"I have to make money somehow.",
-	"reputationequalallies": 0,
 	"option1": {
 		"optiontext":				"Find a lost pet",
 		"outputtext":				"",
@@ -18,6 +17,7 @@
 			"numcards":				0
 		},
 		"randomrequirements":		0,
+		"reputationequalallies": 0,
 		"requirements": {
 			"holy":					0,
 			"money":				0,

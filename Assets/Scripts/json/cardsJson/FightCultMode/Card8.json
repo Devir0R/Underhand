@@ -2,7 +2,6 @@
 	"num": 9,
 	"title":						"Passage Of Time",
 	"flavortext":					"Time gives us opportunities",
-	"reputationequalallies": 0,
 	"option1": {
 		"optiontext":				"Time is money",
 		"outputtext":				"",
@@ -18,6 +17,7 @@
 			"numcards":				0
 		},
 		"randomrequirements":		0,
+		"reputationequalallies": 0,
 		"requirements": {
 			"holy":					0,
 			"money":				0,

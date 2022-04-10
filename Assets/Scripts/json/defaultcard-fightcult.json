@@ -2,7 +2,6 @@
 	"num": 0,
 	"title":						"",
 	"flavortext":					"",
-	"reputationequalallies": 0,
 	"option1": {
 		"optiontext":				"",
 		"outputtext":				"",
@@ -17,6 +16,7 @@
 			"allowsdupes":			0,
 			"numcards":				0
 		},
+		"reputationequalallies": 0,
 		"randomrequirements":		0,
 		"requirements": {
 			"holy":					0,

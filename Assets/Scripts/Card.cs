@@ -77,10 +77,10 @@ public class Card : MonoBehaviour
 
     private void CreateOptions(){
         optionPrefab.disableOption = true;
-        optionPrefab.cardDO = currentCardDO;
         options.Add(Instantiate(optionPrefab,transform.position,transform.rotation));
         options.Add(Instantiate(optionPrefab,transform.position,transform.rotation));
         options.Add(Instantiate(optionPrefab,transform.position,transform.rotation));
+        options.ForEach(op=>op.cardDO=currentCardDO);
         spriteRenderer.sortingLayerName = "Card";
 
 
@@ -88,9 +88,9 @@ public class Card : MonoBehaviour
     }
 
     private void UpdateOptions(){
-        options[0].UpdateDO(this.currentCardDO.option1,1);
-        options[1].UpdateDO(this.currentCardDO.option2,2);
-        options[2].UpdateDO(this.currentCardDO.option3,3);
+        options[0].UpdateDO(this.currentCardDO.GetOption_1(),1);
+        options[1].UpdateDO(this.currentCardDO.GetOption_2(),2);
+        options[2].UpdateDO(this.currentCardDO.GetOption_3(),3);
         if(options.All(op=>op.isDormant)){
             options.Where(op=>op.LosingOption()).ToList().ForEach(op=>op.WakeUp());
         }
@@ -127,7 +127,7 @@ public class Card : MonoBehaviour
             options.RemoveAt(0);
             GameObject.Destroy(op.gameObject);
         }
-        if(currentCardDO.isrecurring==0) {
+        if(!currentCardDO.IsRecurring()) {
             if(Deck.Instance.triggerInsertCardAnimation){
                 yield return Discard.Instance.MoveIn();
                 yield return Deck.Instance.CheckIfInsertCard(this);
@@ -141,7 +141,7 @@ public class Card : MonoBehaviour
         else{
             yield return Discard.Instance.MoveIn();
             Discard.Instance.cardToDicard = this;
-            if(currentCardDO.isrecurring==1) Discard.Instance.discard.Add(currentCardDO);         
+            if(currentCardDO.IsRecurring()) Discard.Instance.discard.Add(currentCardDO);         
             StartCoroutine(Discard.Instance.MoveDiscardOut());
         }
     }
@@ -173,7 +173,7 @@ public class Card : MonoBehaviour
                 
                 transform.position =startingPosition+ Vector3.left*((spriteRenderer.bounds.size.x)*((i<180f? i : i-180f)/180f));
                 if(i==90f){
-                    string cardSuffix = spriteRenderer.sprite.name.Contains("back")?  this.currentCardDO.num.ToString(): "back";
+                    string cardSuffix = spriteRenderer.sprite.name.Contains("back")?  this.currentCardDO.GetNumber().ToString(): "back";
                     changeSprite(cardSuffix);
                     i+=180f;
                 }
@@ -188,7 +188,7 @@ public class Card : MonoBehaviour
 
 
 [System.Serializable]
-public class CardDO{
+public class CardInfo:CardDO{
         public string flavortext;
         public string title;
         public int isrecurring;
@@ -201,5 +201,48 @@ public class CardDO{
         public int animationframes;
         public int weight;
         public int cardartdone;
+        public string GetTitle()=>this.title;
+        public bool IsRecurring()=>isrecurring==1;
+        public bool IsInitial()=>isinitial==1;
+        public bool IsTutorial()=>isTutorial==1;
+        public OptionDO GetOption_1()=>option1;
+        public OptionDO GetOption_2()=>option2;
+        public OptionDO GetOption_3()=>option3;
+        public int GetNumber()=>num;
+
+}
+
+public class FightCultCardDO:CardDO{
+        public string flavortext;
+        public string title;
+        public int isrecurring;
+        public int isinitial;
+        public int isTutorial;
+        public OptionDO option1;
+        public OptionDO option2;
+        public OptionDO option3;
+        public int num ;
+        public int animationframes;
+        public int weight;
+        public int cardartdone;
+        public string GetTitle()=>title;
+        public bool IsRecurring()=>isrecurring==1;
+        public bool IsInitial()=>isinitial==1;
+        public bool IsTutorial()=>isTutorial==1;
+        public OptionDO GetOption_1()=>option1;
+        public OptionDO GetOption_2()=>option2;
+        public OptionDO GetOption_3()=>option3;
+        public int GetNumber()=>num;
+}
+
+public interface CardDO{
+    public string GetTitle();
+    public bool IsRecurring();
+    public bool IsInitial();
+    public bool IsTutorial();
+    public OptionDO GetOption_1();
+    public OptionDO GetOption_2();
+    public OptionDO GetOption_3();
+    public int GetNumber();
 
 }

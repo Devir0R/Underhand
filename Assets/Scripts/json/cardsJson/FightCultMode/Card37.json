@@ -2,7 +2,6 @@
 	"num": 38,
 	"title":						"Treasure",
 	"flavortext":					"Gold",
-	"reputationequalallies": 0,
 	"option1": {
 		"optiontext":				"Money cannot hurt",
 		"outputtext":				"",
@@ -18,6 +17,7 @@
 			"numcards":				0
 		},
 		"randomrequirements":		0,
+		"reputationequalallies": 0,
 		"requirements": {
 			"holy":					0,
 			"money":				0,

@@ -2,7 +2,6 @@
 	"num": 41,
 	"title":						"Slave Market",
 	"flavortext":					"What a despicable place.",
-	"reputationequalallies": 0,
 	"option1": {
 		"optiontext":				"Free a slave",
 		"outputtext":				"",
@@ -18,6 +17,7 @@
 			"numcards":				0
 		},
 		"randomrequirements":		0,
+		"reputationequalallies": 0,
 		"requirements": {
 			"holy":					0,
 			"money":				2,

@@ -2,7 +2,6 @@
 	"num": 22,
 	"title":						"Encounter",
 	"flavortext":					"Your dark side",
-	"reputationequalallies": 0,
 	"option1": {
 		"optiontext":				"This is the real me",
 		"outputtext":				"",
@@ -18,6 +17,7 @@
 			"numcards":				0
 		},
 		"randomrequirements":		0,
+		"reputationequalallies": 0,
 		"requirements": {
 			"holy":					0,
 			"money":				0,

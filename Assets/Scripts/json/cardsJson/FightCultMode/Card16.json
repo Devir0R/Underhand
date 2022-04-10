@@ -2,7 +2,6 @@
 	"num": 17,
 	"title":						"Start a Journey",
 	"flavortext":					"Every hero must find his way",
-	"reputationequalallies": 0,
 	"option1": {
 		"optiontext":				"The journey of a Hero is long and unpredictable: ",
 		"outputtext":				"Insert x3 'Encounter'",
@@ -18,6 +17,7 @@
 			"numcards":				3
 		},
 		"randomrequirements":		0,
+		"reputationequalallies": 0,
 		"requirements": {
 			"holy":					0,
 			"money":				0,

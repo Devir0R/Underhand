@@ -2,7 +2,6 @@
 	"num": 26,
 	"title":						"Cultist Decision",
 	"flavortext":					"Leave the cult.",
-	"reputationequalallies": 0,
 	"option1": {
 		"optiontext":				"I don't need to hold it anymore",
 		"outputtext":				"",
@@ -18,6 +17,7 @@
 			"numcards":				0
 		},
 		"randomrequirements":		0,
+		"reputationequalallies": 0,
 		"requirements": {
 			"holy":					0,
 			"money":				0,
