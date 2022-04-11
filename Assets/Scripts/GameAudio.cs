@@ -8,9 +8,10 @@ public class GameAudio : MonoBehaviour
 {
     public AudioSource audioSource;
 
-    public AudioClip Fireplace;
     public AudioClip Dances;
+    public AudioClip Fight;
     public AudioClip Asterope;
+    public AudioClip FantasyMenu;
     public AudioClip SlideSound;
     private static GameAudio _instance;
     public static GameAudio Instance{ get { return _instance; } }
@@ -37,10 +38,10 @@ public class GameAudio : MonoBehaviour
     public void PlayMenuMusic(){
         if(muteAudio) return;
         audioSource.Stop();
-        audioSource.clip = Asterope;
+        audioSource.clip = GameState.GameMode==Mode.FightCult? FantasyMenu: Asterope;
         audioSource.loop = true;
+        audioSource.volume = 0.5f;
         audioSource.Play();
-        audioSource.PlayOneShot(Fireplace);
     }
     
     public void AddToQueue(string cardName, int optionNum){
@@ -102,15 +103,16 @@ public class GameAudio : MonoBehaviour
     }
 
     public void PlayTrack(AudioClip clip){
-        if(!muteSound) audioSource.PlayOneShot(clip);
+        if(!muteSound) audioSource.PlayOneShot(clip,0.5f);
     }
 
     public void PlayGameMusic(){
         if(muteAudio) return;
 
         audioSource.Stop();
-        audioSource.clip = Dances;
+        audioSource.clip = GameState.GameMode==Mode.FightCult? Fight: Dances;
         audioSource.loop = true;
+        audioSource.volume = 0.25f;
         audioSource.Play();
 
     }

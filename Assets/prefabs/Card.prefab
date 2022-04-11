@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 3757492724992295507}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2155036, y: 1.2155036, z: 1}
+  m_LocalScale: {x: 1.071003, y: 1.071003, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -99,106 +99,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGreyed: 0
   spriteRenderer: {fileID: 3757492724992295506}
-  currentCardDO:
-    flavortext: 
-    title: 
-    isrecurring: 0
-    isinitial: 0
-    isTutorial: 0
-    option1:
-      optiontext: 
-      outputtext: 
-      cultistequalsprisoner: 0
-      randomrequirements: 0
-      requirements:
-        relic: 0
-        money: 0
-        cultist: 0
-        food: 0
-        prisoner: 0
-        suspicion: 0
-      rewards:
-        relic: 0
-        money: 0
-        cultist: 0
-        food: 0
-        prisoner: 0
-        suspicion: 0
-      foresight:
-        hasforesight: 0
-        candiscard: 0
-      shuffle:
-        lowerbound: 0
-        upperbound: 0
-        specificids: 
-        allowsdupes: 0
-        numcards: 0
-      iswin: 
-      islose: 0
-    option2:
-      optiontext: 
-      outputtext: 
-      cultistequalsprisoner: 0
-      randomrequirements: 0
-      requirements:
-        relic: 0
-        money: 0
-        cultist: 0
-        food: 0
-        prisoner: 0
-        suspicion: 0
-      rewards:
-        relic: 0
-        money: 0
-        cultist: 0
-        food: 0
-        prisoner: 0
-        suspicion: 0
-      foresight:
-        hasforesight: 0
-        candiscard: 0
-      shuffle:
-        lowerbound: 0
-        upperbound: 0
-        specificids: 
-        allowsdupes: 0
-        numcards: 0
-      iswin: 
-      islose: 0
-    option3:
-      optiontext: 
-      outputtext: 
-      cultistequalsprisoner: 0
-      randomrequirements: 0
-      requirements:
-        relic: 0
-        money: 0
-        cultist: 0
-        food: 0
-        prisoner: 0
-        suspicion: 0
-      rewards:
-        relic: 0
-        money: 0
-        cultist: 0
-        food: 0
-        prisoner: 0
-        suspicion: 0
-      foresight:
-        hasforesight: 0
-        candiscard: 0
-      shuffle:
-        lowerbound: 0
-        upperbound: 0
-        specificids: 
-        allowsdupes: 0
-        numcards: 0
-      iswin: 
-      islose: 0
-    num: 0
-    animationframes: 0
-    weight: 0
-    cardartdone: 0
   optionPrefab: {fileID: 4699331813791409292, guid: 56cda26349c06594a896579717b26ba4, type: 3}
   faceUp: 0
   moveSpeed: 10

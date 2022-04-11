@@ -643,7 +643,9 @@ MonoBehaviour:
   audioSource: {fileID: 1630790529}
   Fireplace: {fileID: 8300000, guid: 2b7fcb6e112a06349b28966cb350f142, type: 3}
   Dances: {fileID: 8300000, guid: 86ebb6f492d68b4479153eed3fa48ff4, type: 3}
+  Fight: {fileID: 8300000, guid: da3cb4ba55e02ab4c996867e1a46a5ef, type: 3}
   Asterope: {fileID: 8300000, guid: 9afac032811b3ca4abab209194792f69, type: 3}
+  FantasyMenu: {fileID: 8300000, guid: efa3b33b7cdf3b7469371404422db42b, type: 3}
   SlideSound: {fileID: 8300000, guid: c88c90d7c935c1d48b52056ccadbb41a, type: 3}
   optionsAudio:
   - cardName: Auction on Relic

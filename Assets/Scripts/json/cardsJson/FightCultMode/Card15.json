@@ -3,7 +3,7 @@
 	"title":						"Cursed Artifact",
 	"flavortext":					"Holy water in ill looking container",
 	"option1": {
-		"optiontext":				"I cant control it",
+		"optiontext":				"I can control it",
 		"outputtext":				"",
 		"foresight": {
 			"hasforesight":			0,
