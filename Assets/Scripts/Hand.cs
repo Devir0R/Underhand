@@ -10,6 +10,8 @@ public class Hand : MonoBehaviour
     public static float GREED_CHANCE = 0.5f;
     public static float POLICE_RAID_CHANCE = 0.5f;
     public static float DESPARATE_MEASURES_CHANCE = 0.5f;
+    public static float CULT_RISES_CHANCE = 0.5f;
+    public static float INNER_DEMONS_CHANCE = 0.5f;
 
     public TextMeshPro cardsNumber;
     private static Hand _instance;
@@ -29,6 +31,8 @@ public class Hand : MonoBehaviour
     public Alert MoreThan15Cards;
     public Alert FiveOrMoreSuspision;
     public Alert NoFood;
+    public Alert FiveOrMoreCorruption;
+    public Alert FiveOrMoreFoe;
 
     private void Awake()
     {

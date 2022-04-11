@@ -248,13 +248,10 @@ public class Deck : MonoBehaviour
     }
 
     CardDO GetAlertCard(){
+        if(Hand.Instance.MoreThan15Cards.isOn && Random.value>=Hand.GREED_CHANCE) return GetCard("Greed");
+
         if(GameState.GameMode==Mode.Cult){
-            if(Hand.Instance.MoreThan15Cards.isOn){
-                if( Random.value>=Hand.GREED_CHANCE){
-                    return GetCard("Greed");
-                }
-            }
-            else if(Hand.Instance.FiveOrMoreSuspision.isOn){
+            if(Hand.Instance.FiveOrMoreSuspision.isOn){
                 if(Random.value>=Hand.POLICE_RAID_CHANCE){
                     return GetCard("Police Raid");
                 }
@@ -264,10 +261,18 @@ public class Deck : MonoBehaviour
                     return GetCard("Desperate Measures");
                 }
             }
-            return null;
         }
         else if(GameState.GameMode==Mode.FightCult){
-            return null;
+            if(Hand.Instance.FiveOrMoreCorruption.isOn){
+                if(Random.value>=Hand.INNER_DEMONS_CHANCE){
+                    return GetCard("Face Your Inner Demons");
+                }
+            }
+            else if(Hand.Instance.FiveOrMoreFoe.isOn){
+                if(Random.value>=Hand.CULT_RISES_CHANCE){
+                    return GetCard("The Cult Rises To Power");
+                }
+            }
         }
         return null;
     }

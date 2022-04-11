@@ -286,19 +286,19 @@ class ResourceInfo{
                 Resource.Suspision, new ResourceInfo(Resource.Suspision,"SuspisionImages",new Color(181f/255,81f/255,51f/255))
             },
             {
-                Resource.Ally, new ResourceInfo(Resource.Ally,"AllyImages",new Color(126f/255,141f/255,66f/255))
+                Resource.Ally, new ResourceInfo(Resource.Ally,"AllyImages",new Color(76f/255,178f/255,8f/255))
             },
             {
-                Resource.Foe, new ResourceInfo(Resource.Foe,"FoeImages", new Color(168f/255,122f/255,125f/255))
+                Resource.Foe, new ResourceInfo(Resource.Foe,"FoeImages", new Color(208f/255,43f/255,27f/255))
             },
             {
-                Resource.Corruption, new ResourceInfo(Resource.Corruption,"CorruptionImages",new Color(156f/255,172f/255,157f/255))
+                Resource.Corruption, new ResourceInfo(Resource.Corruption,"CorruptionImages",new Color(41f/255,41f/255,41f/255))
             },
             {
                 Resource.Holy, new ResourceInfo(Resource.Holy,"HolyImages",new Color(255f/255,255f/255,255f/255))
             },
             {
-                Resource.Reputation, new ResourceInfo(Resource.Reputation,"ReputationImages",new Color(181f/255,81f/255,51f/255))
+                Resource.Reputation, new ResourceInfo(Resource.Reputation,"ReputationImages",new Color(231f/255,182f/255,39f/255))
             },
         };
 }

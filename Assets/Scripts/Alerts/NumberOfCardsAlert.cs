@@ -5,7 +5,7 @@ public class NumberOfCardsAlert : Alert
     new void Start()
     {
         base.Start();
-        ActiveOnMode = Mode.Cult;
+        ActiveOnModes = new Mode[]{Mode.Cult,Mode.FightCult};
         condition = new MoreThan15Cards();
 
     }

@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System.Linq;
 public class Alert : MonoBehaviour
 {
     public int framesBetweenBlinks = 15;
@@ -7,7 +7,7 @@ public class Alert : MonoBehaviour
     private int currentFrame = 0;
     public bool isOn = false;
 
-    public Mode ActiveOnMode = Mode.Cult;
+    public Mode[] ActiveOnModes = new Mode[]{Mode.Cult};
     public AlertCondition condition;
     // Start is called before the first frame update
     public void Start()
@@ -19,7 +19,7 @@ public class Alert : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(GameState.GameMode==ActiveOnMode){
+        if(ActiveOnModes.Contains(GameState.GameMode)){
             if(isOn){
                 if(timesBlinked<3){
                     currentFrame++;

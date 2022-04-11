@@ -4,7 +4,7 @@ public class SuspisionOverloadAlert : Alert
     new void Start()
     {
         base.Start();
-        ActiveOnMode = Mode.Cult;
+        ActiveOnModes = new Mode[]{Mode.Cult};
         condition = new FiveOrMoreSuspision();
 
 

@@ -1,10 +1,10 @@
 {
-	"num": 35,
-	"title":						"Reporter",
-	"flavortext":					"He wants to write about you",
+	"num": 56,
+	"title":						"Greed",
+	"flavortext":					"We mustn't be like them.",
 	"option1": {
-		"optiontext":				"Participate in an interview",
-		"outputtext":				"",
+		"optiontext":				"Punished accordingly",
+		"outputtext":				"Discard 5 cards at random",
 		"foresight": {
 				"hasforesight": 		0,
 				"candiscard": 			0
@@ -16,8 +16,8 @@
 			"allowsdupes":			0,
 			"numcards":				0
 		},
-		"randomrequirements":		0,
 		"reputationequalallies": 0,
+		"randomrequirements":		5,
 		"requirements": {
 			"holy":					0,
 			"money":				0,
@@ -30,7 +30,7 @@
 			"holy":					0,
 			"money":				0,
 			"foe":					0,
-			"reputation":			1,
+			"reputation":			0,
 			"ally":					0,
 			"corruption":			0
 		},
@@ -38,7 +38,7 @@
 		"islose":					0
 		},
 	"option2": {
-		"optiontext":				"Hire him",
+		"optiontext":				"Clean my soul",
 		"reputationequalallies": 0,
 		"outputtext":				"",
 		"foresight": {
@@ -54,8 +54,8 @@
 		},
 		"randomrequirements":		0,
 		"requirements": {
-			"holy":					0,
-			"money":				1,
+			"holy":					2,
+			"money":				0,
 			"foe":					0,
 			"reputation":			0,
 			"ally":					0,
@@ -65,15 +65,15 @@
 			"holy":					0,
 			"money":				0,
 			"foe":					0,
-			"reputation":			1,
-			"ally":					1,
+			"reputation":			0,
+			"ally":					0,
 			"corruption":			0
 		},
 		"iswin":					"",
 		"islose":					0
 	},
 	"option3": {
-		"optiontext":				"Brag about your prophecy",
+		"optiontext":				"",
 		"outputtext":				"",
 		"reputationequalallies": 0,
 		"foresight": {
@@ -100,16 +100,16 @@
 			"holy":					0,
 			"money":				0,
 			"foe":					0,
-			"reputation":			1,
-			"ally":					1,
-			"corruption":			1
+			"reputation":			0,
+			"ally":					0,
+			"corruption":			0
 		},
 		"iswin":					"",
 		"islose":					0
 	},
 	"isTutorial": 0,
-	"isinitial":					1,
-	"isrecurring":					1,
+	"isinitial":					0,
+	"isrecurring":					0,
 	"animationframes":				1,
 	"weight": 						1,
 	"cardartdone":					0

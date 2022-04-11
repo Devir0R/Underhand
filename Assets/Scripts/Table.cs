@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -93,15 +92,27 @@ public class Table : MonoBehaviour
     void Start()
     {
         Vector3 size = ResourceOnTablePrefab.spriteRenderer.bounds.size;
+        if(GameState.GameMode==Mode.FightCult){
+           ResourceInfo.Info[Resource.Money].resourcePositionOnTable = MoneyPosition;
+            ResourceInfo.Info[Resource.Ally].resourcePositionOnTable = new Vector3(MoneyPosition.x,MoneyPosition.y+(size.y*1.2f),transform.position.z);
+            Vector3 AllyPosition = ResourceInfo.Info[Resource.Ally].resourcePositionOnTable;
 
-        ResourceInfo.Info[Resource.Money].resourcePositionOnTable = MoneyPosition;
-        ResourceInfo.Info[Resource.Prisoner].resourcePositionOnTable = new Vector3(MoneyPosition.x,MoneyPosition.y+(size.y*1.2f),transform.position.z);
-        Vector3 PrisonerPosition = ResourceInfo.Info[Resource.Prisoner].resourcePositionOnTable;
+            ResourceInfo.Info[Resource.Corruption].resourcePositionOnTable = new Vector3(AllyPosition.x-size.x,AllyPosition.y,transform.position.z);
+            ResourceInfo.Info[Resource.Foe].resourcePositionOnTable = new Vector3(AllyPosition.x+size.x,AllyPosition.y,transform.position.z);
+            ResourceInfo.Info[Resource.Reputation].resourcePositionOnTable = new Vector3(MoneyPosition.x+size.x,MoneyPosition.y,transform.position.z);
+            ResourceInfo.Info[Resource.Holy].resourcePositionOnTable = new Vector3(MoneyPosition.x-size.x,MoneyPosition.y,transform.position.z);
+        }
+        else{
+            ResourceInfo.Info[Resource.Money].resourcePositionOnTable = MoneyPosition;
+            ResourceInfo.Info[Resource.Prisoner].resourcePositionOnTable = new Vector3(MoneyPosition.x,MoneyPosition.y+(size.y*1.2f),transform.position.z);
+            Vector3 PrisonerPosition = ResourceInfo.Info[Resource.Prisoner].resourcePositionOnTable;
 
-        ResourceInfo.Info[Resource.Food].resourcePositionOnTable = new Vector3(PrisonerPosition.x-size.x,PrisonerPosition.y,transform.position.z);
-        ResourceInfo.Info[Resource.Suspision].resourcePositionOnTable = new Vector3(PrisonerPosition.x+size.x,PrisonerPosition.y,transform.position.z);
-        ResourceInfo.Info[Resource.Cultist].resourcePositionOnTable = new Vector3(MoneyPosition.x+size.x,MoneyPosition.y,transform.position.z);
-        ResourceInfo.Info[Resource.Relic].resourcePositionOnTable = new Vector3(MoneyPosition.x-size.x,MoneyPosition.y,transform.position.z);
+            ResourceInfo.Info[Resource.Food].resourcePositionOnTable = new Vector3(PrisonerPosition.x-size.x,PrisonerPosition.y,transform.position.z);
+            ResourceInfo.Info[Resource.Suspision].resourcePositionOnTable = new Vector3(PrisonerPosition.x+size.x,PrisonerPosition.y,transform.position.z);
+            ResourceInfo.Info[Resource.Cultist].resourcePositionOnTable = new Vector3(MoneyPosition.x+size.x,MoneyPosition.y,transform.position.z);
+            ResourceInfo.Info[Resource.Relic].resourcePositionOnTable = new Vector3(MoneyPosition.x-size.x,MoneyPosition.y,transform.position.z);
+        }
+        
 
     }
 

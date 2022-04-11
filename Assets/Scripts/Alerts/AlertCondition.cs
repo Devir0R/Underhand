@@ -32,3 +32,19 @@ public class FiveOrMoreSuspision : AlertCondition{
         return resourcesOnTable+ResourcesInHand>=5;
     }
 }
+
+public class FiveOrMoreCorrpution : AlertCondition{
+    public bool Check(){
+        int resourcesOnTable = Table.Instance.ResourcesOnTable().Where(res=>res==Resource.Corruption).Count();
+        int ResourcesInHand = Hand.Instance.HowManyOfResourceInHand(Resource.Corruption);
+        return resourcesOnTable+ResourcesInHand>=5;
+    }
+}
+
+public class FiveOrMoreFoe : AlertCondition{
+    public bool Check(){
+        int resourcesOnTable = Table.Instance.ResourcesOnTable().Where(res=>res==Resource.Foe).Count();
+        int ResourcesInHand = Hand.Instance.HowManyOfResourceInHand(Resource.Foe);
+        return resourcesOnTable+ResourcesInHand>=5;
+    }
+}
