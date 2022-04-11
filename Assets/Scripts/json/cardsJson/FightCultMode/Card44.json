@@ -1,0 +1,116 @@
+{
+	"num": 45,
+	"title":						"The Haunted Jungle",
+	"flavortext":					"In the canopy-darkness the trail ends and the road forks.",
+	"option1": {
+		"optiontext":				"Turn left",
+		"outputtext":				"Insert the next Expedition",
+		"foresight": {
+				"hasforesight": 		0,
+				"candiscard": 			0
+		},
+		"shuffle": {
+			"lowerbound":			999,
+			"upperbound":			999,
+			"specificids":			[47],
+			"allowsdupes":			0,
+			"numcards":				1
+		},
+		"reputationequalallies": 0,
+		"randomrequirements":		0,
+		"requirements": {
+			"holy":					0,
+			"money":				0,
+			"foe":					0,
+			"reputation":			0,
+			"ally":					0,
+			"corruption":			0
+		},
+		"rewards": {
+			"holy":					0,
+			"money":				0,
+			"foe":					0,
+			"reputation":			0,
+			"ally":					0,
+			"corruption":			0
+		},
+		"iswin":					"",
+		"islose":					0
+		},
+	"option2": {
+		"optiontext":				"Turn right",
+		"reputationequalallies": 0,
+		"outputtext":				"Insert the next expedition.",
+		"foresight": {
+				"hasforesight": 		0,
+				"candiscard": 			0
+		},
+		"shuffle": {
+			"lowerbound":			999,
+			"upperbound":			999,
+			"specificids":			[45],
+			"allowsdupes":			0,
+			"numcards":				1
+		},
+		"randomrequirements":		0,
+		"requirements": {
+			"holy":					0,
+			"money":				0,
+			"foe":					0,
+			"reputation":			0,
+			"ally":					0,
+			"corruption":			0
+		},
+		"rewards": {
+			"holy":					0,
+			"money":				0,
+			"foe":					0,
+			"reputation":			0,
+			"ally":					0,
+			"corruption":			0
+		},
+		"iswin":					"",
+		"islose":					0
+	},
+	"option3": {
+		"optiontext":				"Turn back",
+		"outputtext":				"Insert Expedition.",
+		"reputationequalallies": 0,
+		"foresight": {
+				"hasforesight": 		0,
+				"candiscard": 			0
+		},
+		"shuffle": {
+			"lowerbound":			999,
+			"upperbound":			999,
+			"specificids":			[44],
+			"allowsdupes":			0,
+			"numcards":				1
+		},
+		"randomrequirements":		0,
+		"requirements": {
+			"holy":					0,
+			"money":				0,
+			"foe":					0,
+			"reputation":			0,
+			"ally":					0,
+			"corruption":			0
+		},
+		"rewards": {
+			"holy":					0,
+			"money":				0,
+			"foe":					0,
+			"reputation":			0,
+			"ally":					0,
+			"corruption":			0
+		},
+		"iswin":					"",
+		"islose":					0
+	},
+	"isTutorial": 0,
+	"isinitial":					0,
+	"isrecurring":					0,
+	"animationframes":				1,
+	"weight": 						1,
+	"cardartdone":					0
+}

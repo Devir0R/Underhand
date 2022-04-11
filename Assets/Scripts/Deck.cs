@@ -12,7 +12,7 @@ public class Deck : MonoBehaviour
     public SpriteRenderer spriteRenderer;
 
     public TextAsset godsJSON;
-    public TextAsset leadersJSON;
+    public TextAsset cultsJSON;
     AllCards allCards;
     public List<CardDO>  deck;
     public Sprite[] spriteArray;
@@ -298,22 +298,18 @@ public class Deck : MonoBehaviour
     }
 
     void insertWinCards(){
-        if(GameState.GameMode==Mode.Cult){
-            this.godsInfo = new Gods(GameState.GameMode==Mode.FightCult? leadersJSON : godsJSON);
-            foreach(GodDO god in godsInfo.getUnlockedGods()){
-                if (god.specialRequirements==0){
-                    int startingCard = god.startingCard;
-                    CardDO staringCardDO = this.allCards.allCardsList.Find(card=>card.GetNumber()==startingCard);
-                    if (!staringCardDO.IsTutorial()){
-                        this.deck.Add(staringCardDO);
-                    }
-                    if(god.defeated==1) this.deck.AddRange(god.blessings.Select(card_num=>this.allCards.allCardsList.Find(card=>card.GetNumber()==card_num)));
+        this.godsInfo = new Gods(GameState.GameMode==Mode.FightCult? cultsJSON : godsJSON);
+        foreach(GodDO god in godsInfo.getUnlockedGods()){
+            if (god.specialRequirements==0){
+                int startingCard = god.startingCard;
+                CardDO staringCardDO = this.allCards.allCardsList.Find(card=>card.GetNumber()==startingCard);
+                if (!staringCardDO.IsTutorial()){
+                    this.deck.Add(staringCardDO);
                 }
+                if(god.defeated==1) this.deck.AddRange(god.blessings.Select(card_num=>this.allCards.allCardsList.Find(card=>card.GetNumber()==card_num)));
             }
         }
-        else{
 
-        }
     }
         
 

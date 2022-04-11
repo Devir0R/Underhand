@@ -1,0 +1,116 @@
+{
+	"num": 52,
+	"title":						"Cult Hideout",
+	"flavortext":					"We can learn their secrets",
+	"option1": {
+		"optiontext":				"use connectios to learn them",
+		"outputtext":				"Foresight",
+		"foresight": {
+				"hasforesight": 		1,
+				"candiscard": 			0
+		},
+		"shuffle": {
+			"lowerbound":			999,
+			"upperbound":			999,
+			"specificids":			[],
+			"allowsdupes":			0,
+			"numcards":				0
+		},
+		"reputationequalallies": 0,
+		"randomrequirements":		0,
+		"requirements": {
+			"holy":					0,
+			"money":				0,
+			"foe":					0,
+			"reputation":			1,
+			"ally":					0,
+			"corruption":			0
+		},
+		"rewards": {
+			"holy":					0,
+			"money":				0,
+			"foe":					0,
+			"reputation":			0,
+			"ally":					0,
+			"corruption":			0
+		},
+		"iswin":					"",
+		"islose":					0
+		},
+	"option2": {
+		"optiontext":				"We can't be seen entering here",
+		"reputationequalallies": 0,
+		"outputtext":				"",
+		"foresight": {
+				"hasforesight": 		0,
+				"candiscard": 			0
+		},
+		"shuffle": {
+			"lowerbound":			999,
+			"upperbound":			999,
+			"specificids":			[],
+			"allowsdupes":			0,
+			"numcards":				0
+		},
+		"randomrequirements":		0,
+		"requirements": {
+			"holy":					0,
+			"money":				0,
+			"foe":					0,
+			"reputation":			0,
+			"ally":					0,
+			"corruption":			0
+		},
+		"rewards": {
+			"holy":					0,
+			"money":				0,
+			"foe":					0,
+			"reputation":			0,
+			"ally":					0,
+			"corruption":			0
+		},
+		"iswin":					"",
+		"islose":					0
+	},
+	"option3": {
+		"optiontext":				"",
+		"outputtext":				"",
+		"reputationequalallies": 0,
+		"foresight": {
+				"hasforesight": 		0,
+				"candiscard": 			0
+		},
+		"shuffle": {
+			"lowerbound":			999,
+			"upperbound":			999,
+			"specificids":			[],
+			"allowsdupes":			0,
+			"numcards":				0
+		},
+		"randomrequirements":		0,
+		"requirements": {
+			"holy":					0,
+			"money":				0,
+			"foe":					0,
+			"reputation":			0,
+			"ally":					0,
+			"corruption":			0
+		},
+		"rewards": {
+			"holy":					0,
+			"money":				0,
+			"foe":					0,
+			"reputation":			0,
+			"ally":					0,
+			"corruption":			0
+		},
+		"iswin":					"",
+		"islose":					0
+	},
+	"isTutorial": 0,
+	"isinitial":					0,
+	"isrecurring":					0,
+	"animationframes":				1,
+	"weight": 						1,
+	"cardartdone":					0
+}

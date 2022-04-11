@@ -6,8 +6,8 @@
 		"optiontext":				"Charity mends the soul.",
 		"outputtext":				"",
 		"foresight": {
-			"hasforesight":			0,
-			"numcards":				0
+				"hasforesight": 		0,
+				"candiscard": 			0
 		},
 		"shuffle": {
 			"lowerbound":			999,
@@ -38,12 +38,12 @@
 		"islose":					0
 		},
 	"option2": {
-		"optiontext":				"Pull connections to give him a job",
+		"optiontext":				"Give him a job",
 		"reputationequalallies": 0,
 		"outputtext":				"",
 		"foresight": {
-			"hasforesight":			0,
-			"numcards":				0
+				"hasforesight": 		0,
+				"candiscard": 			0
 		},
 		"shuffle": {
 			"lowerbound":			999,
@@ -77,8 +77,8 @@
 		"outputtext":				"",
 		"reputationequalallies": 0,
 		"foresight": {
-			"hasforesight":			0,
-			"numcards":				0
+				"hasforesight": 		0,
+				"candiscard": 			0
 		},
 		"shuffle": {
 			"lowerbound":			999,

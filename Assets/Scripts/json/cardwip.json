@@ -3248,7 +3248,7 @@
 		"cardartdone":					1
 	},
 	{
-				"num": 29,
+		"num": 29,
 		"title":						"Rumors of Darkness",
 		"flavortext":					"Whispers of ancient ruins in the jungle",
 		"option1": {
@@ -3364,7 +3364,7 @@
 		"cardartdone":					1
 	},
 	{
-				"num": 30,
+		"num": 30,
 		"title":						"An Expedition",
 		"flavortext":					"Fortune and glory",
 		"option1": {

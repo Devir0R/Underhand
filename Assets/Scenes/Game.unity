@@ -220,6 +220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   framesBetweenBlinks: 6
   isOn: 0
+  ActiveOnMode: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,7 +501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 909605309}
   godsJSON: {fileID: 4900000, guid: 893c4f1138cb21142b8129377d8b6ced, type: 3}
-  deck: []
+  cultsJSON: {fileID: 4900000, guid: c293e7bedc0be544c9c89780c41796aa, type: 3}
   spriteArray:
   - {fileID: 1113812728336201195, guid: bdb6684b60f557b4380efe1924d03d7a, type: 3}
   - {fileID: 5134120919787300631, guid: bdb6684b60f557b4380efe1924d03d7a, type: 3}
@@ -1367,6 +1368,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   framesBetweenBlinks: 6
   isOn: 0
+  ActiveOnMode: 0
 --- !u!1 &1554141146
 GameObject:
   m_ObjectHideFlags: 0
@@ -1572,7 +1574,6 @@ MonoBehaviour:
   - {fileID: -8636438075815445334, guid: bdb6684b60f557b4380efe1924d03d7a, type: 3}
   - {fileID: 5134120919787300631, guid: bdb6684b60f557b4380efe1924d03d7a, type: 3}
   - {fileID: -681101681698349018, guid: bdb6684b60f557b4380efe1924d03d7a, type: 3}
-  discard: []
   spriteRenderer: {fileID: 1686722277}
   cardToDicard: {fileID: 0}
   cardPrefab: {fileID: 0}
@@ -1764,6 +1765,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   framesBetweenBlinks: 6
   isOn: 0
+  ActiveOnMode: 0
 --- !u!1 &1980228878
 GameObject:
   m_ObjectHideFlags: 0

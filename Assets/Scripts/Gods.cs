@@ -68,7 +68,7 @@ public class Gods
     }
 
     private static string PlaceToSave(){
-        return Application.persistentDataPath + (GameState.GameMode == Mode.FightCult? "/leaders.json" : "/gods.json");
+        return Application.persistentDataPath + (GameState.GameMode == Mode.FightCult? "/cults.json" : "/gods.json");
     }
 }
 

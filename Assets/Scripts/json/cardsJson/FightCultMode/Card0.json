@@ -7,8 +7,8 @@
 		"outputtext":				"",
 		"reputationequalallies": 0,
 		"foresight": {
-			"hasforesight":			0,
-			"numcards":				0
+				"hasforesight": 		0,
+				"candiscard": 			0
 		},
 		"shuffle": {
 			"lowerbound":			999,
@@ -42,8 +42,8 @@
 		"outputtext":				"",
 		"reputationequalallies": 0,
 		"foresight": {
-			"hasforesight":			0,
-			"numcards":				0
+				"hasforesight": 		0,
+				"candiscard": 			0
 		},
 		"shuffle": {
 			"lowerbound":			999,
@@ -77,8 +77,8 @@
 		"outputtext":				"",
 		"reputationequalallies": 0,
 		"foresight": {
-			"hasforesight":			0,
-			"numcards":				0
+				"hasforesight": 		0,
+				"candiscard": 			0
 		},
 		"shuffle": {
 			"lowerbound":			999,

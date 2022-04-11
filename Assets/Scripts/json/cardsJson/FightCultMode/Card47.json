@@ -1,0 +1,116 @@
+{
+	"num": 48,
+	"title":						"Demons.",
+	"flavortext":					"The cult is nowhere to be found.",
+	"option1": {
+		"optiontext":				"The demons scare you away",
+		"outputtext":				"Insert Expedition.",
+		"foresight": {
+				"hasforesight": 		0,
+				"candiscard": 			0
+		},
+		"shuffle": {
+			"lowerbound":			999,
+			"upperbound":			999,
+			"specificids":			[44],
+			"allowsdupes":			0,
+			"numcards":				1
+		},
+		"reputationequalallies": 0,
+		"randomrequirements":		0,
+		"requirements": {
+			"holy":					0,
+			"money":				0,
+			"foe":					0,
+			"reputation":			420,
+			"ally":					0,
+			"corruption":			0
+		},
+		"rewards": {
+			"holy":					0,
+			"money":				0,
+			"foe":					0,
+			"reputation":			0,
+			"ally":					0,
+			"corruption":			0
+		},
+		"iswin":					"",
+		"islose":					0
+		},
+	"option2": {
+		"optiontext":				"Go deeper.",
+		"reputationequalallies": 0,
+		"outputtext":				"They taint your heart",
+		"foresight": {
+				"hasforesight": 		0,
+				"candiscard": 			0
+		},
+		"shuffle": {
+			"lowerbound":			999,
+			"upperbound":			999,
+			"specificids":			[47],
+			"allowsdupes":			0,
+			"numcards":				1
+		},
+		"randomrequirements":		0,
+		"requirements": {
+			"holy":					0,
+			"money":				0,
+			"foe":					0,
+			"reputation":			0,
+			"ally":					0,
+			"corruption":			0
+		},
+		"rewards": {
+			"holy":					0,
+			"money":				0,
+			"foe":					0,
+			"reputation":			0,
+			"ally":					0,
+			"corruption":			3
+		},
+		"iswin":					"",
+		"islose":					0
+	},
+	"option3": {
+		"optiontext":				"",
+		"outputtext":				"",
+		"reputationequalallies": 0,
+		"foresight": {
+				"hasforesight": 		0,
+				"candiscard": 			0
+		},
+		"shuffle": {
+			"lowerbound":			999,
+			"upperbound":			999,
+			"specificids":			[],
+			"allowsdupes":			0,
+			"numcards":				0
+		},
+		"randomrequirements":		0,
+		"requirements": {
+			"holy":					0,
+			"money":				0,
+			"foe":					0,
+			"reputation":			0,
+			"ally":					0,
+			"corruption":			0
+		},
+		"rewards": {
+			"holy":					0,
+			"money":				0,
+			"foe":					0,
+			"reputation":			0,
+			"ally":					0,
+			"corruption":			0
+		},
+		"iswin":					"",
+		"islose":					0
+	},
+	"isTutorial": 0,
+	"isinitial":					0,
+	"isrecurring":					0,
+	"animationframes":				1,
+	"weight": 						1,
+	"cardartdone":					0
+}

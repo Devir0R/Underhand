@@ -1,0 +1,16 @@
+{
+  "gods": [
+    {
+      "num": 0,
+      "name": "Rhyabaax Cult",
+      "defeated": 0,
+      "blessings": [
+        51,
+        52
+      ],
+      "dependency": [],
+      "startingCard": 43,
+      "specialRequirements": 0
+    }
+  ]
+}
