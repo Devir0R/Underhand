@@ -21,10 +21,10 @@
 		"requirements": {
 			"holy":					0,
 			"money":				0,
-			"foe":					0,
+			"foe":					2,
 			"reputation":			0,
 			"ally":					2,
-			"corruption":			2
+			"corruption":			0
 		},
 		"rewards": {
 			"holy":					0,
