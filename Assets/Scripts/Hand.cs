@@ -34,6 +34,23 @@ public class Hand : MonoBehaviour
     public Alert FiveOrMoreCorruption;
     public Alert FiveOrMoreFoe;
 
+    public void WiggleResources(IOptionDO option){
+        var howManyFromFunctions = 
+            option.GetRequirements()
+                    .HowManyFromFunctions(new RequirementsOptions()
+                    {
+                        allyequalreputation=option.IsAllyEqualReputation(),
+                        cultistequalsprisoner=option.IsCultistEqualPrisoner()
+                    });
+        foreach(Resource resource in howManyFromFunctions.Keys){
+            if(howManyFromFunctions[resource]()>0){
+                foreach(ResourceCard card in hand){
+                    if(resource.IsCoveredBy(card.resourceType)) card.Wiggle();
+                }
+            }
+        }
+    }
+
     private void Awake()
     {
         if (_instance != null && _instance != this)

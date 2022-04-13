@@ -16,17 +16,30 @@ public class Card : MonoBehaviour
     private Camera mainCamera;
 
 
-    private void Awake(){
-        mainCamera = Camera.main;
-    }
 
     public bool faceUp = false;
 
     public float moveSpeed = 10f;
 
     public AudioClip flipSound;
+    public InputAction MouseEnter;
 
-    
+    public void OnMouseOver(InputAction.CallbackContext context){
+        if(IsMouseOnMe())   spriteRenderer.material.color =Color.Lerp(Color.white,Color.gray,0.5f);
+        else spriteRenderer.material.color = Color.white;
+    }
+
+
+    void OnDestroy(){
+        MouseEnter.performed -= OnMouseOver;
+        MouseEnter.Disable();
+    }
+
+    private void Awake(){
+        mainCamera = Camera.main;
+        MouseEnter.performed += OnMouseOver;
+        MouseEnter.Enable();
+    }
     void Start()
     {
         if(spriteList==null ||spriteList.Count==0){
@@ -160,8 +173,22 @@ public class Card : MonoBehaviour
     public IEnumerator FlipAndMoveUp(){
         yield return FlipCard();
         CreateOptions();
-        yield return new WaitForSeconds(0.35f);
-        yield return MoveCardUp();
+    }
+
+    public void OnClickMoveUp(InputAction.CallbackContext context)
+    {
+        if(context.performed && IsMouseOnMe())   StartCoroutine(MoveCardUp());
+    }
+
+    bool IsMouseOnMe(){
+        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        IEnumerable<RaycastHit2D> rayHits = Physics2D.GetRayIntersectionAll(ray);
+        foreach(RaycastHit2D hit in rayHits){
+            if(hit.collider.gameObject.GetComponent<Card>()==this){
+                return true;
+            }
+        }
+        return false;
     }
 
     public IEnumerator FlipCard(){

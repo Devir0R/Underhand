@@ -41,7 +41,14 @@ public class Option : MonoBehaviour
     public static event NotifyOptionChosen OptionChosen;
 
     public CardDO cardDO;
+    public InputAction MouseEnter;
 
+    public void OnMouseOver(InputAction.CallbackContext context){
+        if(isDormant) return;
+
+        if(IsMouseOnMe())   spriteRenderer.material.color = Color.Lerp(Color.white,Color.gray,0.5f);
+        else spriteRenderer.material.color = Color.white;
+    }
     protected virtual void OnOptionChosen() //protected virtual method
     {
         //if ProcessCompleted is not null then call delegate
@@ -49,6 +56,8 @@ public class Option : MonoBehaviour
     }
     private void Awake(){
         mainCamera = Camera.main;
+        MouseEnter.performed += OnMouseOver;
+        MouseEnter.Enable();
     }
     void Start()
     {
@@ -72,10 +81,6 @@ public class Option : MonoBehaviour
     public bool LosingOption(){
         return option.IsLose();
     }
-
-    public void OnOptionHover(){
-
-    }
     public IEnumerator MoveTo(Vector3 to,float speed = 10f){
         while(transform.position!=to){
             transform.position = Vector3.MoveTowards(transform.position, to,  Time.deltaTime*speed);
@@ -88,7 +93,11 @@ public class Option : MonoBehaviour
     }
     public void OnOptionClicked(InputAction.CallbackContext context){
         if(this.disableOption || ! context.performed || !IsMouseOnOption()) return ;
-        if(isDormant || !spriteRenderer.sprite.name.Contains("Ready")) return;
+        if(isDormant) return;
+        if(!spriteRenderer.sprite.name.Contains("Ready")){
+            if(IsMouseOnMe())   Hand.Instance.WiggleResources(option);
+            return;
+        }
 
         if(IsMouseOnMe()){
             disableSpriteChange();
@@ -248,6 +257,8 @@ public class Option : MonoBehaviour
         disableSpriteChange();
         OptionChosen -= MoveOptionBack;
         OptionChosen -= this.SpawnRewards;
+        MouseEnter.performed -= OnMouseOver;
+        MouseEnter.Disable();
     }
 
     private void disableSpriteChange(){

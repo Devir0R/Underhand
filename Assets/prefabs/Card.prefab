@@ -103,6 +103,32 @@ MonoBehaviour:
   faceUp: 0
   moveSpeed: 10
   flipSound: {fileID: 8300000, guid: 3c060805192d23843aa908198b2e8b6b, type: 3}
+  MouseEnter:
+    m_Name: Mouse Enter
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: f8183a28-8209-40f0-9816-5887bdb401cb
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 77830781-ea1d-4175-8353-088ad5b5e5f9
+      m_Path: <Mouse>/position
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Mouse Enter
+      m_Flags: 0
+    m_Flags: 0
+  MouseExit:
+    m_Name: Mouse Exit
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 60cabe30-989f-4812-bc17-398d1d7fb5b4
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!114 &-760384447663447326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,7 +158,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3757492724992295504}
         m_TargetAssemblyTypeName: Card, Assembly-CSharp
-        m_MethodName: ShowOptions
+        m_MethodName: OnClickMoveUp
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

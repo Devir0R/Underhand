@@ -134,6 +134,23 @@ MonoBehaviour:
   howMany: 0
   AnimationSpeed: 4
   DropClip: {fileID: 0}
+  MouseEnter:
+    m_Name: Mouse Enter
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 2c4798c1-9912-45dd-a50d-32b9e471161c
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 34424259-1988-4545-a396-0cbc46319d0d
+      m_Path: <Mouse>/position
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Mouse Enter
+      m_Flags: 0
+    m_Flags: 0
 --- !u!61 &-8398607294356848527
 BoxCollider2D:
   m_ObjectHideFlags: 0

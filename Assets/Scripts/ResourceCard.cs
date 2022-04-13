@@ -22,8 +22,6 @@ public class ResourceCard : MonoBehaviour
 
     int frameCount = 0;
     public TextMeshPro many;
-
-
     public GameObject resourceCircle;
     public List<Sprite> sprites;
 
@@ -53,20 +51,62 @@ public class ResourceCard : MonoBehaviour
     public AudioClip DropClip;
 
     bool disbled = false;
+
+    public InputAction MouseEnter;
+
+    public void OnMouseOver(InputAction.CallbackContext context){
+        if(IsMouseOnMe())   spriteRenderer.material.color = Color.Lerp(Color.white,Color.gray,0.5f);
+        else spriteRenderer.material.color = Color.white;
+    }
+
+    public void Wiggle(){
+        StartCoroutine(WiggleAround());
+    }
+
+    IEnumerator WiggleAround(){
+        Vector3 forward = new Vector3(-Mathf.Cos(transform.eulerAngles.z),Mathf.Abs( Mathf.Sin(transform.eulerAngles.z)),0);
+        transform.position += forward * (spriteRenderer.bounds.size.x/72f);
+        yield return new WaitForSeconds(0.05f);
+        transform.position += forward * (spriteRenderer.bounds.size.x/72f);
+        yield return new WaitForSeconds(0.05f);
+
+        transform.position -= forward * (spriteRenderer.bounds.size.x/18f);
+        yield return new WaitForSeconds(0.05f);
+        transform.position -= forward * (spriteRenderer.bounds.size.x/18f);
+        yield return new WaitForSeconds(0.05f);
+
+        transform.position += forward * (spriteRenderer.bounds.size.x/24f);
+        yield return new WaitForSeconds(0.05f);
+        transform.position += forward * (spriteRenderer.bounds.size.x/24f);
+
+    }
+
+    bool IsMouseOnMe(){
+        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        IEnumerable<RaycastHit2D> rayHits = Physics2D.GetRayIntersectionAll(ray);
+        IEnumerable<ResourceCard> cards = rayHits.Select(hit=>hit.collider.gameObject.GetComponent<ResourceCard>()).Where(card=>card!=null);
+        if(cards.Count()==0) return false;
+        return cards.Aggregate((card1,card2)=>card1.spriteRenderer.sortingOrder>card2.spriteRenderer.sortingOrder? card1 : card2)==this;
+    }
     protected virtual void OnCardOnTableDestroyed() //protected virtual method
     {
         //if ProcessCompleted is not null then call delegate
         CardOnTableDestroyed?.Invoke(); 
     }
 
+
     private void OnEnable(){
         mouseClickedOnCard.Enable();
         mouseClickedOnCard.performed += DragCard;
+        MouseEnter.performed += OnMouseOver;
+        MouseEnter.Enable();
     }
 
     public void OnDisable(){
         mouseClickedOnCard.performed -= DragCard;
         mouseClickedOnCard.Disable();
+        MouseEnter.performed -= OnMouseOver;
+        MouseEnter.Disable();
     }
 
     private void Awake(){
