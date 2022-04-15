@@ -54,20 +54,21 @@
 		},
 		"randomrequirements":		0,
 		"requirements": {
-			"relic":				1,
-			"money":				1,
-			"cultist":				1,
-			"prisoner":				1,
-			"food":					1,
-			"suspicion":			1
-		},
-		"rewards": {
 			"relic":				0,
 			"money":				0,
 			"cultist":				0,
 			"prisoner":				0,
 			"food":					0,
 			"suspicion":			0
+
+		},
+		"rewards": {
+			"relic":				1,
+			"money":				1,
+			"cultist":				1,
+			"prisoner":				1,
+			"food":					1,
+			"suspicion":			1
 		},
 		"iswin":					"",
 		"islose":					0
