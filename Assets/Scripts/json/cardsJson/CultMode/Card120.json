@@ -4,7 +4,7 @@
 	"flavortext":					"Bloodbath for power",
 	"option1": {
 		"optiontext":				"We adhere to his advice",
-		"outputtext":				"Insert 'Sulucnumoh, The Imprisoned'",
+		"outputtext":				"Insert 'Sulucnumoh, Flask Bound'",
 		"cultistequalsprisoner":	1,
 		"foresight": {
 				"hasforesight": 		0,
@@ -13,9 +13,9 @@
 		"shuffle": {
 			"lowerbound":			999,
 			"upperbound":			999,
-			"specificids":			[],
+			"specificids":			[122],
 			"allowsdupes":			0,
-			"numcards":				0
+			"numcards":				1
 		},
 		"randomrequirements":		0,
 		"requirements": {
