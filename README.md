@@ -33,8 +33,8 @@ everything! except...
 
 <h2>Vision(Future Expectations</h2>
 
-1) Add Gods to the game.
-2) add cheerful mode of fighting the cultist plan to revive the gods.
+1) Add More Gods to the game.
+2) Add cheerful mode of fighting the cultist plan to revive the gods.
 
 Any suggestion will be great.
 
