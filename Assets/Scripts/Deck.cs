@@ -117,7 +117,8 @@ public class Deck : MonoBehaviour
         this.addRelicCardIfThereIsnt();
         this.insertWinCards();
         shuffleDeck();
-        // this.deck.Insert(0,allCards.allCardsList.Find(card=>card.GetNumber()==4));
+        // this.deck.Insert(0,allCards.allCardsList.Find(card=>card.GetNumber()==124));
+        // this.deck.Insert(0,allCards.allCardsList.Find(card=>card.GetNumber()==123));
         // this.deck.RemoveRange(0,3*deck.Count/4);
         this.deckSize = this.deck.Count;
         GameState.GameStart();
