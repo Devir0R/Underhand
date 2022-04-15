@@ -1,10 +1,10 @@
 {
-	"num":-1,
-	"title":						"",
-	"flavortext":					"",
+	"num":120,
+	"title":						"Little Thing",
+	"flavortext":					"A little advice",
 	"option1": {
-		"optiontext":				"",
-		"outputtext":				"",
+		"optiontext":				"We need its advice",
+		"outputtext":				"Insert the next Little Thing",
 		"cultistequalsprisoner":	0,
 		"foresight": {
 				"hasforesight": 		0,
@@ -13,9 +13,9 @@
 		"shuffle": {
 			"lowerbound":			999,
 			"upperbound":			999,
-			"specificids":			[],
+			"specificids":			[121],
 			"allowsdupes":			0,
-			"numcards":				0
+			"numcards":				1
 		},
 		"randomrequirements":		0,
 		"requirements": {
@@ -32,13 +32,13 @@
 			"cultist":				0,
 			"prisoner":				0,
 			"food":					0,
-			"suspicion":			0
+			"suspicion":			3
 		},
 		"iswin":					"",
 		"islose":					0
 		},
 	"option2": {
-		"optiontext":				"",
+		"optiontext":				"Smash its container",
 		"outputtext":				"",
 		"cultistequalsprisoner":	0,
 		"foresight": {
@@ -73,7 +73,7 @@
 		"islose":					0
 	},
 	"option3": {
-		"optiontext":				"",
+		"optiontext":				"Test him with gold transmutation",
 		"outputtext":				"",
 		"cultistequalsprisoner":	0,
 		"foresight": {
@@ -83,9 +83,9 @@
 		"shuffle": {
 			"lowerbound":			999,
 			"upperbound":			999,
-			"specificids":			[],
+			"specificids":			[120],
 			"allowsdupes":			0,
-			"numcards":				0
+			"numcards":				1
 		},
 		"randomrequirements":		0,
 		"requirements": {
@@ -93,12 +93,12 @@
 			"money":				0,
 			"cultist":				0,
 			"prisoner":				0,
-			"food":					0,
+			"food":					1,
 			"suspicion":			0
 		},
 		"rewards": {
 			"relic":				0,
-			"money":				0,
+			"money":				1,
 			"cultist":				0,
 			"prisoner":				0,
 			"food":					0,
@@ -108,8 +108,8 @@
 		"islose":					0
 	},
 	"isTutorial": 0,
-	"isinitial":					1,
-	"isrecurring":					1,
+	"isinitial":					0,
+	"isrecurring":					0,
 	"animationframes":				1,
 	"weight": 						1,
 	"cardartdone":					0

@@ -1,11 +1,11 @@
 {
-	"num":-1,
-	"title":						"",
-	"flavortext":					"",
+	"num": 119,
+	"title":						"Blood Sacrifice",
+	"flavortext":					"A small experiment",
 	"option1": {
-		"optiontext":				"",
-		"outputtext":				"",
-		"cultistequalsprisoner":	0,
+		"optiontext":				"A human is the only ingredient",
+		"outputtext":				"Insert the next Little Thing",
+		"cultistequalsprisoner":	1,
 		"foresight": {
 				"hasforesight": 		0,
 				"candiscard": 			0
@@ -21,7 +21,7 @@
 		"requirements": {
 			"relic":				0,
 			"money":				0,
-			"cultist":				0,
+			"cultist":				1,
 			"prisoner":				0,
 			"food":					0,
 			"suspicion":			0
@@ -38,8 +38,8 @@
 		"islose":					0
 		},
 	"option2": {
-		"optiontext":				"",
-		"outputtext":				"",
+		"optiontext":				"We need more preparation",
+		"outputtext":				"Insert back to the deck",
 		"cultistequalsprisoner":	0,
 		"foresight": {
 				"hasforesight": 		0,
@@ -50,7 +50,7 @@
 			"upperbound":			999,
 			"specificids":			[],
 			"allowsdupes":			0,
-			"numcards":				0
+			"numcards":				1
 		},
 		"randomrequirements":		0,
 		"requirements": {
@@ -73,7 +73,7 @@
 		"islose":					0
 	},
 	"option3": {
-		"optiontext":				"",
+		"optiontext":				"We don't have life to spare",
 		"outputtext":				"",
 		"cultistequalsprisoner":	0,
 		"foresight": {
@@ -108,8 +108,8 @@
 		"islose":					0
 	},
 	"isTutorial": 0,
-	"isinitial":					1,
-	"isrecurring":					1,
+	"isinitial":					0,
+	"isrecurring":					0,
 	"animationframes":				1,
 	"weight": 						1,
 	"cardartdone":					0

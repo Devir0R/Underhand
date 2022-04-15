@@ -99,6 +99,19 @@
       ],
       "startingCard": 106,
       "specialRequirements": 0
+    },
+    {
+      "num": 7,
+      "name": "Sulucnumoh",
+      "defeated": 0,
+      "blessings": [
+        123,
+        124
+      ],
+      "dependency": [
+      ],
+      "startingCard": 119,
+      "specialRequirements": 0
     }
   ]
 }
