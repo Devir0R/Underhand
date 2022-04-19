@@ -28,10 +28,11 @@ everything! except...
 <h2>Added</h2>
 
 1) Added another God - Sulucnumoh
-2) Mode 2 is in development, Cards art should be created, any help will do!
+2) Mode 2 is in development.
+    I am more of a developer than a designer, so art is quite difficult for me, I hope it won't tale too long.
 
 
-<h2>Vision(Future Expectations</h2>
+<h2>Vision(Future Expectations)</h2>
 
 1) Add More Gods to the game.
 2) Add cheerful mode of fighting the cultist plan to revive the gods.
