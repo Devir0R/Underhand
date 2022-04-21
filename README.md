@@ -24,12 +24,18 @@ To open the project in Unity -
 everything! except...
 1)  the game menu is not done yet, it contains only The Game and mute in options.
 2)  all god's blessing cards are all in the deck and not like the app, where you can choose up to 3 god's blessing,this will be implemented in the future.
-3)  no radio commentarry yet, will be added soon!
 
-<h2>Vision(Future Expectations</h2>
+<h2>Added</h2>
 
-1) Add Gods to the game.
-2) add cheerful mode of fighting the cultist plan to revive the gods.
+1) Added another God - Sulucnumoh
+2) Mode 2 is in development.
+    I am more of a developer than a designer, so art is quite difficult for me, I hope it won't tale too long.
+
+
+<h2>Vision(Future Expectations)</h2>
+
+1) Add More Gods to the game.
+2) Add cheerful mode of fighting the cultist plan to revive the gods.
 
 Any suggestion will be great.
 
