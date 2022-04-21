@@ -109,6 +109,9 @@
         124
       ],
       "dependency": [
+        1,
+        2,
+        4
       ],
       "startingCard": 119,
       "specialRequirements": 0

@@ -1,7 +1,7 @@
 {
 	"num": 21,
 	"title":						"Encounter",
-	"flavortext":					"Group of cultists performs a dark ritual",
+	"flavortext":					"Group of cultists performs a seance",
 	"option1": {
 		"optiontext":				"Interfere",
 		"outputtext":				"",
