@@ -96,6 +96,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - FightCultCardsImages
+  - m_GUID: 3c46648bb80cd98439b76b625cc697ec
+    m_Address: Assets/Sprites/gods
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GodsImages
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2075ec3d5f044ff4ea70106940026b21, type: 2}
   m_SchemaSet:

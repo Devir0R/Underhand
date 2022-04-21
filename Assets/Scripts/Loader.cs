@@ -9,14 +9,21 @@ public static class Loader
     private static AsyncOperationHandle<IList<Sprite>> fightCultCardsSpriteHandler;
     private static AsyncOperationHandle<IList<TextAsset>> cultCardsJsonsHandler;
     private static AsyncOperationHandle<IList<TextAsset>> fightCultCardsJsonsHandler;
+    private static AsyncOperationHandle<IList<Sprite>> godsSpritesHandler;
     private static Dictionary<Resource,AsyncOperationHandle<IList<Sprite>>> resourcesSpritesHandler;
 
+    public static List<Sprite> GodsSprites;
     public static List<Sprite> CultCardsSprites;
     public static List<Sprite> FightCultCardsSprites;
     public static List<TextAsset> CultCardsJsons;
     public static List<TextAsset> FightCultCardsJsons;
     public static Dictionary<Resource, List<Sprite>> resourcesSpritesDictionary;
     public static void LoadAddressables(){
+        godsSpritesHandler = Addressables.LoadAssetsAsync<Sprite>("GodsImages", null);
+        godsSpritesHandler.Completed += handleToCheck=>{
+            if(handleToCheck.Status == AsyncOperationStatus.Succeeded)  GodsSprites =  handleToCheck.Result.ToList();
+        };
+
         cultCardsSpriteHandler = Addressables.LoadAssetsAsync<Sprite>("CultCardsImages", null);
         cultCardsSpriteHandler.Completed += handleToCheck=>{
             if(handleToCheck.Status == AsyncOperationStatus.Succeeded)  CultCardsSprites =  handleToCheck.Result.ToList();
@@ -64,22 +71,25 @@ public static class Loader
 
     public static float PercentComplete(){
         float resourcesLoadPercent = 0f;
-        foreach(Resource resourceType in ResourceInfo.GetAllResources()){
+        foreach(Resource resourceType in ResourceInfo.GetAllResources_AllModes()){
             resourcesLoadPercent+=resourcesSpritesHandler[resourceType].PercentComplete;
         }
-        //resourcesLoadPercent has 6 images with total 120 frames.
-        //resourceSpriteHandler has 100 images
-        //cardsJsonsHandler has 100 jsons so...
-        resourcesLoadPercent = (resourcesLoadPercent/ResourceInfo.GetAllResources().Count())*0.16f;
-        float cultCardsSpritesPercent = cultCardsSpriteHandler.PercentComplete*.21f;
-        float fightCultCardsSpritesPercent = fightCultCardsSpriteHandler.PercentComplete*.21f;
-        float cultCardsJsonsPercent = cultCardsJsonsHandler.PercentComplete*.21f;
-        float fightCultCardsJsonsPercent = fightCultCardsJsonsHandler.PercentComplete*.21f;
+
+        float totalAmountOfFiles = 140f+120f+120f+50f+50f+16f;
+
+
+        resourcesLoadPercent = (resourcesLoadPercent/ResourceInfo.GetAllResources_AllModes().Count()) *(140f/totalAmountOfFiles);//140 images
+        float cultCardsSpritesPercent = cultCardsSpriteHandler.PercentComplete*(120f/totalAmountOfFiles);//120 images
+        float fightCultCardsSpritesPercent = fightCultCardsSpriteHandler.PercentComplete*(50f/totalAmountOfFiles);//50 images
+        float cultCardsJsonsPercent = cultCardsJsonsHandler.PercentComplete*(120f/totalAmountOfFiles);//120 jsons
+        float fightCultCardsJsonsPercent = fightCultCardsJsonsHandler.PercentComplete*(50f/totalAmountOfFiles);//50 jsons
+        float godsSpritesPercent = godsSpritesHandler.PercentComplete*(16f/totalAmountOfFiles);//16 images
         
         return resourcesLoadPercent +
                 cultCardsSpritesPercent + 
                 cultCardsJsonsPercent + 
                 fightCultCardsSpritesPercent + 
-                fightCultCardsJsonsPercent;
+                fightCultCardsJsonsPercent +
+                godsSpritesPercent;
     }
 }
