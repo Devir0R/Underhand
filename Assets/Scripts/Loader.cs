@@ -10,6 +10,8 @@ public static class Loader
     private static AsyncOperationHandle<IList<TextAsset>> cultCardsJsonsHandler;
     private static AsyncOperationHandle<IList<TextAsset>> fightCultCardsJsonsHandler;
     private static AsyncOperationHandle<IList<Sprite>> godsSpritesHandler;
+    private static AsyncOperationHandle<TextAsset> godsJsonHandler;
+    private static AsyncOperationHandle<TextAsset> cultsJsonHandler;
     private static Dictionary<Resource,AsyncOperationHandle<IList<Sprite>>> resourcesSpritesHandler;
 
     public static List<Sprite> GodsSprites;
@@ -18,6 +20,14 @@ public static class Loader
     public static List<TextAsset> CultCardsJsons;
     public static List<TextAsset> FightCultCardsJsons;
     public static Dictionary<Resource, List<Sprite>> resourcesSpritesDictionary;
+
+    public static Gods godsInfo{get{
+        return Mode.FightCult==GameState.GameMode? FightCultGods : CultGods;
+    }}
+
+    private static Gods FightCultGods;
+
+    private static Gods CultGods;
     public static void LoadAddressables(){
         godsSpritesHandler = Addressables.LoadAssetsAsync<Sprite>("GodsImages", null);
         godsSpritesHandler.Completed += handleToCheck=>{
@@ -35,7 +45,7 @@ public static class Loader
         };
 
 
-        cultCardsJsonsHandler = Addressables.LoadAssetsAsync<TextAsset>("CultJsons", null);
+        cultCardsJsonsHandler = Addressables.LoadAssetsAsync<TextAsset>("CultJsonCards", null);
         cultCardsJsonsHandler.Completed += handleToCheck=>{
             if(handleToCheck.Status == AsyncOperationStatus.Succeeded)  CultCardsJsons =  handleToCheck.Result.ToList();
         };
@@ -44,6 +54,22 @@ public static class Loader
         fightCultCardsJsonsHandler = Addressables.LoadAssetsAsync<TextAsset>("FightCultJsons", null);
         fightCultCardsJsonsHandler.Completed += handleToCheck=>{
             if(handleToCheck.Status == AsyncOperationStatus.Succeeded)  FightCultCardsJsons =  handleToCheck.Result.ToList();
+        };
+
+        cultsJsonHandler = Addressables.LoadAssetAsync<TextAsset>("CultsJson");
+        cultsJsonHandler.Completed += handleToCheck=>{
+            if(handleToCheck.Status == AsyncOperationStatus.Succeeded){
+                TextAsset cultsJSON = handleToCheck.Result;
+                FightCultGods = new Gods(cultsJSON);
+            }
+        };
+
+        godsJsonHandler = Addressables.LoadAssetAsync<TextAsset>("GodsJson");
+        godsJsonHandler.Completed += handleToCheck=>{
+            if(handleToCheck.Status == AsyncOperationStatus.Succeeded){
+                TextAsset godsJSON = handleToCheck.Result;
+                FightCultGods = new Gods(godsJSON);
+            }
         };
 
 
@@ -75,7 +101,7 @@ public static class Loader
             resourcesLoadPercent+=resourcesSpritesHandler[resourceType].PercentComplete;
         }
 
-        float totalAmountOfFiles = 140f+120f+120f+50f+50f+16f;
+        float totalAmountOfFiles = 140f+120f+120f+50f+50f+16f+4f+4f;
 
 
         resourcesLoadPercent = (resourcesLoadPercent/ResourceInfo.GetAllResources_AllModes().Count()) *(140f/totalAmountOfFiles);//140 images
@@ -84,12 +110,14 @@ public static class Loader
         float cultCardsJsonsPercent = cultCardsJsonsHandler.PercentComplete*(120f/totalAmountOfFiles);//120 jsons
         float fightCultCardsJsonsPercent = fightCultCardsJsonsHandler.PercentComplete*(50f/totalAmountOfFiles);//50 jsons
         float godsSpritesPercent = godsSpritesHandler.PercentComplete*(16f/totalAmountOfFiles);//16 images
-        
+        float cultsJsonPercent = cultsJsonHandler.PercentComplete*(4f/totalAmountOfFiles);
+        float godsJsonPercent = godsJsonHandler.PercentComplete*(4f/totalAmountOfFiles);
+
         return resourcesLoadPercent +
                 cultCardsSpritesPercent + 
                 cultCardsJsonsPercent + 
                 fightCultCardsSpritesPercent + 
                 fightCultCardsJsonsPercent +
-                godsSpritesPercent;
+                godsSpritesPercent + godsJsonPercent + cultsJsonPercent;
     }
 }

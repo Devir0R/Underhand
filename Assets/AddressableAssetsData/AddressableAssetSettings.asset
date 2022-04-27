@@ -92,10 +92,12 @@ MonoBehaviour:
     - HolyImages
     - ReputationImages
     - FightCultJsons
-    - CultJsons
     - CultCardsImages
     - FightCultCardsImages
     - GodsImages
+    - CultsJson
+    - GodsJson
+    - CultJsonCards
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: eb7b51d5590fce74886c545dda4a6a19, type: 2}

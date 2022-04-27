@@ -11,18 +11,14 @@ public class Deck : MonoBehaviour
     public static  int INITIAL_DECK_SIZE=7;
     public SpriteRenderer spriteRenderer;
 
-    public TextAsset godsJSON;
-    public TextAsset cultsJSON;
     AllCards allCards;
     public List<CardDO>  deck;
     public Sprite[] spriteArray;
     public Card cardPrefab;
-    
     private int deckSize;
     public Card theCard;
 
     private bool isSpawning = false;
-    public Gods godsInfo;
 
     private Camera mainCamera;
 
@@ -304,8 +300,7 @@ public class Deck : MonoBehaviour
     }
 
     void insertWinCards(){
-        this.godsInfo = new Gods(GameState.GameMode==Mode.FightCult? cultsJSON : godsJSON);
-        foreach(GodDO god in godsInfo.getUnlockedGods()){
+        foreach(GodDO god in Loader.godsInfo.getUnlockedGods()){
             if (god.specialRequirements==0){
                 int startingCard = god.startingCard;
                 CardDO staringCardDO = this.allCards.allCardsList.Find(card=>card.GetNumber()==startingCard);

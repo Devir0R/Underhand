@@ -29,6 +29,7 @@ MonoBehaviour:
     m_SerializedLabels:
     - CardsJsons
     - CultJsons
+    - CultJsonCards
   - m_GUID: c2bb28e51b2e9ec438ddb136a93800bb
     m_Address: Assets/Sprites/resources_moved/Suspicion.png
     m_ReadOnly: 0
@@ -101,6 +102,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - GodsImages
+  - m_GUID: c293e7bedc0be544c9c89780c41796aa
+    m_Address: Assets/Scripts/json/cults.json
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - CultsJson
+  - m_GUID: 893c4f1138cb21142b8129377d8b6ced
+    m_Address: Assets/Scripts/json/gods.json
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GodsJson
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2075ec3d5f044ff4ea70106940026b21, type: 2}
   m_SchemaSet:

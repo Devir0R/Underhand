@@ -86,4 +86,5 @@ public class GodDO{
         public List<int> dependency;
         public int startingCard;
         public int specialRequirements;
+        public int tier;
 }

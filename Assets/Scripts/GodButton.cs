@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class GodButton : MonoBehaviour
 {
     public Image Checkmark;
-
+    public string godName;
     public bool Checked;
 
     public void UpdateGod(string godName){
@@ -12,6 +12,7 @@ public class GodButton : MonoBehaviour
         if(godSprite!=null){
             GetComponent<Image>().sprite = godSprite;
         }
+        this.godName = godName;
     }
 
     public void ToggleCheck(){
