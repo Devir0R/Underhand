@@ -300,17 +300,26 @@ public class Deck : MonoBehaviour
     }
 
     void insertWinCards(){
-        foreach(GodDO god in Loader.godsInfo.getUnlockedGods()){
+        foreach(GodDO god in Gods.getUnlockedGods()){
             if (god.specialRequirements==0){
                 int startingCard = god.startingCard;
                 CardDO staringCardDO = this.allCards.allCardsList.Find(card=>card.GetNumber()==startingCard);
                 if (!staringCardDO.IsTutorial()){
                     this.deck.Add(staringCardDO);
                 }
-                if(god.defeated==1) this.deck.AddRange(god.blessings.Select(card_num=>this.allCards.allCardsList.Find(card=>card.GetNumber()==card_num)));
             }
         }
-
+        while(GameState.GodsMarked.Count>0){
+            string godName = GameState.GodsMarked.Dequeue();
+            this
+            .deck
+            .AddRange(Loader
+                      .godsInfo
+                      .gods
+                      .Find(god=>god.name==godName)
+                      .blessings
+                      .Select(card_num=>this.allCards.allCardsList.Find(card=>card.GetNumber()==card_num)));
+        }
     }
         
 

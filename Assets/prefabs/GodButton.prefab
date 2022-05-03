@@ -199,7 +199,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6384212201551379274}
         m_TargetAssemblyTypeName: GodButton, Assembly-CSharp
-        m_MethodName: ToggleCheck
+        m_MethodName: Clicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

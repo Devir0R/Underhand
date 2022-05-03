@@ -1,5 +1,8 @@
+using System.Collections.Generic;
+
 public static class GameState 
 {
+    public static Queue<string> GodsMarked = new Queue<string>();
     public static State state = State.NotStarted;
 
     public static void GameStart() => state=State.Ongoing;

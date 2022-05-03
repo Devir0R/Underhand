@@ -2,22 +2,39 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GodChooseMenu : MonoBehaviour
 {
     public GodButton godButtonPrefab;
 
     private List<GodButton> godButtons = new List<GodButton>();
+
+    private static readonly int MAX_MARKS_AMOUNT = 3;
     void Start(){
-        foreach(GodDO god in Gods.allGods.gods){
+        foreach(GodDO god in Loader.allGods.gods){
             GodButton godButton = Instantiate(godButtonPrefab,transform.position,transform.rotation);
             godButton.transform.SetParent(gameObject.transform);
             godButton.UpdateGod(god.name);
             godButtons.Add(godButton);
             ScaleButton(godButton);
+            godButton.GodButtonClicked += CheckmarkAdded;
         }
         StartCoroutine(RepositionGodsButtons());
+    }
+
+    void CheckmarkAdded(GodButton sender){
+        if(!sender.Checked){
+            if(GameState.GodsMarked.Contains(sender.godName)){
+                GameState.GodsMarked = new Queue<string>(GameState.GodsMarked.Where(x => x != sender.godName));
+                return;
+            }
+        }
+        GameState.GodsMarked.Enqueue(sender.godName);
+        while(GameState.GodsMarked.Count>MAX_MARKS_AMOUNT){
+            godButtons
+                .Find(godButton=>godButton.godName==GameState.GodsMarked.Dequeue())
+                .ToggleCheck();
+        }
     }
 
     IEnumerator RepositionGodsButtons(){
@@ -30,14 +47,14 @@ public class GodChooseMenu : MonoBehaviour
     void RepositionGodsButtonsOnce(){
         RectTransform menuRect = GetComponent<RectTransform>();
         Dictionary<int,List<GodDO>> tiers = new Dictionary<int, List<GodDO>>();
-        foreach(GodDO god in Gods.allGods.gods){
+        foreach(GodDO god in Loader.allGods.gods){
             if(!tiers.Keys.Contains(god.tier)){
                 tiers[god.tier] = new List<GodDO>();
             }
             tiers[god.tier].Add(god);
         }
 
-        float topPadding = menuRect.rect.height/12f;
+        float topPadding = menuRect.rect.height/24f;
         float bottomBoundary = transform.position.y-topPadding-((tiers.Keys.Count)/2f)*godButtons[0].GetComponent<RectTransform>().rect.height*1.03f;
         foreach(int tier in tiers.Keys.OrderBy(tier=>tier)){
             float yPosition = bottomBoundary + ((tier-1)*1.3f)*godButtons[0].GetComponent<RectTransform>().rect.height*1.03f;

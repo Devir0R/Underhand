@@ -74,7 +74,7 @@ public class Hand : MonoBehaviour
         List<Coroutine> cardsJumps = new List<Coroutine>();
         for(int j =cardsIndexesToRemove.Count-1;j>0;j--){
             int indexToRemove = cardsIndexesToRemove[j];
-            ResourceCard toRemove = hand[indexToRemove];
+            ResourceCard toRemove = hand[indexToRemove];//there might be a bug here
             hand.RemoveAt(indexToRemove);
             cardsJumps.Add(StartCoroutine(toRemove.JumpToTable()));
         }

@@ -67,7 +67,7 @@ public class Continue : MonoBehaviour
         disabled = true;
         if(GameState.state==State.Won){
             Gods.GodDefeated(GameState.GodWon);
-            Gods.SaveToFile();
+            Loader.SaveToFile();
             
         }
         GameAudio.Instance.PlayMenuMusic();

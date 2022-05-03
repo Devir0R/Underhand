@@ -1,80 +1,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using Newtonsoft.Json;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 
 public class Gods
 {
 
-    public static AllGods allGods{get;set;}
-    // Start is called before the first frame update
-
-    public Gods(TextAsset godsJSON){
-        if(!LoadGame()) allGods = JsonConvert.DeserializeObject<AllGods>(godsJSON.text);
-    }
-    public List<int> godBlessingCardNumbers(int num){
-        if (num>=0){
-            return allGods.gods.Find(god=>god.num==num).blessings;
-        }
-        else{
-            return allGods.gods.Select(god=>god.blessings).SelectMany(b=>b).ToList();
-        }
-    }
-
     public static void GodDefeated(string godName){
-        Gods.allGods.gods.Find(god=>god.name==godName).defeated=1;
+        Loader.allGods.gods.Find(god=>god.name==godName).defeated=1;
     }
     public static void GodUndefeated(string godName){
-        Gods.allGods.gods.Find(god=>god.name==godName).defeated=0;
+        Loader.allGods.gods.Find(god=>god.name==godName).defeated=0;
     }
 
     public static void AllGodsUndefeated(){
-        Gods.allGods.gods.ForEach(god=>god.defeated=0);
+        Loader.allGods.gods.ForEach(god=>god.defeated=(god.name=="God of Beginnings"? 1: 0));
     }
-    public List<GodDO> getUnlockedGods(){
-        return allGods.gods
+    public static List<GodDO> getUnlockedGods(){
+        return Loader.allGods.gods
             .Where(god=>
                 god.dependency.All(godnum=>
-                    allGods.gods.Find(god=>god.num==godnum).defeated==1)).ToList();
-    }
-
-
-    public static void SaveToFile(){
-	    BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(PlaceToSave());
-        bf.Serialize(file,allGods);
-        file.Close();
-    }
-
-    public static bool LoadGame()
-    {
-        if (File.Exists(PlaceToSave()))
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = 
-                    File.Open(PlaceToSave(), FileMode.Open);
-            AllGods allGods = (AllGods)bf.Deserialize(file);
-            file.Close();
-            Gods.allGods = allGods;
-            //Debug.Log("Game data loaded!");
-            return true;
-        }
-        else{
-            //Debug.LogError("There is no save data!");
-            return false;
-        }            
-    }
-
-    private static string PlaceToSave(){
-        return Application.persistentDataPath + (GameState.GameMode == Mode.FightCult? "/cults.json" : "/gods.json");
+                    Loader.allGods.gods.Find(god=>god.num==godnum).defeated==1)).ToList();
     }
 }
 
 [System.Serializable]
 public class AllGods{
+    [SerializeField]
     public List<GodDO> gods;
+
+    public List<int> godBlessingCardNumbers(int num){
+        if (num>=0){
+            return gods.Find(god=>god.num==num).blessings;
+        }
+        else{
+            return gods.Select(god=>god.blessings).SelectMany(b=>b).ToList();
+        }
+    }
 }
 
 [System.Serializable]

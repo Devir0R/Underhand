@@ -3,6 +3,9 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Newtonsoft.Json;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 public static class Loader
 {
     private static AsyncOperationHandle<IList<Sprite>> cultCardsSpriteHandler;
@@ -21,13 +24,73 @@ public static class Loader
     public static List<TextAsset> FightCultCardsJsons;
     public static Dictionary<Resource, List<Sprite>> resourcesSpritesDictionary;
 
-    public static Gods godsInfo{get{
+    public static AllGods godsInfo{get{
         return Mode.FightCult==GameState.GameMode? FightCultGods : CultGods;
     }}
 
-    private static Gods FightCultGods;
+    public static AllGods allGods{get{
+        return GameState.GameMode==Mode.FightCult? FightCultGods : CultGods;
+    }}
 
-    private static Gods CultGods;
+    public static void SaveToFile(){
+	    BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(PlaceToSave());
+        bf.Serialize(file,allGods);
+        file.Close();
+    }
+
+    private static AllGods FightCultGods;
+
+    private static AllGods CultGods;
+
+    private static string PlaceToSaveCults(){
+        return Application.persistentDataPath +  "/cults.json";
+    }
+
+    private static string PlaceToSaveGods(){
+        return Application.persistentDataPath +  "/gods.json";
+    }
+
+    private static string PlaceToSave(){
+        return (GameState.GameMode == Mode.FightCult? PlaceToSaveCults() : PlaceToSaveGods());
+    }
+
+    private static bool LoadCults()
+    {
+        if (File.Exists(PlaceToSaveCults()))
+        {
+            FightCultGods = LoadBosses(PlaceToSaveCults());
+            return true;
+        }
+        else{
+            return false;
+        }            
+    }
+
+
+    private static bool LoadGods()
+    {
+        if (File.Exists(PlaceToSaveGods()))
+        {
+            CultGods = LoadBosses(PlaceToSaveGods());
+            return true;
+        }
+        else{
+            return false;
+        }            
+    }
+
+
+    private static AllGods LoadBosses(string path){
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = 
+                File.Open(path, FileMode.Open);
+        AllGods allGods = (AllGods)bf.Deserialize(file);
+        file.Close();
+        return allGods;
+        
+    }
+
     public static void LoadAddressables(){
         godsSpritesHandler = Addressables.LoadAssetsAsync<Sprite>("GodsImages", null);
         godsSpritesHandler.Completed += handleToCheck=>{
@@ -56,21 +119,25 @@ public static class Loader
             if(handleToCheck.Status == AsyncOperationStatus.Succeeded)  FightCultCardsJsons =  handleToCheck.Result.ToList();
         };
 
-        cultsJsonHandler = Addressables.LoadAssetAsync<TextAsset>("CultsJson");
-        cultsJsonHandler.Completed += handleToCheck=>{
-            if(handleToCheck.Status == AsyncOperationStatus.Succeeded){
-                TextAsset cultsJSON = handleToCheck.Result;
-                FightCultGods = new Gods(cultsJSON);
-            }
-        };
+        if(!LoadCults()){
+            cultsJsonHandler = Addressables.LoadAssetAsync<TextAsset>("CultsJson");
+            cultsJsonHandler.Completed += handleToCheck=>{
+                if(handleToCheck.Status == AsyncOperationStatus.Succeeded){
+                    TextAsset cultsJSON = handleToCheck.Result;
+                    FightCultGods = JsonConvert.DeserializeObject<AllGods>(cultsJSON.text);
+                }
+            };
+        }
 
-        godsJsonHandler = Addressables.LoadAssetAsync<TextAsset>("GodsJson");
-        godsJsonHandler.Completed += handleToCheck=>{
-            if(handleToCheck.Status == AsyncOperationStatus.Succeeded){
-                TextAsset godsJSON = handleToCheck.Result;
-                FightCultGods = new Gods(godsJSON);
-            }
-        };
+        if(!LoadGods()){
+            godsJsonHandler = Addressables.LoadAssetAsync<TextAsset>("GodsJson");
+            godsJsonHandler.Completed += handleToCheck=>{
+                if(handleToCheck.Status == AsyncOperationStatus.Succeeded){
+                    TextAsset godsJSON = handleToCheck.Result;
+                    CultGods = JsonConvert.DeserializeObject<AllGods>(godsJSON.text);
+                }
+            };
+        }
 
 
         resourcesSpritesHandler = new Dictionary<Resource, AsyncOperationHandle<IList<Sprite>>>();
@@ -110,8 +177,8 @@ public static class Loader
         float cultCardsJsonsPercent = cultCardsJsonsHandler.PercentComplete*(120f/totalAmountOfFiles);//120 jsons
         float fightCultCardsJsonsPercent = fightCultCardsJsonsHandler.PercentComplete*(50f/totalAmountOfFiles);//50 jsons
         float godsSpritesPercent = godsSpritesHandler.PercentComplete*(16f/totalAmountOfFiles);//16 images
-        float cultsJsonPercent = cultsJsonHandler.PercentComplete*(4f/totalAmountOfFiles);
-        float godsJsonPercent = godsJsonHandler.PercentComplete*(4f/totalAmountOfFiles);
+        float cultsJsonPercent = (cultsJsonHandler.Result==null? 1: cultsJsonHandler.PercentComplete)*(4f/totalAmountOfFiles);
+        float godsJsonPercent = (cultsJsonHandler.Result==null? 1: godsJsonHandler.PercentComplete)*(4f/totalAmountOfFiles);
 
         return resourcesLoadPercent +
                 cultCardsSpritesPercent + 

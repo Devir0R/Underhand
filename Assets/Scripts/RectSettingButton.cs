@@ -9,7 +9,7 @@ public class RectSettingButton : MenuButton
         }
         else if(Reset=="gods"){
             Gods.AllGodsUndefeated();
-            Gods.SaveToFile();
+            Loader.SaveToFile();
         }
     }
 }
