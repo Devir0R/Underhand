@@ -15,6 +15,7 @@ public static class Loader
     private static AsyncOperationHandle<IList<Sprite>> godsSpritesHandler;
     private static AsyncOperationHandle<TextAsset> godsJsonHandler;
     private static AsyncOperationHandle<TextAsset> cultsJsonHandler;
+    private static AsyncOperationHandle<TextAsset> settingsJsonHandler;
     private static Dictionary<Resource,AsyncOperationHandle<IList<Sprite>>> resourcesSpritesHandler;
 
     public static List<Sprite> GodsSprites;
@@ -23,6 +24,7 @@ public static class Loader
     public static List<TextAsset> CultCardsJsons;
     public static List<TextAsset> FightCultCardsJsons;
     public static Dictionary<Resource, List<Sprite>> resourcesSpritesDictionary;
+    public static Settings settings;
 
     public static AllGods godsInfo{get{
         return Mode.FightCult==GameState.GameMode? FightCultGods : CultGods;
@@ -34,8 +36,15 @@ public static class Loader
 
     public static void SaveToFile(){
 	    BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(PlaceToSave());
+        FileStream file = File.Create(PlaceToSaveBosses());
         bf.Serialize(file,allGods);
+        file.Close();
+    }
+
+    public static void SaveSettings(){
+	    BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(PlaceToSaveSettings());
+        bf.Serialize(file,settings);
         file.Close();
     }
 
@@ -51,7 +60,11 @@ public static class Loader
         return Application.persistentDataPath +  "/gods.json";
     }
 
-    private static string PlaceToSave(){
+    private static string PlaceToSaveSettings(){
+        return Application.persistentDataPath +  "/settings.json";
+    }
+
+    private static string PlaceToSaveBosses(){
         return (GameState.GameMode == Mode.FightCult? PlaceToSaveCults() : PlaceToSaveGods());
     }
 
@@ -59,7 +72,7 @@ public static class Loader
     {
         if (File.Exists(PlaceToSaveCults()))
         {
-            FightCultGods = LoadBosses(PlaceToSaveCults());
+            settings = LoadJson<Settings>(PlaceToSaveSettings());
             return true;
         }
         else{
@@ -67,12 +80,22 @@ public static class Loader
         }            
     }
 
-
+    private static bool LoadSettings()
+    {
+        if (File.Exists(PlaceToSaveSettings()))
+        {
+            CultGods = LoadJson<AllGods>(PlaceToSaveGods());
+            return true;
+        }
+        else{
+            return false;
+        }            
+    }
     private static bool LoadGods()
     {
         if (File.Exists(PlaceToSaveGods()))
         {
-            CultGods = LoadBosses(PlaceToSaveGods());
+            CultGods = LoadJson<AllGods>(PlaceToSaveGods());
             return true;
         }
         else{
@@ -81,13 +104,13 @@ public static class Loader
     }
 
 
-    private static AllGods LoadBosses(string path){
+    private static T LoadJson<T>(string path){
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = 
                 File.Open(path, FileMode.Open);
-        AllGods allGods = (AllGods)bf.Deserialize(file);
+        T TJson = (T)bf.Deserialize(file);
         file.Close();
-        return allGods;
+        return TJson;
         
     }
 
@@ -139,6 +162,15 @@ public static class Loader
             };
         }
 
+        if(!LoadSettings()){
+            settingsJsonHandler = Addressables.LoadAssetAsync<TextAsset>("SettingsJson");
+            settingsJsonHandler.Completed += handleToCheck=>{
+                if(handleToCheck.Status == AsyncOperationStatus.Succeeded){
+                    TextAsset settingsJson = handleToCheck.Result;
+                    settings = JsonConvert.DeserializeObject<Settings>(settingsJson.text);
+                }
+            };
+        }
 
         resourcesSpritesHandler = new Dictionary<Resource, AsyncOperationHandle<IList<Sprite>>>();
         resourcesSpritesDictionary = new Dictionary<Resource, List<Sprite>>();
@@ -168,7 +200,7 @@ public static class Loader
             resourcesLoadPercent+=resourcesSpritesHandler[resourceType].PercentComplete;
         }
 
-        float totalAmountOfFiles = 140f+120f+120f+50f+50f+16f+4f+4f;
+        float totalAmountOfFiles = 140f+120f+120f+50f+50f+16f+4f+4f+2f;
 
 
         resourcesLoadPercent = (resourcesLoadPercent/ResourceInfo.GetAllResources_AllModes().Count()) *(140f/totalAmountOfFiles);//140 images
@@ -178,13 +210,21 @@ public static class Loader
         float fightCultCardsJsonsPercent = fightCultCardsJsonsHandler.PercentComplete*(50f/totalAmountOfFiles);//50 jsons
         float godsSpritesPercent = godsSpritesHandler.PercentComplete*(16f/totalAmountOfFiles);//16 images
         float cultsJsonPercent = (cultsJsonHandler.Result==null? 1: cultsJsonHandler.PercentComplete)*(4f/totalAmountOfFiles);
-        float godsJsonPercent = (cultsJsonHandler.Result==null? 1: godsJsonHandler.PercentComplete)*(4f/totalAmountOfFiles);
+        float godsJsonPercent = (cultsJsonHandler.Result==null? 1: cultsJsonHandler.PercentComplete)*(4f/totalAmountOfFiles);
+        float settingssJsonPercent = (settingsJsonHandler.Result==null? 1: settingsJsonHandler.PercentComplete)*(2f/totalAmountOfFiles);
 
         return resourcesLoadPercent +
                 cultCardsSpritesPercent + 
                 cultCardsJsonsPercent + 
                 fightCultCardsSpritesPercent + 
                 fightCultCardsJsonsPercent +
-                godsSpritesPercent + godsJsonPercent + cultsJsonPercent;
+                godsSpritesPercent + godsJsonPercent + cultsJsonPercent + settingssJsonPercent;
     }
+}
+
+[System.Serializable]
+public class Settings{
+    bool tutorial;
+    float master_volume;
+    string previous_summon;
 }
