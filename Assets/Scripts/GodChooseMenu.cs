@@ -18,7 +18,13 @@ public class GodChooseMenu : MonoBehaviour
             godButton.UpdateGod(god.name);
             godButtons.Add(godButton);
             ScaleButton(godButton);
-            if(god.defeated==1){
+            if(Loader.settings.previous_summon!="" &&Loader.settings.previous_summon!=null && Loader.settings.previous_summon==god.name){
+                godButton.ToggleCheck();
+                godButton.GetComponent<Button>().interactable = false;
+                Loader.ResetLastSummon();
+                GameState.GodsMarked.Enqueue(god.name);
+            }
+            else if(god.defeated==1){
                 godButton.GodButtonClicked += CheckmarkAdded;
             }
             else{

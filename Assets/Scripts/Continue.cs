@@ -68,6 +68,7 @@ public class Continue : MonoBehaviour
         if(GameState.state==State.Won){
             Gods.GodDefeated(GameState.GodWon);
             Loader.SaveToFile();
+            Loader.ChangeLastSummon(GameState.GodWon);
             
         }
         GameAudio.Instance.PlayMenuMusic();

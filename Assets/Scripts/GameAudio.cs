@@ -40,7 +40,7 @@ public class GameAudio : MonoBehaviour
         audioSource.Stop();
         audioSource.clip = GameState.GameMode==Mode.FightCult? FantasyMenu: Asterope;
         audioSource.loop = true;
-        audioSource.volume = 0.5f;
+        audioSource.volume = Loader.settings.master_volume;
         audioSource.Play();
     }
     
@@ -103,7 +103,7 @@ public class GameAudio : MonoBehaviour
     }
 
     public void PlayTrack(AudioClip clip){
-        if(!muteSound) audioSource.PlayOneShot(clip,0.5f);
+        if(!muteSound) audioSource.PlayOneShot(clip,Loader.settings.master_volume);
     }
 
     public void PlayGameMusic(){
@@ -112,7 +112,7 @@ public class GameAudio : MonoBehaviour
         audioSource.Stop();
         audioSource.clip = GameState.GameMode==Mode.FightCult? Fight: Dances;
         audioSource.loop = true;
-        audioSource.volume = 0.25f;
+        audioSource.volume = Loader.settings.master_volume/2f;
         audioSource.Play();
 
     }

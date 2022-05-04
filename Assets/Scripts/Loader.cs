@@ -48,6 +48,15 @@ public static class Loader
         file.Close();
     }
 
+    public static void ChangeLastSummon(string god){
+        Loader.settings.previous_summon = god;
+        Loader.SaveSettings();
+    }
+
+    public static void ResetLastSummon(){
+        Loader.settings.previous_summon = "";
+        Loader.SaveSettings();
+    }
     private static AllGods FightCultGods;
 
     private static AllGods CultGods;
@@ -224,7 +233,7 @@ public static class Loader
 
 [System.Serializable]
 public class Settings{
-    bool tutorial;
-    float master_volume;
-    string previous_summon;
+    public bool tutorial;
+    public float master_volume;
+    public string previous_summon;
 }
