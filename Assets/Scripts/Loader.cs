@@ -27,11 +27,11 @@ public static class Loader
     public static Settings settings;
 
     public static AllGods godsInfo{get{
-        return Mode.FightCult==GameState.GameMode? FightCultGods : CultGods;
+        return Mode.FightCult==GameState.GameMode? Cults : Gods;
     }}
 
     public static AllGods allGods{get{
-        return GameState.GameMode==Mode.FightCult? FightCultGods : CultGods;
+        return GameState.GameMode==Mode.FightCult? Cults : Gods;
     }}
 
     public static void SaveToFile(){
@@ -57,9 +57,9 @@ public static class Loader
         Loader.settings.previous_summon = "";
         Loader.SaveSettings();
     }
-    private static AllGods FightCultGods;
+    private static AllGods Cults;
 
-    private static AllGods CultGods;
+    private static AllGods Gods;
 
     private static string PlaceToSaveCults(){
         return Application.persistentDataPath +  "/cults.json";
@@ -77,9 +77,9 @@ public static class Loader
         return (GameState.GameMode == Mode.FightCult? PlaceToSaveCults() : PlaceToSaveGods());
     }
 
-    private static bool LoadCults()
+    private static bool LoadSettings()
     {
-        if (File.Exists(PlaceToSaveCults()))
+        if (File.Exists(PlaceToSaveSettings()))
         {
             settings = LoadJson<Settings>(PlaceToSaveSettings());
             return true;
@@ -89,11 +89,11 @@ public static class Loader
         }            
     }
 
-    private static bool LoadSettings()
+    private static bool LoadCults()
     {
-        if (File.Exists(PlaceToSaveSettings()))
+        if (File.Exists(PlaceToSaveCults()))
         {
-            CultGods = LoadJson<AllGods>(PlaceToSaveGods());
+            Cults = LoadJson<AllGods>(PlaceToSaveCults());
             return true;
         }
         else{
@@ -104,7 +104,7 @@ public static class Loader
     {
         if (File.Exists(PlaceToSaveGods()))
         {
-            CultGods = LoadJson<AllGods>(PlaceToSaveGods());
+            Gods = LoadJson<AllGods>(PlaceToSaveGods());
             return true;
         }
         else{
@@ -156,7 +156,7 @@ public static class Loader
             cultsJsonHandler.Completed += handleToCheck=>{
                 if(handleToCheck.Status == AsyncOperationStatus.Succeeded){
                     TextAsset cultsJSON = handleToCheck.Result;
-                    FightCultGods = JsonConvert.DeserializeObject<AllGods>(cultsJSON.text);
+                    Cults = JsonConvert.DeserializeObject<AllGods>(cultsJSON.text);
                 }
             };
         }
@@ -166,7 +166,7 @@ public static class Loader
             godsJsonHandler.Completed += handleToCheck=>{
                 if(handleToCheck.Status == AsyncOperationStatus.Succeeded){
                     TextAsset godsJSON = handleToCheck.Result;
-                    CultGods = JsonConvert.DeserializeObject<AllGods>(godsJSON.text);
+                    Gods = JsonConvert.DeserializeObject<AllGods>(godsJSON.text);
                 }
             };
         }
@@ -218,9 +218,9 @@ public static class Loader
         float cultCardsJsonsPercent = cultCardsJsonsHandler.PercentComplete*(120f/totalAmountOfFiles);//120 jsons
         float fightCultCardsJsonsPercent = fightCultCardsJsonsHandler.PercentComplete*(50f/totalAmountOfFiles);//50 jsons
         float godsSpritesPercent = godsSpritesHandler.PercentComplete*(16f/totalAmountOfFiles);//16 images
-        float cultsJsonPercent = (cultsJsonHandler.Result==null? 1: cultsJsonHandler.PercentComplete)*(4f/totalAmountOfFiles);
-        float godsJsonPercent = (cultsJsonHandler.Result==null? 1: cultsJsonHandler.PercentComplete)*(4f/totalAmountOfFiles);
-        float settingssJsonPercent = (settingsJsonHandler.Result==null? 1: settingsJsonHandler.PercentComplete)*(2f/totalAmountOfFiles);
+        float cultsJsonPercent = (!cultsJsonHandler.IsValid()? 1: cultsJsonHandler.PercentComplete)*(4f/totalAmountOfFiles);
+        float godsJsonPercent = (!cultsJsonHandler.IsValid()? 1: cultsJsonHandler.PercentComplete)*(4f/totalAmountOfFiles);
+        float settingssJsonPercent = (!settingsJsonHandler.IsValid()? 1: settingsJsonHandler.PercentComplete)*(2f/totalAmountOfFiles);
 
         return resourcesLoadPercent +
                 cultCardsSpritesPercent + 

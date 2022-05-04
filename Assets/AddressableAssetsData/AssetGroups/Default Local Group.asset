@@ -112,6 +112,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - GodsJson
+  - m_GUID: 401486676d9775c4eb4603b6c02b6819
+    m_Address: Assets/Scripts/json/settings.json
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - SettingsJson
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2075ec3d5f044ff4ea70106940026b21, type: 2}
   m_SchemaSet:
