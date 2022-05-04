@@ -2,6 +2,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GodChooseMenu : MonoBehaviour
 {
@@ -17,7 +18,13 @@ public class GodChooseMenu : MonoBehaviour
             godButton.UpdateGod(god.name);
             godButtons.Add(godButton);
             ScaleButton(godButton);
-            godButton.GodButtonClicked += CheckmarkAdded;
+            if(god.defeated==1){
+                godButton.GodButtonClicked += CheckmarkAdded;
+            }
+            else{
+                godButton.GetComponent<Button>().interactable = false;
+            }
+            
         }
         StartCoroutine(RepositionGodsButtons());
     }
