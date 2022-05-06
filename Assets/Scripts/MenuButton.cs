@@ -23,7 +23,8 @@ public class MenuButton : MonoBehaviour
         RectTransform menuRect = GameObject.FindGameObjectWithTag("GameMenu").GetComponent<RectTransform>();
         float newYPosition = (menuRect.rect.height*RelativePosition.y);
         float newXPosition = (menuRect.rect.width*RelativePosition.x);
-        transform.position = menuRect.transform.position + new Vector3(newXPosition,newYPosition,transform.position.z);
+        
+        if(type!=ButtonType.Arrow)  transform.position = menuRect.transform.position + new Vector3(newXPosition,newYPosition,transform.position.z);
         Rect mySize = GetComponent<RectTransform>().rect;
         float newYScale;
         float newXScale;
@@ -34,7 +35,7 @@ public class MenuButton : MonoBehaviour
             newXScale = (menuRect.rect.width/mySize.width)*xScale;
         }
         else if(type==ButtonType.Arrow){
-            float sideSize = Mathf.Min(menuRect.rect.height/1.5f,menuRect.rect.width/1.5f);
+            float sideSize = Mathf.Min(menuRect.rect.height/3f,menuRect.rect.width/3f);
             newYScale = (sideSize/mySize.height);
             newXScale = (sideSize/mySize.width);
         }
