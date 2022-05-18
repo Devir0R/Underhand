@@ -57,6 +57,11 @@ public static class Loader
         Loader.settings.previous_summon = "";
         Loader.SaveSettings();
     }
+
+    public static void ResetTutorial(){
+        Loader.settings.tutorial = true;
+        Loader.SaveSettings();
+    }
     private static AllGods Cults;
 
     private static AllGods Gods;

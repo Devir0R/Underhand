@@ -1,5 +1,5 @@
 {
-	"tutorial" : false,
+	"tutorial" : true,
 	"previous_summon":"",
 	"master_volume" : 0.3
 }

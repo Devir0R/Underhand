@@ -461,8 +461,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SettingButton, Assembly-CSharp
+      - m_Target: {fileID: 886871351}
+        m_TargetAssemblyTypeName: RectSettingButton, Assembly-CSharp
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
@@ -605,13 +605,13 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 894024147}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SettingButton, Assembly-CSharp
+      - m_Target: {fileID: 894024149}
+        m_TargetAssemblyTypeName: RectSettingButton, Assembly-CSharp
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
@@ -864,8 +864,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 348, y: 107}
-  m_SizeDelta: {x: 300, y: 300}
+  m_AnchoredPosition: {x: 422.59998, y: 82.790955}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1303562558
 MonoBehaviour:
@@ -880,7 +880,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Main
-  RelativePosition: {x: 0.3, y: 0.35, z: 0}
+  RelativePosition: {x: 0.4, y: 0.35, z: 0}
   type: 1
 --- !u!114 &1303562559
 MonoBehaviour:

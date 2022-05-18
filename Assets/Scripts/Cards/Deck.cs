@@ -14,7 +14,8 @@ public class Deck : MonoBehaviour
     AllCards allCards;
     public List<CardDO>  deck;
 
-    
+    public static int[] tutorialDeck = new int[]{71};   //71(show event card explanation) 91 92 (show all resources) 93 (show obstacles) 94 (show god explanation)
+                                                        //95 99 100 (101) 102 103 102 104 105 (show summon god text) WIN
     public Sprite[] spriteArray;
     public Card cardPrefab;
     private int deckSize;
@@ -101,23 +102,28 @@ public class Deck : MonoBehaviour
         transform.position = new Vector3(worldScreenWidth+spriteRenderer.bounds.size.x*0.6f,
                                          worldScreenHeight-spriteRenderer.bounds.size.y/1.8f,
                                          transform.position.z);
+        Discard.Instance.discard = new List<CardDO>();
         if(GameState.GameMode==Mode.FightCult){
             allCards = new AllCards(Loader.FightCultCardsJsons.Select(json=>JsonConvert.DeserializeObject<FightCultCardDO>(json.text)));
         }
         else{
             allCards = new AllCards(Loader.CultCardsJsons.Select(json=>JsonConvert.DeserializeObject<CultCardDO>(json.text)));
         }
-        this.deck  = this.allCards.allCardsList
-            .Where(card=>card.IsInitial())
-            .OrderByDescending(card=>Random.value)
-            .Take(INITIAL_DECK_SIZE).ToList();
-        Discard.Instance.discard = new List<CardDO>();
-        this.addRelicCardIfThereIsnt();
-        this.insertWinCards();
-        shuffleDeck();
-        // this.deck.Insert(0,allCards.allCardsList.Find(card=>card.GetNumber()==124));
-        // this.deck.Insert(0,allCards.allCardsList.Find(card=>card.GetNumber()==123));
-        // this.deck.RemoveRange(0,3*deck.Count/4);
+        if(Loader.settings.tutorial){
+            this.deck = tutorialDeck.Select(num=>this.allCards.allCardsList.Find(card=>card.GetNumber()==num)).ToList();
+        }
+        else{
+            this.deck  = this.allCards.allCardsList
+                .Where(card=>card.IsInitial())
+                .OrderByDescending(card=>Random.value)
+                .Take(INITIAL_DECK_SIZE).ToList();
+            this.addRelicCardIfThereIsnt();
+            this.insertWinCards();
+            shuffleDeck();
+            // this.deck.Insert(0,allCards.allCardsList.Find(card=>card.GetNumber()==124));
+            // this.deck.Insert(0,allCards.allCardsList.Find(card=>card.GetNumber()==123));
+            // this.deck.RemoveRange(0,3*deck.Count/4);
+        }
         this.deckSize = this.deck.Count;
         GameState.GameStart();
     }
@@ -277,13 +283,17 @@ public class Deck : MonoBehaviour
     }
 
     IEnumerator shuffleDiscard(){
-        GameAudio.Instance.PlayTrack(shuffleSound);
-        shuffleText.Show();
-        yield return new WaitForSeconds(shuffleSound.length-0.2f);
-        shuffleText.Hide();
+        if(!Loader.settings.tutorial)
+        {
+            GameAudio.Instance.PlayTrack(shuffleSound);
+            shuffleText.Show();
+            yield return new WaitForSeconds(shuffleSound.length-0.2f);
+            shuffleText.Hide();
+        }
         Discard.Instance.shuffleDiscard();
         this.deck.AddRange(Discard.Instance.discard);
         Discard.Instance.discard.RemoveAll(card=>true);
+        
     }
 
     CardDO RemoveTopCard(){

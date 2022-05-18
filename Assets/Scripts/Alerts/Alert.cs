@@ -36,7 +36,7 @@ public class Alert : MonoBehaviour
                     backToInitState();
                 }
             }
-            else if(!ResourceCard.dragging && condition.Check()){
+            else if(!ResourceCard.dragging && condition.Check() && !Loader.settings.tutorial){
                 isOn = true;
             }
         }

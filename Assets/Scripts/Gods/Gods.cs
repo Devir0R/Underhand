@@ -4,16 +4,20 @@ using System.Linq;
 
 public class Gods
 {
-
+    private static readonly string tutorialGod = "God of Beginnings";
     public static void GodDefeated(string godName){
         Loader.allGods.gods.Find(god=>god.name==godName).defeated=1;
+        if(godName==tutorialGod){
+            Loader.settings.tutorial = false;
+            Loader.SaveSettings();
+        }
     }
     public static void GodUndefeated(string godName){
         Loader.allGods.gods.Find(god=>god.name==godName).defeated=0;
     }
 
     public static void AllGodsUndefeated(){
-        Loader.allGods.gods.ForEach(god=>god.defeated=(god.name=="God of Beginnings"? 1: 0));
+        Loader.allGods.gods.ForEach(god=>god.defeated=0);
     }
     public static List<GodDO> getUnlockedGods(){
         return Loader.allGods.gods

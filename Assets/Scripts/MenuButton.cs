@@ -64,7 +64,11 @@ public class MenuButton : MonoBehaviour
     public void LoadScene(){
         if(sceneName=="Game")   GameAudio.Instance.PlayGameMusic();
         else if(sceneName=="Main")   GameAudio.Instance.PlayMenuMusic();
-        
+        else if(sceneName=="GodChooseMenu" && Loader.settings.tutorial){
+            GameAudio.Instance.PlayGameMusic();
+            SceneManager.LoadScene("Game");
+            return;
+        }
         if(sceneName!="")   SceneManager.LoadScene(sceneName);
     }
 

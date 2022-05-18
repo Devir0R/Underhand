@@ -87,6 +87,7 @@ public class Hand : MonoBehaviour
     void Start()
     {
         gapFromOneItemToTheNextOne = ResourcePrefab.spriteRenderer.bounds.size.x*0.4f;
+        if(Loader.settings.tutorial) return;
         SpawnCards();
         OrganizeHand();
         FitCards();
