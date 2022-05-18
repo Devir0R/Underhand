@@ -13,6 +13,8 @@ public class Deck : MonoBehaviour
 
     AllCards allCards;
     public List<CardDO>  deck;
+
+    
     public Sprite[] spriteArray;
     public Card cardPrefab;
     private int deckSize;
