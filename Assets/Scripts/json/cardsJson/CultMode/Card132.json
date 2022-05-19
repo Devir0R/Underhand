@@ -1,0 +1,116 @@
+{
+	"num":133,
+	"title":						"Lepudeus, The Prolific",
+	"flavortext":					"His Offsprings were teated well.",
+	"option1": {
+		"optiontext":				"Offer him a carrot in your finest instrument",
+		"outputtext":				"You Win.",
+		"cultistequalsprisoner":	0,
+		"foresight": {
+				"hasforesight": 		0,
+				"candiscard": 			0
+		},
+		"shuffle": {
+			"lowerbound":			999,
+			"upperbound":			999,
+			"specificids":			[],
+			"allowsdupes":			0,
+			"numcards":				0
+		},
+		"randomrequirements":		0,
+		"requirements": {
+			"relic":				1,
+			"money":				0,
+			"cultist":				0,
+			"prisoner":				0,
+			"food":					1,
+			"suspicion":			0
+		},
+		"rewards": {
+			"relic":				0,
+			"money":				0,
+			"cultist":				0,
+			"prisoner":				0,
+			"food":					0,
+			"suspicion":			0
+		},
+		"iswin":					"Lepudeus",
+		"islose":					0
+	},
+	"option2": {
+		"optiontext":				"Offer him servant with suitable tribute.",
+		"outputtext":				"You Win.",
+		"cultistequalsprisoner":	0,
+		"foresight": {
+				"hasforesight": 		0,
+				"candiscard": 			0
+		},
+		"shuffle": {
+			"lowerbound":			999,
+			"upperbound":			999,
+			"specificids":			[],
+			"allowsdupes":			0,
+			"numcards":				0
+		},
+		"randomrequirements":		0,
+		"requirements": {
+			"relic":				0,
+			"money":				0,
+			"cultist":				1,
+			"prisoner":				0,
+			"food":					4,
+			"suspicion":			0
+		},
+		"rewards": {
+			"relic":				0,
+			"money":				0,
+			"cultist":				0,
+			"prisoner":				0,
+			"food":					0,
+			"suspicion":			0
+		},
+		"iswin":					"Lepudeus",
+		"islose":					0
+	},
+	"option3": {
+		"optiontext":				"We cannot please him",
+		"outputtext":				"Insert 'Lepudeus Fury'",
+		"cultistequalsprisoner":	0,
+		"foresight": {
+				"hasforesight": 		0,
+				"candiscard": 			0
+		},
+		"shuffle": {
+			"lowerbound":			999,
+			"upperbound":			999,
+			"specificids":			[126],
+			"allowsdupes":			0,
+			"numcards":				1
+		},
+		"randomrequirements":		0,
+		"requirements": {
+			"relic":				0,
+			"money":				0,
+			"cultist":				0,
+			"prisoner":				0,
+			"food":					0,
+			"suspicion":			0
+		},
+		"rewards": {
+			"relic":				0,
+			"money":				0,
+			"cultist":				0,
+			"prisoner":				0,
+			"food":					0,
+			"suspicion":			0
+		},
+		"iswin":					"",
+		"islose":					0
+	},
+	"isTutorial": 0,
+	"isinitial":					0,
+	"isrecurring":					0,
+	"animationframes":				1,
+	"weight": 						1,
+	"cardartdone":					0
+}

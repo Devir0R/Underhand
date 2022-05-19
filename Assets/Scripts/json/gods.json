@@ -116,13 +116,42 @@
         124
       ],
       "dependency": [
-        1,
-        2,
-        4
+        5,
+        6
       ],
       "startingCard": 119,
       "specialRequirements": 0,
-      "tier":2
+      "tier":3
+    },
+    {
+      "num": 8,
+      "name": "Anatideus",
+      "defeated": 0,
+      "blessings": [
+      ],
+      "dependency": [
+        0,
+        3,
+        7
+      ],
+      "startingCard": 127,
+      "specialRequirements": 0,
+      "tier":4
+    },
+    {
+      "num": 9,
+      "name": "Lepudeus",
+      "defeated": 0,
+      "blessings": [
+      ],
+      "dependency": [
+        0,
+        3,
+        7
+      ],
+      "startingCard": 127,
+      "specialRequirements": 0,
+      "tier":4
     }
   ]
 }

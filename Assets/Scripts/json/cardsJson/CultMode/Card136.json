@@ -1,0 +1,116 @@
+{
+	"num":137,
+	"title":						"Anatideus, All Seeing",
+	"flavortext":					"His look is not scary anymore",
+	"option1": {
+		"optiontext":				"Your eyes are his now.",
+		"outputtext":				"",
+		"cultistequalsprisoner":	0,
+		"foresight": {
+				"hasforesight": 		0,
+				"candiscard": 			0
+		},
+		"shuffle": {
+			"lowerbound":			999,
+			"upperbound":			999,
+			"specificids":			[],
+			"allowsdupes":			0,
+			"numcards":				0
+		},
+		"randomrequirements":		0,
+		"requirements": {
+			"relic":				2,
+			"money":				0,
+			"cultist":				0,
+			"prisoner":				0,
+			"food":					0,
+			"suspicion":			0
+		},
+		"rewards": {
+			"relic":				0,
+			"money":				0,
+			"cultist":				0,
+			"prisoner":				0,
+			"food":					0,
+			"suspicion":			0
+		},
+		"iswin":					"Anatideus",
+		"islose":					0
+		},
+	"option2": {
+		"optiontext":				"Avert your eyes",
+		"outputtext":				"Insert 'Anatideus Fury'",
+		"cultistequalsprisoner":	0,
+		"foresight": {
+				"hasforesight": 		0,
+				"candiscard": 			0
+		},
+		"shuffle": {
+			"lowerbound":			999,
+			"upperbound":			999,
+			"specificids":			[125],
+			"allowsdupes":			0,
+			"numcards":				1
+		},
+		"randomrequirements":		0,
+		"requirements": {
+			"relic":				0,
+			"money":				0,
+			"cultist":				0,
+			"prisoner":				0,
+			"food":					0,
+			"suspicion":			0
+		},
+		"rewards": {
+			"relic":				0,
+			"money":				0,
+			"cultist":				0,
+			"prisoner":				0,
+			"food":					0,
+			"suspicion":			0
+		},
+		"iswin":					"",
+		"islose":					0
+	},
+	"option3": {
+		"optiontext":				"",
+		"outputtext":				"",
+		"cultistequalsprisoner":	0,
+		"foresight": {
+				"hasforesight": 		0,
+				"candiscard": 			0
+		},
+		"shuffle": {
+			"lowerbound":			999,
+			"upperbound":			999,
+			"specificids":			[],
+			"allowsdupes":			0,
+			"numcards":				0
+		},
+		"randomrequirements":		0,
+		"requirements": {
+			"relic":				0,
+			"money":				0,
+			"cultist":				0,
+			"prisoner":				0,
+			"food":					0,
+			"suspicion":			0
+		},
+		"rewards": {
+			"relic":				0,
+			"money":				0,
+			"cultist":				0,
+			"prisoner":				0,
+			"food":					0,
+			"suspicion":			0
+		},
+		"iswin":					"",
+		"islose":					0
+	},
+	"isTutorial": 0,
+	"isinitial":					0,
+	"isrecurring":					0,
+	"animationframes":				1,
+	"weight": 						1,
+	"cardartdone":					0
+}

@@ -312,20 +312,20 @@ public class Deck : MonoBehaviour
     }
 
     void insertWinCards(){
+        HashSet<CardDO> winCards = new HashSet<CardDO>();
         foreach(GodDO god in Gods.getUnlockedGods()){
             if (god.specialRequirements==0){
                 int startingCard = god.startingCard;
                 CardDO staringCardDO = this.allCards.allCardsList.Find(card=>card.GetNumber()==startingCard);
                 if (!staringCardDO.IsTutorial()){
-                    this.deck.Add(staringCardDO);
+                    winCards.Add(staringCardDO);
                 }
             }
         }
+        this.deck.AddRange(winCards);
         while(GameState.GodsMarked.Count>0){
             string godName = GameState.GodsMarked.Dequeue();
-            this
-            .deck
-            .AddRange(Loader
+            this.deck.AddRange(Loader
                       .godsInfo
                       .gods
                       .Find(god=>god.name==godName)

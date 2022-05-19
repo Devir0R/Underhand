@@ -41,6 +41,13 @@ public static class Loader
         file.Close();
     }
 
+    private static void SaveToFile(AllGods allGods,string placeToSave){
+	    BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(placeToSave);
+        bf.Serialize(file,allGods);
+        file.Close();
+    }
+
     public static void SaveSettings(){
 	    BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(PlaceToSaveSettings());
@@ -156,25 +163,40 @@ public static class Loader
             if(handleToCheck.Status == AsyncOperationStatus.Succeeded)  FightCultCardsJsons =  handleToCheck.Result.ToList();
         };
 
-        if(!LoadCults()){
-            cultsJsonHandler = Addressables.LoadAssetAsync<TextAsset>("CultsJson");
-            cultsJsonHandler.Completed += handleToCheck=>{
-                if(handleToCheck.Status == AsyncOperationStatus.Succeeded){
-                    TextAsset cultsJSON = handleToCheck.Result;
-                    Cults = JsonConvert.DeserializeObject<AllGods>(cultsJSON.text);
+        cultsJsonHandler = Addressables.LoadAssetAsync<TextAsset>("CultsJson");
+        cultsJsonHandler.Completed += handleToCheck=>{
+            if(handleToCheck.Status == AsyncOperationStatus.Succeeded){
+                TextAsset cultsJSON = handleToCheck.Result;
+                AllGods staticCults = JsonConvert.DeserializeObject<AllGods>(cultsJSON.text);
+                if(LoadCults()){
+                    if(staticCults.gods.Count>Cults.gods.Count){
+                        Cults = staticCults;
+                        SaveToFile(Cults,PlaceToSaveCults());
+                    }
                 }
-            };
-        }
+                else{
+                    Cults = staticCults;
+                }
+            }
+        };
 
-        if(!LoadGods()){
-            godsJsonHandler = Addressables.LoadAssetAsync<TextAsset>("GodsJson");
-            godsJsonHandler.Completed += handleToCheck=>{
-                if(handleToCheck.Status == AsyncOperationStatus.Succeeded){
-                    TextAsset godsJSON = handleToCheck.Result;
-                    Gods = JsonConvert.DeserializeObject<AllGods>(godsJSON.text);
+        godsJsonHandler = Addressables.LoadAssetAsync<TextAsset>("GodsJson");
+        godsJsonHandler.Completed += handleToCheck=>{
+            if(handleToCheck.Status == AsyncOperationStatus.Succeeded){
+                TextAsset godsJSON = handleToCheck.Result;
+                AllGods staticGods = JsonConvert.DeserializeObject<AllGods>(godsJSON.text);
+                if(LoadGods()){
+                    if(staticGods.gods.Count>Gods.gods.Count){
+                        Gods = staticGods;
+                        SaveToFile(Gods,PlaceToSaveGods());
+                    }
                 }
-            };
-        }
+                else{
+                    Gods = staticGods;
+                }
+                
+            }
+        };
 
         if(!LoadSettings()){
             settingsJsonHandler = Addressables.LoadAssetAsync<TextAsset>("SettingsJson");
