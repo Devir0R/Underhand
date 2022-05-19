@@ -169,7 +169,7 @@ public static class Loader
                 TextAsset cultsJSON = handleToCheck.Result;
                 AllGods staticCults = JsonConvert.DeserializeObject<AllGods>(cultsJSON.text);
                 if(LoadCults()){
-                    if(staticCults.gods.Count>Cults.gods.Count){
+                    if(staticGodsChanged(staticCults,Cults)){
                         Cults = staticCults;
                         SaveToFile(Cults,PlaceToSaveCults());
                     }
@@ -186,7 +186,7 @@ public static class Loader
                 TextAsset godsJSON = handleToCheck.Result;
                 AllGods staticGods = JsonConvert.DeserializeObject<AllGods>(godsJSON.text);
                 if(LoadGods()){
-                    if(staticGods.gods.Count>Gods.gods.Count){
+                    if(staticGodsChanged(staticGods,Gods)){
                         Gods = staticGods;
                         SaveToFile(Gods,PlaceToSaveGods());
                     }
@@ -256,6 +256,15 @@ public static class Loader
                 fightCultCardsJsonsPercent +
                 godsSpritesPercent + godsJsonPercent + cultsJsonPercent + settingssJsonPercent;
     }
+    
+    private static bool staticGodsChanged(AllGods staticGods,AllGods localGods){
+        bool numOfGodChanged = staticGods.gods.Count!=localGods.gods.Count;
+        bool dependencyChanged = 
+            staticGods.gods.Any(
+                god=>!god.dependency.SequenceEqual(
+                    localGods.gods.Find(localGod=>localGod.name==god.name).dependency));
+        return numOfGodChanged || dependencyChanged;
+    }
 }
 
 [System.Serializable]
@@ -263,4 +272,5 @@ public class Settings{
     public bool tutorial;
     public float master_volume;
     public string previous_summon;
+    public bool reset_gods;
 }

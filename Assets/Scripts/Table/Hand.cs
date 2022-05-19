@@ -64,10 +64,12 @@ public class Hand : MonoBehaviour
     public IEnumerator RemoveFromHandRandomly(int numberOfCards){
         List<int> cardsIndexesToRemove = new List<int>();
         for(int j =0;j<numberOfCards;j++){
-            cardsIndexesToRemove.Add(Mathf.FloorToInt(Random.value*hand.Count));
-            if(cardsIndexesToRemove[j]==hand.Count){
-                cardsIndexesToRemove.Remove(j);
+            int randomIndex = Mathf.FloorToInt(Random.value*hand.Count);
+            if(randomIndex==hand.Count || cardsIndexesToRemove.Contains(randomIndex)){
                 j--;
+            }
+            else{
+                cardsIndexesToRemove.Add(randomIndex);
             }
         }
         cardsIndexesToRemove.Sort();

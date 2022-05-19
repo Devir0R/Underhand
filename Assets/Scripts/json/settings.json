@@ -1,5 +1,6 @@
 {
 	"tutorial" : true,
 	"previous_summon":"",
-	"master_volume" : 0.3
+	"master_volume" : 0.3,
+	"reset_gods": true
 }
