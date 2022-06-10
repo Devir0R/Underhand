@@ -130,6 +130,9 @@
       "blessings": [
       ],
       "dependency": [
+        0,
+        3,
+        7
       ],
       "startingCard": 127,
       "specialRequirements": 0,
@@ -142,6 +145,9 @@
       "blessings": [
       ],
       "dependency": [
+        0,
+        3,
+        7
       ],
       "startingCard": 127,
       "specialRequirements": 0,
