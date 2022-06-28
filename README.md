@@ -23,13 +23,17 @@ To open the project in Unity -
 
 everything! except...
 1)  the game menu is not done yet, it contains only The Game and mute in options.
-2)  all god's blessing cards are all in the deck and not like the app, where you can choose up to 3 god's blessing,this will be implemented in the future.
 
 <h2>Added</h2>
 
 1) Added another God - Sulucnumoh
 2) Mode 2 is in development.
     I am more of a developer than a designer, so art is quite difficult for me, I hope it won't tale too long.
+3) Added 2 more gods, Lepudeus and Anatideus.
+    They yet to have blessings.
+    
+    
+ I was surprised to discover how hard it to add art to the new cards, it halted almost entirely my progress, hope i will continue soon.
 
 
 <h2>Vision(Future Expectations)</h2>
